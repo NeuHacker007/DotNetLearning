@@ -15,26 +15,15 @@ namespace MathTests
         {
             _math = new Math();
         }
-        [Test]
-        public void Max_FirstArgumentIsGreater_ReturnFirstArgument()
-        {
-            var results = _math.Max(2, 1);
-            Assert.That(results, Is.EqualTo(2));
-        }
 
         [Test]
-        public void Max_SecondArgumentIsGreater_ReturnSecondArgument()
+        [TestCase(1, 2, 2)]
+        [TestCase(2, 1, 2)]
+        [TestCase(2, 2, 2)]
+        public void Max_WhenCalled_ReturnGreterArgument(int a, int b, int expectedresults)
         {
-            var results = _math.Max(1, 2);
-            Assert.That(results, Is.EqualTo(2));
-        }
-
-        [Test]
-        public void Max_ArgumentsEqual_ReturnSame()
-        {
-            var results = _math.Max(1, 1);
-
-            Assert.That(results, Is.EqualTo(1));
+            var results = _math.Max(a, b);
+            Assert.That(results, Is.EqualTo(expectedresults));
         }
     }
 }
