@@ -1,0 +1,13 @@
+H:\.NET Learning\Mosh\Automation Test\source-code-starter\TestNinja\ReservationTests\bin\Debug\ReservationTests.dll
+H:\.NET Learning\Mosh\Automation Test\source-code-starter\TestNinja\ReservationTests\bin\Debug\ReservationTests.pdb
+H:\.NET Learning\Mosh\Automation Test\source-code-starter\TestNinja\ReservationTests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+H:\.NET Learning\Mosh\Automation Test\source-code-starter\TestNinja\ReservationTests\bin\Debug\TestNinja.dll
+H:\.NET Learning\Mosh\Automation Test\source-code-starter\TestNinja\ReservationTests\bin\Debug\EntityFramework.dll
+H:\.NET Learning\Mosh\Automation Test\source-code-starter\TestNinja\ReservationTests\bin\Debug\Newtonsoft.Json.dll
+H:\.NET Learning\Mosh\Automation Test\source-code-starter\TestNinja\ReservationTests\bin\Debug\TestNinja.pdb
+H:\.NET Learning\Mosh\Automation Test\source-code-starter\TestNinja\ReservationTests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.xml
+H:\.NET Learning\Mosh\Automation Test\source-code-starter\TestNinja\ReservationTests\bin\Debug\EntityFramework.xml
+H:\.NET Learning\Mosh\Automation Test\source-code-starter\TestNinja\ReservationTests\bin\Debug\Newtonsoft.Json.xml
+H:\.NET Learning\Mosh\Automation Test\source-code-starter\TestNinja\ReservationTests\obj\Debug\ReservationTests.csprojResolveAssemblyReference.cache
+H:\.NET Learning\Mosh\Automation Test\source-code-starter\TestNinja\ReservationTests\obj\Debug\ReservationTests.dll
+H:\.NET Learning\Mosh\Automation Test\source-code-starter\TestNinja\ReservationTests\obj\Debug\ReservationTests.pdb
