@@ -35,7 +35,8 @@ namespace TestNinja.Tests
         [Test]
         public void ReadVideoTitle_EmptyFile_ReturnErrorMsg()
         {
-            var result = _vs.ReadVideoTitle(new FileReaderForTest());
+            _vs.FileReader = new FileReaderForTest();
+            var result = _vs.ReadVideoTitle();
 
             Assert.That(result, Does.Contain("error").IgnoreCase);
         }

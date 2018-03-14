@@ -14,3 +14,5 @@ H:\.NET Learning\Mosh\Automation Test\source-code-starter\TestNinja\TestNinja.Te
 H:\.NET Learning\Mosh\Automation Test\source-code-starter\TestNinja\TestNinja.Tests\obj\Debug\TestNinja.Tests.csprojResolveAssemblyReference.cache
 H:\.NET Learning\Mosh\Automation Test\source-code-starter\TestNinja\TestNinja.Tests\obj\Debug\TestNinja.Tests.dll
 H:\.NET Learning\Mosh\Automation Test\source-code-starter\TestNinja\TestNinja.Tests\obj\Debug\TestNinja.Tests.pdb
+H:\.NET Learning\Mosh\Automation Test\source-code-starter\TestNinja\TestNinja.Tests\bin\Debug\dotMemory.Unit.dll
+H:\.NET Learning\Mosh\Automation Test\source-code-starter\TestNinja\TestNinja.Tests\bin\Debug\dotMemory.Unit.xml
