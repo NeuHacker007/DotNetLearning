@@ -30,12 +30,12 @@ namespace TestNinja.Tests
         [SetUp]
         public void SetUp()
         {
-            _vs = new VideoService();
+            _vs = new VideoService(new FileReaderForTest());
         }
         [Test]
         public void ReadVideoTitle_EmptyFile_ReturnErrorMsg()
         {
-            _vs.FileReader = new FileReaderForTest();
+            //_vs.FileReader = new FileReaderForTest();
             var result = _vs.ReadVideoTitle();
 
             Assert.That(result, Does.Contain("error").IgnoreCase);
