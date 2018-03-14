@@ -1,0 +1,16 @@
+H:\.NET Learning\Mosh\Automation Test\source-code-starter\TestNinja\TestNinja.Tests\bin\Debug\TestNinja.Tests.dll
+H:\.NET Learning\Mosh\Automation Test\source-code-starter\TestNinja\TestNinja.Tests\bin\Debug\TestNinja.Tests.pdb
+H:\.NET Learning\Mosh\Automation Test\source-code-starter\TestNinja\TestNinja.Tests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+H:\.NET Learning\Mosh\Automation Test\source-code-starter\TestNinja\TestNinja.Tests\bin\Debug\nunit.framework.dll
+H:\.NET Learning\Mosh\Automation Test\source-code-starter\TestNinja\TestNinja.Tests\bin\Debug\TestNinja.dll
+H:\.NET Learning\Mosh\Automation Test\source-code-starter\TestNinja\TestNinja.Tests\bin\Debug\EntityFramework.dll
+H:\.NET Learning\Mosh\Automation Test\source-code-starter\TestNinja\TestNinja.Tests\bin\Debug\Newtonsoft.Json.dll
+H:\.NET Learning\Mosh\Automation Test\source-code-starter\TestNinja\TestNinja.Tests\bin\Debug\TestNinja.pdb
+H:\.NET Learning\Mosh\Automation Test\source-code-starter\TestNinja\TestNinja.Tests\bin\Debug\nunit.framework.pdb
+H:\.NET Learning\Mosh\Automation Test\source-code-starter\TestNinja\TestNinja.Tests\bin\Debug\nunit.framework.xml
+H:\.NET Learning\Mosh\Automation Test\source-code-starter\TestNinja\TestNinja.Tests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.xml
+H:\.NET Learning\Mosh\Automation Test\source-code-starter\TestNinja\TestNinja.Tests\bin\Debug\EntityFramework.xml
+H:\.NET Learning\Mosh\Automation Test\source-code-starter\TestNinja\TestNinja.Tests\bin\Debug\Newtonsoft.Json.xml
+H:\.NET Learning\Mosh\Automation Test\source-code-starter\TestNinja\TestNinja.Tests\obj\Debug\TestNinja.Tests.csprojResolveAssemblyReference.cache
+H:\.NET Learning\Mosh\Automation Test\source-code-starter\TestNinja\TestNinja.Tests\obj\Debug\TestNinja.Tests.dll
+H:\.NET Learning\Mosh\Automation Test\source-code-starter\TestNinja\TestNinja.Tests\obj\Debug\TestNinja.Tests.pdb
