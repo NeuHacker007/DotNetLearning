@@ -26,7 +26,7 @@ using System.Threading.Tasks;
 
 namespace TestNinja.Mocking
 {
-    internal interface IFileReader
+    public interface IFileReader
     {
         string Read(string path);
     }

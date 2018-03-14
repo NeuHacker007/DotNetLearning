@@ -57,12 +57,12 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="CustomerControllerTests.cs" />
-    <Compile Include="ErrorLoggerTests.cs" />
-    <Compile Include="HtmlFormatter.Tests.cs" />
-    <Compile Include="Math.Tests.cs" />
+    <Compile Include="Fundamentals\CustomerControllerTests.cs" />
+    <Compile Include="Fundamentals\ErrorLoggerTests.cs" />
+    <Compile Include="Fundamentals\HtmlFormatter.Tests.cs" />
+    <Compile Include="Fundamentals\Math.Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VideoServiceTests.cs" />
+    <Compile Include="Mocking\VideoServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TestNinja\TestNinja.csproj">
