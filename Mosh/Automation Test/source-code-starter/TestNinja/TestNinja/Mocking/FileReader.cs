@@ -17,12 +17,7 @@
 * Copyright (c) @ Yifan Zhang 2018.  All rights reserved.
 *
 */
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TestNinja.Mocking
 {
@@ -39,7 +34,7 @@ namespace TestNinja.Mocking
         }
     }
 
-    class FileReaderForTest : IFileReader
+    public class FileReaderForTest : IFileReader
     {
         public string Read(string path)
         {
