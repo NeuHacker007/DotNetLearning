@@ -82,6 +82,7 @@
     <Compile Include="Fundamentals\ErrorLoggerTests.cs" />
     <Compile Include="Fundamentals\HtmlFormatter.Tests.cs" />
     <Compile Include="Fundamentals\Math.Tests.cs" />
+    <Compile Include="Mocking\InstallerHelperTests.cs" />
     <Compile Include="Mocking\OrderServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Mocking\VideoServiceTests.cs" />
