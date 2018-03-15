@@ -16,3 +16,12 @@ H:\.NET Learning\Mosh\Automation Test\source-code-starter\TestNinja\TestNinja.Te
 H:\.NET Learning\Mosh\Automation Test\source-code-starter\TestNinja\TestNinja.Tests\obj\Debug\TestNinja.Tests.pdb
 H:\.NET Learning\Mosh\Automation Test\source-code-starter\TestNinja\TestNinja.Tests\bin\Debug\dotMemory.Unit.dll
 H:\.NET Learning\Mosh\Automation Test\source-code-starter\TestNinja\TestNinja.Tests\bin\Debug\dotMemory.Unit.xml
+H:\.NET Learning\Mosh\Automation Test\source-code-starter\TestNinja\TestNinja.Tests\bin\Debug\Castle.Core.dll
+H:\.NET Learning\Mosh\Automation Test\source-code-starter\TestNinja\TestNinja.Tests\bin\Debug\Moq.dll
+H:\.NET Learning\Mosh\Automation Test\source-code-starter\TestNinja\TestNinja.Tests\bin\Debug\System.Threading.Tasks.Extensions.dll
+H:\.NET Learning\Mosh\Automation Test\source-code-starter\TestNinja\TestNinja.Tests\bin\Debug\System.ValueTuple.dll
+H:\.NET Learning\Mosh\Automation Test\source-code-starter\TestNinja\TestNinja.Tests\bin\Debug\Castle.Core.xml
+H:\.NET Learning\Mosh\Automation Test\source-code-starter\TestNinja\TestNinja.Tests\bin\Debug\Moq.pdb
+H:\.NET Learning\Mosh\Automation Test\source-code-starter\TestNinja\TestNinja.Tests\bin\Debug\Moq.xml
+H:\.NET Learning\Mosh\Automation Test\source-code-starter\TestNinja\TestNinja.Tests\bin\Debug\System.Threading.Tasks.Extensions.xml
+H:\.NET Learning\Mosh\Automation Test\source-code-starter\TestNinja\TestNinja.Tests\bin\Debug\System.ValueTuple.xml
