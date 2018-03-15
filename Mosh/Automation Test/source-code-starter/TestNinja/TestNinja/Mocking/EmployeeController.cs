@@ -4,19 +4,22 @@ namespace TestNinja.Mocking
 {
     public class EmployeeController
     {
+
         private EmployeeContext _db;
+        private IEmployeeStorage _storage;
 
-        public EmployeeController()
+        public EmployeeController(IEmployeeStorage storage)
         {
-            _db = new EmployeeContext();
+            _storage = storage;
         }
-
+        //test:
+        // 1. whether returns to Employees
+        // 2. whether employee is deleted
         public ActionResult DeleteEmployee(int id)
         {
-            var employee = _db.Employees.Find(id);
-            _db.Employees.Remove(employee);
-            _db.SaveChanges();
+            _storage.DeleteEmployee(id);
             return RedirectToAction("Employees");
+
         }
 
         private ActionResult RedirectToAction(string employees)
@@ -26,9 +29,9 @@ namespace TestNinja.Mocking
     }
 
     public class ActionResult { }
- 
+
     public class RedirectResult : ActionResult { }
-    
+
     public class EmployeeContext
     {
         public DbSet<Employee> Employees { get; set; }
