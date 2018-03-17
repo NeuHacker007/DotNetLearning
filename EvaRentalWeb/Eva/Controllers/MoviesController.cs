@@ -30,6 +30,7 @@ namespace Eva.Controllers
             return Content($"pageIndex={pageIndex}&&sortby={sortBy}");
         }
 
+        [Route(@"movies/released/{year:regex(\d{4})}/{month:regex(\d{2}):range(1,12)}")]
         public ActionResult ByReleasedDate(int year, int month)
         {
             return Content($"movies released at {year} - {month}");

@@ -8,10 +8,12 @@ namespace Eva
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-            routes.MapRoute(
-                name: "MovieReleasedByDate",
-                url: "movies/released/{year}/{month}",
-                defaults: new { Controller = "Movies", Action = "ByReleasedDate" });
+
+            routes.MapMvcAttributeRoutes();
+            //routes.MapRoute(
+            //    name: "MovieReleasedByDate",
+            //    url: "movies/released/{year}/{month}",
+            //    defaults: new { Controller = "Movies", Action = "ByReleasedDate" });
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
