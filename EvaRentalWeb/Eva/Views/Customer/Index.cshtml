@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Eva.Models.Customer>
+@{
+    ViewBag.Title = "CustomerIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (!Model.Any())
+{
+    <text>We don't have any customers! </text>
+}
+else
+{
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Customer</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var customer in Model)
+            {
+                <tr>
+                    <td>@Html.ActionLink(customer.Name,"Details","Customer", new {id = customer.Id}, null)</td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+}
+
+
