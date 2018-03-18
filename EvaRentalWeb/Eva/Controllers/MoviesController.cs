@@ -1,4 +1,6 @@
 ﻿using Eva.Models;
+using Eva.ViewModels;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace Eva.Controllers
@@ -12,7 +14,18 @@ namespace Eva.Controllers
             {
                 Name = "Shrek!"
             };
-            return View(movie);
+            var customers = new List<Customer>()
+            {
+                new Customer() {Name = "Ivan"},
+                new Customer() {Name = "Guopin"}
+            };
+
+            var viewModel = new RandomMovieVIewModel
+            {
+                movie = movie,
+                Customers = customers
+            };
+            return View(viewModel);
         }
 
         public ActionResult Edit(int id)
