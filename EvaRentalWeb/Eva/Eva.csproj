@@ -225,6 +225,18 @@
     <Compile Include="Migrations\201803191533230_ApplyDataAnnotationToCustermName.Designer.cs">
       <DependentUpon>201803191533230_ApplyDataAnnotationToCustermName.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803191603549_AddNamePropToMembershipType.cs" />
+    <Compile Include="Migrations\201803191603549_AddNamePropToMembershipType.Designer.cs">
+      <DependentUpon>201803191603549_AddNamePropToMembershipType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803191606313_UpdateMembershipTypeDataWithName.cs" />
+    <Compile Include="Migrations\201803191606313_UpdateMembershipTypeDataWithName.Designer.cs">
+      <DependentUpon>201803191606313_UpdateMembershipTypeDataWithName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803191835488_AddBirthDateToCustomer.cs" />
+    <Compile Include="Migrations\201803191835488_AddBirthDateToCustomer.Designer.cs">
+      <DependentUpon>201803191835488_AddBirthDateToCustomer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -364,6 +376,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803191533230_ApplyDataAnnotationToCustermName.resx">
       <DependentUpon>201803191533230_ApplyDataAnnotationToCustermName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803191603549_AddNamePropToMembershipType.resx">
+      <DependentUpon>201803191603549_AddNamePropToMembershipType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803191606313_UpdateMembershipTypeDataWithName.resx">
+      <DependentUpon>201803191606313_UpdateMembershipTypeDataWithName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803191835488_AddBirthDateToCustomer.resx">
+      <DependentUpon>201803191835488_AddBirthDateToCustomer.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -6,3 +6,13 @@
 
 <h2>@Model.Name</h2>
 
+<div>
+    <ul type="circle">
+        <li>Membership Type: @Model.MembershipType.Name</li>
+        @if (@Model.BirthDate != null)
+        {
+            <li>Birth Date: @Model.BirthDate</li>
+        }
+    </ul>
+</div>
+
