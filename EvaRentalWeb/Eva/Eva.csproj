@@ -202,6 +202,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MoviesController.cs" />
+    <Compile Include="CustomerValidations\Min18YearsIfAMember.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -244,6 +245,14 @@
     <Compile Include="Migrations\201803191922484_PopulateDataToGenreTypesTable.cs" />
     <Compile Include="Migrations\201803191922484_PopulateDataToGenreTypesTable.Designer.cs">
       <DependentUpon>201803191922484_PopulateDataToGenreTypesTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803221657304_MakeBirthdayRequired.cs" />
+    <Compile Include="Migrations\201803221657304_MakeBirthdayRequired.Designer.cs">
+      <DependentUpon>201803221657304_MakeBirthdayRequired.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803221741068_RemoveReuiredToCustomerBirthday.cs" />
+    <Compile Include="Migrations\201803221741068_RemoveReuiredToCustomerBirthday.Designer.cs">
+      <DependentUpon>201803221741068_RemoveReuiredToCustomerBirthday.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
@@ -405,6 +414,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803191922484_PopulateDataToGenreTypesTable.resx">
       <DependentUpon>201803191922484_PopulateDataToGenreTypesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803221657304_MakeBirthdayRequired.resx">
+      <DependentUpon>201803221657304_MakeBirthdayRequired.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803221741068_RemoveReuiredToCustomerBirthday.resx">
+      <DependentUpon>201803221741068_RemoveReuiredToCustomerBirthday.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
