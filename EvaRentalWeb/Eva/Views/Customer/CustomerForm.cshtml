@@ -1,10 +1,10 @@
 ﻿@model Eva.ViewModels.CustomerFormViewModel
 @{
-    ViewBag.Title = "New";
+    ViewBag.Title = Model.Title;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Customer Info</h2>
+<h2>@Model.Title</h2>
 
 @using (@Html.BeginForm("Save", "Customer"))
 {

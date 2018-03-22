@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace Eva.Models
 {
@@ -13,13 +10,22 @@ namespace Eva.Models
         [StringLength(255)]
         public string Name { get; set; }
 
-        [Required]
-        public GenreTypes Genre { get; set;}
 
+        public GenreTypes Genre { get; set; }
+
+        [Required]
+        [Display(Name = "Genre Types")]
         public byte GenreId { get; set; }
 
+        [Required]
         public DateTime DateAdded { get; set; }
+
+        [Required]
+        [Display(Name = "Date of Release")]
         public DateTime ReleasedDate { get; set; }
+
+        [Required]
+        [Display(Name = "Avalability")]
         public byte NumberInStock { get; set; }
     }
 }

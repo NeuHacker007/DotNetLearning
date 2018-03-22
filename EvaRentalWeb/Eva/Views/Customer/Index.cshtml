@@ -3,7 +3,8 @@
     ViewBag.Title = "CustomerIndex";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<h2>Customers</h2>
+<div>@Html.ActionLink("New Customer", "New", "Customer", null, new { @class = "btn btn-primary" })</div>
 @if (!Model.Any())
 {
     <text>We don't have any customers! </text>
@@ -15,7 +16,7 @@ else
             <tr>
                 <th>Customer</th>
                 <th>MembershipType</th>
-                <th>Action</th>
+                <th  colspan="2">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -24,9 +25,12 @@ else
                 <tr>
                     <td>@Html.ActionLink(customer.Name, "Details", "Customer", new { id = customer.Id }, null)</td>
                     <td>@customer.MembershipType.Name</td>
-                    <td>@Html.ActionLink("Edit", "Edit", "Customer", new { id = customer.Id },null)</td>
-
+                    <th>@Html.ActionLink("Edit", "Edit", "Customer", new { id = customer.Id },null)</th>
+                    <th>@Html.ActionLink("Remove", "Edit", "Customer", new { id = customer.Id }, null)</th>
                 </tr>
+
+
+
             }
         </tbody>
 

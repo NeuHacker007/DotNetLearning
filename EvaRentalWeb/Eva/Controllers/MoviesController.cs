@@ -37,6 +37,38 @@ namespace Eva.Controllers
             return View(movie);
         }
 
+        public ActionResult New()
+        {
+            var genreTypes = _context.GenreTypes.ToList();
+            var viewModel = new MoviesFormViewModel()
+            {
+                GenreTypes = genreTypes
+            };
+
+            return View("MovieForms", viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Save(Movie movie)
+        {
+            if (movie.Id == 0)
+            {
+                _context.Movies.Add(movie);
+            }
+            else
+            {
+                var movieInDb = _context.Movies.Single(m => m.Id == movie.Id);
+
+                movieInDb.Name = movie.Name;
+                movieInDb.ReleasedDate = movie.ReleasedDate;
+                movieInDb.GenreId = movie.GenreId;
+                movieInDb.NumberInStock = movieInDb.NumberInStock;
+
+            }
+
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Movies");
+        }
         // GET: Movies
         public ActionResult Random()
         {
@@ -60,7 +92,20 @@ namespace Eva.Controllers
 
         public ActionResult Edit(int id)
         {
-            return Content($"id is {id}");
+            var movie = _context.Movies.SingleOrDefault(m => m.Id == id);
+
+            if (movie == null)
+            {
+                return HttpNotFound();
+            }
+
+            var viewModel = new MoviesFormViewModel()
+            {
+                Movie = movie,
+                GenreTypes = _context.GenreTypes.ToList()
+
+            };
+            return View("MovieForms", viewModel);
         }
         [Obsolete]
         //public ActionResult Index(int? pageIndex, string sortBy)
