@@ -46,9 +46,8 @@ namespace Eva.Controllers
         {
             if (!ModelState.IsValid)
             {
-                var viewModel = new CustomerFormViewModel()
+                var viewModel = new CustomerFormViewModel(customer)
                 {
-                    Customer = customer,
                     MembershipTypes = _context.MembershipTypes.ToList()
                 };
 
@@ -82,9 +81,8 @@ namespace Eva.Controllers
                 return HttpNotFound();
             }
 
-            var viewModel = new CustomerFormViewModel()
+            var viewModel = new CustomerFormViewModel(customer)
             {
-                Customer = customer,
                 MembershipTypes = _context.MembershipTypes.ToList()
             };
 
@@ -97,7 +95,7 @@ namespace Eva.Controllers
                 c => c.Id == id);
             if (customer == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("Index", "Customer");
             }
 
             return View(customer);

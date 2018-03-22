@@ -6,7 +6,7 @@ namespace Eva.Models
     public class Movie
     {
         public int Id { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Name field is required")]
         [StringLength(255)]
         public string Name { get; set; }
 
@@ -20,11 +20,12 @@ namespace Eva.Models
         [Required]
         public DateTime DateAdded { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "The Release Date field is required")]
         [Display(Name = "Date of Release")]
         public DateTime ReleasedDate { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "The Number in STock field is required")]
+        [Range(1, 200)]
         [Display(Name = "Avalability")]
         public byte NumberInStock { get; set; }
     }

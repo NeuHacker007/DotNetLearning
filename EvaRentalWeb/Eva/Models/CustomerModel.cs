@@ -23,6 +23,7 @@ namespace Eva.Models
 
         //[Required(ErrorMessage = "Please enter your Date of Birth")]
         [Display(Name = "Date of Birth")]
+        [DisplayFormat(DataFormatString = "{0:d MMM yyyy}")]
         [Min18YearsIfAMember]
         public DateTime? BirthDate { get; set; }
 

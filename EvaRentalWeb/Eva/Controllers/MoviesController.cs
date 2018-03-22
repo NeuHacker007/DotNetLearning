@@ -32,7 +32,7 @@ namespace Eva.Controllers
             var movie = _context.Movies.Include(m => m.Genre).SingleOrDefault(m => m.Id == id);
             if (movie == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("Index", "Movies");
             }
             return View(movie);
         }
@@ -49,10 +49,21 @@ namespace Eva.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(Movie movie)
         {
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new MoviesFormViewModel(movie)
+                {
+                    GenreTypes = _context.GenreTypes.ToList()
+                };
+
+                return View("MovieForms", viewModel);
+            }
             if (movie.Id == 0)
             {
+                movie.DateAdded = DateTime.Now;
                 _context.Movies.Add(movie);
             }
             else
@@ -99,9 +110,8 @@ namespace Eva.Controllers
                 return HttpNotFound();
             }
 
-            var viewModel = new MoviesFormViewModel()
+            var viewModel = new MoviesFormViewModel(movie)
             {
-                Movie = movie,
                 GenreTypes = _context.GenreTypes.ToList()
 
             };
