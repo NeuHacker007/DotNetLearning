@@ -1,0 +1,24 @@
+﻿@model Eva.Models.Movie
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Name</h2>
+
+@if (Model == null)
+{
+    <text>This movie doesn't exist </text>
+}
+else
+{
+    <ul>
+        <li>Genre: @Model.Genre.Name</li>
+        <li>Released Date: @Model.ReleasedDate.ToLongDateString()</li>
+        <li>Added Date: @Model.DateAdded.ToLongDateString()</li>
+        <li>Number in Stock: @Model.NumberInStock</li>
+    </ul>
+}
+
+
+
