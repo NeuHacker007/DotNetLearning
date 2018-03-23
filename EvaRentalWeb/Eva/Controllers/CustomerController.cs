@@ -89,6 +89,21 @@ namespace Eva.Controllers
             return View("CustomerForm", viewModel);
         }
 
+        public ActionResult DeleteCustomer(int id)
+
+        {
+            var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
+
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+
+            _context.Customers.Remove(customer);
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Customer");
+        }
+
         public ActionResult Details(int id)
         {
             var customer = _context.Customers.Include(c => c.MembershipType).SingleOrDefault(

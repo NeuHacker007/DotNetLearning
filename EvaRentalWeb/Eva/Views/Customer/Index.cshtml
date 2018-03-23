@@ -26,7 +26,7 @@ else
                     <td>@Html.ActionLink(customer.Name, "Details", "Customer", new { id = customer.Id }, null)</td>
                     <td>@customer.MembershipType.Name</td>
                     <th>@Html.ActionLink("Edit", "Edit", "Customer", new { id = customer.Id },null)</th>
-                    <th>@Html.ActionLink("Remove", "Edit", "Customer", new { id = customer.Id }, null)</th>
+                    <th>@Html.ActionLink("Remove", "DeleteCustomer", "Customer", new { id = customer.Id }, null)</th>
                 </tr>
 
 

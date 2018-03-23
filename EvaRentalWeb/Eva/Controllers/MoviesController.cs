@@ -117,6 +117,20 @@ namespace Eva.Controllers
             };
             return View("MovieForms", viewModel);
         }
+
+        public ActionResult DeleteMovie(int id)
+        {
+            var movie = _context.Movies.SingleOrDefault(m => m.Id == id);
+
+            if (movie == null)
+            {
+                return HttpNotFound();
+            }
+
+            _context.Movies.Remove(movie);
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Movies");
+        }
         [Obsolete]
         //public ActionResult Index(int? pageIndex, string sortBy)
         //{

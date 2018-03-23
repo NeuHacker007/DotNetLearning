@@ -21,7 +21,7 @@
             <td>@Html.ActionLink(movie.Name,"Details","Movies", new {id = movie.Id},null)</td>
             <td>@movie.Genre.Name</td>
             <th>@Html.ActionLink("Edit","Edit","Movies", new {id = movie.Id}, null)</th>
-            <th>@Html.ActionLink("Remove","Edit","Movies", new {id = movie.Id}, null)</th>
+            <th>@Html.ActionLink("Remove","DeleteMovie","Movies", new {id = movie.Id}, null)</th>
         </tr>
     }
     </tbody>
