@@ -34,7 +34,7 @@
                     {
                         data: "name",
                         render: function (data, type, customer) {
-                            return "<a href='/customers/details/" + customer.id + "'>" + customer.name + "</a>";
+                            return "<a href='/customer/details/" + customer.id + "'>" + customer.name + "</a>";
                         }
                     },
                     {
@@ -43,7 +43,7 @@
                     {
                         data: "id",
                         render: function (data, type, customer) {
-                            return "<a href='/customers/Edit/" + customer.id + "'>Edit</a>";
+                            return "<a href='/customer/edit/" + customer.id + "'>Edit</a>";
                         }
                     },
                     {

@@ -19,6 +19,8 @@ namespace Eva.App_Start
 
             Mapper.CreateMap<MembershipType, MembershipTypeDto>();
 
+            Mapper.CreateMap<GenreTypes, GenreTypeDto>();
+
         }
     }
 }

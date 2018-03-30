@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Eva.Models.Movie>
+﻿
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -16,15 +16,7 @@
     </tr>
     </thead>
     <tbody>
-    @foreach (var movie in Model)
-    {
-        <tr>
-            <td>@Html.ActionLink(movie.Name,"Details","Movies", new {id = movie.Id},null)</td>
-            <td>@movie.Genre.Name</td>
-            <td>@Html.ActionLink("Edit","Edit","Movies", new {id = movie.Id}, null)</td>
-            <td><button data-movie-id="@movie.Id"  class="btn btn-link js-delete">Delete</button></td>
-        </tr>
-    }
+
     </tbody>
 
 </table>
@@ -36,10 +28,39 @@
     <script>
         $(document).ready(function () {
 
-            var movieTalbes = $("#movies");
+            var movieTable = $("#movies");
 
+           var table = movieTable.DataTable({
+                ajax: {
+                    url: "/api/movieapi",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "name",
+                        render: function (data, type, movie) {
+                            return "<a href='/movies/details/" + movie.id + "'>" + movie.name + "</a>";
+                        }
+                    },
+                    {
+                        data: "genre.name"
+                    },
+                    {
+                        data: "id",
+                        render: function(data, type, movie) {
+                            return "<a href='/movies/edit/" + data + "'>Edit</a>";
+                        }
+                    },
+                    {
+                        data: "id",
+                        render: function (data, type, movie) {
+                            return "<button class='btn-link js-delete' data-movie-id='" + data + "'>Delete</button>";
+                        }
+                    }
+                    ]
+            });
 
-            movieTalbes.on("click",
+            movieTable.on("click",
                 ".js-delete",
                 function() {
                     var button = $(this);
@@ -50,12 +71,11 @@
                                 url: "/api/movieapi/" + button.attr("data-movie-id"),
                                 method: "DELETE",
                                 success: function() {
-                                    button.parent("tr").remove();
+                                    table.row(button.parents("tr")).remove().draw();
                                 }
                             });
                         }
                     });
-
 
                 });
 
