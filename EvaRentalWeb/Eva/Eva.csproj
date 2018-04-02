@@ -278,6 +278,10 @@
     <Compile Include="Migrations\201803221741068_RemoveReuiredToCustomerBirthday.Designer.cs">
       <DependentUpon>201803221741068_RemoveReuiredToCustomerBirthday.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803301540035_SeedUsersAndRoles.cs" />
+    <Compile Include="Migrations\201803301540035_SeedUsersAndRoles.Designer.cs">
+      <DependentUpon>201803301540035_SeedUsersAndRoles.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\CustomerModel.cs" />
@@ -619,6 +623,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803221741068_RemoveReuiredToCustomerBirthday.resx">
       <DependentUpon>201803221741068_RemoveReuiredToCustomerBirthday.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803301540035_SeedUsersAndRoles.resx">
+      <DependentUpon>201803301540035_SeedUsersAndRoles.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
