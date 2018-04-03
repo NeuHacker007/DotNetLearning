@@ -40,6 +40,7 @@ namespace Eva.Controllers.api
 
         // POST /api/Movies
         [HttpPost]
+        [Authorize(Roles = RolesName.CanManageMovies)]
         public IHttpActionResult CreateMovie(MovieDto movieDto)
         {
             if (!ModelState.IsValid)
@@ -58,6 +59,7 @@ namespace Eva.Controllers.api
         //PUT /api/movie/id
 
         [HttpPut]
+        [Authorize(Roles = RolesName.CanManageMovies)]
         public IHttpActionResult UpdateMovie(int id, MovieDto movieDto)
         {
             if (!ModelState.IsValid)
@@ -77,6 +79,8 @@ namespace Eva.Controllers.api
 
 
         //DELETE /api/movies/id
+        [HttpDelete]
+        [Authorize(Roles = RolesName.CanManageMovies)]
         public IHttpActionResult DELETE(int id)
         {
             var movie = _context.Movies.SingleOrDefault(m => m.Id == id);

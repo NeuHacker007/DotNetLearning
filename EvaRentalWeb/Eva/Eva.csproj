@@ -19,7 +19,7 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>44365</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -282,7 +282,12 @@
     <Compile Include="Migrations\201803301540035_SeedUsersAndRoles.Designer.cs">
       <DependentUpon>201803301540035_SeedUsersAndRoles.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804021614451_AddDrivingLicenseToApplicationUser.cs" />
+    <Compile Include="Migrations\201804021614451_AddDrivingLicenseToApplicationUser.Designer.cs">
+      <DependentUpon>201804021614451_AddDrivingLicenseToApplicationUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\RolesName.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\CustomerModel.cs" />
     <Compile Include="Models\GenreTypesModel.cs" />
@@ -569,10 +574,11 @@
     <Content Include="Views\Shared\_NavBarPartialView.cshtml" />
     <Content Include="Views\Customer\Index.cshtml" />
     <Content Include="Views\Customer\Details.cshtml" />
-    <Content Include="Views\Movies\Index.cshtml" />
+    <Content Include="Views\Movies\List.cshtml" />
     <Content Include="Views\Movies\Details.cshtml" />
     <Content Include="Views\Customer\CustomerForm.cshtml" />
     <Content Include="Views\Movies\MovieForms.cshtml" />
+    <Content Include="Views\Movies\ReadOnlyList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -627,6 +633,9 @@
     <EmbeddedResource Include="Migrations\201803301540035_SeedUsersAndRoles.resx">
       <DependentUpon>201803301540035_SeedUsersAndRoles.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804021614451_AddDrivingLicenseToApplicationUser.resx">
+      <DependentUpon>201804021614451_AddDrivingLicenseToApplicationUser.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -647,7 +656,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>4012</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:4012/</IISUrl>
+          <IISUrl>https://localhost:44365/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

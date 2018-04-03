@@ -23,8 +23,9 @@ namespace Eva.Controllers
         }
         public ViewResult Index()
         {
-
-            return View();
+            if (User.IsInRole(RolesName.CanManageMovies))
+                return View("List");
+            return View("ReadOnlyList");
         }
 
         public ActionResult Details(int id)
@@ -37,6 +38,7 @@ namespace Eva.Controllers
             return View(movie);
         }
 
+        [Authorize(Roles = RolesName.CanManageMovies)]
         public ActionResult New()
         {
             var genreTypes = _context.GenreTypes.ToList();
@@ -50,6 +52,7 @@ namespace Eva.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = RolesName.CanManageMovies)]
         public ActionResult Save(Movie movie)
         {
             if (!ModelState.IsValid)
@@ -80,6 +83,8 @@ namespace Eva.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index", "Movies");
         }
+
+
         // GET: Movies
         public ActionResult Random()
         {
@@ -101,6 +106,7 @@ namespace Eva.Controllers
             return View(viewModel);
         }
 
+        [Authorize(Roles = RolesName.CanManageMovies)]
         public ActionResult Edit(int id)
         {
             var movie = _context.Movies.SingleOrDefault(m => m.Id == id);
@@ -118,6 +124,7 @@ namespace Eva.Controllers
             return View("MovieForms", viewModel);
         }
 
+        [Authorize(Roles = RolesName.CanManageMovies)]
         public ActionResult DeleteMovie(int id)
         {
             var movie = _context.Movies.SingleOrDefault(m => m.Id == id);
