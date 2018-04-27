@@ -19,9 +19,20 @@ namespace Eva.Controllers.api
         }
 
         //GET /api/Moives
-        public IHttpActionResult GetMovies()
+        public IHttpActionResult GetMovies(string query = null)
         {
-            var moviesDto = _context.Movies.Include(m => m.Genre)
+
+            var movieQuery = _context.Movies.Include(m => m.Genre)
+                .Where(m => m.NumberOfAvailability > 0);
+
+            if (!string.IsNullOrWhiteSpace(query))
+                movieQuery = movieQuery.Where(m => m.Name.Contains(query));
+
+            //var moviesDto = _context.Movies.Include(m => m.Genre)
+            //    .ToList()
+            //    .Select(Mapper.Map<Movie, MovieDto>);
+
+            var moviesDto = movieQuery
                 .ToList()
                 .Select(Mapper.Map<Movie, MovieDto>);
             return Ok(moviesDto);

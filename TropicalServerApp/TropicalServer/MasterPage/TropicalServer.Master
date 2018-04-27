@@ -1,0 +1,55 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="TropicalServer.master.cs" Inherits="TropicalServer.MasterPage.TropicalServer" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajax" %>
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head id="Head" runat="server">
+    <title></title>
+    <link href="~/AppThemes/TropicalStyles/Site.css" rel="stylesheet" type="text/css" />
+
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="Form" runat="server">
+
+    <div class="page">
+        <div class="header">
+            <div class="imageDisplay">
+                <asp:Image ID="Image" runat="server"
+                     CssClass="imageHeader" ImageUrl="~/Images/HeaderTropicalServer.png" />
+            </div>
+            <div class="clear menuLink">
+                <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false"
+                          IncludeStyleBlock="false" Orientation="Horizontal">
+                    <Items>
+                        <asp:MenuItem NavigateUrl="~/UI/Orders.aspx" Text="Orders"/>
+                        <asp:MenuItem NavigateUrl="~/UI/Products.aspx" Text="Products"/>
+                        <asp:MenuItem NavigateUrl="~/UI/Routes.aspx" Text="Routes"/>
+                        <asp:MenuItem NavigateUrl="~/UI/StopSEQN.aspx" Text="StopSEQN"/>
+                        <asp:MenuItem NavigateUrl="~/UI/MsgCenter.aspx" Text="Message Center"/>
+                        <asp:MenuItem NavigateUrl="~/UI/Reports.aspx" Text="Reports"/>
+                        <asp:MenuItem NavigateUrl="~/UI/Settings.aspx" Text="Settings"/>
+                    </Items>
+                </asp:Menu>
+                <asp:LinkButton CssClass="menuLink LogOut" ID="linkBtnLogOut" runat="server" >Log Out</asp:LinkButton>
+            </div>
+        </div>
+
+        <div class="main">
+            <ajax:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
+            </ajax:ToolkitScriptManager>
+            <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
+        </div>
+
+    </div>
+        <%--    <div class="footer">
+
+    </div>--%>
+    </form>
+</body>
+</html>

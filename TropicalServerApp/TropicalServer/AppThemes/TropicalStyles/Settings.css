@@ -1,0 +1,91 @@
+﻿/* Settings
+----------------------------------------------------------*/
+
+.settingsMenu
+{
+    width: 930px;
+    height:380px;
+    padding-top:22px;
+}
+
+.lblSettings
+{
+    background-color:#0033CC;
+    font-weight:bold;
+    color:White;
+    text-align:center;
+    font-size:12px;
+    margin-top: 0px;
+}
+
+.buttonSettings
+{
+    Font-Size:9pt;
+    background-color:#4C787E;
+    border-style:none;
+    color:White;
+}
+
+.settingsChart
+{
+    background-color:White;
+    overflow:auto;
+    padding-left:15px;
+    padding-top:15px;    
+}
+
+.headerTemplate
+{
+    background-color:#4C787E;
+    Font-Size:9pt;
+    color:White;
+    font-family:Calibri;
+}
+
+.itemTemplate
+{
+    background-color:#98AFC7;
+    Font-Size:9pt;
+    color:Black;
+    font-family:Calibri;
+}
+
+
+.lnkBtnEditDelete
+{
+    text-decoration:underline;
+    color:Blue;  
+    
+}
+
+.popupEditWindow
+{
+    background-color:#ADD8E6;
+    width:300px;
+    height:auto;
+    border:solid 1px; 
+    border-color:Black;
+    padding:10px;
+}
+
+.popupEdit
+{
+    padding:3px;
+}
+
+.lblEdit
+{
+    font-family:Calibri;
+    width:100px;
+    color:Black;
+}
+
+.btnEdit
+{
+    height:20px;
+    padding-left:2;
+    padding-right:2;
+    background-color:transparent;
+    border-color:Black;
+    
+}

@@ -1,0 +1,45 @@
+﻿* 
+{
+    font-family:Calibri;
+}
+body 
+{
+    margin:0;
+    padding:0;
+    background-color:#CCCCCC;
+}
+#page 
+{
+    width:980px;
+    margin:10px auto;
+    padding:0;
+}
+header #logo 
+{
+    width:980px;
+    height:125px;
+    background-image:url(../../Images/Tropical.png);
+}
+#tabs {
+	padding: 0px;
+	padding-top: 10px;
+	background: #4B6C9E;
+	border-width: 0px;
+}
+#tabs .ui-tabs-nav {
+	padding-left: 10px;
+	background: #4B6C9E;
+	border-width: 0px 0px 1px 0px;
+	border-radius: 0px;
+	-moz-border-radius: 0px;
+	-webkit-border-radius: 0px;
+}
+#tabs .ui-tabs-nav li {
+	margin-top: 0.6em;
+	padding:0px 20px;
+}
+#tabs .ui-tabs-panel {
+	background: url(images/ui-bg_highlight-hard_100_f5f3e5_1x100.png) repeat-x scroll 50% top #f5f3e5;
+	border-width: 19px 1px 1px 1px;
+	height:600px;
+}

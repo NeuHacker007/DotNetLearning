@@ -28,5 +28,7 @@ namespace Eva.Models
         [Range(1, 200)]
         [Display(Name = "Avalability")]
         public byte NumberInStock { get; set; }
+
+        public byte NumberOfAvailability { get; set; }
     }
 }

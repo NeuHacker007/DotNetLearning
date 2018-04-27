@@ -1,0 +1,139 @@
+﻿/* Routes
+----------------------------------------------------------*/
+.routeLayout
+{
+    width: 200px;
+    height:400px;
+    float:left;
+    padding-left:auto;
+    padding-right:auto;
+    text-align:center;
+}
+
+.enterRoute
+{
+    background-color:#0033CC;
+    height: 75px;
+    width: 200px;
+    text-align:center;
+}
+
+.lblRoute
+{
+    font-size:9pt;
+    color:White;  
+    width:200;
+}
+
+.buttonFilter
+{
+    height:21px;
+    width:75px;
+    background-color:#0033CC;
+    border-color:White;
+    color:White;
+}
+
+.ButtonRouteInfo
+{
+    width:150px;
+    background-color:#3399CC;
+    border:none;
+}
+.ButtonRouteInfo:hover
+{
+    cursor:pointer;
+}
+.routeInfoDisplay
+{
+    float:left;
+    width:680px;
+    padding-top:20px;
+    padding-left:20px;
+    padding-right:10px;  
+   
+}
+
+.panelRouteInfo
+{
+    height:80px;
+    width:670px;
+    background-color:#3399CC;
+    padding:10px;
+}
+
+.lblRouteText
+{
+    font-weight:bold;
+    color:black;
+    font-size:9pt;    
+}
+
+.lblRouteTextOutput
+{
+    color:black;
+    font-size:9pt;       
+}
+
+.txtbxRoute
+{
+    height:15px;
+    width:60px;
+}
+
+.routeCal
+{
+    height:20px;
+    margin-left: 0px;
+}
+.daysInfo
+{
+    float:left;
+    width:670px;
+    height:250px;
+    padding-top:20px;
+    padding-left:20px;
+    padding-right:10px;
+    
+    
+}
+
+.daysHeader
+{
+   color: black;
+   font: Calibri;
+   font-size: 12px;
+   cursor: pointer;
+   width:650px;
+   height:25px;
+   padding: 10px;           
+}
+
+.daysBody
+{
+    background-color: #ffffff;
+    font-size: 12px;
+    border: 1px gray;               
+    width:670px;
+    height:400;
+    padding: 10px;
+    padding-top: 2px;
+}    
+
+
+.dlStyle
+{
+    color:Black;        
+}
+
+.dataGridRoute
+{
+    font-size:12px;   
+    border-color:white;
+    width:600px;
+    height:43px;
+    border-width:1;
+    border-color:White;
+    margin-left:24px;
+    margin-top:2px;    
+}

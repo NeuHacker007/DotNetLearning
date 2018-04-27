@@ -18,10 +18,23 @@ namespace Eva.Controllers.api
         }
 
         //GET /api/Customers
-        public IHttpActionResult GetCustomers()
+        public IHttpActionResult GetCustomers(string query = null)
         {
-            var customerDto = _context.Customers
-                .Include(c => c.MembershipType)
+            //var customerDto = _context.Customers
+            //    .Include(c => c.MembershipType)
+            //    .ToList()
+            //    .Select(Mapper.Map<Customer, CustomerDto>);
+
+
+            var customerQuery = _context.Customers
+                .Include(c => c.MembershipType);
+
+            if (!string.IsNullOrWhiteSpace(query))
+            {
+                customerQuery = customerQuery.Where(c => c.Name.Contains(query));
+            }
+
+            var customerDto = customerQuery
                 .ToList()
                 .Select(Mapper.Map<Customer, CustomerDto>);
 

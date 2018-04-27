@@ -1,0 +1,209 @@
+﻿.searchbox
+{
+	background-color: #0066FF;
+	height: 100px;
+}
+#searchTextBox
+{
+    width: 100px;
+    margin-top: 15px;
+}
+#searchLabel
+{
+	color: #FFFFFF;
+	font-weight: bold;
+	font-size: 16pt;
+}
+#searchButton
+{
+	color: #FFFFFF;
+	background-color: #0099CC;
+	width: 80px;
+	font-size: 11pt;
+}
+.RouteButton
+{
+	color: #FFFFFF;
+	background-color: #009999;
+	width: 250px;
+	font-size: medium;
+}
+
+.resultHeader {
+	background-color: #99CCFF;
+	height: 70px;
+	text-align: left;
+	vertical-align: middle;
+	margin-left: 10px;
+	margin-top: 10px;
+}
+#routeLabel
+{
+	color: #FFFFFF;
+	font-size: x-large;
+	padding-right: 75px;
+}
+#routeNumber
+{
+	color: #FFFFFF;
+	font-size: x-large;
+	padding-right: 350px;
+}
+#salesRepLabel
+{
+	color: #FFFFFF;
+	font-size: x-large;
+	padding-right: 35px;
+}
+#salesRepName
+{
+	font-size: x-large;
+	color: #FFFFFF;
+}
+.results
+{
+	overflow: auto;
+	height: 720px;
+}
+.mondayTab
+{
+	background-color: #CCFFFF;
+	text-align: left;
+	margin-top: 10px;
+	margin-left: 10px;
+}
+.tuesdayTab
+{
+	text-align: left;
+	background-color: #CCFFFF;
+	margin-top: 10px;
+	margin-left: 10px;
+}
+.wednesdayTab
+{
+	background-color: #CCFFFF;
+	text-align: left;
+	margin-top: 10px;
+	margin-left: 10px;
+}
+.fridayTab
+{
+	background-color: #CCFFFF;
+	text-align: left;
+	margin-top: 10px;
+	margin-left: 10px;
+}
+.thursdayTab
+{
+	text-align: left;
+	background-color: #CCFFFF;
+	margin-top: 10px;
+	margin-left: 10px;
+}
+#MondaySave
+{
+    background-color: #CCFFFF;
+    margin-left: 400px;
+    border-width: thin;
+    width: 55px;
+}
+#TuesdaySave
+{
+    background-color: #CCFFFF;
+    margin-left: 397px;
+    border-width: thin;
+    width: 55px;
+}
+#WednesdaySave
+{
+    background-color: #CCFFFF;
+    border-width: thin;
+    margin-left: 365px;
+    width: 55px;
+}
+#ThursdaySave
+{
+    background-color: #CCFFFF;
+    border-width: thin;
+    margin-left: 385px;
+    width: 55px;
+}
+#FridaySave
+{
+    background-color: #CCFFFF;
+    border-width: thin;
+    margin-left: 416px;
+    width: 55px;
+}
+#MondayOpenClose
+{
+    background-color: #CCFFFF;
+    color: #000000;
+    border-color: #FFFFFF;
+    margin-left: 100px;
+}
+#TuesdayOpenClose
+{
+    background-color: #CCFFFF;
+    border-color: #FFFFFF;
+    margin-left: 100px;
+}
+#WednesdayOpenClose
+{
+    background-color: #CCFFFF;
+    border-color: #FFFFFF;
+    margin-left: 100px;
+}
+#ThursdayOpenClose
+{
+    background-color: #CCFFFF;
+    border-color: #FFFFFF;
+    margin-left: 100px;
+}
+#FridayOpenClose
+{
+    background-color: #CCFFFF;
+    border-color: #FFFFFF;
+    margin-left: 100px;
+}
+#Monday
+{
+	font-weight: bold;
+	font-size:x-large;
+	margin-left: 30px;
+}
+#Tuesday
+{
+	font-weight: bold;
+	font-size: x-large;
+	margin-left: 30px;
+}
+#Wednesday
+{
+	font-weight: bold;
+	font-size: x-large;
+	margin-left: 30px;
+}
+#Thursday
+{
+	font-weight: bold;
+	font-size: x-large;
+	margin-left: 30px;
+}
+#Friday
+{
+	font-weight: bold;
+	font-size: x-large;
+	margin-left: 30px;
+}
+.ResultPanel
+{
+	text-align: left;
+}
+.SEQNtextbox
+{
+	width: 33px;
+	height: 23px;
+	text-align: center;
+}
+	

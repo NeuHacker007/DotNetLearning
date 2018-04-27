@@ -1,0 +1,1439 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/21/2018 11:12:04 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="IVAN_ZHANG"
+  DTS:CreatorName="Ivan_Zhang\Ivan"
+  DTS:DTSID="{F0FAC696-0FF9-472D-B971-73B6169EA820}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionBuild="1"
+  DTS:VersionGUID="{A8380E23-EA9E-49DC-B85F-9E562006699E}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel Connection Manager]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{B50F345B-A7B9-4581-B570-F85A3D53CE0F}"
+      DTS:ObjectName="Excel Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=E:\Itlize\Training\Day 9(SSIS,RS)\SSIS\Materials and Assignments\SSIS Exercises\Dino File.xlsx;Extended Properties=&quot;Excel 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{368020EB-3063-43E3-9093-8B3FC9DE027A}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task\Excel Source"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Excel Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Excel Source"
+              name="Excel Source"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">Specimens$</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mapping from parameters in the SQL command to variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\Excel Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Excel Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output]"
+                  name="Excel Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[Name]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Name]"
+                      name="Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Meaning of Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[Meaning of Name]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Meaning of Name]"
+                      name="Meaning of Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Pronunciation]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[Pronunciation]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Pronunciation]"
+                      name="Pronunciation"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Period]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[Period]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Period]"
+                      name="Period"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Diet]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[Diet]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Diet]"
+                      name="Diet"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Length (m)]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[Length (m)]"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Length (m)]"
+                      name="Length (m)"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Height  (m)]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[Height  (m)]"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Height  (m)]"
+                      name="Height  (m)"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Mass kg]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[Mass kg]"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Mass kg]"
+                      name="Mass kg"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[No# of feet it walked on?]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[No# of feet it walked on?]"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[No# of feet it walked on?]"
+                      name="No# of feet it walked on?"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Hip Type]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[Hip Type]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Hip Type]"
+                      name="Hip Type"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Group]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[Group]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Group]"
+                      name="Group"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[Name]"
+                      dataType="wstr"
+                      length="255"
+                      name="Name" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[Meaning of Name]"
+                      dataType="wstr"
+                      length="255"
+                      name="Meaning of Name" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[Pronunciation]"
+                      dataType="wstr"
+                      length="255"
+                      name="Pronunciation" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[Period]"
+                      dataType="wstr"
+                      length="255"
+                      name="Period" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[Diet]"
+                      dataType="wstr"
+                      length="255"
+                      name="Diet" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[Length (m)]"
+                      dataType="r8"
+                      name="Length (m)" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[Height  (m)]"
+                      dataType="r8"
+                      name="Height  (m)" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[Mass kg]"
+                      dataType="r8"
+                      name="Mass kg" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[No# of feet it walked on?]"
+                      dataType="r8"
+                      name="No# of feet it walked on?" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[Hip Type]"
+                      dataType="wstr"
+                      length="255"
+                      name="Hip Type" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[Group]"
+                      dataType="wstr"
+                      length="255"
+                      name="Group" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output]"
+                  isErrorOut="true"
+                  name="Excel Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[Name]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[Name]"
+                      name="Name" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[Meaning of Name]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[Meaning of Name]"
+                      name="Meaning of Name" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[Pronunciation]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[Pronunciation]"
+                      name="Pronunciation" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[Period]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[Period]"
+                      name="Period" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[Diet]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[Diet]"
+                      name="Diet" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[Length (m)]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[Length (m)]"
+                      name="Length (m)" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[Height  (m)]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[Height  (m)]"
+                      name="Height  (m)" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[Mass kg]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[Mass kg]"
+                      name="Mass kg" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[No# of feet it walked on?]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[No# of feet it walked on?]"
+                      name="No# of feet it walked on?" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[Hip Type]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[Hip Type]"
+                      name="Hip Type" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[Group]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[Group]"
+                      name="Group" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Row Sampling"
+              componentClassID="Microsoft.RowSampling"
+              contactInfo="Row Sampling;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Randomly samples a specific number of rows from an input data flow. For example, use it randomly select products to feature on your Web site."
+              name="Row Sampling">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the number of rows in the sample."
+                  expressionType="Notify"
+                  name="SamplingValue">5</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the seed for the random number generator."
+                  name="SamplingSeed">0</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Row Sampling.Inputs[Row Sampling Input 1]"
+                  name="Row Sampling Input 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Row Sampling.Inputs[Row Sampling Input 1].Columns[Name]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Name"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Name]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Row Sampling.Inputs[Row Sampling Input 1].Columns[Meaning of Name]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Meaning of Name"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Meaning of Name]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Row Sampling.Inputs[Row Sampling Input 1].Columns[Pronunciation]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Pronunciation"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Pronunciation]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Row Sampling.Inputs[Row Sampling Input 1].Columns[Period]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Period"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Period]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Row Sampling.Inputs[Row Sampling Input 1].Columns[Diet]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Diet"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Diet]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Row Sampling.Inputs[Row Sampling Input 1].Columns[Length (m)]"
+                      cachedDataType="r8"
+                      cachedName="Length (m)"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Length (m)]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Row Sampling.Inputs[Row Sampling Input 1].Columns[Height  (m)]"
+                      cachedDataType="r8"
+                      cachedName="Height  (m)"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Height  (m)]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Row Sampling.Inputs[Row Sampling Input 1].Columns[Mass kg]"
+                      cachedDataType="r8"
+                      cachedName="Mass kg"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Mass kg]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Row Sampling.Inputs[Row Sampling Input 1].Columns[No# of feet it walked on?]"
+                      cachedDataType="r8"
+                      cachedName="No# of feet it walked on?"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[No# of feet it walked on?]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Row Sampling.Inputs[Row Sampling Input 1].Columns[Hip Type]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Hip Type"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Hip Type]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Row Sampling.Inputs[Row Sampling Input 1].Columns[Group]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Group"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Group]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Row Sampling.Outputs[sampled]"
+                  name="sampled">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      description="Output for rows in the sample"
+                      name="Selected">true</property>
+                  </properties>
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Row Sampling.Outputs[sampled].Columns[Name]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Row Sampling.Outputs[sampled].Columns[Name]"
+                      name="Name">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Input column lineage ID"
+                          name="InputColumnLineageID">#{Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Name]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Row Sampling.Outputs[sampled].Columns[Meaning of Name]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Row Sampling.Outputs[sampled].Columns[Meaning of Name]"
+                      name="Meaning of Name">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Input column lineage ID"
+                          name="InputColumnLineageID">#{Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Meaning of Name]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Row Sampling.Outputs[sampled].Columns[Pronunciation]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Row Sampling.Outputs[sampled].Columns[Pronunciation]"
+                      name="Pronunciation">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Input column lineage ID"
+                          name="InputColumnLineageID">#{Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Pronunciation]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Row Sampling.Outputs[sampled].Columns[Period]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Row Sampling.Outputs[sampled].Columns[Period]"
+                      name="Period">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Input column lineage ID"
+                          name="InputColumnLineageID">#{Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Period]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Row Sampling.Outputs[sampled].Columns[Diet]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Row Sampling.Outputs[sampled].Columns[Diet]"
+                      name="Diet">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Input column lineage ID"
+                          name="InputColumnLineageID">#{Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Diet]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Row Sampling.Outputs[sampled].Columns[Length (m)]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\Row Sampling.Outputs[sampled].Columns[Length (m)]"
+                      name="Length (m)">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Input column lineage ID"
+                          name="InputColumnLineageID">#{Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Length (m)]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Row Sampling.Outputs[sampled].Columns[Height  (m)]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\Row Sampling.Outputs[sampled].Columns[Height  (m)]"
+                      name="Height  (m)">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Input column lineage ID"
+                          name="InputColumnLineageID">#{Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Height  (m)]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Row Sampling.Outputs[sampled].Columns[Mass kg]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\Row Sampling.Outputs[sampled].Columns[Mass kg]"
+                      name="Mass kg">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Input column lineage ID"
+                          name="InputColumnLineageID">#{Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Mass kg]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Row Sampling.Outputs[sampled].Columns[No# of feet it walked on?]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\Row Sampling.Outputs[sampled].Columns[No# of feet it walked on?]"
+                      name="No# of feet it walked on?">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Input column lineage ID"
+                          name="InputColumnLineageID">#{Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[No# of feet it walked on?]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Row Sampling.Outputs[sampled].Columns[Hip Type]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Row Sampling.Outputs[sampled].Columns[Hip Type]"
+                      name="Hip Type">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Input column lineage ID"
+                          name="InputColumnLineageID">#{Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Hip Type]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Row Sampling.Outputs[sampled].Columns[Group]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Row Sampling.Outputs[sampled].Columns[Group]"
+                      name="Group">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Input column lineage ID"
+                          name="InputColumnLineageID">#{Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Group]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Row Sampling.Outputs[un-sampled]"
+                  name="un-sampled">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      description="Output for rows in the sample"
+                      name="Selected">false</property>
+                  </properties>
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Row Sampling.Outputs[un-sampled].Columns[Name]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Row Sampling.Outputs[un-sampled].Columns[Name]"
+                      name="Name">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Input column lineage ID"
+                          name="InputColumnLineageID">#{Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Name]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Row Sampling.Outputs[un-sampled].Columns[Meaning of Name]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Row Sampling.Outputs[un-sampled].Columns[Meaning of Name]"
+                      name="Meaning of Name">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Input column lineage ID"
+                          name="InputColumnLineageID">#{Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Meaning of Name]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Row Sampling.Outputs[un-sampled].Columns[Pronunciation]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Row Sampling.Outputs[un-sampled].Columns[Pronunciation]"
+                      name="Pronunciation">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Input column lineage ID"
+                          name="InputColumnLineageID">#{Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Pronunciation]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Row Sampling.Outputs[un-sampled].Columns[Period]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Row Sampling.Outputs[un-sampled].Columns[Period]"
+                      name="Period">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Input column lineage ID"
+                          name="InputColumnLineageID">#{Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Period]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Row Sampling.Outputs[un-sampled].Columns[Diet]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Row Sampling.Outputs[un-sampled].Columns[Diet]"
+                      name="Diet">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Input column lineage ID"
+                          name="InputColumnLineageID">#{Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Diet]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Row Sampling.Outputs[un-sampled].Columns[Length (m)]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\Row Sampling.Outputs[un-sampled].Columns[Length (m)]"
+                      name="Length (m)">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Input column lineage ID"
+                          name="InputColumnLineageID">#{Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Length (m)]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Row Sampling.Outputs[un-sampled].Columns[Height  (m)]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\Row Sampling.Outputs[un-sampled].Columns[Height  (m)]"
+                      name="Height  (m)">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Input column lineage ID"
+                          name="InputColumnLineageID">#{Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Height  (m)]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Row Sampling.Outputs[un-sampled].Columns[Mass kg]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\Row Sampling.Outputs[un-sampled].Columns[Mass kg]"
+                      name="Mass kg">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Input column lineage ID"
+                          name="InputColumnLineageID">#{Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Mass kg]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Row Sampling.Outputs[un-sampled].Columns[No# of feet it walked on?]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\Row Sampling.Outputs[un-sampled].Columns[No# of feet it walked on?]"
+                      name="No# of feet it walked on?">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Input column lineage ID"
+                          name="InputColumnLineageID">#{Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[No# of feet it walked on?]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Row Sampling.Outputs[un-sampled].Columns[Hip Type]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Row Sampling.Outputs[un-sampled].Columns[Hip Type]"
+                      name="Hip Type">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Input column lineage ID"
+                          name="InputColumnLineageID">#{Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Hip Type]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Row Sampling.Outputs[un-sampled].Columns[Group]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Row Sampling.Outputs[un-sampled].Columns[Group]"
+                      name="Group">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Input column lineage ID"
+                          name="InputColumnLineageID">#{Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Group]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Sampled"
+              componentClassID="Microsoft.UnionAll"
+              contactInfo="Union All;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combines rows from multiple data flows without sorting. For example, add rows back to a data flow after correction of errors. If sorting is important, we recommend using the Merge transformation."
+              name="Sampled"
+              version="1">
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Sampled.Inputs[Union All Input 1]"
+                  name="Union All Input 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Sampled.Inputs[Union All Input 1].Columns[Name]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Name"
+                      lineageId="Package\Data Flow Task\Row Sampling.Outputs[sampled].Columns[Name]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Sampled.Outputs[Union All Output 1].Columns[Name]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Sampled.Inputs[Union All Input 1].Columns[Meaning of Name]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Meaning of Name"
+                      lineageId="Package\Data Flow Task\Row Sampling.Outputs[sampled].Columns[Meaning of Name]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Sampled.Outputs[Union All Output 1].Columns[Meaning of Name]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Sampled.Inputs[Union All Input 1].Columns[Pronunciation]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Pronunciation"
+                      lineageId="Package\Data Flow Task\Row Sampling.Outputs[sampled].Columns[Pronunciation]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Sampled.Outputs[Union All Output 1].Columns[Pronunciation]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Sampled.Inputs[Union All Input 1].Columns[Period]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Period"
+                      lineageId="Package\Data Flow Task\Row Sampling.Outputs[sampled].Columns[Period]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Sampled.Outputs[Union All Output 1].Columns[Period]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Sampled.Inputs[Union All Input 1].Columns[Diet]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Diet"
+                      lineageId="Package\Data Flow Task\Row Sampling.Outputs[sampled].Columns[Diet]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Sampled.Outputs[Union All Output 1].Columns[Diet]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Sampled.Inputs[Union All Input 1].Columns[Length (m)]"
+                      cachedDataType="r8"
+                      cachedName="Length (m)"
+                      lineageId="Package\Data Flow Task\Row Sampling.Outputs[sampled].Columns[Length (m)]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Sampled.Outputs[Union All Output 1].Columns[Length (m)]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Sampled.Inputs[Union All Input 1].Columns[Height  (m)]"
+                      cachedDataType="r8"
+                      cachedName="Height  (m)"
+                      lineageId="Package\Data Flow Task\Row Sampling.Outputs[sampled].Columns[Height  (m)]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Sampled.Outputs[Union All Output 1].Columns[Height  (m)]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Sampled.Inputs[Union All Input 1].Columns[Mass kg]"
+                      cachedDataType="r8"
+                      cachedName="Mass kg"
+                      lineageId="Package\Data Flow Task\Row Sampling.Outputs[sampled].Columns[Mass kg]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Sampled.Outputs[Union All Output 1].Columns[Mass kg]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Sampled.Inputs[Union All Input 1].Columns[No# of feet it walked on?]"
+                      cachedDataType="r8"
+                      cachedName="No# of feet it walked on?"
+                      lineageId="Package\Data Flow Task\Row Sampling.Outputs[sampled].Columns[No# of feet it walked on?]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Sampled.Outputs[Union All Output 1].Columns[No# of feet it walked on?]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Sampled.Inputs[Union All Input 1].Columns[Hip Type]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Hip Type"
+                      lineageId="Package\Data Flow Task\Row Sampling.Outputs[sampled].Columns[Hip Type]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Sampled.Outputs[Union All Output 1].Columns[Hip Type]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Sampled.Inputs[Union All Input 1].Columns[Group]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Group"
+                      lineageId="Package\Data Flow Task\Row Sampling.Outputs[sampled].Columns[Group]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Sampled.Outputs[Union All Output 1].Columns[Group]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Data Flow Task\Sampled.Inputs[Union All Input 2]"
+                  dangling="true"
+                  hasSideEffects="true"
+                  name="Union All Input 2">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Sampled.Outputs[Union All Output 1]"
+                  name="Union All Output 1">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Sampled.Outputs[Union All Output 1].Columns[Name]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Sampled.Outputs[Union All Output 1].Columns[Name]"
+                      name="Name" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Sampled.Outputs[Union All Output 1].Columns[Meaning of Name]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Sampled.Outputs[Union All Output 1].Columns[Meaning of Name]"
+                      name="Meaning of Name" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Sampled.Outputs[Union All Output 1].Columns[Pronunciation]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Sampled.Outputs[Union All Output 1].Columns[Pronunciation]"
+                      name="Pronunciation" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Sampled.Outputs[Union All Output 1].Columns[Period]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Sampled.Outputs[Union All Output 1].Columns[Period]"
+                      name="Period" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Sampled.Outputs[Union All Output 1].Columns[Diet]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Sampled.Outputs[Union All Output 1].Columns[Diet]"
+                      name="Diet" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Sampled.Outputs[Union All Output 1].Columns[Length (m)]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\Sampled.Outputs[Union All Output 1].Columns[Length (m)]"
+                      name="Length (m)" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Sampled.Outputs[Union All Output 1].Columns[Height  (m)]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\Sampled.Outputs[Union All Output 1].Columns[Height  (m)]"
+                      name="Height  (m)" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Sampled.Outputs[Union All Output 1].Columns[Mass kg]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\Sampled.Outputs[Union All Output 1].Columns[Mass kg]"
+                      name="Mass kg" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Sampled.Outputs[Union All Output 1].Columns[No# of feet it walked on?]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\Sampled.Outputs[Union All Output 1].Columns[No# of feet it walked on?]"
+                      name="No# of feet it walked on?" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Sampled.Outputs[Union All Output 1].Columns[Hip Type]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Sampled.Outputs[Union All Output 1].Columns[Hip Type]"
+                      name="Hip Type" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Sampled.Outputs[Union All Output 1].Columns[Group]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Sampled.Outputs[Union All Output 1].Columns[Group]"
+                      name="Group" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Un-Sampled"
+              componentClassID="Microsoft.UnionAll"
+              contactInfo="Union All;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combines rows from multiple data flows without sorting. For example, add rows back to a data flow after correction of errors. If sorting is important, we recommend using the Merge transformation."
+              name="Un-Sampled"
+              version="1">
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Un-Sampled.Inputs[Union All Input 1]"
+                  name="Union All Input 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Un-Sampled.Inputs[Union All Input 1].Columns[Name]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Name"
+                      lineageId="Package\Data Flow Task\Row Sampling.Outputs[un-sampled].Columns[Name]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Un-Sampled.Outputs[Union All Output 1].Columns[Name]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Un-Sampled.Inputs[Union All Input 1].Columns[Meaning of Name]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Meaning of Name"
+                      lineageId="Package\Data Flow Task\Row Sampling.Outputs[un-sampled].Columns[Meaning of Name]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Un-Sampled.Outputs[Union All Output 1].Columns[Meaning of Name]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Un-Sampled.Inputs[Union All Input 1].Columns[Pronunciation]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Pronunciation"
+                      lineageId="Package\Data Flow Task\Row Sampling.Outputs[un-sampled].Columns[Pronunciation]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Un-Sampled.Outputs[Union All Output 1].Columns[Pronunciation]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Un-Sampled.Inputs[Union All Input 1].Columns[Period]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Period"
+                      lineageId="Package\Data Flow Task\Row Sampling.Outputs[un-sampled].Columns[Period]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Un-Sampled.Outputs[Union All Output 1].Columns[Period]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Un-Sampled.Inputs[Union All Input 1].Columns[Diet]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Diet"
+                      lineageId="Package\Data Flow Task\Row Sampling.Outputs[un-sampled].Columns[Diet]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Un-Sampled.Outputs[Union All Output 1].Columns[Diet]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Un-Sampled.Inputs[Union All Input 1].Columns[Length (m)]"
+                      cachedDataType="r8"
+                      cachedName="Length (m)"
+                      lineageId="Package\Data Flow Task\Row Sampling.Outputs[un-sampled].Columns[Length (m)]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Un-Sampled.Outputs[Union All Output 1].Columns[Length (m)]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Un-Sampled.Inputs[Union All Input 1].Columns[Height  (m)]"
+                      cachedDataType="r8"
+                      cachedName="Height  (m)"
+                      lineageId="Package\Data Flow Task\Row Sampling.Outputs[un-sampled].Columns[Height  (m)]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Un-Sampled.Outputs[Union All Output 1].Columns[Height  (m)]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Un-Sampled.Inputs[Union All Input 1].Columns[Mass kg]"
+                      cachedDataType="r8"
+                      cachedName="Mass kg"
+                      lineageId="Package\Data Flow Task\Row Sampling.Outputs[un-sampled].Columns[Mass kg]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Un-Sampled.Outputs[Union All Output 1].Columns[Mass kg]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Un-Sampled.Inputs[Union All Input 1].Columns[No# of feet it walked on?]"
+                      cachedDataType="r8"
+                      cachedName="No# of feet it walked on?"
+                      lineageId="Package\Data Flow Task\Row Sampling.Outputs[un-sampled].Columns[No# of feet it walked on?]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Un-Sampled.Outputs[Union All Output 1].Columns[No# of feet it walked on?]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Un-Sampled.Inputs[Union All Input 1].Columns[Hip Type]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Hip Type"
+                      lineageId="Package\Data Flow Task\Row Sampling.Outputs[un-sampled].Columns[Hip Type]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Un-Sampled.Outputs[Union All Output 1].Columns[Hip Type]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Un-Sampled.Inputs[Union All Input 1].Columns[Group]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Group"
+                      lineageId="Package\Data Flow Task\Row Sampling.Outputs[un-sampled].Columns[Group]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Un-Sampled.Outputs[Union All Output 1].Columns[Group]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Data Flow Task\Un-Sampled.Inputs[Union All Input 2]"
+                  dangling="true"
+                  hasSideEffects="true"
+                  name="Union All Input 2">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Un-Sampled.Outputs[Union All Output 1]"
+                  name="Union All Output 1">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Un-Sampled.Outputs[Union All Output 1].Columns[Name]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Un-Sampled.Outputs[Union All Output 1].Columns[Name]"
+                      name="Name" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Un-Sampled.Outputs[Union All Output 1].Columns[Meaning of Name]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Un-Sampled.Outputs[Union All Output 1].Columns[Meaning of Name]"
+                      name="Meaning of Name" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Un-Sampled.Outputs[Union All Output 1].Columns[Pronunciation]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Un-Sampled.Outputs[Union All Output 1].Columns[Pronunciation]"
+                      name="Pronunciation" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Un-Sampled.Outputs[Union All Output 1].Columns[Period]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Un-Sampled.Outputs[Union All Output 1].Columns[Period]"
+                      name="Period" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Un-Sampled.Outputs[Union All Output 1].Columns[Diet]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Un-Sampled.Outputs[Union All Output 1].Columns[Diet]"
+                      name="Diet" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Un-Sampled.Outputs[Union All Output 1].Columns[Length (m)]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\Un-Sampled.Outputs[Union All Output 1].Columns[Length (m)]"
+                      name="Length (m)" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Un-Sampled.Outputs[Union All Output 1].Columns[Height  (m)]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\Un-Sampled.Outputs[Union All Output 1].Columns[Height  (m)]"
+                      name="Height  (m)" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Un-Sampled.Outputs[Union All Output 1].Columns[Mass kg]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\Un-Sampled.Outputs[Union All Output 1].Columns[Mass kg]"
+                      name="Mass kg" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Un-Sampled.Outputs[Union All Output 1].Columns[No# of feet it walked on?]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\Un-Sampled.Outputs[Union All Output 1].Columns[No# of feet it walked on?]"
+                      name="No# of feet it walked on?" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Un-Sampled.Outputs[Union All Output 1].Columns[Hip Type]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Un-Sampled.Outputs[Union All Output 1].Columns[Hip Type]"
+                      name="Hip Type" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Un-Sampled.Outputs[Union All Output 1].Columns[Group]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Un-Sampled.Outputs[Union All Output 1].Columns[Group]"
+                      name="Group" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task.Paths[Excel Source Output]"
+              endId="Package\Data Flow Task\Row Sampling.Inputs[Row Sampling Input 1]"
+              name="Excel Source Output"
+              startId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output]" />
+            <path
+              refId="Package\Data Flow Task.Paths[sampled]"
+              endId="Package\Data Flow Task\Sampled.Inputs[Union All Input 1]"
+              name="sampled"
+              startId="Package\Data Flow Task\Row Sampling.Outputs[sampled]" />
+            <path
+              refId="Package\Data Flow Task.Paths[un-sampled]"
+              endId="Package\Data Flow Task\Un-Sampled.Inputs[Union All Input 1]"
+              name="un-sampled"
+              startId="Package\Data Flow Task\Row Sampling.Outputs[un-sampled]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="152,41.6"
+          Id="Package\Data Flow Task"
+          TopLeft="332.571434235086,121.741178177962" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="140,41.6"
+          Id="Package\Data Flow Task\Excel Source"
+          TopLeft="142.857145289985,40.9882358689622" />
+        <NodeLayout
+          Size="146.4,41.6"
+          Id="Package\Data Flow Task\Row Sampling"
+          TopLeft="148.571431101585,158.44706104569" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Excel Source Output]"
+          TopLeft="212.857145289985,82.5882358689622">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="8.91428581159946,75.8588251767275"
+              Start="0,0"
+              End="8.91428581159946,68.3588251767275">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.9294125883637" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,33.9294125883637"
+                    Point2="0,37.9294125883637"
+                    Point3="4,37.9294125883637" />
+                  <mssgle:LineSegment
+                    End="4.91428581159946,37.9294125883637" />
+                  <mssgle:CubicBezierSegment
+                    Point1="4.91428581159946,37.9294125883637"
+                    Point2="8.91428581159946,37.9294125883637"
+                    Point3="8.91428581159946,41.9294125883637" />
+                  <mssgle:LineSegment
+                    End="8.91428581159946,68.3588251767275" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-3.54285709420027,42.9294125883637,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="120,41.6"
+          Id="Package\Data Flow Task\Sampled"
+          TopLeft="63.4285725087535,258.776474217478" />
+        <NodeLayout
+          Size="136.8,41.6"
+          Id="Package\Data Flow Task\Un-Sampled"
+          TopLeft="300.57143369013,260.000003646402" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[sampled]"
+          TopLeft="221.771431101585,200.04706104569">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-98.3428585928315,58.729413171788"
+              Start="0,0"
+              End="-98.3428585928315,51.229413171788">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.364706585894" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,25.364706585894"
+                    Point2="0,29.364706585894"
+                    Point3="-4,29.364706585894" />
+                  <mssgle:LineSegment
+                    End="-94.3428585928315,29.364706585894" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-94.3428585928315,29.364706585894"
+                    Point2="-98.3428585928315,29.364706585894"
+                    Point3="-98.3428585928315,33.364706585894" />
+                  <mssgle:LineSegment
+                    End="-98.3428585928315,51.229413171788" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-76.6980699214157,34.364706585894,55.05328125,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[un-sampled]"
+          TopLeft="244.838097768252,200.04706104569">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="124.133335921878,59.9529426007122"
+              Start="0,0"
+              End="124.133335921878,52.4529426007122">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.3700609922895" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.3700609922895"
+                    Point2="0,24.3700609922895"
+                    Point3="4,24.3700609922895" />
+                  <mssgle:LineSegment
+                    End="120.133335921878,24.3700609922895" />
+                  <mssgle:CubicBezierSegment
+                    Point1="120.133335921878,24.3700609922895"
+                    Point2="124.133335921878,24.3700609922895"
+                    Point3="124.133335921878,28.3700609922895" />
+                  <mssgle:LineSegment
+                    End="124.133335921878,52.4529426007122" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="27.145027335939,29.3700609922895,69.84328125,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\Excel Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

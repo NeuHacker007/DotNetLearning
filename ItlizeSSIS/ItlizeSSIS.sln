@@ -1,0 +1,63 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "Question1", "Question1\Question1.dtproj", "{67B7F1B8-5886-40DD-B1B3-36AECA2BEA28}"
+EndProject
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "Question2", "Question2\Question2.dtproj", "{6B796012-FD65-465A-9979-81E057973061}"
+EndProject
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "Question3", "Question3\Question3.dtproj", "{0BF96C1B-F335-42B1-8B61-6F790EDF9063}"
+EndProject
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "Question4", "Question4\Question4.dtproj", "{37A200D8-1617-48D6-A3E2-42B5C1A70FD0}"
+EndProject
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "Question5", "Question5\Question5.dtproj", "{C817A184-E235-48C2-B6F2-CDFC12A9B316}"
+EndProject
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "Question6", "Question6\Question6.dtproj", "{B781AFC0-8E92-4E61-8F55-769FF2033BA4}"
+EndProject
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "Question7", "Question7\Question7.dtproj", "{5B906BF7-D02E-4EF6-8AFB-3E1A30357DA6}"
+EndProject
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "Question10", "Question10\Question10.dtproj", "{0AE5A8E7-9887-4467-8252-2E361F462EF6}"
+EndProject
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "Question8", "Question8\Question8.dtproj", "{BF29C02D-AC5B-4B50-ABAF-9DFB44A717A6}"
+EndProject
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "Question9", "Question9\Question9.dtproj", "{CC251594-C5F8-44CE-AD16-A404683ABDB0}"
+EndProject
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "Question12", "Question12\Question12.dtproj", "{E45EC2BC-B283-4602-AEB2-985FB5A00DE4}"
+EndProject
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "Question11", "Question11\Question11.dtproj", "{2FB0C3C6-86C9-4A3B-96F1-5A0B1FC5B5E1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{67B7F1B8-5886-40DD-B1B3-36AECA2BEA28}.Development|Default.ActiveCfg = Development
+		{67B7F1B8-5886-40DD-B1B3-36AECA2BEA28}.Development|Default.Build.0 = Development
+		{6B796012-FD65-465A-9979-81E057973061}.Development|Default.ActiveCfg = Development
+		{6B796012-FD65-465A-9979-81E057973061}.Development|Default.Build.0 = Development
+		{0BF96C1B-F335-42B1-8B61-6F790EDF9063}.Development|Default.ActiveCfg = Development
+		{0BF96C1B-F335-42B1-8B61-6F790EDF9063}.Development|Default.Build.0 = Development
+		{37A200D8-1617-48D6-A3E2-42B5C1A70FD0}.Development|Default.ActiveCfg = Development
+		{37A200D8-1617-48D6-A3E2-42B5C1A70FD0}.Development|Default.Build.0 = Development
+		{C817A184-E235-48C2-B6F2-CDFC12A9B316}.Development|Default.ActiveCfg = Development
+		{C817A184-E235-48C2-B6F2-CDFC12A9B316}.Development|Default.Build.0 = Development
+		{B781AFC0-8E92-4E61-8F55-769FF2033BA4}.Development|Default.ActiveCfg = Development
+		{B781AFC0-8E92-4E61-8F55-769FF2033BA4}.Development|Default.Build.0 = Development
+		{5B906BF7-D02E-4EF6-8AFB-3E1A30357DA6}.Development|Default.ActiveCfg = Development
+		{5B906BF7-D02E-4EF6-8AFB-3E1A30357DA6}.Development|Default.Build.0 = Development
+		{0AE5A8E7-9887-4467-8252-2E361F462EF6}.Development|Default.ActiveCfg = Development
+		{0AE5A8E7-9887-4467-8252-2E361F462EF6}.Development|Default.Build.0 = Development
+		{BF29C02D-AC5B-4B50-ABAF-9DFB44A717A6}.Development|Default.ActiveCfg = Development
+		{BF29C02D-AC5B-4B50-ABAF-9DFB44A717A6}.Development|Default.Build.0 = Development
+		{CC251594-C5F8-44CE-AD16-A404683ABDB0}.Development|Default.ActiveCfg = Development
+		{CC251594-C5F8-44CE-AD16-A404683ABDB0}.Development|Default.Build.0 = Development
+		{E45EC2BC-B283-4602-AEB2-985FB5A00DE4}.Development|Default.ActiveCfg = Development
+		{E45EC2BC-B283-4602-AEB2-985FB5A00DE4}.Development|Default.Build.0 = Development
+		{2FB0C3C6-86C9-4A3B-96F1-5A0B1FC5B5E1}.Development|Default.ActiveCfg = Development
+		{2FB0C3C6-86C9-4A3B-96F1-5A0B1FC5B5E1}.Development|Default.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,135 @@
+﻿#reportsTab 
+{
+    height: 600px;
+}
+#reportsContent 
+{
+    overflow: auto;
+    height: 597px;
+}
+.ReportsButtonPanel
+{
+	background-color: #FEB710;
+	text-align: center;
+	margin-right: 5%;
+	height: 100%;
+}
+
+#ReportsHeader
+{
+    background-color: #0033CC;
+    color: #FFFFFF;
+    vertical-align: middle;
+    font-size: 1.4em;
+    font-weight: bold;
+    display: block;
+    width: 100%;
+}
+#CollectionsButton
+{
+	color: #FFFFFF;
+	background-color: #009999;
+	width: 90%;
+	margin-bottom: 8px;
+}
+#OrdersButton
+{
+	color: #FFFFFF;
+	background-color: #009999;
+	width: 90%;
+	margin-bottom: 8px;
+}
+#SpoilsButton
+{
+	color: #FFFFFF;
+	background-color: #009999;
+	width: 90%;
+	margin-bottom: 8px;
+}
+#DailyRouteStopsButton
+{
+	color: #FFFFFF;
+	background-color: #009999;
+	width: 90%;
+	margin-bottom: 8px;
+}
+#PriceChangeButton
+{
+	color: #FFFFFF;
+	background-color: #009999;
+	width: 90%;
+	margin-bottom: 8px;
+}
+#SurveyReportButton
+{
+	color: #FFFFFF;
+	background-color: #009999;
+	width: 90%;
+}
+#ReportLabel
+{
+	color: #999999;
+	font-size: 1.2em;
+}
+#ReportChoiceList
+{
+	width: 10%;
+}
+#ListChoices
+{
+    width: 10%;
+}
+#FromCalendarBox
+{
+    width: 11%;
+}
+#ToCalendarBox
+{
+    width: 11%;
+}
+#ReportName
+{
+	font-size: 1.2em;
+	color: #006600;
+	font-weight: bold;
+}
+#NameDate 
+{
+	width:100%;
+	clear:both;
+}   
+#CompanyNameLabel
+{
+	color: #006600;
+	font-size: 1.2em;
+	font-weight: bold;
+}
+#DateLabel
+{
+	color: #006600;
+	font-size: 1.2em;
+	font-weight: bold;
+}
+#Address1Label
+{
+	color: #006600;
+	font-size: 1.2em;
+}
+#Address2Label
+{
+	color: #006600;
+	font-size: 1.2em;
+}
+.total
+{
+    padding-left: 30%;
+    padding-right: 22.2%;
+}
+.listview
+{
+	width: 100%;
+}
+#From
+{
+    margin-left: 13%;
+}

@@ -1,0 +1,31 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="OrderTraking.master.cs" Inherits="OrderTracking.MasterPages.OrderTraking" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>Tropical Mobile Order Tracking</title>
+    <script src="~/Scripts/Jquery3.31.min.js"></script>
+    <link rel="stylesheet" href="../Styles/MasterFrame.css" />
+</head>
+<body>
+
+        <div class="logo">
+            <asp:Image ID="Logo" runat="server" ImageUrl="~/Assets/images/Tropical_Logo.jpg" />
+        </div>
+
+            <asp:ContentPlaceHolder ID="Content" runat="server">
+            </asp:ContentPlaceHolder>
+
+
+
+        <div class="footer">
+            Copy Right @2018 Yifan Zhang  All rights reserved.
+        </div>
+
+
+
+
+</body>
+</html>
+

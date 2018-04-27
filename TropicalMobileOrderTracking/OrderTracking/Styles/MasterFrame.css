@@ -1,0 +1,50 @@
+﻿body {
+    border: 5px solid darkorange;
+height: 725px;
+}
+.logo {
+    padding-top: 15px;
+    text-align: center;
+
+}
+.LoginFormContainer {
+    background-color: darkorange;
+    width: 25%;
+    margin-top: 35px;
+    margin-left: 40%;
+    height: 276px;
+}
+.LoginFormContainer .LoginFormTitle {
+    text-align: left;
+    padding-left: 5px;
+    padding-top: 10px;
+    margin-bottom: 30px;
+}
+.LoginFormContainer .LoginFormContent {
+    background-color: burlywood;
+    display: block;
+    height: 110px;
+    padding: 10px 20px 20px 20px;
+    vertical-align: middle;
+    text-align: center;
+}
+.LoginFormContent .btn-Login {
+    background-color: black;
+    display: inline;
+    border: 0;
+    margin-left: 60px;
+}
+.LoginFormContainer .link_Btn {
+    text-align: center;
+}
+body .footer {
+    position: fixed;
+    left: 11px;
+    bottom: 20px;
+    width: 98.6%;
+    padding: 0em;
+    color: white;
+    background-color: #64A1DD;
+    clear: left;
+    text-align: center;
+}

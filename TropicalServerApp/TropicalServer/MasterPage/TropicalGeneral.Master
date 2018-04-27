@@ -1,0 +1,39 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="TropicalGeneral.Master.cs" Inherits="TropicalServer.MasterPage.TropicalServer" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajax" %>
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head id="HeadGen" runat="server">
+    <title></title>
+    <link href="~/AppThemes/TropicalStyles/Site.css" rel="stylesheet" type="text/css" />
+
+    <asp:ContentPlaceHolder ID="HeadContentGen" runat="server">
+
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="FormGen" runat="server">
+
+    <div class="page">
+        <div class="header">
+            <div class="imageDisplay">
+                <asp:Image ID="ImageGen" runat="server"
+                     CssClass="imageHeader" ImageUrl="~/Images/HeaderTropicalServer.png" AlternateText="Logo" />
+            </div>
+        </div>
+
+        <div class="main">
+
+            <asp:ContentPlaceHolder ID="MainContentGen" runat="server"/>
+        </div>
+
+    </div>
+<%--    <div class="footer">
+
+    </div>--%>
+    </form>
+</body>
+</html>

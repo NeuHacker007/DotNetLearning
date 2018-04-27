@@ -1,0 +1,638 @@
+﻿/* MasterPage
+----------------------------------------------------------*/
+*
+{
+    font-size: 9pt;
+    font-family:Calibri;
+}
+body
+{
+    background: #000000;
+    font-size: 9pt;
+    font-family:Calibri;
+    margin: 0px;
+    color: #000000;
+}
+
+.page
+{
+    width: 980px;
+    background-color: #fff;
+    margin:  0px auto;
+    border:  3px solid  #FFA500;
+}
+
+.header
+{
+    margin: 0px;
+    padding: 0px;
+    background: #4b6c9e;
+    width: 100%;
+}
+
+.imageDisplay
+{
+    width:980px;
+}
+
+.imageHeader
+{
+    width:100%;
+    height:130px;
+}
+
+/* TAB MENU   must be in this order for the tab to function.
+----------------------------------------------------------*/
+
+div.menuLink
+{
+    background-color:#3a4f63;
+    width:100%;
+}
+
+div.menu
+{
+    padding:  4px 0px 4px 8px;
+}
+
+
+div.menu ul
+{
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    width: auto;
+}
+
+div.menu ul li a, div.menu ul li a:visited
+{
+    background-color: #465c71;
+    border: 1px #4e667d solid;
+    color: #dde4ec;
+    display: block;
+    line-height: 1.35em;
+    padding: 4px 20px;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+div.menu ul li a:hover
+{
+    background-color: #FBB917;
+    color: #000000;
+    text-decoration: none;
+}
+
+div.menu ul li a:active
+{
+    background-color: #465c71;
+    color: #cfdbe6;
+    text-decoration: none;
+}
+
+
+/* Add padding here to adjust the display.
+ * use overflow:auto to cover the top and bottom white space.
+ */
+.main
+{
+    padding: 5px 5px 5px 5px;
+    height:400px;
+    overflow:auto;
+    background-color:#FBB917;
+}
+
+.mainContent
+{
+    width:100%;
+    height:100%;
+    overflow:auto;
+}
+
+.sideBar
+{
+    width:180px;
+    float:left;
+    padding-top:10px;
+}
+
+.sideBarlbl
+{
+    background-color:#0033CC;
+    text-align:center;
+    font-weight:bold;
+    font-size:12pt;
+    color:White;
+    display: block;
+    width:inherit;
+    height:20px;
+    padding-top:5px;
+    padding-bottom:5px;
+}
+
+/*
+ *Side bar with search box and filter button.
+ */
+.searchBox
+{
+    background-color:#0033CC;
+    padding:5px 0px 5px 0px;
+    height:70px;
+    width: 180px;
+}
+
+.sideBarlbl2
+{
+    color:White;
+    font-weight:bold;
+    font-size:12pt;
+}
+
+.textboxLayout
+{
+    padding:5px 0px 5px 0px;
+}
+
+.filterButton
+{
+    height:20px;
+    width:75px;
+    background-color:#0033CC;
+    border-color:White;
+    color:White;
+}
+
+.filterButton:hover
+{
+    background-color:#ffffff;
+    color:Black;
+}
+/*------------------------------------------*/
+
+/*
+ * button- change the color of the button when
+ * mouse hover.
+ */
+.sideBarbutton
+{
+    height:20px;
+    width:160px;
+    background-color:#4C787E;
+    border-style:none;
+    color:White;
+    margin-top:10px;
+}
+
+.sideBarbutton:hover
+{
+    background-color:#ffffff;
+    color:Black;
+}
+/*------------------------------------------*/
+
+/*
+ *Repeater Layout
+ */
+.RepeaterTable
+{
+    width:140px;
+}
+
+.RepeaterRow
+{
+    background-color:#4C787E;
+}
+
+.Routeslkb
+{
+    text-decoration:none;
+    display: block;
+    color:White;
+}
+
+.Routeslkb:hover
+{
+    background-color:#ffffff;
+    display: block;
+    color:Black;
+}
+
+.sideBarbutton2
+{
+    height:20px;
+    width:160px;
+    background-color:#4C787E;
+    border-style:none;
+    color:White;
+    margin-top:5px;
+}
+
+.sideBarbutton2:hover
+{
+    background-color:#ffffff;
+    color:Black;
+}
+/*------------------------------------------*/
+
+
+.resultDisplay
+{
+    width:795px;
+    height:100%;
+    float:left;
+    background-color:#ffffff;
+    overflow:auto;
+}
+
+/*
+ * DatagList layout
+ */
+
+.dataListLayout
+{
+    padding:10px;
+    overflow:auto;
+}
+
+.dataList
+{
+    color:Black;
+    width:100%;
+    height:auto;
+    border-color:White;
+}
+
+.headerStyle
+{
+    background-color:#307D7E;
+    color:White;
+    height:27px;
+    width:100%;
+}
+
+.headerRowStyle
+{
+    width:25%;
+    padding-left:5px;
+    font-size:11pt;
+    font-weight:bold;
+}
+
+.headerRowStyle1
+{
+    padding-left:5px;
+    font-size:11pt;
+    font-weight:bold;
+}
+
+.headerRowStyle2
+{
+    width:10%;
+    padding-left:5px;
+    font-size:11pt;
+    font-weight:bold;
+}
+
+.itemStyle
+{
+    background-color:#98AFC7;
+    border-color:White;
+    height:25px;
+    width:100%;
+}
+
+.itemRowStyle
+{
+    width:25%;
+    padding-left:5px;
+    border-color:White;
+}
+
+.itemRowStyle1
+{
+    padding-left:5px;
+    border-color:White;
+}
+
+.itemRowStyle2
+{
+    width:10%;
+    border-color:White;
+    padding-left:5px;
+}
+
+.alternatingItemStyle
+{
+    background-color:#AFC7C7;
+    border-color:White;
+    height:25px;
+    width:100%;
+}
+
+.routeInfo
+{
+    height:80px;
+    margin: 10px 10px 5px 10px;
+    background-color:white;
+}
+
+.routeInfoTable
+{
+  height:80px;
+  Width:100%;
+}
+
+.routeInfoRow
+{
+    height:40px;
+}
+
+.routeInfoTableCell
+{
+    width:33%;
+}
+
+.routeInfoLabel
+{
+    font-size:11pt;
+    font-weight:bold;
+    padding-left:5px;
+    width:33%;
+}
+
+.routeInfoData
+{
+    padding-left:5px;
+}
+
+.routeInfoSaveButton
+{
+    background-color:transparent;
+    border-color:Black;
+    Height:20px;
+    margin-left:150px;
+}
+
+.routeInfotb
+{
+    width:60px;
+}
+
+.routeColumnHeader
+{
+    height:40px;
+    margin: 5px 10px 0px 10px;
+    background-color:white;
+}
+
+.routeInfoByDayTable
+{
+    height:40px;
+    Width:100%;
+}
+
+.routeInfoByDaytb
+{
+    width:60px;
+}
+
+.routeInfoByDayLabel
+{
+    font-size:11pt;
+    font-weight:bold;
+    padding-left:5px;
+    Width:220px;
+}
+
+.routeInfoByDayTableCell
+{
+    width:33%;
+}
+
+.collapsibleDay
+{
+    height:50px;
+    margin:  0px 10px 0px 10px;
+}
+
+.dlRouteByDay
+{
+    width:100%;
+}
+
+.tableRouteByDay
+{
+    width:100%;
+}
+
+/*------------------------------------------*/
+
+a:link, a:visited
+{
+    color: #034af3;
+}
+
+a:hover
+{
+    color: #1d60ff;
+    text-decoration: none;
+}
+
+a:active
+{
+    color: #034af3;
+}
+
+p
+{
+    margin-bottom: 10px;
+    line-height: 1.6em;
+    height: 15px;
+}
+
+
+/* HEADINGS
+----------------------------------------------------------*/
+
+h1, h2, h3, h4, h5, h6
+{
+    font-size: 1.5em;
+    color: #666666;
+    font-variant: small-caps;
+    text-transform: none;
+    font-weight: 200;
+    margin-bottom: 0px;
+}
+
+h1
+{
+    font-size: 1.6em;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+
+h2
+{
+    font-size: 1.5em;
+    font-weight: 600;
+}
+
+h3
+{
+    font-size: 1.2em;
+}
+
+h4
+{
+    font-size: 1.1em;
+}
+
+h5, h6
+{
+    font-size: 1em;
+}
+
+/* this rule styles <h1> and <h2> tags that are the
+first child of the left and right table columns */
+.rightColumn > h1, .rightColumn > h2, .leftColumn > h1, .leftColumn > h2
+{
+    margin-top: 0px;
+}
+
+
+/* PRIMARY LAYOUT ELEMENTS
+----------------------------------------------------------*/
+
+
+
+
+
+.header h1
+{
+    font-weight: 700;
+    margin: 0px;
+    padding: 0px 0px 0px 20px;
+    color: #f9f9f9;
+    border: none;
+    line-height: 2em;
+    font-size: 2em;
+}
+
+
+
+.leftCol
+{
+    padding: 6px 0px;
+    margin: 12px 8px 8px 8px;
+    width: 200px;
+    min-height: 200px;
+}
+
+.footer
+{
+    color: #4e5766;
+    padding: 8px 0px 0px 0px;
+    margin: 0px auto;
+    text-align: center;
+    line-height: normal;
+}
+
+
+/* FORM ELEMENTS
+----------------------------------------------------------*/
+
+fieldset
+{
+    margin: 1em 0px;
+    padding: 1em;
+    border: 1px solid #ccc;
+}
+
+fieldset p
+{
+    margin: 2px 12px 10px 10px;
+}
+
+fieldset.login label, fieldset.register label, fieldset.changePassword label
+{
+    display: block;
+}
+
+fieldset label.inline
+{
+    display: inline;
+}
+
+legend
+{
+    font-size: 1.1em;
+    font-weight: 600;
+    padding: 2px 4px 8px 4px;
+}
+
+input.textEntry
+{
+    width: 320px;
+    border: 1px solid #ccc;
+}
+
+input.passwordEntry
+{
+    width: 320px;
+    border: 1px solid #ccc;
+}
+
+div.accountInfo
+{
+    width: 42%;
+}
+
+/* MISC
+----------------------------------------------------------*/
+
+.clear
+{
+    clear: both;
+}
+
+.title
+{
+    display: block;
+    float: left;
+    text-align: left;
+    width: auto;
+}
+
+
+
+.loginDisplay a:link
+{
+    color: white;
+}
+
+.loginDisplay a:visited
+{
+    color: white;
+}
+
+.loginDisplay a:hover
+{
+    color: white;
+}
+
+.failureNotification
+{
+    font-size: 1.2em;
+    color: Red;
+}
+
+.bold
+{
+    font-weight: bold;
+}
+
+.submitButton
+{
+    text-align: right;
+    padding-right: 10px;
+}

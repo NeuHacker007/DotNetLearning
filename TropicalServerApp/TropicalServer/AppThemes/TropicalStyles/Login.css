@@ -1,0 +1,153 @@
+﻿body 
+{
+	margin:10px auto;
+	padding:0;
+	width:980px;
+	height:750px;
+	background-color:#CCCCCC;
+}
+#header
+{
+	margin:0;
+	padding:0;
+	width:980px;
+	
+}  
+#container
+{
+    margin-top:0;
+    padding-top:10px;
+    width:980px;
+    height:600px;
+    background-color:#FFFFFF;
+}
+#BodyDetail
+{
+	height: 300px;
+	width: 400px;
+	margin:100px auto;
+	background-color: #FF6600;
+	color: #FFFFFF;
+	padding: 10px;
+}
+#Loginlbl
+{
+	font-size:25px;
+	color:White;
+	font-family:Calibri;
+}
+#loginBox
+{
+	height: 220px;
+	margin-top: 10px; 
+	width: 400px; 
+	background-color: #FFCC00;
+}
+
+#errorBox 
+{
+    text-align:center;
+    width:420px;
+    margin:10px auto;
+}
+
+#errorlbl 
+{
+	font-size: 16px;
+	font-family: Calibri;
+	color: Red;
+}
+
+#useridlbl
+{
+	color:White;
+	font-family:Calibri;
+	font-size:16pt;
+	margin-left:20px;
+}
+
+#passwordlbl
+{
+	color:White;
+	font-family:Calibri;
+	font-size:16pt;
+	margin-left:20px;
+}
+
+#useridtextbox
+{
+	width:250px;
+	margin-top: 50px;
+	margin-left: 24px;
+}
+
+#passwordtextbox
+{
+	width:250px;
+	margin-top: 29px;
+	margin-left: 13px;
+}
+
+#login 
+{
+    margin-top:30px;
+    text-align:center;
+}
+
+#loginButton
+{
+	margin-left: 50px;
+}
+
+#forgot
+{
+	text-align:center;
+	margin-top:15px;
+}
+
+#forgotPassword
+{
+	font-family: Calibri;
+	font-size: 16px;
+	text-decoration: underline;
+	color: #FFFFFF;
+	margin-left:50px;
+}
+#forgotUsername
+{
+	font-family: calibri;
+	font-size: 16px;
+	text-decoration: underline;
+	color: #FFFFFF;
+	margin-right:50px;
+}
+
+#emailIDlbl
+{
+    margin-left:20px;
+	color: #FFFFFF;
+	font-family: Calibri;
+	font-size: 20px;
+}
+
+#emailIDtextbox
+{
+    width:260px;
+	margin-left: 15px; 
+	margin-top: 50px;
+}
+
+#usernamelbl
+{
+    margin-left:20px;
+	color:White;
+	font-family:Calibri;
+	font-size:20px;
+}
+
+#usernametextbox
+{
+    width:245px;
+	margin-left: 15px;
+	margin-top: 50px;
+}
