@@ -24,6 +24,10 @@
 {
     width:100px;
 }
+#CriteriaBar .Criteria .btnQuery {
+    width: 100px;
+    background-color: #2c4e81;
+}
 #grid
 {
     width:100%;

@@ -103,5 +103,37 @@ namespace TropicalServer.DAL
 
             }
         }
+
+        public DataSet GetOrdersWithFilterOptions(string orderdate, int customerId, string customerName, string salesMgr)
+        {
+            _ds = new DataSet();
+            try
+            {
+                using (_conn = new SqlConnection(_connectString))
+                {
+                    _conn.Open();
+
+                    _command = new SqlCommand("", _conn);
+                    _command.CommandType = CommandType.StoredProcedure;
+                    _command.Parameters.Add("@orderdate", SqlDbType.NVarChar).Value = orderdate;
+                    _command.Parameters.Add("@customerId", SqlDbType.Int).Value = customerId;
+                    _command.Parameters.Add("@customerName", SqlDbType.NVarChar).Value = customerName;
+                    _command.Parameters.Add("@salesMgrFirstName", SqlDbType.NVarChar).Value = customerName.Split(',')[0];
+                    _command.Parameters.Add("@salesMgrLastName", SqlDbType.NVarChar).Value = customerName.Split(',')[1];
+
+                    using (_sda = new SqlDataAdapter(_command))
+                    {
+                        _sda.Fill(_ds);
+                    }
+
+                    _conn.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                //TODO:log
+            }
+            return _ds;
+        }
     }
 }

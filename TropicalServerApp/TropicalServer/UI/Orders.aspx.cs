@@ -57,5 +57,15 @@ namespace TropicalServer.Pages
             gvOrders.DataSource = ds;
             gvOrders.DataBind();
         }
+
+        protected void BtnQuery_Click(object sender, EventArgs e)
+        {
+            string orderDateFilterValue = ddlOrderDate.SelectedValue;
+            int custId = Convert.ToInt32(txtBoxCustomerID.Text);
+            string custName = txtBoxUserName.Text;
+            string salesMgr = ddlSalesManager.SelectedValue;
+
+            //TODO: filter data by dynamic SQL
+        }
     }
 }
