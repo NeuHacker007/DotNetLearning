@@ -20,6 +20,7 @@ namespace TropicalServer.Helper
             _connectString = ConfigurationManager.AppSettings["TropicalServerConnectionString"].ToString();
             _command = new SqlCommand();
         }
+
         public static DataTable GetAllUsersInfo()
         {
             _dt = new DataTable();
@@ -33,8 +34,8 @@ namespace TropicalServer.Helper
                     using (_sda = new SqlDataAdapter(_command))
                     {
                         _sda.Fill(_dt);
-
                     }
+
                     _conn.Close();
                 }
             }
@@ -42,25 +43,36 @@ namespace TropicalServer.Helper
             {
                 //TODO: Log
             }
+
             return _dt;
         }
 
         public static DataTable GetUserInfoByUserName(string username)
         {
-            using (_conn = new SqlConnection(_connectString))
+            _dt = new DataTable();
+            try
             {
-                string query = "select * from tblUserLogin where UserName = @UserName";
-                using (_command = new SqlCommand(query, _conn))
+                using (_conn = new SqlConnection(_connectString))
                 {
+                    _conn.Open();
+                    string query = "select * from tblUserLogin where UserName = @UserName";
+                    _command = new SqlCommand(query, _conn);
                     _command.Parameters.Add("@UserName", SqlDbType.NVarChar);
                     _command.Parameters["@UserName"].Value = username;
                     using (_sda = new SqlDataAdapter(_command))
                     {
                         _sda.Fill(_dt);
-                        return _dt;
                     }
+
+                    _conn.Close();
                 }
             }
+            catch (Exception e)
+            {
+                //TODO: ADD LOG
+            }
+
+            return _dt;
         }
 
         //TODO: Whether user alreary exists incomplete
@@ -81,11 +93,8 @@ namespace TropicalServer.Helper
                     _command = new SqlCommand(query, _conn);
                     _command.Parameters.Add("@UserName", SqlDbType.NVarChar);
                     _command.Parameters["@UserName"].Value = loginID;
-
-
                     using (_reader = _command.ExecuteReader())
                     {
-
                         if (_reader.Read())
                         {
                             string passwordFromServer = _reader["password"].ToString();
@@ -93,25 +102,18 @@ namespace TropicalServer.Helper
                             {
                                 result = true;
                             }
-
                         }
                     }
 
                     _conn.Close();
                 }
-
-
             }
             catch (Exception e)
             {
                 //TODO: Add Log
             }
 
-
             return result;
         }
-
-
-
     }
 }
