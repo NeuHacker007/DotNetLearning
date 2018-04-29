@@ -66,6 +66,12 @@ namespace TropicalServer.Pages
             string salesMgr = ddlSalesManager.SelectedValue;
 
             //TODO: filter data by dynamic SQL
+
+            OrdersDAL orders = new OrdersDAL();
+            DataSet ds = orders.GetOrdersWithFilterOptions(orderDateFilterValue, custId, custName, salesMgr);
+            gvOrders.DataSource = ds;
+            gvOrders.DataBind();
+
         }
     }
 }
