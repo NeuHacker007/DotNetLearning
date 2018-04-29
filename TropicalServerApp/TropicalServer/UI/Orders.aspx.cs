@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Web.UI.WebControls;
 using TropicalServer.DAL;
 
 namespace TropicalServer.Pages
@@ -10,6 +11,8 @@ namespace TropicalServer.Pages
         {
             if (!IsPostBack)
             {
+                PopulateOrderDateFilter();
+                PopulateSalesMgrFilter();
                 PopulateOrdersGridView();
             }
         }
@@ -24,6 +27,23 @@ namespace TropicalServer.Pages
             gvOrders.DataSource = ds;
             gvOrders.DataBind();
         }
+        private void PopulateSalesMgrFilter()
+        {
+            UserOperationDALcs userOperation = new UserOperationDALcs();
+            DataSet ds = userOperation.GetUniqueSalesMgr();
+            ddlSalesManager.DataSource = ds.Tables[0];
+            ddlSalesManager.DataTextField = ds.Tables[0].Columns["UserName"].ToString();
+            ddlSalesManager.DataValueField = ds.Tables[0].Columns["UserName"].ToString();
+            ddlSalesManager.DataBind();
+        }
+        private void PopulateOrderDateFilter()
+        {
+
+            ddlOrderDate.Items.Add(new ListItem("Today"));
+            ddlOrderDate.Items.Add(new ListItem("Last 7 Days"));
+            ddlOrderDate.Items.Add(new ListItem("Last 1 Month"));
+            ddlOrderDate.Items.Add(new ListItem("Last 6 Months"));
+        }
         protected void ddlSalesManager_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -31,7 +51,11 @@ namespace TropicalServer.Pages
 
         protected void ddlOrderDate_SelectedIndexChanged(object sender, EventArgs e)
         {
+            OrdersDAL orders = new OrdersDAL();
 
+            DataSet ds = orders.GetOrdersByDateType(ddlOrderDate.SelectedValue);
+            gvOrders.DataSource = ds;
+            gvOrders.DataBind();
         }
     }
 }
