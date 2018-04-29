@@ -69,7 +69,7 @@
                     <ItemTemplate>
                         <asp:LinkButton ID="View_Link_Btn" runat="server" Text="View">View</asp:LinkButton>&nbsp;
                         <asp:LinkButton ID="Edit_Link_Btn" runat="server" Text="Edit" CommandName="Edit" CommandArgument='<%#Eval("OrderTrackingNumber") %>'>Edit</asp:LinkButton>&nbsp;
-                        <asp:LinkButton ID="Del_Link_Btn" runat="server" Text="Delete">Delete</asp:LinkButton>
+                        <asp:LinkButton ID="Del_Link_Btn" runat="server" Text="Delete" OnClientClick="confirm('Are you really want to delete')">Delete</asp:LinkButton>
                     </ItemTemplate>
                     <EditItemTemplate>
                         <asp:Button ID="RowEditConfirm_Btn" runat="server" Text="Save" CommandName="Update"/>
