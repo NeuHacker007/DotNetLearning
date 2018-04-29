@@ -49,7 +49,7 @@ namespace TropicalServer.DAL
                 {
                     _conn.Open();
 
-                    string query = "SELECT O.OrderTrackingNumber, O.OrderDate, C.CustNumber, C.CustName, C.CustOfficeAddress1, C.CustOfficeAddress2, O.OrderRouteNumber FROM tblCustomer C JOIN tblOrder O ON C.CustNumber = O.OrderCustomerNumber WHERE O.OrderTrackingNumber IS NOT NULL";
+                    string query = "SELECT c.custID, O.OrderTrackingNumber, O.OrderDate, C.CustNumber, C.CustName, C.CustOfficeAddress1,O.OrderRouteNumber FROM tblCustomer C JOIN tblOrder O ON C.CustNumber = O.OrderCustomerNumber WHERE O.OrderTrackingNumber IS NOT NULL";
                     _sda = new SqlDataAdapter(query, _conn);
                     _sda.Fill(_ds);
                     _conn.Close();
@@ -65,7 +65,43 @@ namespace TropicalServer.DAL
             return _ds;
         }
 
+        public DataSet GetOrdersByDateType(string dateType)
+        {
+            _ds = new DataSet();
+            try
+            {
+                using (_conn = new SqlConnection(_connectString))
+                {
+                    _conn.Open();
+                    _command = new SqlCommand("spGetOrdersByTimePeriod", _conn);
+                    _command.CommandType = CommandType.StoredProcedure;
+                    _command.Parameters.Add("@OrderDate", SqlDbType.NVarChar).Value = dateType;
+                    _sda = new SqlDataAdapter(_command);
+                    _sda.Fill(_ds);
+                    _conn.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                //Add To Log
 
+            }
+            return _ds;
+        }
 
+        public void UpdateCustomerAddress(string addr, int custId)
+        {
+            using (_conn = new SqlConnection(_connectString))
+            {
+                _conn.Open();
+                _command = new SqlCommand("spUpdateCutomerAddress", _conn);
+                _command.CommandType = CommandType.StoredProcedure;
+                _command.Parameters.Add("@Address", SqlDbType.NVarChar).Value = addr;
+                _command.Parameters.Add("@custNumber", SqlDbType.Int).Value = custId;
+                _command.ExecuteNonQuery();
+                _conn.Close();
+
+            }
+        }
     }
 }

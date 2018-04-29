@@ -10,27 +10,28 @@ namespace TropicalServer.Pages
         {
             if (!IsPostBack)
             {
-                PopulateSalesMgrTxtBox();
                 PopulateOrdersGridView();
             }
         }
-
         private void PopulateOrdersGridView()
+        {
+            BindData();
+        }
+        private void BindData()
         {
             OrdersDAL orders = new OrdersDAL();
             DataSet ds = orders.GetAllOrders();
             gvOrders.DataSource = ds;
             gvOrders.DataBind();
         }
-
-        private void PopulateSalesMgrTxtBox()
+        protected void ddlSalesManager_SelectedIndexChanged(object sender, EventArgs e)
         {
-            UserOperationDALcs userOperation = new UserOperationDALcs();
-            DataSet ds = userOperation.GetUniqueSalesMgr();
-            ddlSalesManager.DataSource = ds.Tables[0];
-            ddlSalesManager.DataTextField = ds.Tables[0].Columns["UserName"].ToString();
-            ddlSalesManager.DataValueField = ds.Tables[0].Columns["UserName"].ToString();
-            ddlSalesManager.DataBind();
+
+        }
+
+        protected void ddlOrderDate_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
