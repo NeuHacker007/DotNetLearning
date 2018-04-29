@@ -24,7 +24,7 @@
             </asp:DropDownList>
             <asp:Button CssClass="" ID="BtnQuery" runat="server" Text="Query" OnClick="BtnQuery_Click" />
 
-        <asp:GridView ID="gvOrders" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" Width="100%" AllowPaging="True">
+        <asp:GridView ID="gvOrders" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" Width="100%" AllowPaging="True" OnRowCancelingEdit="gvOrders_RowCancelingEdit" OnRowUpdating="gvOrders_RowUpdating">
             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
             <EditRowStyle BackColor="#999999" />
             <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
@@ -39,7 +39,7 @@
             <Columns>
                 <asp:TemplateField HeaderText="custID" Visible="false">
                     <ItemTemplate>
-                        <asp:Label runat="server" Text=''></asp:Label></ItemTemplate>
+                        <asp:Label runat="server" Text='<%#Eval("custID") %>'></asp:Label></ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Order Date" Visible="true">
                     <ItemTemplate>

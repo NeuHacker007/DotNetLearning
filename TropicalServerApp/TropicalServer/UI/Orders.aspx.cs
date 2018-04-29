@@ -77,5 +77,22 @@ namespace TropicalServer.Pages
             gvOrders.DataBind();
 
         }
+
+        protected void gvOrders_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            string address = gvOrders.Rows[e.RowIndex].Cells[4].Text;
+            int customerId = Convert.ToInt32(gvOrders.Rows[e.RowIndex].Cells[0].Text);
+
+            OrdersDAL orders = new OrdersDAL();
+            orders.UpdateCustomerAddress(address, customerId);
+
+            BindData();
+        }
+
+        protected void gvOrders_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            gvOrders.EditIndex = -1;
+            DataBind();
+        }
     }
 }

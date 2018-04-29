@@ -113,7 +113,7 @@ namespace TropicalServer.DAL
                 {
                     _conn.Open();
 
-                    _command = new SqlCommand("", _conn);
+                    _command = new SqlCommand("spFilterOrderByCondition", _conn);
                     _command.CommandType = CommandType.StoredProcedure;
                     _command.Parameters.Add("@orderdate", SqlDbType.NVarChar).Value = orderdate;
                     _command.Parameters.Add("@customerId", SqlDbType.Int).Value = customerId;
