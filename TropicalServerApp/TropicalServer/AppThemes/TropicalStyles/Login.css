@@ -177,3 +177,8 @@
     margin-left: 50px;
     margin-top: 50px;
 }
+.loginButton {
+    width: 50px;
+    background-color: darkcyan;
+    float: right;
+}

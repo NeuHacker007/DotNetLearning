@@ -22,7 +22,7 @@
             <asp:DropDownList CssClass="Criteria Input" ID="ddlSalesManager" runat="server" OnSelectedIndexChanged="ddlSalesManager_SelectedIndexChanged">
 
             </asp:DropDownList>
-            <asp:Button CssClass="" ID="BtnQuery" runat="server" Text="Query" OnClick="BtnQuery_Click" />
+            <asp:Button CssClass="loginButton" ID="BtnQuery" runat="server" Text="Query" OnClick="BtnQuery_Click" />
 
         <asp:GridView ID="gvOrders" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" Width="100%" AllowPaging="True" OnRowCancelingEdit="gvOrders_RowCancelingEdit" OnRowUpdating="gvOrders_RowUpdating">
             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />

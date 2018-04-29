@@ -27,7 +27,7 @@
                         <asp:TextBox ID="txtBoxUsername" CssClass="usernametextbox" runat="server"></asp:TextBox>
 
                         <br />
-                        <asp:Label ID="lblPassword" CssClass="passwordlbl" runat="server" Text="Password:" Font-Bold="True"></asp:Label>
+                        <asp:Label ID="lblPassword" CssClass="passwordlbl" runat="server" Text="Password:" ></asp:Label>
 
 
                         <asp:TextBox ID="txtBoxPassword" CssClass="passwordTextBox" runat="server" TextMode="Password"></asp:TextBox>
