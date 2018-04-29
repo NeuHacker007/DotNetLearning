@@ -19,17 +19,18 @@ namespace TropicalServer.UI
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-            string loginID = txtBoxUsername.Text;
+            string loginId = txtBoxUsername.Text;
             string password = txtBoxPassword.Text;
             bool isChecked = chkRemeberMe.Checked;
             //TODO: check whether user is exists
-            bool isLoginedIn = SQLHelper.IsUserLogin(loginID, password);
+            bool isLoginedIn = SQLHelper.IsUserLogin(loginId, password);
             if (isLoginedIn)
             {
+                Session["LoginID"] = loginId;
                 //TODO: load cookies
                 if (isChecked)
                 {
-                    UtilityTools.CreateCookies("LoginIDCookie", "LoginID", loginID, 24);
+                    UtilityTools.CreateCookies("LoginIDCookie", "LoginID", loginId, 24);
                 }
                 Response.Redirect("~/UI/Products.aspx");
 

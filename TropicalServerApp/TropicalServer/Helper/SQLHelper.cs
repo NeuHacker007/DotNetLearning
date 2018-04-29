@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -21,17 +22,27 @@ namespace TropicalServer.Helper
         }
         public static DataTable GetAllUsersInfo()
         {
-            using (_conn = new SqlConnection(_connectString))
+            _dt = new DataTable();
+            try
             {
-                string query = "select * from tblUserLogin";
-                _command = new SqlCommand(query, _conn);
-                using (_sda = new SqlDataAdapter(_command))
+                using (_conn = new SqlConnection(_connectString))
                 {
-                    _sda.Fill(_dt);
-                    return _dt;
-                }
+                    _conn.Open();
+                    string query = "select * from tblUserLogin";
+                    _command = new SqlCommand(query, _conn);
+                    using (_sda = new SqlDataAdapter(_command))
+                    {
+                        _sda.Fill(_dt);
 
+                    }
+                    _conn.Close();
+                }
             }
+            catch (Exception e)
+            {
+                //TODO: Log
+            }
+            return _dt;
         }
 
         public static DataTable GetUserInfoByUserName(string username)
@@ -61,40 +72,46 @@ namespace TropicalServer.Helper
         public static bool IsUserLogin(string loginID, string password)
         {
             bool result = false;
-            using (_conn = new SqlConnection(_connectString))
+            try
             {
-                string query = "select password from tblUserLogin where @UserName";
-                using (_command = new SqlCommand(query, _conn))
+                using (_conn = new SqlConnection(_connectString))
                 {
+                    _conn.Open();
+                    string query = "select password from tblUserLogin where @UserName";
+                    _command = new SqlCommand(query, _conn);
                     _command.Parameters.Add("@UserName", SqlDbType.NVarChar);
                     _command.Parameters["@UserName"].Value = loginID;
 
-                    _conn.Open();
+
                     using (_reader = _command.ExecuteReader())
                     {
 
                         if (_reader.Read())
                         {
-                            string PasswordFromServer = _reader["password"].ToString();
-                            if (PasswordFromServer.Equals(password))
+                            string passwordFromServer = _reader["password"].ToString();
+                            if (passwordFromServer.Equals(password))
                             {
                                 result = true;
                             }
-                            else
-                            {
-                                result = false;
-                            }
+
                         }
                     }
+
                     _conn.Close();
                 }
 
+
             }
+            catch (Exception e)
+            {
+                //TODO: Add Log
+            }
+
 
             return result;
         }
 
-        //TODO: Get Production list
+
 
     }
 }

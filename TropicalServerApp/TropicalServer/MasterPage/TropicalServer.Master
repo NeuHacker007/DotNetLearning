@@ -36,7 +36,7 @@
                         <asp:MenuItem NavigateUrl="~/UI/Settings.aspx" Text="Settings"/>
                     </Items>
                 </asp:Menu>
-                <asp:LinkButton CssClass="menuLink LogOut" ID="linkBtnLogOut" runat="server" >Log Out</asp:LinkButton>
+                <asp:LinkButton CssClass="menuLink LogOut" ID="linkBtnLogOut" runat="server" OnClick="linkBtnLogOut_Click" >Log Out</asp:LinkButton>
             </div>
         </div>
 
