@@ -63,5 +63,61 @@ namespace TropicalServer.DAL
             }
             return _ds;
         }
+
+        public DataSet GetUniqueCustomerID()
+        {
+            _ds = new DataSet();
+
+            try
+            {
+                using (_conn = new SqlConnection(_connectString))
+                {
+                    _conn.Open();
+                    string query = "select distinct CustNumber  from tblCustomer";
+                    _command = new SqlCommand(query, _conn);
+
+                    using (_sda = new SqlDataAdapter(_command))
+                    {
+                        _sda.Fill(_ds);
+                    }
+                    _conn.Close();
+
+                }
+            }
+            catch (Exception e)
+            {
+                //TODO:Add Log
+            }
+
+            return _ds;
+        }
+
+        public DataSet GetUniqueCustomerNames()
+        {
+            _ds = new DataSet();
+
+            try
+            {
+                using (_conn = new SqlConnection(_connectString))
+                {
+                    _conn.Open();
+                    string query = "select distinct CustName  from tblCustomer";
+                    _command = new SqlCommand(query, _conn);
+
+                    using (_sda = new SqlDataAdapter(_command))
+                    {
+                        _sda.Fill(_ds);
+                    }
+                    _conn.Close();
+
+                }
+            }
+            catch (Exception e)
+            {
+                //TODO:Add Log
+            }
+
+            return _ds;
+        }
     }
 }

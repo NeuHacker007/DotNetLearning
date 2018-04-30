@@ -2,27 +2,76 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <link rel="stylesheet" href="~/AppThemes/TropicalStyles/Orders.css" type="text/css" />
+    <script type="text/javascript">
+        $(document).ready(
+            function () {
+                $("#<%txtBoxCustomerID.ClientID%>").autocomplete(
+                    {
+                        source: function(request, response) {
+                            $.ajax({
+                                url: "Orders.aspx/GetCustomerId",
+                                datatype: "json",
+                                type: "POST",
+                                contentType: "application/json; charset=utf-8",
+                                sucess: function(data) {
+                                    response($.map(data.d,
+                                        function(item) {
+                                            return { value: item }
+                                        }));
+                                },
+                                error: function(XMLHttpRequest, textstatus, errorThrown) {
+                                    console.log(textstatus);
+
+                                }
+                            });
+                        }
+                    });
+
+
+                $("#<%txtBoxUserName.ClientID%>").autocomplete(
+                    {
+                        source: function(request, response) {
+                            $.ajax({
+                                url: "Orders.aspx/GetCustomerNames",
+                                datatype: "json",
+                                type: "POST",
+                                contentType: "application/json; charset=utf-8",
+                                sucess: function(data) {
+                                    response($.map(data.d,
+                                        function(item) {
+                                            return { value: item }
+                                        }));
+                                },
+                                error: function(XMLHttpRequest, textstatus, errorThrown) {
+                                    console.log(textstatus);
+
+                                }
+                            });
+                        }
+                    });
+            }
+       )
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div id="CriteriaBar">
 
-            <asp:Label CssClass="label" runat="server" Text="Order Date" ID="lblOrderDate" Width="129px"></asp:Label>
-            <asp:DropDownList AutoPostBack="True" CssClass="Input" ID="ddlOrderDate" runat="server" OnSelectedIndexChanged="ddlOrderDate_SelectedIndexChanged"></asp:DropDownList>
+        <asp:Label CssClass="label" runat="server" Text="Order Date" ID="lblOrderDate" Width="129px"></asp:Label>
+        <asp:DropDownList AutoPostBack="True" CssClass="Input" ID="ddlOrderDate" runat="server" OnSelectedIndexChanged="ddlOrderDate_SelectedIndexChanged"></asp:DropDownList>
 
 
-            <asp:Label CssClass="label" ID="lblCustomerID" runat="server" Text="Customer ID"></asp:Label>
-            <asp:TextBox CssClass="Criteria Input" ID="txtBoxCustomerID" runat="server"></asp:TextBox>
+        <asp:Label CssClass="label" ID="lblCustomerID" runat="server" Text="Customer ID"></asp:Label>
+        <asp:TextBox CssClass="Criteria Input" ID="txtBoxCustomerID" AutoPostBack="True" runat="server"></asp:TextBox>
         <asp:RegularExpressionValidator ID="regExpCustomerID" runat="server" ErrorMessage="Only Digits Allowed!" ControlToValidate="txtBoxCustomerID" ValidationExpression="/d+"></asp:RegularExpressionValidator>
 
-            <asp:Label CssClass="label" ID="lblCustomerName" runat="server" Text="Customer Name"></asp:Label>
-            <asp:TextBox CssClass="Input" ID="txtBoxUserName" runat="server"></asp:TextBox>
+        <asp:Label CssClass="label" ID="lblCustomerName" runat="server" Text="Customer Name"></asp:Label>
+        <asp:TextBox CssClass="Input" ID="txtBoxUserName" runat="server"></asp:TextBox>
 
 
-            <asp:Label ID="lblSalesManager" runat="server" Text="Sales Manager"></asp:Label>
-            <asp:DropDownList CssClass="Criteria Input" ID="ddlSalesManager" runat="server" OnSelectedIndexChanged="ddlSalesManager_SelectedIndexChanged">
-
-            </asp:DropDownList>
-            <asp:Button CssClass="loginButton" ID="BtnQuery" runat="server" Text="Query" OnClick="BtnQuery_Click" />
+        <asp:Label ID="lblSalesManager" runat="server" Text="Sales Manager"></asp:Label>
+        <asp:DropDownList CssClass="Criteria Input" ID="ddlSalesManager" runat="server" OnSelectedIndexChanged="ddlSalesManager_SelectedIndexChanged">
+        </asp:DropDownList>
+        <asp:Button CssClass="loginButton" ID="BtnQuery" runat="server" Text="Query" OnClick="BtnQuery_Click" />
 
         <asp:GridView ID="gvOrders" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" Width="100%" AllowPaging="True" OnRowCancelingEdit="gvOrders_RowCancelingEdit" OnRowUpdating="gvOrders_RowUpdating">
             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
@@ -39,30 +88,36 @@
             <Columns>
                 <asp:TemplateField HeaderText="custID" Visible="false">
                     <ItemTemplate>
-                        <asp:Label runat="server" Text='<%#Eval("custID") %>'></asp:Label></ItemTemplate>
+                        <asp:Label runat="server" Text='<%#Eval("custID") %>'></asp:Label>
+                    </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Order Date" Visible="true">
                     <ItemTemplate>
-                        <asp:Label runat="server" Text='<%#Eval("OrderDate") %>'></asp:Label></ItemTemplate>
+                        <asp:Label runat="server" Text='<%#Eval("OrderDate") %>'></asp:Label>
+                    </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Customer ID" Visible="true">
                     <ItemTemplate>
-                        <asp:Label runat="server" Text='<%#Eval("CustNumber") %>'></asp:Label></ItemTemplate>
+                        <asp:Label runat="server" Text='<%#Eval("CustNumber") %>'></asp:Label>
+                    </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Customer Name" Visible="true">
                     <ItemTemplate>
-                        <asp:Label runat="server" Text='<%#Eval("CustName") %>'></asp:Label></ItemTemplate>
+                        <asp:Label runat="server" Text='<%#Eval("CustName") %>'></asp:Label>
+                    </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Address" Visible="true">
                     <ItemTemplate>
-                        <asp:Label runat="server" Text='<%#Eval("CustOfficeAddress1") %>'></asp:Label></ItemTemplate>
+                        <asp:Label runat="server" Text='<%#Eval("CustOfficeAddress1") %>'></asp:Label>
+                    </ItemTemplate>
                     <EditItemTemplate>
                         <asp:TextBox ID="Address_Txt_Box" runat="server" Text='<%#Eval("CustOfficeAddress1") %>'></asp:TextBox>
                     </EditItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Route #" Visible="true">
                     <ItemTemplate>
-                        <asp:Label runat="server" Text='<%#Eval("OrderRouteNumber") %>'></asp:Label></ItemTemplate>
+                        <asp:Label runat="server" Text='<%#Eval("OrderRouteNumber") %>'></asp:Label>
+                    </ItemTemplate>
                 </asp:TemplateField>
 
                 <asp:TemplateField HeaderText="Operation" Visible="true">
@@ -72,7 +127,7 @@
                         <asp:LinkButton ID="Del_Link_Btn" runat="server" Text="Delete" OnClientClick="confirm('Are you really want to delete')">Delete</asp:LinkButton>
                     </ItemTemplate>
                     <EditItemTemplate>
-                        <asp:Button ID="RowEditConfirm_Btn" runat="server" Text="Save" CommandName="Update"/>
+                        <asp:Button ID="RowEditConfirm_Btn" runat="server" Text="Save" CommandName="Update" />
                         <asp:Button ID="CancelRowEditing_Btn" runat="server" Text="Cancel" CommandName="Cancel" />
                     </EditItemTemplate>
                 </asp:TemplateField>

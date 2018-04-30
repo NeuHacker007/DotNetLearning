@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Web.Script.Services;
 using System.Web.Services;
 using System.Web.UI.WebControls;
@@ -100,18 +101,28 @@ namespace TropicalServer.Pages
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public List<string> GetCustomerID()
+        public List<string> GetCustomerId(string pre)
         {
+
             List<string> ids = new List<string>();
-            //TODO: Get CustomerIDs from DB
+            UserOperationDALcs userOperation = new UserOperationDALcs();
+            DataSet ds = userOperation.GetUniqueCustomerID();
+            ids = ds.Tables[0].AsEnumerable()
+                .Where(datarow => datarow["CustNumber"].ToString().StartsWith(pre))
+                .Select(a => a.Field<string>("CustNumber")).ToList();
             return ids;
         }
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public List<string> GetCustomerNames()
+        public List<string> GetCustomerNames(string pre)
         {
             List<string> names = new List<string>();
+            UserOperationDALcs userOperation = new UserOperationDALcs();
+            DataSet ds = userOperation.GetUniqueCustomerID();
+            names = ds.Tables[0].AsEnumerable()
+                .Where(datarow => datarow["CustName"].ToString().StartsWith(pre))
+                .Select(a => a.Field<string>("CustName")).ToList();
             return names;
         }
     }
