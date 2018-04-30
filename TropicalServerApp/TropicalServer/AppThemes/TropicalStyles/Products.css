@@ -18,9 +18,9 @@
     background-color:#0033CC;
     padding-top:15px;
     padding-bottom:15px;
-    text-align:center;    
+    text-align:center;
     color:white;
-    
+
 }
 
 .imageStyle
@@ -43,7 +43,7 @@
     margin:5px;
     color:Black;
     font-family:Calibri;
-    font-size:12px;   
+    font-size:12px;
     border-color:black;
     width:768px;
 }
@@ -52,7 +52,7 @@
     background-color:#307D7E;
     font-weight:bold;
     color:white;
-    text-align:left;    
+    text-align:left;
 }
 .chartItemStyle
 {
@@ -62,8 +62,8 @@
     height:30px;
 }
 .chartAlternatingItemStyle
-{    
+{
     background-color:#C6DEFF;
-    color:black;    
+    color:black;
     height:30px;
 }
