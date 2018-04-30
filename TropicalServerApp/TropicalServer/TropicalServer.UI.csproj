@@ -102,6 +102,7 @@
     <Content Include="AppThemes\TropicalStyles\Site.css" />
     <Content Include="Images\Tropical.png" />
     <Content Include="Javascipts\jquery-3.3.1.min.js" />
+    <Content Include="Javascipts\jquery-ui.min.js" />
     <Content Include="UI\AccountRecovery.aspx" />
     <Content Include="UI\Login.aspx" />
     <Content Include="UI\MsgCenter.aspx" />

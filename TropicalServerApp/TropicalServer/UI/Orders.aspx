@@ -2,6 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <link rel="stylesheet" href="~/AppThemes/TropicalStyles/Orders.css" type="text/css" />
+    <script type="text/javascript" src="~/Javascipts/jquery-ui.min.js"></script>
 
 
 </asp:Content>
