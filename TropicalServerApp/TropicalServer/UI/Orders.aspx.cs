@@ -69,10 +69,26 @@ namespace TropicalServer.Pages
         protected void BtnQuery_Click(object sender, EventArgs e)
         {
             string orderDateFilterValue = ddlOrderDate.SelectedValue;
-            int custId = Convert.ToInt32(txtBoxCustomerID.Text);
+
+            string custId = txtBoxCustomerID.Text;
             string custName = txtBoxUserName.Text;
             string salesMgr = ddlSalesManager.SelectedValue;
-
+            if (string.Equals(orderDateFilterValue, ""))
+            {
+                orderDateFilterValue = null;
+            }
+            else if (string.Equals(custId, ""))
+            {
+                custId = null;
+            }
+            else if (string.Equals(custName, ""))
+            {
+                custName = null;
+            }
+            else if (string.Equals(salesMgr, ""))
+            {
+                salesMgr = null;
+            }
 
             OrdersDAL orders = new OrdersDAL();
             DataSet ds = orders.GetOrdersWithFilterOptions(orderDateFilterValue, custId, custName, salesMgr);

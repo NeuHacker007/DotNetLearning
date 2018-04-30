@@ -89,7 +89,7 @@ namespace TropicalServer.Helper
                 using (_conn = new SqlConnection(_connectString))
                 {
                     _conn.Open();
-                    string query = "select password from tblUserLogin where UserID ='" + loginID + "'";
+                    string query = "select password from tblTropicalUser where LoginID ='" + loginID + "'";
                     _command = new SqlCommand(query, _conn);
 
                     using (_reader = _command.ExecuteReader())

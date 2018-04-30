@@ -117,9 +117,10 @@ namespace TropicalServer.DAL
 
             }
         }
-        public DataSet GetOrdersWithFilterOptions(string orderdate, int customerId, string customerName, string salesMgr)
+        public DataSet GetOrdersWithFilterOptions(string orderdate, string customerId, string customerName, string salesMgr)
         {
             _ds = new DataSet();
+
             try
             {
                 using (_conn = new SqlConnection(_connectString))
@@ -128,12 +129,19 @@ namespace TropicalServer.DAL
 
                     _command = new SqlCommand("spFilterOrderByCondition", _conn);
                     _command.CommandType = CommandType.StoredProcedure;
-                    _command.Parameters.Add("@orderdate", SqlDbType.NVarChar).Value = orderdate;
-                    _command.Parameters.Add("@customerId", SqlDbType.Int).Value = customerId;
-                    _command.Parameters.Add("@customerName", SqlDbType.NVarChar).Value = customerName;
-                    _command.Parameters.Add("@salesMgrFirstName", SqlDbType.NVarChar).Value = customerName.Split(',')[0];
-                    _command.Parameters.Add("@salesMgrLastName", SqlDbType.NVarChar).Value = customerName.Split(',')[1];
-
+                    if (orderdate != null)
+                    {
+                        _command.Parameters.Add("@orderdate", SqlDbType.NVarChar).Value = orderdate;
+                    }
+                    else if (customerId != null)
+                    {
+                        _command.Parameters.Add("@customerId", SqlDbType.NVarChar).Value = customerId;
+                    }
+                    else if (customerName != null)
+                    {
+                        _command.Parameters.Add("@salesMgrFirstName", SqlDbType.NVarChar).Value = customerName.Split(',')[0];
+                        _command.Parameters.Add("@salesMgrLastName", SqlDbType.NVarChar).Value = customerName.Split(',')[1];
+                    }
                     using (_sda = new SqlDataAdapter(_command))
                     {
                         _sda.Fill(_ds);
