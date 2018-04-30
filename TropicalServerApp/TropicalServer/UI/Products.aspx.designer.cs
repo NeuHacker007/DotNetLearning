@@ -119,5 +119,14 @@ namespace TropicalServer.UI {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton imgBtnPerPoundItems;
+        
+        /// <summary>
+        /// gvProductsDisplay control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvProductsDisplay;
     }
 }

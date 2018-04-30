@@ -3,7 +3,7 @@
 
 .productCategories
 {
-    width: 200px;
+    width: 185px;
     height:600px;
     float:left;
     padding-left:auto;
@@ -66,4 +66,11 @@
     background-color:#C6DEFF;
     color:black;
     height:30px;
+}
+
+#page-wrap  {
+    width: 600px;
+    background: #ffffff;
+    height: 400px;
+    margin-left: 200px;
 }
