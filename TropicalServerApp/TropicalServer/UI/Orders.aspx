@@ -2,56 +2,8 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <link rel="stylesheet" href="~/AppThemes/TropicalStyles/Orders.css" type="text/css" />
-    <script type="text/javascript">
-        $(document).ready(
-            function () {
-                $("#<%txtBoxCustomerID.ClientID%>").autocomplete(
-                    {
-                        source: function(request, response) {
-                            $.ajax({
-                                url: "Orders.aspx/GetCustomerId",
-                                datatype: "json",
-                                type: "POST",
-                                contentType: "application/json; charset=utf-8",
-                                sucess: function(data) {
-                                    response($.map(data.d,
-                                        function(item) {
-                                            return { value: item }
-                                        }));
-                                },
-                                error: function(XMLHttpRequest, textstatus, errorThrown) {
-                                    console.log(textstatus);
-
-                                }
-                            });
-                        }
-                    });
 
 
-                $("#<%txtBoxUserName.ClientID%>").autocomplete(
-                    {
-                        source: function(request, response) {
-                            $.ajax({
-                                url: "Orders.aspx/GetCustomerNames",
-                                datatype: "json",
-                                type: "POST",
-                                contentType: "application/json; charset=utf-8",
-                                sucess: function(data) {
-                                    response($.map(data.d,
-                                        function(item) {
-                                            return { value: item }
-                                        }));
-                                },
-                                error: function(XMLHttpRequest, textstatus, errorThrown) {
-                                    console.log(textstatus);
-
-                                }
-                            });
-                        }
-                    });
-            }
-       )
-    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div id="CriteriaBar">
@@ -65,7 +17,7 @@
         <asp:RegularExpressionValidator ID="regExpCustomerID" runat="server" ErrorMessage="Only Digits Allowed!" ControlToValidate="txtBoxCustomerID" ValidationExpression="/d+"></asp:RegularExpressionValidator>
 
         <asp:Label CssClass="label" ID="lblCustomerName" runat="server" Text="Customer Name"></asp:Label>
-        <asp:TextBox CssClass="Input" ID="txtBoxUserName" runat="server"></asp:TextBox>
+        <asp:TextBox CssClass="Input" ID="txtBoxUserName" AutoPostBack="True" runat="server"></asp:TextBox>
 
 
         <asp:Label ID="lblSalesManager" runat="server" Text="Sales Manager"></asp:Label>

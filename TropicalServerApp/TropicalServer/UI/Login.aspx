@@ -37,7 +37,7 @@
                         &nbsp;&nbsp;
                             <asp:CheckBox ID="chkRemeberMe" runat="server" />
                         &nbsp;&nbsp;
-                            <asp:Button CssClass="btn-Login" ID="btnLogin" runat="server" Text="Log-in" Font-Bold="True" Font-Names="Calibri" ForeColor="White" Width="82px" OnClick="btnLogin_Click" />
+                            <asp:Button ID="btnLoginButton" runat="server" Text="Log-in" CssClass="loginButton" OnClick="btnLoginButton_Click" UseSubmitBehavior="False" />
                         </div>
 
                     </div>

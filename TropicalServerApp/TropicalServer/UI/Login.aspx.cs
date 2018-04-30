@@ -19,26 +19,7 @@ namespace TropicalServer.UI
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-            string loginId = txtBoxUsername.Text;
-            string password = txtBoxPassword.Text;
-            bool isChecked = chkRemeberMe.Checked;
-            //TODO: check whether user is exists
-            bool isLoginedIn = SQLHelper.IsUserLogin(loginId, password);
-            if (isLoginedIn)
-            {
-                Session["LoginID"] = loginId;
-                //TODO: load cookies
-                if (isChecked)
-                {
-                    UtilityTools.CreateCookies("LoginIDCookie", "LoginID", loginId, 24);
-                }
-                Response.Redirect("~/UI/Products.aspx");
 
-            }
-            else
-            {
-                Response.Write("Login Failed");
-            }
         }
 
         protected void lbtnForgetUserName_Click(object sender, EventArgs e)
@@ -49,6 +30,30 @@ namespace TropicalServer.UI
         protected void lbtnForgetPassword_Click(object sender, EventArgs e)
         {
             Response.Redirect("AccountRecovery.aspx");
+        }
+
+        protected void btnLoginButton_Click(object sender, EventArgs e)
+        {
+            string loginId = txtBoxUsername.Text;
+            string password = txtBoxPassword.Text;
+            bool isChecked = chkRemeberMe.Checked;
+            SQLHelper helper = new SQLHelper();
+            bool isLoginedIn = helper.IsUserLogin(loginId, password);
+            if (isLoginedIn)
+            {
+                Session["LoginID"] = loginId;
+
+                if (isChecked)
+                {
+                    UtilityTools.CreateCookies("LoginIDCookie", "LoginID", loginId, 24);
+                }
+                Response.Redirect("~/UI/Orders.aspx");
+
+            }
+            else
+            {
+                Response.Write("Login Failed");
+            }
         }
     }
 }
