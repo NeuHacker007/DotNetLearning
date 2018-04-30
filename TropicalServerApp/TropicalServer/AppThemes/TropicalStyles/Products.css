@@ -3,11 +3,13 @@
 
 .productCategories
 {
-    width: 185px;
+    width: 300px;
     height:600px;
     float:left;
+    margin: auto;
     padding-left:auto;
     padding-right:auto;
+    text-align: center;
 }
 
 .productCategoriesLabel
@@ -25,7 +27,7 @@
 
 .imageStyle
 {
-    width:150px;
+    width:300px !important;
     height:18px;
     margin:5px 0;
 }
@@ -33,19 +35,19 @@
 .chartdisplay
 {
     float:left;
-    width:778px;
+    width:500px;
     height:600px;
     background-color:#FFFFFF;
 }
 
 .dataGrid
 {
-    margin:5px;
+    margin:5px 5px 5px 122px;
     color:Black;
     font-family:Calibri;
     font-size:12px;
     border-color:black;
-    width:768px;
+    width:500px;
 }
 .chartHeaderStyle
 {
@@ -68,9 +70,3 @@
     height:30px;
 }
 
-#page-wrap  {
-    width: 600px;
-    background: #ffffff;
-    height: 400px;
-    margin-left: 200px;
-}

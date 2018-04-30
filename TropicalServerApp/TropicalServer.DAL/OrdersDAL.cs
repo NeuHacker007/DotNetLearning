@@ -49,7 +49,7 @@ namespace TropicalServer.DAL
                 {
                     _conn.Open();
 
-                    string query = "SELECT c.custID, O.OrderTrackingNumber, O.OrderDate, C.CustNumber, C.CustName, C.CustOfficeAddress1,O.OrderRouteNumber FROM tblCustomer C JOIN tblOrder O ON C.CustNumber = O.OrderCustomerNumber WHERE O.OrderTrackingNumber IS NOT NULL";
+                    string query = "SELECT c.custID, O.OrderTrackingNumber, O.OrderDate, C.CustNumber, C.CustName, C.CustOfficeAddress1,O.OrderRouteNumber,o.OrderID FROM tblCustomer C JOIN tblOrder O ON C.CustNumber = O.OrderCustomerNumber WHERE O.OrderTrackingNumber IS NOT NULL";
                     _sda = new SqlDataAdapter(query, _conn);
                     _sda.Fill(_ds);
                     _conn.Close();
@@ -97,13 +97,26 @@ namespace TropicalServer.DAL
                 _command = new SqlCommand("spUpdateCutomerAddress", _conn);
                 _command.CommandType = CommandType.StoredProcedure;
                 _command.Parameters.Add("@Address", SqlDbType.NVarChar).Value = addr;
-                _command.Parameters.Add("@custNumber", SqlDbType.Int).Value = custId;
+                _command.Parameters.Add("@custID", SqlDbType.Int).Value = custId;
                 _command.ExecuteNonQuery();
                 _conn.Close();
 
             }
         }
 
+        public void DeleteOrdersById(int id)
+        {
+            using (_conn = new SqlConnection(_connectString))
+            {
+                _conn.Open();
+                string query = "delete from tblOrder where orderid=" + id;
+                _command = new SqlCommand(query, _conn);
+
+                _command.ExecuteNonQuery();
+                _conn.Close();
+
+            }
+        }
         public DataSet GetOrdersWithFilterOptions(string orderdate, int customerId, string customerName, string salesMgr)
         {
             _ds = new DataSet();

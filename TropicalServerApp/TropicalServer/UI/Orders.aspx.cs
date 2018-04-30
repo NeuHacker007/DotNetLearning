@@ -73,7 +73,6 @@ namespace TropicalServer.Pages
             string custName = txtBoxUserName.Text;
             string salesMgr = ddlSalesManager.SelectedValue;
 
-            //TODO: filter data by dynamic SQL
 
             OrdersDAL orders = new OrdersDAL();
             DataSet ds = orders.GetOrdersWithFilterOptions(orderDateFilterValue, custId, custName, salesMgr);
@@ -84,19 +83,19 @@ namespace TropicalServer.Pages
 
         protected void gvOrders_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
-            string address = gvOrders.Rows[e.RowIndex].Cells[4].Text;
-            int customerId = Convert.ToInt32(gvOrders.Rows[e.RowIndex].Cells[0].Text);
-
+            GridViewRow row = gvOrders.Rows[e.RowIndex];
+            int customerId = Convert.ToInt32(((Label)row.FindControl("lblCustID")).Text);
+            string address = ((TextBox)row.FindControl("Address_Txt_Box")).Text;
             OrdersDAL orders = new OrdersDAL();
             orders.UpdateCustomerAddress(address, customerId);
-
+            gvOrders.EditIndex = -1;
             BindData();
         }
 
         protected void gvOrders_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
             gvOrders.EditIndex = -1;
-            DataBind();
+            BindData();
         }
 
         [WebMethod]
@@ -124,6 +123,25 @@ namespace TropicalServer.Pages
                 .Where(datarow => datarow["CustName"].ToString().StartsWith(pre))
                 .Select(a => a.Field<string>("CustName")).ToList();
             return names;
+        }
+
+        protected void gvOrders_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void gvOrders_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            gvOrders.EditIndex = e.NewEditIndex;
+
+        }
+
+        protected void gvOrders_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            GridViewRow row = gvOrders.Rows[e.RowIndex];
+            int orderId = Convert.ToInt32(((Label)row.FindControl("OrderID")).Text);
+
+
         }
     }
 }

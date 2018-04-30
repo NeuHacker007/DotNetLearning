@@ -102,9 +102,11 @@
     <Content Include="AppThemes\TropicalStyles\Site.css" />
     <Content Include="Images\Tropical.png" />
     <Content Include="Javascipts\jquery-3.3.1.min.js" />
+    <Content Include="UI\AccountRecovery.aspx" />
     <Content Include="UI\Login.aspx" />
     <Content Include="UI\MsgCenter.aspx" />
     <Content Include="UI\Orders.aspx" />
+    <Content Include="UI\PasswordReset.aspx" />
     <Content Include="UI\Products.aspx" />
     <Content Include="UI\Reports.aspx" />
     <Content Include="UI\Routes.aspx" />
@@ -140,6 +142,13 @@
       <DependentUpon>TropicalServer.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\AccountRecovery.aspx.cs">
+      <DependentUpon>AccountRecovery.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\AccountRecovery.aspx.designer.cs">
+      <DependentUpon>AccountRecovery.aspx</DependentUpon>
+    </Compile>
     <Compile Include="UI\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -160,6 +169,13 @@
     </Compile>
     <Compile Include="UI\Orders.aspx.designer.cs">
       <DependentUpon>Orders.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\PasswordReset.aspx.cs">
+      <DependentUpon>PasswordReset.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\PasswordReset.aspx.designer.cs">
+      <DependentUpon>PasswordReset.aspx</DependentUpon>
     </Compile>
     <Compile Include="UI\Products.aspx.cs">
       <DependentUpon>Products.aspx</DependentUpon>

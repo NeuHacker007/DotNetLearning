@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="OrdersDAL.cs" />
     <Compile Include="ProductsDAL.cs" />
+    <Compile Include="RecoveryDAL.cs" />
     <Compile Include="ReportsDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserOperationDALcs.cs" />

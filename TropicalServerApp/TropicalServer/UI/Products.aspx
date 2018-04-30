@@ -5,6 +5,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
+
         <div class="productCategories">
             <asp:Label ID="lblProductionCategories" CssClass="productCategoriesLabel" runat="server" Text="PRODUCTION CATEGORIES" Font-Bold="True"></asp:Label>
             <br />
@@ -30,7 +31,7 @@
             <br>
             <asp:ImageButton ID="imgBtnPerPoundItems" runat="server" ImageUrl="~/Images/productPerPoundItems.png" CssClass="imageStyle" OnClick="imgBtnPerPoundItems_Click" />
         </div>
-        <div id="page-wrap" class="chartdisplay">
+        <div   style="display: inline-block !important;  width: 750px;white-space: nowrap">
             <asp:GridView ID="gvProductsDisplay" AutoGenerateColumns="True" runat="server" CssClass="dataGrid chartHeaderStyle chartItemStyle"></asp:GridView>
         </div>
 
