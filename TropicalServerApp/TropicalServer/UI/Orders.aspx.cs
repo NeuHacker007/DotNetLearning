@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Web.Script.Services;
+using System.Web.Services;
 using System.Web.UI.WebControls;
 using TropicalServer.DAL;
 
@@ -93,6 +96,23 @@ namespace TropicalServer.Pages
         {
             gvOrders.EditIndex = -1;
             DataBind();
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public List<string> GetCustomerID()
+        {
+            List<string> ids = new List<string>();
+            //TODO: Get CustomerIDs from DB
+            return ids;
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public List<string> GetCustomerNames()
+        {
+            List<string> names = new List<string>();
+            return names;
         }
     }
 }

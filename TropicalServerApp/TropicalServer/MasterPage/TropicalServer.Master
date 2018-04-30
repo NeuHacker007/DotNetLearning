@@ -9,6 +9,7 @@
 <head id="Head" runat="server">
     <title></title>
     <link href="~/AppThemes/TropicalStyles/Site.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="~/Javascipts/jquery-3.3.1.min.js"></script>
 
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
 

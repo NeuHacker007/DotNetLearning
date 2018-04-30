@@ -101,6 +101,7 @@
     <Content Include="Images\RoutersColumnHeader.png" />
     <Content Include="AppThemes\TropicalStyles\Site.css" />
     <Content Include="Images\Tropical.png" />
+    <Content Include="Javascipts\jquery-3.3.1.min.js" />
     <Content Include="UI\Login.aspx" />
     <Content Include="UI\MsgCenter.aspx" />
     <Content Include="UI\Orders.aspx" />
