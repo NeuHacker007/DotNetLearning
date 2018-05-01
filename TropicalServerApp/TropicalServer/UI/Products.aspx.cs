@@ -9,6 +9,10 @@ namespace TropicalServer.UI
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["LoginID"] == null)
+            {
+                Response.Redirect("Login.aspx");
+            }
             PrePopolateWithAllProducts();
         }
 

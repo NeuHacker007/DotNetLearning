@@ -31,6 +31,15 @@ namespace TropicalServer.UI {
         protected global::System.Web.UI.WebControls.TextBox txtBoxRecoverEmail;
         
         /// <summary>
+        /// rfvrecoverEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvrecoverEmail;
+        
+        /// <summary>
         /// btnSubmit control.
         /// </summary>
         /// <remarks>

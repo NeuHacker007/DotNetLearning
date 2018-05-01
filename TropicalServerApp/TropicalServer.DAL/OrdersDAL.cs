@@ -133,15 +133,40 @@ namespace TropicalServer.DAL
                     {
                         _command.Parameters.Add("@orderdate", SqlDbType.NVarChar).Value = orderdate;
                     }
-                    else if (customerId != null)
+                    else
+                    {
+                        _command.Parameters.Add("@orderdate", SqlDbType.NVarChar);
+                    }
+
+                    if (customerId != null)
                     {
                         _command.Parameters.Add("@customerId", SqlDbType.NVarChar).Value = customerId;
                     }
-                    else if (customerName != null)
+                    else
                     {
-                        _command.Parameters.Add("@salesMgrFirstName", SqlDbType.NVarChar).Value = customerName.Split(',')[0];
-                        _command.Parameters.Add("@salesMgrLastName", SqlDbType.NVarChar).Value = customerName.Split(',')[1];
+                        _command.Parameters.Add("@customerId", SqlDbType.NVarChar);
                     }
+                    if (customerName != null)
+                    {
+                        _command.Parameters.Add("@CustomerName", SqlDbType.NVarChar).Value = customerName;
+                    }
+                    else
+                    {
+                        _command.Parameters.Add("@CustomerName", SqlDbType.NVarChar);
+                    }
+
+                    if (salesMgr != null)
+                    {
+                        _command.Parameters.Add("@salesMgrFirstName", SqlDbType.NVarChar).Value = salesMgr.Split(',')[0];
+                        _command.Parameters.Add("@salesMgrLastName", SqlDbType.NVarChar).Value = salesMgr.Split(',')[1];
+                    }
+                    else
+                    {
+                        _command.Parameters.Add("@salesMgrFirstName", SqlDbType.NVarChar);
+                        _command.Parameters.Add("@salesMgrLastName", SqlDbType.NVarChar);
+                    }
+
+
                     using (_sda = new SqlDataAdapter(_command))
                     {
                         _sda.Fill(_ds);

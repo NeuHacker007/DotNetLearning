@@ -4,6 +4,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <asp:Label ID="lblRecoverEmail" runat="server" Text="Email To Recover"></asp:Label>
     <asp:TextBox ID="txtBoxRecoverEmail" runat="server"></asp:TextBox>
+    <asp:RequiredFieldValidator ID="rfvrecoverEmail" runat="server" ErrorMessage="Required"></asp:RequiredFieldValidator>
     <asp:Button ID="btnSubmit" runat="server" Text="Submit" OnClick="btnSubmit_Click" />
 </asp:Content>
 

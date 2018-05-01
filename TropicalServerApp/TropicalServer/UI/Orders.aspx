@@ -2,9 +2,33 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <link rel="stylesheet" href="~/AppThemes/TropicalStyles/Orders.css" type="text/css" />
-    <script type="text/javascript" src="~/Javascipts/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
-
+    <script language="javascript" type="text/javascript">
+        $(function () {
+            $('#<%=txtBoxCustomerID.ClientID%>').autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "Orders.aspx/GetCustomerId",
+                        data: "{ 'pre':'" +<%=txtBoxCustomerID.Text%> + "'}",
+                        dataType: "json",
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            response($.map(data.d,
+                                function(item) {
+                                    return { value: item }
+                                }));
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            alert(textStatus);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div id="CriteriaBar">
@@ -15,14 +39,15 @@
 
         <asp:Label CssClass="label" ID="lblCustomerID" runat="server" Text="Customer ID"></asp:Label>
         <asp:TextBox CssClass="Criteria Input" ID="txtBoxCustomerID" AutoPostBack="True" runat="server"></asp:TextBox>
-        <asp:RegularExpressionValidator ID="regExpCustomerID" runat="server" ErrorMessage="Only Digits Allowed!" ControlToValidate="txtBoxCustomerID" ValidationExpression="/d+"></asp:RegularExpressionValidator>
+
 
         <asp:Label CssClass="label" ID="lblCustomerName" runat="server" Text="Customer Name"></asp:Label>
         <asp:TextBox CssClass="Input" ID="txtBoxUserName" AutoPostBack="True" runat="server"></asp:TextBox>
 
 
         <asp:Label ID="lblSalesManager" runat="server" Text="Sales Manager"></asp:Label>
-        <asp:DropDownList CssClass="Criteria Input" ID="ddlSalesManager" runat="server" OnSelectedIndexChanged="ddlSalesManager_SelectedIndexChanged">
+        <asp:DropDownList CssClass="Criteria Input" ID="ddlSalesManager" runat="server" OnSelectedIndexChanged="ddlSalesManager_SelectedIndexChanged" AppendDataBoundItems="True">
+            <asp:ListItem Selected="True" Value="">Please select a sales manager</asp:ListItem>
         </asp:DropDownList>
         <asp:Button CssClass="loginButton" ID="BtnQuery" runat="server" Text="Query" OnClick="BtnQuery_Click" />
 

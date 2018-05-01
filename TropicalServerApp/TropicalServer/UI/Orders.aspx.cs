@@ -39,6 +39,7 @@ namespace TropicalServer.Pages
         {
             UserOperationDALcs userOperation = new UserOperationDALcs();
             DataSet ds = userOperation.GetUniqueSalesMgr();
+
             ddlSalesManager.DataSource = ds.Tables[0];
             ddlSalesManager.DataTextField = ds.Tables[0].Columns["UserName"].ToString();
             ddlSalesManager.DataValueField = ds.Tables[0].Columns["UserName"].ToString();
@@ -46,7 +47,7 @@ namespace TropicalServer.Pages
         }
         private void PopulateOrderDateFilter()
         {
-
+            ddlOrderDate.Items.Insert(0, new ListItem("Select", ""));
             ddlOrderDate.Items.Add(new ListItem("Today"));
             ddlOrderDate.Items.Add(new ListItem("Last 7 Days"));
             ddlOrderDate.Items.Add(new ListItem("Last 1 Month"));
@@ -68,33 +69,15 @@ namespace TropicalServer.Pages
 
         protected void BtnQuery_Click(object sender, EventArgs e)
         {
-            string orderDateFilterValue = ddlOrderDate.SelectedValue;
-
-            string custId = txtBoxCustomerID.Text;
-            string custName = txtBoxUserName.Text;
-            string salesMgr = ddlSalesManager.SelectedValue;
-            if (string.Equals(orderDateFilterValue, ""))
-            {
-                orderDateFilterValue = null;
-            }
-            else if (string.Equals(custId, ""))
-            {
-                custId = null;
-            }
-            else if (string.Equals(custName, ""))
-            {
-                custName = null;
-            }
-            else if (string.Equals(salesMgr, ""))
-            {
-                salesMgr = null;
-            }
+            string orderDateFilterValue = ddlOrderDate.SelectedValue == "" ? "Last 6 Months" : ddlOrderDate.SelectedValue;
+            string customerId = txtBoxCustomerID.Text == "" ? null : txtBoxCustomerID.Text;
+            string custName = txtBoxUserName.Text == "" ? null : txtBoxUserName.Text;
+            string salesMgr = ddlSalesManager.SelectedValue == "" ? null : ddlSalesManager.SelectedValue;
 
             OrdersDAL orders = new OrdersDAL();
-            DataSet ds = orders.GetOrdersWithFilterOptions(orderDateFilterValue, custId, custName, salesMgr);
+            DataSet ds = orders.GetOrdersWithFilterOptions(orderDateFilterValue, customerId, custName, salesMgr);
             gvOrders.DataSource = ds;
             gvOrders.DataBind();
-
         }
 
         protected void gvOrders_RowUpdating(object sender, GridViewUpdateEventArgs e)
@@ -116,7 +99,7 @@ namespace TropicalServer.Pages
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public List<string> GetCustomerId(string pre)
+        public static List<string> GetCustomerId(string pre)
         {
 
             List<string> ids = new List<string>();
@@ -130,7 +113,7 @@ namespace TropicalServer.Pages
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public List<string> GetCustomerNames(string pre)
+        public static List<string> GetCustomerNames(string pre)
         {
             List<string> names = new List<string>();
             UserOperationDALcs userOperation = new UserOperationDALcs();
