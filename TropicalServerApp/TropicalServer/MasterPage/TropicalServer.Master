@@ -9,45 +9,53 @@
 <head id="Head" runat="server">
     <title></title>
     <link href="~/AppThemes/TropicalStyles/Site.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="~/Javascipts/jquery-3.3.1.min.js"></script>
+
 
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
-
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="Form" runat="server">
 
-    <div class="page">
-        <div class="header">
-            <div class="imageDisplay">
-                <asp:Image ID="Image" runat="server"
-                     CssClass="imageHeader" ImageUrl="~/Images/HeaderTropicalServer.png" />
-            </div>
-            <div class="clear menuLink">
-                <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false"
-                          IncludeStyleBlock="false" Orientation="Horizontal">
-                    <Items>
-                        <asp:MenuItem NavigateUrl="~/UI/Orders.aspx" Text="Orders"/>
-                        <asp:MenuItem NavigateUrl="~/UI/Products.aspx" Text="Products"/>
-                        <asp:MenuItem NavigateUrl="~/UI/Routes.aspx" Text="Routes"/>
-                        <asp:MenuItem NavigateUrl="~/UI/StopSEQN.aspx" Text="StopSEQN"/>
-                        <asp:MenuItem NavigateUrl="~/UI/MsgCenter.aspx" Text="Message Center"/>
-                        <asp:MenuItem NavigateUrl="~/UI/Reports.aspx" Text="Reports"/>
-                        <asp:MenuItem NavigateUrl="~/UI/Settings.aspx" Text="Settings"/>
-                    </Items>
-                </asp:Menu>
-                <asp:LinkButton CssClass="menuLink LogOut" ID="linkBtnLogOut" runat="server" OnClick="linkBtnLogOut_Click" >Log Out</asp:LinkButton>
-            </div>
-        </div>
+        <div class="page">
+            <div class="header">
+                <div class="imageDisplay">
+                    <asp:Image ID="Image" runat="server"
+                        CssClass="imageHeader" ImageUrl="~/Images/HeaderTropicalServer.png" />
+                </div >
 
-        <div class="main">
-            <ajax:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
-            </ajax:ToolkitScriptManager>
-            <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
-        </div>
+                    <div class="clear menuLink"  style="display: inline-block;">
+                        <div style="display: inline-block;">
+                        <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false"
+                            IncludeStyleBlock="False" Orientation="Horizontal">
+                            <Items>
+                                <asp:MenuItem NavigateUrl="~/UI/Orders.aspx" Text="Orders" />
+                                <asp:MenuItem NavigateUrl="~/UI/Products.aspx" Text="Products" />
+                                <asp:MenuItem NavigateUrl="~/UI/Routes.aspx" Text="Routes" />
+                                <asp:MenuItem NavigateUrl="~/UI/StopSEQN.aspx" Text="StopSEQN" />
+                                <asp:MenuItem NavigateUrl="~/UI/MsgCenter.aspx" Text="Message Center" />
+                                <asp:MenuItem NavigateUrl="~/UI/Reports.aspx" Text="Reports" />
+                                <asp:MenuItem NavigateUrl="~/UI/Settings.aspx" Text="Settings" />
+                            </Items>
+                        </asp:Menu>
+                        </div>
+                    <div style="float: right; display: inline-block;">
+                        <asp:Menu ID="menuLogout" CssClass="menu" runat="server" OnMenuItemClick="linkBtnLogOut_Click">
+                            <Items>
+                                <asp:MenuItem Text="Logout" />
+                            </Items>
+                        </asp:Menu>
+                    </div>
+                </div>
 
-    </div>
+
+            <div class="main">
+                <ajax:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
+                </ajax:ToolkitScriptManager>
+                <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+            </div>
+
+        </div>
         <%--    <div class="footer">
 
     </div>--%>

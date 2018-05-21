@@ -64,7 +64,7 @@ namespace TropicalServer.DAL
             return _ds;
         }
 
-        public DataSet GetUniqueCustomerID()
+        public DataSet GetUniqueCustomerName()
         {
             _ds = new DataSet();
 
@@ -73,7 +73,7 @@ namespace TropicalServer.DAL
                 using (_conn = new SqlConnection(_connectString))
                 {
                     _conn.Open();
-                    string query = "select distinct CustNumber  from tblCustomer";
+                    string query = "select distinct CustName  from tblCustomer";
                     _command = new SqlCommand(query, _conn);
 
                     using (_sda = new SqlDataAdapter(_command))

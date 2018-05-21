@@ -13,10 +13,10 @@ namespace TropicalServer.Pages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["LoginID"] == null)
-            {
-                Response.Redirect("Login.aspx");
-            }
+            //if (Session["LoginID"] == null)
+            //{
+            //    Response.Redirect("Login.aspx");
+            //}
             if (!IsPostBack)
             {
                 PopulateOrderDateFilter();
@@ -104,7 +104,7 @@ namespace TropicalServer.Pages
 
             List<string> ids = new List<string>();
             UserOperationDALcs userOperation = new UserOperationDALcs();
-            DataSet ds = userOperation.GetUniqueCustomerID();
+            DataSet ds = userOperation.GetUniqueCustomerName();
             ids = ds.Tables[0].AsEnumerable()
                 .Where(datarow => datarow["CustNumber"].ToString().StartsWith(pre))
                 .Select(a => a.Field<string>("CustNumber")).ToList();
@@ -117,7 +117,7 @@ namespace TropicalServer.Pages
         {
             List<string> names = new List<string>();
             UserOperationDALcs userOperation = new UserOperationDALcs();
-            DataSet ds = userOperation.GetUniqueCustomerID();
+            DataSet ds = userOperation.GetUniqueCustomerName();
             names = ds.Tables[0].AsEnumerable()
                 .Where(datarow => datarow["CustName"].ToString().StartsWith(pre))
                 .Select(a => a.Field<string>("CustName")).ToList();

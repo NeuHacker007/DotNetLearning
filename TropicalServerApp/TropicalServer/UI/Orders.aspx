@@ -1,34 +1,11 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/TropicalServer.Master" AutoEventWireup="true" CodeBehind="Orders.aspx.cs" Inherits="TropicalServer.Pages.Orders" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/TropicalServer.Master" AutoEventWireup="true" CodeBehind="Orders.aspx.cs" Inherits="TropicalServer.Pages.Orders" EnableSessionState="false"%>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    <link rel="stylesheet" href="~/AppThemes/TropicalStyles/Orders.css" type="text/css" />
+    <link rel="stylesheet" href="../AppThemes/TropicalStyles/Orders.css" type="text/css" />
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"/>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
-    <script language="javascript" type="text/javascript">
-        $(function () {
-            $('#<%=txtBoxCustomerID.ClientID%>').autocomplete({
-                source: function (request, response) {
-                    $.ajax({
-                        url: "Orders.aspx/GetCustomerId",
-                        data: "{ 'pre':'" +<%=txtBoxCustomerID.Text%> + "'}",
-                        dataType: "json",
-                        type: "POST",
-                        contentType: "application/json; charset=utf-8",
-                        success: function (data) {
-                            response($.map(data.d,
-                                function(item) {
-                                    return { value: item }
-                                }));
-                        },
-                        error: function (XMLHttpRequest, textStatus, errorThrown) {
-                            alert(textStatus);
-                        }
-                    });
-                }
-            });
-        });
-    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div id="CriteriaBar">
@@ -38,11 +15,11 @@
 
 
         <asp:Label CssClass="label" ID="lblCustomerID" runat="server" Text="Customer ID"></asp:Label>
-        <asp:TextBox CssClass="Criteria Input" ID="txtBoxCustomerID" AutoPostBack="True" runat="server"></asp:TextBox>
+        <asp:TextBox CssClass="Criteria Input" ID="txtBoxCustomerID"  runat="server"></asp:TextBox>
 
 
         <asp:Label CssClass="label" ID="lblCustomerName" runat="server" Text="Customer Name"></asp:Label>
-        <asp:TextBox CssClass="Input" ID="txtBoxUserName" AutoPostBack="True" runat="server"></asp:TextBox>
+        <asp:TextBox CssClass="Input" ID="txtBoxUserName"  runat="server"></asp:TextBox>
 
 
         <asp:Label ID="lblSalesManager" runat="server" Text="Sales Manager"></asp:Label>
@@ -97,7 +74,7 @@
                         <asp:Label runat="server" Text='<%#Eval("OrderRouteNumber") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField  Visible="False">
+                <asp:TemplateField Visible="False">
                     <ItemTemplate>
                         <asp:Label runat="server" ID="lblOrderID" Text='<%#Eval("OrderID") %>'></asp:Label>
                     </ItemTemplate>
@@ -118,4 +95,66 @@
         </asp:GridView>
     </div>
 
+    <script  type="text/javascript">
+        $(document).ready(
+            function () {
+
+                <%--$('#<%=lblCustomerName.ClientID%>').autocomplete({
+
+                        source: function (request, response) {
+                            alert(request.term);
+                            $.ajax({
+                                type: "post",
+                                contentType: "application/json; charset=utf-8",
+                                url: "AutoComplete.asmx/GetCustomerNames",
+                                dataType: "json",
+                                data: "{'pre':'" + request.term + "'}",
+                                success: function (data) {
+                                    console.log(data.d);
+
+                                    response(data.d);
+                                },
+                                error: function(err) {
+                                    alert(JSON.stringify(err));
+                                }
+
+                            });
+                        }
+                    }
+
+                );--%>
+
+                $(document).ready(function () {
+                    $("#<%=txtBoxUserName.ClientID%>").autocomplete({
+                        source:
+                            function (request, response)
+                            {
+                                $.ajax({
+                                    url: "../AutoComplete.svc/GetCustomerNamesAutoComplete",
+                                    type: 'POST',
+                                    contentType: 'application/json;charset=utf-8',
+                                    data: JSON.stringify({ pre: $("#<%=txtBoxUserName.ClientID%>").val() }),
+                                    dataType: "json",
+                                    async: true,
+                                    success: function (data) {
+                                        response(data.d);
+                                    },
+                                    error: function (err) {
+
+                                        alert(JSON.stringify(err));
+                                    }
+                                });
+                            },
+                        minLength: 3,
+                        delay: 500
+                    });
+                    debugger;
+                });
+
+
+
+
+            }
+        );
+    </script>
 </asp:Content>

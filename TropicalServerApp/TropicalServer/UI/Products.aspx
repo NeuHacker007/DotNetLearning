@@ -6,7 +6,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
 
-        <div class="productCategories">
+    <div class="productCategories" style="display: inline-block">
+        <div style="display: inline-block;">
             <asp:Label ID="lblProductionCategories" CssClass="productCategoriesLabel" runat="server" Text="PRODUCTION CATEGORIES" Font-Bold="True"></asp:Label>
             <br />
             <asp:ImageButton CssClass="imageStyle" ID="imgBtnCaribbeanLine" runat="server" ImageUrl="~/Images/productCaribbeanLine.png" OnClick="imgBtnCaribbeanLine_Click" />
@@ -31,8 +32,30 @@
             <br>
             <asp:ImageButton ID="imgBtnPerPoundItems" runat="server" ImageUrl="~/Images/productPerPoundItems.png" CssClass="imageStyle" OnClick="imgBtnPerPoundItems_Click" />
         </div>
-        <div   style="display: inline-block !important;  width: 750px;white-space: nowrap">
-            <asp:GridView ID="gvProductsDisplay" AutoGenerateColumns="True" runat="server" CssClass="dataGrid chartHeaderStyle chartItemStyle"></asp:GridView>
-        </div>
+        <div style="float: right; display: inline-block;">
+            <asp:GridView ID="gvProductsDisplay" runat="server"  CellPadding="4" ForeColor="#333333" GridLines="None" Width="670px">
+                <AlternatingRowStyle BackColor="White" ForeColor="#284775"></AlternatingRowStyle>
 
+                <EditRowStyle BackColor="#999999"></EditRowStyle>
+
+                <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White"></FooterStyle>
+
+                <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White"></HeaderStyle>
+
+                <PagerStyle HorizontalAlign="Center" BackColor="#284775" ForeColor="White"></PagerStyle>
+
+                <RowStyle BackColor="#F7F6F3" ForeColor="#333333"></RowStyle>
+
+                <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333"></SelectedRowStyle>
+
+                <SortedAscendingCellStyle BackColor="#E9E7E2"></SortedAscendingCellStyle>
+
+                <SortedAscendingHeaderStyle BackColor="#506C8C"></SortedAscendingHeaderStyle>
+
+                <SortedDescendingCellStyle BackColor="#FFFDF8"></SortedDescendingCellStyle>
+
+                <SortedDescendingHeaderStyle BackColor="#6F8DAE"></SortedDescendingHeaderStyle>
+            </asp:GridView>
+        </div>
+    </div>
 </asp:Content>

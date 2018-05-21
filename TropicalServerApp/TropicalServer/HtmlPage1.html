@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+</head>
+<body>
+    <input id="customer" />
+
+    <script language="javascript" type="text/javascript">
+        $(document).ready(
+            function() {
+
+
+                $(".customer").autocomplete({
+                    source: function(request, response) {
+                        $.ajax({
+                            type: "POST",
+                            contentType: "application/json; charset=utf-8",
+                            url: "http://localhost:55254/AutoComplete.asmx/GetCustomerNames",
+                            data: "{'pre':'" + request.term + "'}",
+                            dataType: "json",
+                            success: function(data) {
+                                response(data);
+                            },
+                            error: function() {
+                                alert('fail');
+                            }
+
+                        });
+
+                        //$('#customer').autocomplete({
+
+                        //        source: function (request, response) {
+
+                        //            $.ajax({
+                        //                type: "post",
+                        //                contentType: "application/json; charset=utf-8",
+                        //                url: "AutoComplete.asmx/GetCustomerNames",
+                        //                dataType: "json",
+                        //                data: "{'pre':'" + request.term + "'}",
+                        //                success: function (data) {
+                        //                    console.log(data);
+
+                        //                    response(data);
+                        //                }
+
+                        //            });
+                        //        }
+                        //    }
+
+                        //);
+                    }
+                });
+            });
+    </script>
+</body>
+</html>

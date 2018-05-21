@@ -25,6 +25,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
+    <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -51,6 +52,9 @@
       <HintPath>..\..\..\.Net Project\MyJadcore\MyJadcore\bin\itextsharp.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -79,6 +83,9 @@
     <Content Include="AppThemes\TropicalStyles\Routes.css" />
     <Content Include="AppThemes\TropicalStyles\Settings.css" />
     <Content Include="AppThemes\TropicalStyles\StopSEQN.css" />
+    <Content Include="AutoComplete.asmx" />
+    <Content Include="AutoComplete.svc" />
+    <Content Include="HtmlPage1.html" />
     <Content Include="Images\arrowDown.png" />
     <Content Include="Images\arrowUp.png" />
     <Content Include="Images\calendar.png" />
@@ -125,6 +132,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoComplete.asmx.cs">
+      <DependentUpon>AutoComplete.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AutoComplete.svc.cs">
+      <DependentUpon>AutoComplete.svc</DependentUpon>
+    </Compile>
     <Compile Include="Helper\EmailHelper.cs" />
     <Compile Include="Helper\SQLHelper.cs" />
     <Compile Include="Helper\UtilityTools.cs" />
