@@ -6,14 +6,18 @@ namespace AngularWebApi.UnitofWork
 {
     public class UnitOfWorkcs
     {
-        private ApplicationDbContext _dbContext;
+        private readonly ApplicationDbContext _dbContext;
         private ITasksRepository _tasksRepository;
 
         public UnitOfWorkcs()
         {
-            _dbContext = new ApplicationDbContext();
+            _dbContext = ApplicationDbContext.Create();
         }
 
+        public void Save()
+        {
+            _dbContext.SaveChanges();
+        }
         public ITasksRepository TasksRepository =>
             _tasksRepository ?? (_tasksRepository = new TasksRepository(_dbContext));
 

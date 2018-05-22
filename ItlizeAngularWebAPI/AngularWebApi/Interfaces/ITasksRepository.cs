@@ -1,6 +1,8 @@
-﻿namespace AngularWebApi.Interfaces
+﻿using AngularWebApi.Models;
+
+namespace AngularWebApi.Interfaces
 {
-    public interface ITasksRepository
+    public interface ITasksRepository : IRepository<Tasks>
     {
     }
 }

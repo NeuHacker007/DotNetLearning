@@ -51,10 +51,33 @@ namespace AngularWebApi.Repositories
             _dbContext.Set<TEntity>().Remove(entity);
         }
 
-        public void Update(TEntity entity)
+
+
+        public void Update(int id, TEntity entity)
         {
-            //TODO: Add Update Logic
-            throw new NotImplementedException();
+            try
+            {
+                if (entity == null)
+                {
+                    throw new ArgumentNullException("entity");
+                }
+
+                _dbContext.SaveChanges();
+            }
+            catch (DbEntityValidationException dbEx)
+            {
+
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        errorMessage += string.Format("Property: {0} Error: {1}",
+                                            validationError.PropertyName, validationError.ErrorMessage) + Environment.NewLine;
+                    }
+                }
+                throw new Exception(errorMessage, dbEx);
+            }
+
         }
     }
 }

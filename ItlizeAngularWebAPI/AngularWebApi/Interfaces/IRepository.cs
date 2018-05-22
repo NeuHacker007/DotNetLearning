@@ -2,12 +2,12 @@
 
 namespace AngularWebApi.Interfaces
 {
-    interface IRepository<TEntity>
+    public interface IRepository<TEntity>
     {
         List<TEntity> GetAll();
         void Add(TEntity entity);
         void Remove(TEntity entity);
-        void Update(TEntity entity);
+        void Update(int id, TEntity entity);
 
     }
 }
