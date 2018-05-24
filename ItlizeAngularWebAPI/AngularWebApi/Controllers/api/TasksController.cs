@@ -26,6 +26,21 @@ namespace AngularWebApi.Controllers.api
             return Ok(taskDto);
         }
 
+        [HttpGet]
+        public IHttpActionResult GetTaskById(int id)
+        {
+            if (id <= 0)
+            {
+                return BadRequest();
+            }
+
+            var tasks = _uow.TasksRepository.GetTaskById(id);
+
+
+
+            return Ok(Mapper.Map<Tasks, TasksDto>(tasks));
+
+        }
         [HttpPost]
         public IHttpActionResult AddTasks(TasksDto tasksDto)
         {

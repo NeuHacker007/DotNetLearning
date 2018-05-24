@@ -19,10 +19,7 @@ namespace AngularWebApi
             // Web API routes
             config.MapHttpAttributeRoutes();
 
-            config.Routes.MapHttpRoute(
-                name: "RouteWithAction",
-                routeTemplate: "api/{controller}/{action}"
-            );
+
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
