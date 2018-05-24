@@ -16,6 +16,8 @@ namespace AngularWebApi.Controllers.api
         {
             _uow = new UnitOfWorkcs();
         }
+
+        [HttpGet]
         public IHttpActionResult GetTasks()
         {
             var taskDto = _uow.TasksRepository.GetAll()
@@ -24,6 +26,7 @@ namespace AngularWebApi.Controllers.api
             return Ok(taskDto);
         }
 
+        [HttpPost]
         public IHttpActionResult AddTasks(TasksDto tasksDto)
         {
             if (!ModelState.IsValid)
@@ -38,7 +41,7 @@ namespace AngularWebApi.Controllers.api
             return Created(new Uri(Request.RequestUri + "/" + tasksDto.Id), tasksDto);
         }
 
-
+        [HttpPut]
         public IHttpActionResult UpdateTasks(int id, TasksDto tasksDto)
         {
             if (!ModelState.IsValid)
@@ -58,6 +61,7 @@ namespace AngularWebApi.Controllers.api
             return Ok();
         }
 
+        [HttpDelete]
         public IHttpActionResult DeleteTask(int id)
         {
             var tasksInDb = _uow.TasksRepository.GetAll().SingleOrDefault(t => t.Id == id);
