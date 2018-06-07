@@ -42,7 +42,7 @@ namespace AngularWebApi.Controllers.api
 
         }
         [HttpPost]
-        public IHttpActionResult AddTasks(TasksDto tasksDto)
+        public IHttpActionResult AddTasks([FromBody] TasksDto tasksDto)
         {
             if (!ModelState.IsValid)
             {
@@ -57,7 +57,7 @@ namespace AngularWebApi.Controllers.api
         }
 
         [HttpPut]
-        public IHttpActionResult UpdateTasks(int id, TasksDto tasksDto)
+        public IHttpActionResult UpdateTasks([FromUri] int id, [FromBody] TasksDto tasksDto)
         {
             if (!ModelState.IsValid)
             {
