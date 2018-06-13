@@ -263,6 +263,18 @@
     <Compile Include="Migrations\201805250223396_UpdateExistingDataInTable.Designer.cs">
       <DependentUpon>201805250223396_UpdateExistingDataInTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806131819219_AddUserRolesInAspNetRoles.cs" />
+    <Compile Include="Migrations\201806131819219_AddUserRolesInAspNetRoles.Designer.cs">
+      <DependentUpon>201806131819219_AddUserRolesInAspNetRoles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806131831520_AddUsersInAspnetUser.cs" />
+    <Compile Include="Migrations\201806131831520_AddUsersInAspnetUser.Designer.cs">
+      <DependentUpon>201806131831520_AddUsersInAspnetUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806131851272_AddRoleAndUserMapping.cs" />
+    <Compile Include="Migrations\201806131851272_AddRoleAndUserMapping.Designer.cs">
+      <DependentUpon>201806131851272_AddRoleAndUserMapping.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -356,6 +368,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805250223396_UpdateExistingDataInTable.resx">
       <DependentUpon>201805250223396_UpdateExistingDataInTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806131819219_AddUserRolesInAspNetRoles.resx">
+      <DependentUpon>201806131819219_AddUserRolesInAspNetRoles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806131831520_AddUsersInAspnetUser.resx">
+      <DependentUpon>201806131831520_AddUsersInAspnetUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806131851272_AddRoleAndUserMapping.resx">
+      <DependentUpon>201806131851272_AddRoleAndUserMapping.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
