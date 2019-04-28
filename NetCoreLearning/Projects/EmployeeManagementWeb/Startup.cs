@@ -38,11 +38,10 @@ namespace EmployeeManagementWeb
              * it just update the response URL
              * The Actual execution is in userstaticFiles() middle ware
              */
-            DefaultFilesOptions defaultFiles = new DefaultFilesOptions();
-            defaultFiles.DefaultFileNames.Clear();
-            defaultFiles.DefaultFileNames.Add("foo.html");
-            app.UseDefaultFiles(defaultFiles);
-            app.UseStaticFiles();
+            FileServerOptions fileServerOptions = new FileServerOptions();
+            fileServerOptions.DefaultFilesOptions.DefaultFileNames.Clear();
+            fileServerOptions.DefaultFilesOptions.DefaultFileNames.Add("foo.html");
+            app.UseFileServer();
             app.Run(async (context) =>
             {
                 await context.Response.WriteAsync("Hello World");
