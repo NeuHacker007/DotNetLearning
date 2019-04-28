@@ -32,16 +32,28 @@ namespace EmployeeManagementWeb
             {
                 app.UseDeveloperExceptionPage();
             }
+            /**
+             * Every thing before next() happens as request travel 
+             * Every thing after next() happens as response travel (All the way up to the terminal middleware)
+             */
             app.Use(async (context, next) =>
             {
                 logger.LogInformation("MW1: Incoming Request");
-                await context.Response.WriteAsync("This is my 1st middleware");
+                //await context.Response.WriteAsync("This is my 1st middleware");
                 await next();
                 logger.LogInformation("MW1: Outgoing Response");
             });
+            app.Use(async (context, next) =>
+            {
+                logger.LogInformation("MW2: Incoming Request");
+                //await context.Response.WriteAsync("This is my 1st middleware");
+                await next();
+                logger.LogInformation("MW2: Outgoing Response");
+            });
             app.Run(async (context) =>
             {
-                await context.Response.WriteAsync("This is my 2nd middle ware");
+                await context.Response.WriteAsync("MW3: Request handled and response produced!");
+                logger.LogInformation("MW3: Request handled and response produced!");
             });
         }
     }
