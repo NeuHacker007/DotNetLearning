@@ -32,28 +32,17 @@ namespace EmployeeManagementWeb
             {
                 app.UseDeveloperExceptionPage();
             }
+
             /**
-             * Every thing before next() happens as request travel 
-             * Every thing after next() happens as response travel (All the way up to the terminal middleware)
+             * The order of the below two line is very important because useDefaultFiles() middleware will not actually run anything
+             * it just update the response URL
+             * The Actual execution is in userstaticFiles() middle ware
              */
-            app.Use(async (context, next) =>
-            {
-                logger.LogInformation("MW1: Incoming Request");
-                //await context.Response.WriteAsync("This is my 1st middleware");
-                await next();
-                logger.LogInformation("MW1: Outgoing Response");
-            });
-            app.Use(async (context, next) =>
-            {
-                logger.LogInformation("MW2: Incoming Request");
-                //await context.Response.WriteAsync("This is my 1st middleware");
-                await next();
-                logger.LogInformation("MW2: Outgoing Response");
-            });
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
             app.Run(async (context) =>
             {
-                await context.Response.WriteAsync("MW3: Request handled and response produced!");
-                logger.LogInformation("MW3: Request handled and response produced!");
+                await context.Response.WriteAsync("Hello World");
             });
         }
     }
