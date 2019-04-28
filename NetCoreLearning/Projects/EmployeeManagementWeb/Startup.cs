@@ -28,24 +28,18 @@ namespace EmployeeManagementWeb
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILogger<Startup> logger)
         {
-            /**
-             * Must be plugged in the pipeline as early as possible
-             * contains stack trace, query string, cookies and HTTP headers
-             * customized the developerExceptionPageOptions
-             */
+
             if (env.IsDevelopment())
             {
-                DeveloperExceptionPageOptions developerExceptionPage = new DeveloperExceptionPageOptions()
-                {
-                    SourceCodeLineCount = 10
-                };
-                app.UseDeveloperExceptionPage(developerExceptionPage);
-            }         
-            app.UseFileServer();
+                app.UseDeveloperExceptionPage();
+            }
+            else if (env.IsProduction() || env.IsStaging() || env.IsEnvironment("UAT")) {
+                app.UseExceptionHandler("/Error");
+            }
+            //app.UseStaticFiles();mm
             app.Run(async (context) =>
             {
-                throw new Exception("Some wrong with the server");
-                await context.Response.WriteAsync("Hello World");
+                await context.Response.WriteAsync("Hosting Enviornment: " + env.EnvironmentName);
             });
         }
     }
