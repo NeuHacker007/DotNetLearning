@@ -242,3 +242,8 @@ ModelManifest.xml
 .fake/
 /TropicalServerApp.7z
 DotNetCoreLearningNotes
+bin
+/Dotnet Core/MoshDonetCore/bin
+/Dotnet Core/MoshDonetCore/ClientApp/node_modules
+/Dotnet Core/MoshDonetCore/obj
+/Dotnet Core/MoshDonetCore/ClientApp/*.gitignore
