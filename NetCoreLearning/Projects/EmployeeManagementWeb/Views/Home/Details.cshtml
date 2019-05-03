@@ -1,5 +1,4 @@
-﻿
-
+﻿@model EmployeeManagementWeb.Models.Employee
 <html>
 <head>
     <title></title>
@@ -9,9 +8,9 @@
         @ViewBag.PageTitle
     </h1>
 <div>
-    name:@ViewBag.Employee.EmployeeName
+    name: @Model.EmployeeName
 </div>
-<div>Email: @ViewBag.Employee.Email</div>
-    <div>Department: @ViewBag.Employee.Department</div>
+<div>Email: @Model.Email</div>
+    <div>Department: @Model.Department</div>
 </body>
 </html>
