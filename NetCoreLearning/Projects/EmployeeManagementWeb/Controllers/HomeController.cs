@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EmployeeManagementWeb.Models;
+using EmployeeManagementWeb.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeeManagementWeb.Controllers
@@ -15,17 +16,20 @@ namespace EmployeeManagementWeb.Controllers
         {
             _employeeRepository = employeeRepository;
         }
-        public string Index()
+        public ViewResult Index()
         {
-            return this._employeeRepository.GetEmployee(1).EmployeeName;
+            return View(this._employeeRepository.GetEmployees());
         }
 
         public ViewResult Details()
         {
             Employee model = _employeeRepository.GetEmployee(1);
-            ViewBag.Employee = model;
-            ViewBag.PageTitle = "Employee Details";
-            return View(model);
+            HomeDetailsViewModel viewModel = new HomeDetailsViewModel() {
+                Employee = model,
+                PageTitle="HelloWorld"
+            };
+
+            return View(viewModel);
         }
     }
 }

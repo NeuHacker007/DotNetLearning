@@ -21,5 +21,10 @@ namespace EmployeeManagementWeb.Models
         {
             return this._employeeList.FirstOrDefault((employee) => employee.ID == ID);
         }
+
+        public IEnumerable<Employee> GetEmployees()
+        {
+            return _employeeList;
+        }
     }
 }

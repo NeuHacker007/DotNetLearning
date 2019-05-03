@@ -1,16 +1,16 @@
-﻿@model EmployeeManagementWeb.Models.Employee
+﻿@model EmployeeManagementWeb.ViewModel.HomeDetailsViewModel
 <html>
 <head>
     <title></title>
 </head>
 <body>
     <h1>
-        @ViewBag.PageTitle
+        @Model.PageTitle
     </h1>
 <div>
-    name: @Model.EmployeeName
+    name: @Model.Employee.EmployeeName
 </div>
-<div>Email: @Model.Email</div>
-    <div>Department: @Model.Department</div>
+<div>Email: @Model.Employee.Email</div>
+    <div>Department: @Model.Employee.Department</div>
 </body>
 </html>
