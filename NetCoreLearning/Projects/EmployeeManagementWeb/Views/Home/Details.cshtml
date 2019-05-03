@@ -6,15 +6,12 @@
 </head>
 <body>
     <h1>
-        @ViewData["PageTitle"]
+        @ViewBag.PageTitle
     </h1>
-    @{ 
-        var employee = ViewData["Employee"] as EmployeeManagementWeb.Models.Employee;
-    }
 <div>
-    name:@employee.EmployeeName
+    name:@ViewBag.Employee.EmployeeName
 </div>
-<div>Email: @employee.Email</div>
-    <div>Department: @employee.Department</div>
+<div>Email: @ViewBag.Employee.Email</div>
+    <div>Department: @ViewBag.Employee.Department</div>
 </body>
 </html>
