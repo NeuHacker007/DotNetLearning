@@ -40,7 +40,7 @@ namespace EmployeeManagementWeb
             //app.UseMvcWithDefaultRoute();
             app.UseMvc(routes =>
             {
-                routes.MapRoute("default", "{controller}/{action}/{id}");
+                routes.MapRoute("default", "{controller}/{action}/{id?}");
             });
             app.Run(async (context) =>
             {
