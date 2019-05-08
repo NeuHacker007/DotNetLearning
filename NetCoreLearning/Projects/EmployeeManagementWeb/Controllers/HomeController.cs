@@ -21,9 +21,9 @@ namespace EmployeeManagementWeb.Controllers
             return View(this._employeeRepository.GetEmployees());
         }
 
-        public ViewResult Details()
+        public ViewResult Details(int Id)
         {
-            Employee model = _employeeRepository.GetEmployee(1);
+            Employee model = _employeeRepository.GetEmployee(Id);
             HomeDetailsViewModel viewModel = new HomeDetailsViewModel() {
                 Employee = model,
                 PageTitle="HelloWorld"
