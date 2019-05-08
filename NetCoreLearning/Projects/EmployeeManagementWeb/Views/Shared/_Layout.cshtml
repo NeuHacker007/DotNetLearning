@@ -9,6 +9,10 @@
     <div>
         @RenderBody()
     </div>
-    @RenderSection("Scripts", required:false)
+    @if (IsSectionDefined("Scripts"))
+    {
+        RenderSection("Scripts", required: false);
+    }
+
 </body>
 </html>
