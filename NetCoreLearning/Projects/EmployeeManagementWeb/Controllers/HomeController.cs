@@ -16,14 +16,18 @@ namespace EmployeeManagementWeb.Controllers
         {
             _employeeRepository = employeeRepository;
         }
+        [Route("")]
+        [Route("Home")]
+        [Route("Home/Index")]
         public ViewResult Index()
         {
             return View(this._employeeRepository.GetEmployees());
         }
-
-        public ViewResult Details(int Id)
+        [Route("Home/Details/{id?}")]
+        public ViewResult Details(int? Id)
         {
-            Employee model = _employeeRepository.GetEmployee(Id);
+            // ?? null coalescing operation if ID is null use 1, otherwise use the id value
+            Employee model = _employeeRepository.GetEmployee(Id??1);
             HomeDetailsViewModel viewModel = new HomeDetailsViewModel() {
                 Employee = model,
                 PageTitle="HelloWorld"
