@@ -1,4 +1,4 @@
-﻿@model IEnumerable<EmployeeManagementWeb.Models.Employee>
+﻿@model IEnumerable<Employee>
 @{
     ViewBag.Title = "Index";
 }
@@ -13,7 +13,22 @@
             </div>
             <img src="~/img/Dog.jpg" alt="" class="card-img-top" />
             <div class="card-footer text-center">
-                <a href="#" class="btn btn-primary">View</a>
+                @* 
+                
+                   There are many ways to dealing with the link of an a tag
+                    1. Hard code  
+                        /Home/Details/1
+                    2. Use HTML helper (The old way to do it)
+                        1) @Html.ActionLink("view","Details","Home", new {id = @employee.Id})
+                        2) <a href="@Url.Action("details", "Home", new {id = @employee.Id})"
+                    3. Use Tag Helper (new in .net core)
+                        utlizing the attributes 
+                            1) asp-controller
+                            2) asp-action
+                            3) asp-route-{parameter Name}
+                
+                *@
+                <a asp-controller="Home" asp-action="Details" asp-route-id="@employee.ID"  class="btn btn-primary">View</a>
                 <a href="#" class="btn btn-primary">Edit</a>
                 <a href="#" class="btn btn-danger">Delete</a>
             </div>
