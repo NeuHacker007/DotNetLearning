@@ -2,14 +2,22 @@
 @{
     ViewBag.Title = "Employee Details";
 }
-<h1>
-    @Model.PageTitle
-</h1>
-<div>
-    name: @Model.Employee.EmployeeName
+<div class="row justify-content-center m-3">
+    <div class="card">
+        <div class="card-header">@Model.Employee.EmployeeName</div>
+        <div class="card-body text-center">
+            <img src="~/img/Dog.jpg" alt="" class="card-img-top" />
+            <h4>EmployeeID: @Model.Employee.ID</h4>
+            <h4>Email: @Model.Employee.Email</h4>
+            <h4>Department: @Model.Employee.Department</h4>
+        </div>
+        <div class="card-footer text-center">
+            <a href="#" class="btn btn-primary">Back</a>
+            <a href="#" class="btn btn-primary">Edit</a>
+            <a href="#" class="btn btn-danger">Delete</a>
+        </div>
+    </div>
 </div>
-<div>Email: @Model.Employee.Email</div>
-<div>Department: @Model.Employee.Department</div>
 @section Scripts {
     <script src="~/js/CustomScript.js"></script>
 }
