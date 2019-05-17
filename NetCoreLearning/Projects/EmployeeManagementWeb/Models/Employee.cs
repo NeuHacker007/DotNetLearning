@@ -10,7 +10,7 @@ namespace EmployeeManagementWeb.Models
         public int ID { get; set; }
         public string EmployeeName { get; set; }
         public string Email { get; set; }
-        public string Department { get; set; }
+        public Departments Department { get; set; }
 
     }
 }

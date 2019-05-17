@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeeManagementWeb.Controllers
 {
+    
+    [Route("Home")]
     public class HomeController : Controller
     {
         private readonly IEmployeeRepository _employeeRepository;
@@ -17,13 +19,13 @@ namespace EmployeeManagementWeb.Controllers
             _employeeRepository = employeeRepository;
         }
         [Route("")]
-        [Route("Home")]
-        [Route("Home/Index")]
+        [Route("Index")]
+        [Route("~/")]
         public ViewResult Index()
         {
             return View(this._employeeRepository.GetEmployees());
         }
-        [Route("Home/Details/{id?}")]
+        [Route("Details/{id?}")]
         public ViewResult Details(int? Id)
         {
             // ?? null coalescing operation if ID is null use 1, otherwise use the id value
@@ -34,6 +36,11 @@ namespace EmployeeManagementWeb.Controllers
             };
 
             return View(viewModel);
+        }
+        [Route("Create")]
+        public ViewResult Create()
+        {
+            return View();
         }
     }
 }

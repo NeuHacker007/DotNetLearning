@@ -12,9 +12,9 @@ namespace EmployeeManagementWeb.Models
         public MockEmployeeRepository()
         {
             _employeeList = new List<Employee>() {
-                new Employee(){ID = 1, EmployeeName="Ivan01", Department="AOS", Email="ab@c.com"},
-                new Employee(){ID = 2, EmployeeName="Ivan02", Department="SOA", Email="ab@c.com"},
-                new Employee(){ID = 3, EmployeeName="Ivan03", Department="OSA", Email="ab@c.com"},
+                new Employee(){ID = 1, EmployeeName="Ivan01", Department=Departments.HR, Email="ab@c.com"},
+                new Employee(){ID = 2, EmployeeName="Ivan02", Department=Departments.HelpDesk, Email="ab@c.com"},
+                new Employee(){ID = 3, EmployeeName="Ivan03", Department=Departments.IT, Email="ab@c.com"},
             };
         }
         public Employee GetEmployee(int ID)
