@@ -25,7 +25,12 @@ namespace EmployeeManagementWeb
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().AddXmlSerializerFormatters();
+            /* AddSingleTon will return the same mock employee Repository for each places need this repository*/
             services.AddSingleton<IEmployeeRepository, MockEmployeeRepository>();
+            /* Each new HTTP request it will return a new instance of MockEmployeeRepository*/
+            //services.AddScoped<IEmployeeRepository, MockEmployeeRepository>();
+            /* this will return new instance of mockemployeeRepository when it is asked for*/
+            //services.AddTransient<IEmployeeRepository, MockEmployeeRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
