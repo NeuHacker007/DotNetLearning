@@ -16,7 +16,8 @@ namespace EmployeeManagementWeb.Models
         [RegularExpression(@"‎^\w+@+?\.$", ErrorMessage = "Invalid Email Format")]
         [Display(Name = "Office Email")]
         public string Email { get; set; }
-        public Departments Department { get; set; }
+        [Required]
+        public Departments? Department { get; set; }
 
     }
 }
