@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using EmployeeManagement.DataAccess;
+using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeManagementWeb
 {
@@ -24,6 +26,7 @@ namespace EmployeeManagementWeb
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContextPool<AppDbContext>(options => { options.UseMySql(_config.GetConnectionString("MySQLConnection")); });
             services.AddMvc().AddXmlSerializerFormatters();
             /* AddSingleTon will return the same mock employee Repository for each places need this repository*/
             services.AddSingleton<IEmployeeRepository, MockEmployeeRepository>();
