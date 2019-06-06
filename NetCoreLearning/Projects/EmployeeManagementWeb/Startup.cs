@@ -32,6 +32,7 @@ namespace EmployeeManagementWeb
             services.AddSingleton<IEmployeeRepository, MockEmployeeRepository>();
             /* Each new HTTP request it will return a new instance of MockEmployeeRepository*/
             //services.AddScoped<IEmployeeRepository, MockEmployeeRepository>();
+            services.AddScoped<IEmployeeRepository, MySQLEmployeeRepository>();
             /* this will return new instance of mockemployeeRepository when it is asked for*/
             //services.AddTransient<IEmployeeRepository, MockEmployeeRepository>();
         }
