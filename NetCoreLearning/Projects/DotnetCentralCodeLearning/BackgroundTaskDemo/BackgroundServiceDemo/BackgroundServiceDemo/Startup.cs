@@ -26,6 +26,8 @@ namespace BackgroundServiceDemo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddSingleton<IWorker, Worker>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
