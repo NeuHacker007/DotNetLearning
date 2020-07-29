@@ -23,6 +23,6 @@ namespace BackgroundServiceDemo
                 {
                     webBuilder.UseStartup<Startup>();
                 }).ConfigureServices(services =>
-                    services.AddHostedService<BackgroundPrinter>());
+                    services.AddHostedService<DerivedBackgroundPrinter>());
     }
 }
