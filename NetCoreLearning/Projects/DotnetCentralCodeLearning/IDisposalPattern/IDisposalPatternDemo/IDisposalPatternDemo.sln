@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30128.74
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDisposalPatternDemo", "IDisposalPatternDemo\IDisposalPatternDemo.csproj", "{84C9A9C6-D0CF-444F-92E0-8E034A1825CA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{84C9A9C6-D0CF-444F-92E0-8E034A1825CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84C9A9C6-D0CF-444F-92E0-8E034A1825CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84C9A9C6-D0CF-444F-92E0-8E034A1825CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84C9A9C6-D0CF-444F-92E0-8E034A1825CA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6213473A-29F0-479D-9CB6-0C207E04268E}
+	EndGlobalSection
+EndGlobal
