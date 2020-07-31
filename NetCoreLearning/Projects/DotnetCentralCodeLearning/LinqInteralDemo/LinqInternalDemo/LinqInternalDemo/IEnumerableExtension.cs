@@ -20,5 +20,26 @@ namespace LinqInternalDemo
                 }
             }
         }
+
+
+        public static IEnumerable<TResult> NewSelect<T, TResult>(this IEnumerable<T> items, Func<T, TResult> selector)
+        {
+            foreach (var item in items)
+            {
+                yield return selector(item);
+            }
+        }
+
+        public static IEnumerable<TResult> NewSelectMany<T, TResult>(this IEnumerable<T> items, Func<T, IEnumerable<TResult>> selector)
+        {
+            foreach (var item in items)
+            {
+                foreach (var innerItem in selector(item))
+                {
+                    yield return innerItem;
+                }
+            }
+
+        }
     }
 }
