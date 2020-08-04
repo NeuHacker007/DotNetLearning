@@ -22,6 +22,9 @@ namespace JWTDemo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddAuthentication("Basic")
+                .AddScheme<BasicAuthenticationOptions, CustomerAuthenticationHandler>("Basic", null);
+            services.AddSingleton<ICustomerAuthenticationManager, CustomAuthenticationManager>();
 
         }
 

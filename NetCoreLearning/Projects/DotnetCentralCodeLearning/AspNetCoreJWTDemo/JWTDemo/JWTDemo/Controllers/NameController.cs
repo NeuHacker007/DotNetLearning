@@ -11,18 +11,18 @@ namespace JWTDemo.Controllers
     [ApiController]
     public class NameController : ControllerBase
     {
-        private readonly IJwtAuthenticationManager _jwtAuthenticationManager;
+        private readonly ICustomerAuthenticationManager _customerAuthenticationManager;
 
-        public NameController(IJwtAuthenticationManager jwtAuthenticationManager)
+        public NameController(ICustomerAuthenticationManager customerAuthenticationManager)
         {
-            _jwtAuthenticationManager = jwtAuthenticationManager;
+            _customerAuthenticationManager = customerAuthenticationManager;
         }
 
         // GET: api/<NameController>
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            return new[] {"New Jersy", "Maryland"};
+            return new[] { "New Jersy", "Maryland" };
         }
 
         // GET api/<NameController>/5
@@ -36,7 +36,7 @@ namespace JWTDemo.Controllers
         [HttpPost("authenticate")]
         public IActionResult Authenticate([FromBody] UserCredential userCredential)
         {
-            var token = _jwtAuthenticationManager.Authenticate(userCredential.UserName, userCredential.Password);
+            var token = _customerAuthenticationManager.Authenticate(userCredential.UserName, userCredential.Password);
             if (string.IsNullOrWhiteSpace(token)) return Unauthorized();
             return Ok(token);
         }
