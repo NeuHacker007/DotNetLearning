@@ -74,14 +74,16 @@ namespace JWTDemo
                 return AuthenticateResult.Fail("Unauthorized");
             }
 
+            var (username, role) = validToken.Value;
             var claims = new List<Claim>()
             {
-                new Claim(ClaimTypes.Name, validToken.Value)
+                new Claim(ClaimTypes.Name, username),
+                new Claim(ClaimTypes.Role, role)
             };
 
             var identity = new ClaimsIdentity(claims, Scheme.Name);
 
-            var principal = new GenericPrincipal(identity, null);
+            var principal = new GenericPrincipal(identity, new[] { role });
 
             var ticket = new AuthenticationTicket(principal, Scheme.Name);
 
