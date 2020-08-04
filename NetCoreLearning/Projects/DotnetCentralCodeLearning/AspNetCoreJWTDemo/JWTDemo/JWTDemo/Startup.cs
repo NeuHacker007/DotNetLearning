@@ -22,25 +22,7 @@ namespace JWTDemo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            var key = "this is the testing key";
-            services.AddAuthentication(x =>
-            {
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(x =>
-            {
-                // this AddJwtBearer method will apply and validate the token on each http request
-                x.RequireHttpsMetadata = false;
-                x.SaveToken = true;
-                x.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = false,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(key)),
-                    ValidateIssuer = false,
-                    ValidateAudience = false
-                };
-            });
-            services.AddSingleton<IJwtAuthenticationManager>(new JwtAuthenticationManager(key));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
