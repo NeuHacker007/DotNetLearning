@@ -1,5 +1,6 @@
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -24,8 +25,23 @@ namespace JWTDemo
             services.AddControllers();
             services.AddAuthentication("Basic")
                 .AddScheme<BasicAuthenticationOptions, CustomerAuthenticationHandler>("Basic", null);
-            services.AddSingleton<ICustomerAuthenticationManager, CustomAuthenticationManager>();
 
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AdminAndPowerUser", policy =>
+               {
+                   policy.RequireRole("Administrator", "PowerUser");
+               });
+
+                options.AddPolicy("EmployeeWithMoreThan20Years", policy =>
+                {
+                    policy.Requirements.Add(new EmployeeWithMoreYearsRequirement(20));
+                });
+            });
+
+            services.AddSingleton<IAuthorizationHandler, EmployeeWithMoreYearsHandler>();
+            services.AddSingleton<IEmployeeNumberOfYears, EmployeeNumberOfYears>();
+            services.AddSingleton<ICustomerAuthenticationManager, CustomAuthenticationManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

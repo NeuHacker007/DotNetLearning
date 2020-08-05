@@ -22,9 +22,15 @@ namespace JWTDemo.Controllers
         }
 
         // POST api/<InventoryController>
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Policy = "AdminAndPowerUser")]
         [HttpPost]
         public void Post([FromBody] Inventory inventory)
+        {
+        }
+        // POST api/<InventoryController>
+        [Authorize(Policy = "EmployeeWithMoreThan20Years")]
+        [HttpDelete]
+        public void Delete([FromBody] Inventory inventory)
         {
         }
     }
