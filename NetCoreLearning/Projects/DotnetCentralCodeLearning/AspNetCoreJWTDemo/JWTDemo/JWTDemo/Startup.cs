@@ -40,7 +40,11 @@ namespace JWTDemo
                     ValidateAudience = false
                 };
             });
-            services.AddSingleton<IJwtAuthenticationManager>(new JwtAuthenticationManager(key));
+            services.AddSingleton<ITokenRefresher>(x =>
+                new TokenRefresher(key, x.GetService<IJwtAuthenticationManager>()));
+            services.AddSingleton<IRefreshTokenGenerator, RefreshTokenGenerator>();
+            services.AddSingleton<IJwtAuthenticationManager>(x =>
+                new JwtAuthenticationManager(key, x.GetService<IRefreshTokenGenerator>()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

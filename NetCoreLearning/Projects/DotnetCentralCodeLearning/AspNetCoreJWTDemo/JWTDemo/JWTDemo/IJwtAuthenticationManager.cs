@@ -1,7 +1,12 @@
-﻿namespace JWTDemo
+﻿using System.Collections.Generic;
+using System.Security.Claims;
+
+namespace JWTDemo
 {
     public interface IJwtAuthenticationManager
     {
-        string Authenticate(string userName, string password);
+        AuthenticationResponse Authenticate(string username, string password);
+        IDictionary<string, string> UserRefreshTokens { get; set; }
+        AuthenticationResponse Authenticate(string username, Claim[] claims);
     }
 }

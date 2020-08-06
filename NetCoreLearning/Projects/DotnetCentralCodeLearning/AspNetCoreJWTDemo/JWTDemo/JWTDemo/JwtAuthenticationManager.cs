@@ -22,14 +22,46 @@ namespace JWTDemo
             {"Test6", "pwd6"}
         };
 
-        public JwtAuthenticationManager(string key)
+        private readonly IRefreshTokenGenerator _refreshTokenGenerator;
+
+        public IDictionary<string, string> UserRefreshTokens { get; set; }
+        public JwtAuthenticationManager(string key, IRefreshTokenGenerator refreshTokenGenerator)
         {
+            _refreshTokenGenerator = refreshTokenGenerator;
             _key = key;
+            UserRefreshTokens = new Dictionary<string, string>();
         }
 
-        public string Authenticate(string userName, string password)
+        public AuthenticationResponse Authenticate(string username, Claim[] claims)
         {
-            if (!users.Any(u => u.Key == userName && u.Value == password)) return null;
+            var key = Encoding.ASCII.GetBytes(_key);
+            var jwtSecurityToken = new JwtSecurityToken(
+                claims: claims,
+                expires: DateTime.UtcNow.AddHours(1),
+                signingCredentials: new SigningCredentials(
+                    new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature));
+            var token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
+            var refreshToken = _refreshTokenGenerator.GenerateToken();
+
+            if (UserRefreshTokens.ContainsKey(username))
+            {
+                UserRefreshTokens[username] = refreshToken;
+            }
+            else
+            {
+                UserRefreshTokens.Add(username, refreshToken);
+            }
+
+
+            return new AuthenticationResponse()
+            {
+                JwtToken = token,
+                RefreshToken = refreshToken
+            };
+        }
+        public AuthenticationResponse Authenticate(string username, string password)
+        {
+            if (!users.Any(u => u.Key == username && u.Value == password)) return null;
 
             var tokenHandler = new JwtSecurityTokenHandler();
 
@@ -39,7 +71,7 @@ namespace JWTDemo
             {
                 Subject = new ClaimsIdentity(new[]
                 {
-                    new Claim(ClaimTypes.Name, userName)
+                    new Claim(ClaimTypes.Name, username)
                 }),
                 Expires = DateTime.UtcNow.AddHours(1),
                 SigningCredentials = new SigningCredentials(
@@ -48,8 +80,25 @@ namespace JWTDemo
             };
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
+            var refreshToken = _refreshTokenGenerator.GenerateToken();
 
-            return tokenHandler.WriteToken(token);
+            if (UserRefreshTokens.ContainsKey(username))
+            {
+                UserRefreshTokens[username] = refreshToken;
+            }
+            else
+            {
+                UserRefreshTokens.Add(username, refreshToken);
+            }
+
+
+            return new AuthenticationResponse()
+            {
+                JwtToken = tokenHandler.WriteToken(token),
+                RefreshToken = refreshToken
+            };
         }
+
+
     }
 }
