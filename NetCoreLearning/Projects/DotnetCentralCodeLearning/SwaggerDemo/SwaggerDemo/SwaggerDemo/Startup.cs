@@ -1,3 +1,6 @@
+using System;
+using System.IO;
+using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -29,7 +32,12 @@ namespace SwaggerDemo
                     Description = "Demo API for showing Swagger",
                     Version = "V1"
                 });
+                var fileName = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var filePath = Path.Combine(AppContext.BaseDirectory, fileName);
+                options.IncludeXmlComments(filePath);
             });
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,9 +54,11 @@ namespace SwaggerDemo
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
 
             app.UseSwagger();
-            app.UseSwaggerUI(option =>
+            app.UseSwaggerUI(options =>
             {
-                option.SwaggerEndpoint("/swagger/V1/swagger.json", "Swagger Demo API");
+                // Here  the version number is case sensitive as the set up in services collection
+                options.SwaggerEndpoint("/swagger/V1/swagger.json", "Swagger Demo API");
+                options.RoutePrefix = "";
             });
         }
     }
