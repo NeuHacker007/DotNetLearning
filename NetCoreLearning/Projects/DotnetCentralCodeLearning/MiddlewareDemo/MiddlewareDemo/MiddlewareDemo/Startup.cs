@@ -36,7 +36,7 @@ namespace MiddlewareDemo
             {
                 await ctx.Response.WriteAsync($"<html><body>Response from 1st middleware");
                 await next();
-
+                await ctx.Response.WriteAsync($"<br>End of 1st middleware");
             });
 
             app.Use(async (ctx, next) =>
