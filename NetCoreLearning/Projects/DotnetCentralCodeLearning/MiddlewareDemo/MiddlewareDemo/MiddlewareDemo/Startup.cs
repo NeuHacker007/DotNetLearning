@@ -32,47 +32,8 @@ namespace MiddlewareDemo
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)
         {
-            app.Use(async (ctx, next) =>
-            {
-                await ctx.Response.WriteAsync($"<html><body>Response from 1st middleware");
-                await next();
-                await ctx.Response.WriteAsync($"<br>End of 1st middleware");
-            });
 
-            app.UseWhen(ctx => ctx.Request.Query.ContainsKey("role"), a =>
-            {
-                //a.Run(async ctx =>
-                //{
-                //    await ctx.Response.WriteAsync($"<br> Role is {ctx.Request.Query["role"]}");
-                //});
-                a.Use(async (ctx, next) =>
-                {
-                    await ctx.Response.WriteAsync($"<br> Role is {ctx.Request.Query["role"]}");
-                    await next();
-                });
-            });
-
-            app.Map("/map", a =>
-            {
-                a.Map("/branch", x =>
-                {
-                    x.Run(async ctx =>
-                    {
-                        await ctx.Response.WriteAsync($"New Children branch");
-                    });
-                });
-                a.Run(async ctx =>
-                {
-                    await ctx.Response.WriteAsync($"New map branch");
-                });
-            });
-
-            app.Use(async (ctx, next) =>
-            {
-                await ctx.Response.WriteAsync($"<br>Response from 2st middleware");
-
-            });
-
+            app.UseOutOfBoxExtensions();
         }
     }
 }
