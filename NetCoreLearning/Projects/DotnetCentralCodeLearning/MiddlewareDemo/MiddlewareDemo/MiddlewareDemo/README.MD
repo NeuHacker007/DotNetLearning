@@ -2,7 +2,8 @@
 
 Run => this mehtod will **terminate** the middleware. The middleware after run method will not be called. 
 
-Use => this method allows **route to next middleware**. However, if next() method is not called, then, it behaves the same as Run method does. 
+Use => this method allows **route to next middleware**. However, if next() method is not called, then, it behaves the same as Run method does.
+       also, we can put logic after next() method. It behaves like function invokation.
 
 UseWhen => This method creates a **conditional** branch of middleware. After it finishes, it will rejoin back to the main pipeline
 

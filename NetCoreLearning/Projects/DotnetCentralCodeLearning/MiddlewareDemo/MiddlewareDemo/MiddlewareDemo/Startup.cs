@@ -32,15 +32,19 @@ namespace MiddlewareDemo
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)
         {
-            app.Run(async ctx =>
+            app.Use(async (ctx, next) =>
             {
-                await ctx.Response.WriteAsync($"Response from 1st middleware");
+                await ctx.Response.WriteAsync($"<html><body>Response from 1st middleware");
+                await next();
+
             });
 
-            app.Run(async ctx =>
+            app.Use(async (ctx, next) =>
             {
-                await ctx.Response.WriteAsync($"Response from 2st middleware");
+                await ctx.Response.WriteAsync($"<br>Response from 2st middleware");
+
             });
+
         }
     }
 }
