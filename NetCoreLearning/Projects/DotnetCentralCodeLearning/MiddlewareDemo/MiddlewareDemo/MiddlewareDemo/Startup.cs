@@ -52,6 +52,21 @@ namespace MiddlewareDemo
                 });
             });
 
+            app.Map("/map", a =>
+            {
+                a.Map("/branch", x =>
+                {
+                    x.Run(async ctx =>
+                    {
+                        await ctx.Response.WriteAsync($"New Children branch");
+                    });
+                });
+                a.Run(async ctx =>
+                {
+                    await ctx.Response.WriteAsync($"New map branch");
+                });
+            });
+
             app.Use(async (ctx, next) =>
             {
                 await ctx.Response.WriteAsync($"<br>Response from 2st middleware");
