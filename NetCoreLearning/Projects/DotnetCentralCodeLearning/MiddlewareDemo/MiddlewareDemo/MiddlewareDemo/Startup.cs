@@ -39,6 +39,19 @@ namespace MiddlewareDemo
                 await ctx.Response.WriteAsync($"<br>End of 1st middleware");
             });
 
+            app.UseWhen(ctx => ctx.Request.Query.ContainsKey("role"), a =>
+            {
+                //a.Run(async ctx =>
+                //{
+                //    await ctx.Response.WriteAsync($"<br> Role is {ctx.Request.Query["role"]}");
+                //});
+                a.Use(async (ctx, next) =>
+                {
+                    await ctx.Response.WriteAsync($"<br> Role is {ctx.Request.Query["role"]}");
+                    await next();
+                });
+            });
+
             app.Use(async (ctx, next) =>
             {
                 await ctx.Response.WriteAsync($"<br>Response from 2st middleware");
