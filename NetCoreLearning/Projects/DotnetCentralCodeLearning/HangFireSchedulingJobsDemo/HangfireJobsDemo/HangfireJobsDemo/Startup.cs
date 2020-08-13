@@ -27,6 +27,8 @@ namespace HangfireJobsDemo
                 );
 
             services.AddHangfireServer();
+
+            services.AddSingleton<IPrintJob, PrintJob>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -34,7 +36,8 @@ namespace HangfireJobsDemo
             IApplicationBuilder app,
             IWebHostEnvironment env,
             IBackgroundJobClient backgroundJobClient,
-            IRecurringJobManager recurringJobManager
+            IRecurringJobManager recurringJobManager,
+            IServiceProvider serviceProvider
             )
         {
             if (env.IsDevelopment())
@@ -56,7 +59,7 @@ namespace HangfireJobsDemo
 
             recurringJobManager.AddOrUpdate(
                 "Run every minute",
-                () => Console.WriteLine($"Test recur job"),
+                () => serviceProvider.GetService<IPrintJob>().Print(),
                 Cron.Minutely);
         }
     }
