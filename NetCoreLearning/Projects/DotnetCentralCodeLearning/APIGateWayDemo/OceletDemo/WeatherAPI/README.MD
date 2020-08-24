@@ -1,0 +1,1 @@
+﻿This just a simple API created default by .NET core 3.1
