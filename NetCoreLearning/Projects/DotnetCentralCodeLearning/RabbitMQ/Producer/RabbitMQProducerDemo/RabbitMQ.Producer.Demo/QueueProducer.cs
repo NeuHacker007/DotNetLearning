@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 
@@ -21,6 +22,8 @@ namespace RabbitMQ.Producer.Demo
 
                 channel.BasicPublish("", "demo-queue", null, body);
                 count++;
+
+                Thread.Sleep(1000);
             }
 
             
