@@ -14,6 +14,8 @@ namespace RabbitMQ.Consumer.Demo
             channel.QueueDeclare("demo-direct-queue", true, false, false, null);
 
             channel.QueueBind("demo-direct-queue", "demo-direct-exchange", "account.init");
+            channel.BasicQos(0, 10, false);
+
             var consumer = new EventingBasicConsumer(channel);
 
             consumer.Received += (sender, e) =>
