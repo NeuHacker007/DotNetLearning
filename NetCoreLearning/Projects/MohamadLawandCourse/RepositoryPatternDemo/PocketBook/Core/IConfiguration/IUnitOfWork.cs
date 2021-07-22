@@ -4,7 +4,7 @@ namespace PocketBook.Core.IConfiguration
 {
     public interface IUnitOfWork
     {
-        IUserRepository UserRepository { get; }
+        IUserRepository userRepository { get; }
         Task<bool> CompleteAsync();
     }
 }
