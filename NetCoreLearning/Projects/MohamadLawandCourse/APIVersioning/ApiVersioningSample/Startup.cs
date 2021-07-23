@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -39,6 +40,8 @@ namespace ApiVersioningSample
                 opt.DefaultApiVersion = ApiVersion.Default;
                 // this is going to return all available api versions in response header
                 opt.ReportApiVersions = true;
+
+                opt.ApiVersionReader = new MediaTypeApiVersionReader("x-api-version");
             });
         }
 

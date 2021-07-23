@@ -7,7 +7,8 @@ namespace ApiVersioningSample.Controllers.V2
 {
 
     [ApiController]
-    [Route("api/v{version:apiVersion}/[Controller]")]
+    //[Route("api/v{version:apiVersion}/[Controller]")]
+    [Route("api/[Controller]")]
     [ApiVersion("2.0")]
     public class UsersController : ControllerBase
     {
