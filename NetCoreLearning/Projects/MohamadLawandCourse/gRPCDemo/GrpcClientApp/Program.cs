@@ -21,6 +21,13 @@ namespace GrpcClientApp
             });
             // System.Console.WriteLine(result.FirstName);
             System.Console.WriteLine($"First Name: {result.FirstName} \nLast Name: {result.LastName}");
+
+            var allCustomers = customerClient.GetAllCustomers(new AllCustomerModel());
+            // use await foreach to avoid thread blocking 
+            await foreach (var customer in allCustomers.ResponseStream.ReadAllAsync())
+            {
+                System.Console.WriteLine($"First Name: {customer.FirstName} \nLast Name: {customer.LastName}");
+            }
         }
     }
 }

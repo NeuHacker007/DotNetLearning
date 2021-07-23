@@ -6,6 +6,7 @@ package customers;
 
 service Customer {
     rpc GetCustomerInfo(CustomerFindModel) returns (CustomerDataModel);
+    rpc GetAllCustomers (AllCustomerModel) returns (stream CustomerDataModel);
 }
 
 message CustomerFindModel {
@@ -16,4 +17,8 @@ message CustomerFindModel {
 message CustomerDataModel {
     string firstName = 1;
     string lastName = 2;
+}
+
+message AllCustomerModel {
+
 }
