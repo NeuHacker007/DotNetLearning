@@ -7,7 +7,7 @@ namespace ApiVersioningSample.Controllers.V1
 {
     [ApiController]
     [Route("api/[Controller]")]
-    [ApiVersion("1.0")]
+    [ApiVersion("1.0", Deprecated = true)]
     public class UsersController : ControllerBase
     {
         [HttpGet()]
