@@ -41,7 +41,10 @@ namespace ApiVersioningSample
                 // this is going to return all available api versions in response header
                 opt.ReportApiVersions = true;
 
-                opt.ApiVersionReader = new HeaderApiVersionReader("x-api-version"); //new MediaTypeApiVersionReader("x-api-version");
+                opt.ApiVersionReader = ApiVersionReader.Combine(
+                    new HeaderApiVersionReader("x-api-version"),
+                    new MediaTypeApiVersionReader("x-api-version")
+                );
             });
         }
 
