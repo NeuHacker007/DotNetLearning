@@ -12,3 +12,28 @@
                 opt.AssumeDefaultVersionWhenUnspecified = true; 
             });
     ```
+2. To use the MediaType we need add below option to Startup.cs
+   ```C#
+   services.AddApiVersioning(opt =>
+            {
+                opt.AssumeDefaultVersionWhenUnspecified = true;
+                opt.DefaultApiVersion = ApiVersion.Default;
+                // this is going to return all available api versions in response header
+                opt.ReportApiVersions = true;
+
+                opt.ApiVersionReader = new MediaTypeApiVersionReader("x-api-version");
+            });
+   ``` 
+
+3. To use a separate head we need to use
+   ```C#
+   services.AddApiVersioning(opt =>
+            {
+                opt.AssumeDefaultVersionWhenUnspecified = true;
+                opt.DefaultApiVersion = ApiVersion.Default;
+                // this is going to return all available api versions in response header
+                opt.ReportApiVersions = true;
+
+                opt.ApiVersionReader = new HeaderApiVersionReader("x-api-version"); //new MediaTypeApiVersionReader("x-api-version");
+            });
+   ```
