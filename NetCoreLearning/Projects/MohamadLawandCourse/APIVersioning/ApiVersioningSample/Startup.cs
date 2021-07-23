@@ -32,6 +32,14 @@ namespace ApiVersioningSample
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ApiVersioningSample", Version = "v1" });
             });
+            // Updating the middleware to use the versioning
+            services.AddApiVersioning(opt =>
+            {
+                opt.AssumeDefaultVersionWhenUnspecified = true;
+                opt.DefaultApiVersion = ApiVersion.Default;
+                // this is going to return all available api versions in response header
+                opt.ReportApiVersions = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
