@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Grpc.Core;
 using Microsoft.Extensions.Logging;
@@ -37,6 +38,40 @@ namespace GrpcService.Services
             }
 
             return Task.FromResult(model);
+        }
+
+        public override async Task GetAllCustomers(
+            AllCustomerModel request,
+            IServerStreamWriter<CustomerDataModel> responseStream,
+            ServerCallContext context
+            )
+        {
+            var allCustomers = new List<CustomerDataModel>() {
+                new CustomerDataModel() {
+
+                    FirstName = "Eva 1",
+                    LastName = "Zhang"
+                },
+                 new CustomerDataModel() {
+
+                    FirstName = "Reachel Zhao",
+                    LastName = "Zhang"
+                },
+                 new CustomerDataModel() {
+
+                    FirstName = "Eric",
+                    LastName = "Li"
+                },
+                 new CustomerDataModel() {
+
+                    FirstName = "addam",
+                    LastName = "A"
+                },
+            };
+            foreach (var item in allCustomers)
+            {
+                await responseStream.WriteAsync(item);
+            }
         }
     }
 }
