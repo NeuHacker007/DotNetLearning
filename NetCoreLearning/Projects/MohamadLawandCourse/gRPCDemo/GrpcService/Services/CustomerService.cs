@@ -71,6 +71,10 @@ namespace GrpcService.Services
             foreach (var item in allCustomers)
             {
                 await responseStream.WriteAsync(item);
+                //used to mimik the network congestion scenario 
+                // it allows the client to process one by one instead 
+                // of process the big chunk of data.
+                await Task.Delay(1000);
             }
         }
     }
