@@ -1,0 +1,26 @@
+// Define the schema of the proto file
+syntax = "proto3";
+
+// Define the namespace based on our application
+option csharp_namespace = "GrpcService";
+
+package greet;
+
+// The greeting service definition.
+// we can think of a service as a class
+// can have multiple methods.
+service Greeter {
+  // Sends a greeting
+  rpc SayHello (HelloRequest) returns (HelloReply);
+}
+
+// The request message containing the user's name.
+// a message is like a model
+message HelloRequest {
+  string name = 1;
+}
+
+// The response message containing the greetings.
+message HelloReply {
+  string message = 1;
+}
