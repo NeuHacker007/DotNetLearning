@@ -36,6 +36,10 @@ namespace SampleWebAuth.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+            public string MobilePhone { get; set; }
         }
 
         private async Task LoadAsync(AdvanceUser user)
@@ -47,7 +51,10 @@ namespace SampleWebAuth.Areas.Identity.Pages.Account.Manage
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                PhoneNumber = phoneNumber,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                MobilePhone = user.MobileNumber,
             };
         }
 
@@ -78,15 +85,20 @@ namespace SampleWebAuth.Areas.Identity.Pages.Account.Manage
             }
 
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-            if (Input.PhoneNumber != phoneNumber)
-            {
-                var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
+            // if (Input.PhoneNumber != phoneNumber)
+            // {
+            user.FirstName = Input.FirstName;
+            user.LastName = Input.LastName;
+            user.MobileNumber = Input.LastName;
+
+            await _userManager.UpdateAsync(user);
+            var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
                 if (!setPhoneResult.Succeeded)
                 {
                     StatusMessage = "Unexpected error when trying to set phone number.";
                     return RedirectToPage();
                 }
-            }
+            // }
 
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
