@@ -3,6 +3,7 @@ using System.Data.Common;
 using System.Reflection;
 using DB.Interface;
 using DB.MySql;
+using Microsoft.Extensions.Configuration;
 
 namespace MyReflection
 {
@@ -21,6 +22,10 @@ namespace MyReflection
     {
         static void Main(string[] args)
         {
+            IConfiguration config = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json", true, true)
+                .Build();
+            
             try
             {
                 Console.WriteLine("***********Common**************");
@@ -70,7 +75,7 @@ namespace MyReflection
                 {
                     Console.WriteLine("***************Reflection + Factory + Config***************");
 
-                    IDBHelper dbHelper = Factory.CreateHelper();
+                    IDBHelper dbHelper = Factory.CreateHelper(config);
                     dbHelper.Query();
                 }
             }
