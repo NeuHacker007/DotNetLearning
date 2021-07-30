@@ -66,6 +66,12 @@ namespace MyReflection
                         iDbHelper?.Query(); //5. call the method.
                     }
                 }
+
+                {
+                    Console.WriteLine("***************Reflection + Factory +Config***************");
+
+
+                }
             }
             catch (Exception ex)
             {
