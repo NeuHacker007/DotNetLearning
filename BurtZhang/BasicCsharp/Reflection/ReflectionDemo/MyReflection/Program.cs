@@ -3,6 +3,7 @@ using System.Data.Common;
 using System.Reflection;
 using DB.Interface;
 using DB.MySql;
+using DB.SqlServer;
 using Microsoft.Extensions.Configuration;
 
 namespace MyReflection
@@ -76,7 +77,26 @@ namespace MyReflection
                     Console.WriteLine("***************Reflection + Factory + Config***************");
 
                     IDBHelper dbHelper = Factory.CreateHelper(config);
-                    dbHelper.Query();
+                    dbHelper.Query(); //Configurable, dynamic and depends on the string.
+                }
+
+                {
+                    Console.WriteLine("***************Reflection + Object***************");
+
+                    Assembly assembly = Assembly.Load("DB.SqlServer");
+
+                    Singleton singleton1 = Singleton.GetSingleton();
+                    Singleton singleton2 = Singleton.GetSingleton();
+                    Singleton singleton3 = Singleton.GetSingleton();
+                    Console.WriteLine($"Singleton1: {singleton1.GetHashCode()} \n Singleton2: {singleton2.GetHashCode()} \n Singleton3: {singleton3.GetHashCode()}");
+                    {
+                        Type type = assembly.GetType("DB.SqlServer.Singleton");
+
+                        Singleton singleton4 = Activator.CreateInstance(type, true) as Singleton;
+                        Singleton singleton5 = Activator.CreateInstance(type, true) as Singleton;
+                        Singleton singleton6 = Activator.CreateInstance(type, true) as Singleton;
+                        Console.WriteLine($"Singleton1: {singleton4.GetHashCode()} \n Singleton2: {singleton5.GetHashCode()} \n Singleton3: {singleton6.GetHashCode()}");
+                    }
                 }
             }
             catch (Exception ex)
