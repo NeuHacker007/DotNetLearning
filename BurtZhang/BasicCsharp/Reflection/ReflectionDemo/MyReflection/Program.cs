@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Data.Common;
 using System.Reflection;
 using DB.Interface;
 using DB.MySql;
-using Microsoft.VisualBasic;
 
 namespace MyReflection
 {
@@ -17,7 +17,7 @@ namespace MyReflection
     ///
     /// System.Reflection used to read the metadata 
     /// </summary>
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
@@ -68,9 +68,10 @@ namespace MyReflection
                 }
 
                 {
-                    Console.WriteLine("***************Reflection + Factory +Config***************");
+                    Console.WriteLine("***************Reflection + Factory + Config***************");
 
-
+                    IDBHelper dbHelper = Factory.CreateHelper();
+                    dbHelper.Query();
                 }
             }
             catch (Exception ex)
