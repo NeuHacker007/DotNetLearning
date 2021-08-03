@@ -110,7 +110,25 @@ namespace MyReflection
                         object oStrParameter = Activator.CreateInstance(type, new object[] {"123"});
                     }
                 }
-                
+
+                // Generic 
+                {
+                    Assembly assembly = Assembly.Load("DB.SqlServer");
+                    // In order to find proper generic class, we need use ` + number of parameter.
+                    // otherwise the type will be null
+                    Type type = assembly.GetType("DB.SqlServer.GenericClass`3");
+                    // we cannot direct create instance like below and we will
+                    // get the exception of
+                    //                  Message = "Cannot create an instance of DB.SqlServer.GenericClass`3[T,W,X]
+                    //                            because Type.ContainsGenericParameters is true."
+                    // Reason is that we didn't provide the concrete type info to the create Instance method. 
+                    // object oGeneric = Activator.CreateInstance(type);
+
+                    Type newType = type.MakeGenericType(new Type[] {typeof(int), typeof(string), typeof(DateTime)});
+                    object oGeneric = Activator.CreateInstance(newType);
+
+                }
+
             }
             catch (Exception ex)
             {
