@@ -80,6 +80,7 @@ namespace MyReflection
                     dbHelper.Query(); //Configurable, dynamic and depends on the string.
                 }
 
+                // Break Singleton
                 {
                     Console.WriteLine("***************Reflection + Object***************");
 
@@ -98,6 +99,18 @@ namespace MyReflection
                         Console.WriteLine($"Singleton1: {singleton4.GetHashCode()} \n Singleton2: {singleton5.GetHashCode()} \n Singleton3: {singleton6.GetHashCode()}");
                     }
                 }
+                // create instance with parameterized constructor
+                {
+                    Assembly assembly = Assembly.Load("DB.SqlServer");
+                    Type type = assembly.GetType("DB.SqlServer.ReflectionTest");
+                    if (type != null)
+                    {
+                        object oParameterLess = Activator.CreateInstance(type);
+                        object oIntParameter = Activator.CreateInstance(type, new object[] {123});
+                        object oStrParameter = Activator.CreateInstance(type, new object[] {"123"});
+                    }
+                }
+                
             }
             catch (Exception ex)
             {
