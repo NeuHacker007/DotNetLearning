@@ -16,7 +16,14 @@ namespace MyReflection
     /// 4. Reflection call instance method, static method, overload method, private methods, generic method
     /// 5. Reflection to get fields and property
     /// 6. Pro & cons
-    ///
+    ///     Pro: Dynamic
+    ///     Cons:
+    ///         1. complex to write
+    ///         2. avoid compile check
+    ///         3. performance
+    ///               1 million difference wil be 500
+    ///               7300ms 100/0.73ms the value is small, it will not impact the performance.
+    ///               performance tuning: space get time difference 7
     /// System.Reflection used to read the metadata 
     /// </summary>
     public class Program
