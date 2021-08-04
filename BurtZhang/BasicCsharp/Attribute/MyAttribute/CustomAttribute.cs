@@ -15,7 +15,14 @@ namespace MyAttribute
     ///
     
     // this allow to use the same attribute multiple times
-    [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
+    // [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
+    // attributeTargets 指定可以修饰那种类型
+    // inherited 是否允许子类继承该attribute。默认为true
+    [AttributeUsage(
+        AttributeTargets.Class | 
+        AttributeTargets.Method, 
+        AllowMultiple = true, 
+        Inherited = true)]
     public class CustomAttribute : Attribute
     {
         public CustomAttribute()
