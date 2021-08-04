@@ -8,6 +8,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DB.Interface\DB.Interface.csproj" />
     <ProjectReference Include="..\DB.MySql\DB.MySql.csproj" />
+    <ProjectReference Include="..\DB.Oracle\DB.Oracle.csproj" />
     <ProjectReference Include="..\DB.SqlServer\DB.SqlServer.csproj" />
     <ProjectReference Include="..\Model\Model.csproj" />
   </ItemGroup>

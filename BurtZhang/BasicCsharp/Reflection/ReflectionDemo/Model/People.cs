@@ -19,4 +19,18 @@ namespace Model
 
         public string Description;
     }
+
+    public class PeopleDTO
+    {
+        public PeopleDTO()
+        {
+            Console.WriteLine("{0} is constructed", this.GetType().FullName);
+        }
+
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+
+        public string Description;
+    }
 }

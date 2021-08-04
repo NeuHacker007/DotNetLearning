@@ -4,6 +4,7 @@ using DB.SqlServer;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Reflection;
+using Model;
 
 namespace MyReflection
 {
@@ -184,8 +185,106 @@ namespace MyReflection
                 }
 
                 {
+                    // ORM 
                     Console.WriteLine("****************Reflection + Property/Field");
+                    {
+                        People people = new People();
+                        people.Id = 123;
+                        people.Name = "Ivan";
+                        people.Description = "AAA";
+
+                        Console.WriteLine($"people.Id={people.Id}");
+                        Console.WriteLine($"people.Name={people.Name}");
+                        Console.WriteLine($"people.Description={people.Description}");
+
+                        Type type = typeof(People);
+                        object oPeople = Activator.CreateInstance(type);
+                        foreach (var propertyInfo in type.GetProperties())
+                        {
+                            Console.WriteLine(type.Name);
+                            Console.WriteLine(propertyInfo.Name);
+                            Console.WriteLine(propertyInfo.GetValue(oPeople));
+                            if (propertyInfo.Name == "Id")
+                            {
+                                propertyInfo.SetValue(oPeople, 234);
+                            }
+                            else if (propertyInfo.Name.Equals("Name"))
+                            {
+                                propertyInfo.SetValue(oPeople, "Bob");
+                            }
+
+                            Console.WriteLine($"{type.Name}.{propertyInfo.Name} = {propertyInfo.GetValue(oPeople)}");
+
+                        }
+                        foreach (var field in type.GetFields())
+                        {
+                            Console.WriteLine(type.Name);
+                            Console.WriteLine(field.Name);
+                            Console.WriteLine(field.GetValue(oPeople));
+                            if (field.Name == "Description")
+                            {
+                                field.SetValue(oPeople, "this is a test description");
+                            }
+                            Console.WriteLine($"{type.Name}.{field.Name} = {field.GetValue(oPeople)}");
+
+                        }
+                    }
+                    {
+                        People people = new People();
+                        people.Id = 123;
+                        people.Name = "Ivan";
+                        people.Description = "AAA";
+
+                        {
+                            PeopleDTO peopleDto = new PeopleDTO()
+                            {
+                                Id = people.Id,
+                                Name = people.Name,
+                                Description = people.Description
+                            };// hard code way
+                        }
+
+                        {
+                            Type typePeople = typeof(People);
+                            Type typePeopleDto = typeof(PeopleDTO);
+
+                            object peopleDto = Activator.CreateInstance(typePeopleDto);
+
+                            foreach (var propertyInfo in typePeopleDto.GetProperties())
+                            {
+                                //if (propertyInfo.Name.Equals("Id"))
+                                //{
+                                //    object value = typePeople?.GetProperty("Id")?.GetValue(people);
+
+                                //    propertyInfo.SetValue(peopleDto, value);
+                                //}
+                                //else if (propertyInfo.Name.Equals("Name"))
+                                //{
+                                //    object value = typePeople?.GetProperty("Name")?.GetValue(people);
+
+                                //    propertyInfo.SetValue(peopleDto, value);
+                                //}
+
+                                object value = typePeople?.GetProperty(propertyInfo.Name)?.GetValue(people);
+
+                                propertyInfo.SetValue(peopleDto, value);
+                            }
+
+                            {
+                                foreach (var field in typePeopleDto.GetFields())
+                                {
+                                    
+
+                                    object value = typePeople?.GetProperty(field.Name)?.GetValue(people);
+
+                                    field.SetValue(peopleDto, value);
+                                }
+                            }
+                        }
+                    }
                 }
+
+
             }
             catch (Exception ex)
             {
