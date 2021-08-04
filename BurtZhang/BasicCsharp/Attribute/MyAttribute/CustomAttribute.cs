@@ -20,7 +20,7 @@ namespace MyAttribute
     // inherited 是否允许子类继承该attribute。默认为true
     [AttributeUsage(
         AttributeTargets.All, 
-        AllowMultiple = true, 
+        AllowMultiple = false, 
         Inherited = true)]
     public class CustomAttribute : Attribute
     {

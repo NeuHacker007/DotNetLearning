@@ -24,6 +24,7 @@ namespace MyAttribute
                     stu.Id = 123;
                     stu.Name = "Ivan";
                     stu.Study();
+                    stu.Answer("Ivan");
                 }
             }
             catch (Exception ex)
