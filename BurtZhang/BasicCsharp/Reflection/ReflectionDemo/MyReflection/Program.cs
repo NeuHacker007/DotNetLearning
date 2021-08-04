@@ -1,10 +1,9 @@
-﻿using System;
-using System.Data.Common;
-using System.Reflection;
-using DB.Interface;
+﻿using DB.Interface;
 using DB.MySql;
 using DB.SqlServer;
 using Microsoft.Extensions.Configuration;
+using System;
+using System.Reflection;
 
 namespace MyReflection
 {
@@ -21,7 +20,7 @@ namespace MyReflection
     /// </summary>
     public class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             IConfiguration config = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json", true, true)
@@ -74,6 +73,7 @@ namespace MyReflection
                 }
 
                 {
+                    // mainly used in IOC 
                     Console.WriteLine("***************Reflection + Factory + Config***************");
 
                     IDBHelper dbHelper = Factory.CreateHelper(config);
@@ -131,6 +131,7 @@ namespace MyReflection
 
                 // Method
                 {
+                    // mainly used in MVC
                     Console.WriteLine("***************Reflection + Method***************");
                     Assembly assembly = Assembly.Load("DB.SqlServer");
                     Type type = assembly.GetType("DB.SqlServer.ReflectionTest");
@@ -147,41 +148,44 @@ namespace MyReflection
                     {
                         // parameter 
                         MethodInfo method2 = type.GetMethod("Show2");
-                        method2?.Invoke(oReflection, new object[] {123});
+                        method2?.Invoke(oReflection, new object[] { 123 });
                     }
                     {
                         //static 
                         MethodInfo method3 = type.GetMethod("Show5");
-                        method3?.Invoke(oReflection, new object[] {"123"});
-                        method3?.Invoke(null, new object[] {"123"});
+                        method3?.Invoke(oReflection, new object[] { "123" });
+                        method3?.Invoke(null, new object[] { "123" });
                     }
                     {
                         //Overload
-                        MethodInfo method5 = type.GetMethod("Show3", new Type[] {});
-                        method5?.Invoke(oReflection, new object[] {});
-                        MethodInfo method6 = type.GetMethod("Show3", new Type[] {typeof(int), typeof(string)});
-                        method6?.Invoke(oReflection, new object[] {123, "123"});
+                        MethodInfo method5 = type.GetMethod("Show3", new Type[] { });
+                        method5?.Invoke(oReflection, new object[] { });
+                        MethodInfo method6 = type.GetMethod("Show3", new Type[] { typeof(int), typeof(string) });
+                        method6?.Invoke(oReflection, new object[] { 123, "123" });
                     }
                     {
                         //private method
 
                         MethodInfo method = type.GetMethod("Show4", BindingFlags.Instance | BindingFlags.NonPublic);
-                        method?.Invoke(oReflection, new object[] {"123"});
+                        method?.Invoke(oReflection, new object[] { "123" });
                     }
                     {
                         Assembly assembly1 = Assembly.Load("DB.SqlServer");
                         Type GenericDouble = assembly.GetType("DB.SqlServer.GenericDouble`1");
-                        Type newGenericDouble = GenericDouble?.MakeGenericType(new Type[] {typeof(int)});
+                        Type newGenericDouble = GenericDouble?.MakeGenericType(new Type[] { typeof(int) });
                         object o = Activator.CreateInstance(newGenericDouble);
                         MethodInfo method = newGenericDouble.GetMethod("Show");
-                        MethodInfo newMethod = method?.MakeGenericMethod(new Type[] {typeof(string), typeof(DateTime)});
+                        MethodInfo newMethod = method?.MakeGenericMethod(new Type[] { typeof(string), typeof(DateTime) });
 
-                        newMethod?.Invoke(o, new object[] {123, "Ivan", DateTime.Now});
+                        newMethod?.Invoke(o, new object[] { 123, "Ivan", DateTime.Now });
 
 
                     }
                 }
 
+                {
+                    Console.WriteLine("****************Reflection + Property/Field");
+                }
             }
             catch (Exception ex)
             {
