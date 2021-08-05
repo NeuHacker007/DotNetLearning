@@ -12,6 +12,7 @@ namespace MyAttribute
     public class Student
     {
         public int Id { get; set; }
+        [Length(5, 10)]
         public string Name { get; set; }
 
         [Long(10001, 99999999999)]
