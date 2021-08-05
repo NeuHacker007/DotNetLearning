@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyAttribute.Extension;
+using System;
 
 namespace MyAttribute
 {
@@ -12,6 +13,36 @@ namespace MyAttribute
     {
         public int Id { get; set; }
         public string Name { get; set; }
+
+        [Long(10001, 99999999999)]
+        public long QQ { get; set; }
+
+        #region OldStyle Datavalidation
+
+        //这种写法用来解决数据合法性，但是给属性增加了太多的事儿
+        //把业务逻辑强行嫁给属性了，影响了类型封装
+        private long _QQ2 = 0;
+        public long QQ2
+        {
+            get
+            {
+                return this._QQ2;
+            }
+            set
+            {
+                if (value > 10001 && value < 99999999999)
+                {
+                    _QQ2 = value;
+                }
+                else
+                {
+                    throw new Exception();
+                }
+            }
+        }
+
+        #endregion
+
 
         [Custom]
         public void Study()

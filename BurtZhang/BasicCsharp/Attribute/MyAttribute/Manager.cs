@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using MyAttribute.Extension;
+using System;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MyAttribute
 {
@@ -48,6 +45,13 @@ namespace MyAttribute
                 Console.WriteLine($"{oAttribute.Description}_{oAttribute.Remark}");
                 oAttribute.SHow();
             }
+
+            // 做数据检查(卸载数据库保存之前)
+            //if (student.QQ > 10001 && student.QQ < 99999999999)
+            //{
+
+            //}
+            Console.WriteLine($"validateness: {student.Validate()}");
 
 
             student.Study();

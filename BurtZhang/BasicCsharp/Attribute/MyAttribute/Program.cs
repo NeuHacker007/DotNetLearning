@@ -1,6 +1,6 @@
-﻿using System;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using MyAttribute.Extension;
+using System;
 
 namespace MyAttribute
 {
@@ -15,9 +15,9 @@ namespace MyAttribute
     ///
     /// 没有破坏类型封装的前提下， 可以加点额外的信息及行为。
     /// </summary>
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             IConfiguration configuration = new ConfigurationBuilder()
                  .AddJsonFile("appsettings.json", true, true)
@@ -29,8 +29,13 @@ namespace MyAttribute
                     Student stu = new Student();
                     stu.Id = 123;
                     stu.Name = "Ivan";
+
+                    stu.QQ = 1234556;
                     //stu.Study();
                     //stu.Answer("Ivan");
+                    Manager.Show(stu);
+
+                    stu.QQ = 1234;
                     Manager.Show(stu);
                 }
 
