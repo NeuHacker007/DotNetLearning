@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Extensions.Configuration;
+using MyAttribute.Extension;
 
 namespace MyAttribute
 {
@@ -32,6 +33,27 @@ namespace MyAttribute
                     //stu.Answer("Ivan");
                     Manager.Show(stu);
                 }
+
+                {
+                    UserState userState = UserState.Normal;
+
+                    // if (userState == UserState.Normal) Console.WriteLine("正常");
+                    Console.WriteLine(userState.GetRemark());
+                }
+                {
+                    UserState userState = UserState.Frozen;
+
+                    // if (userState == UserState.Normal) Console.WriteLine("正常");
+                    Console.WriteLine(userState.GetRemark());
+                }
+
+                {
+                    UserState userState = UserState.Deleted;
+
+                    // if (userState == UserState.Normal) Console.WriteLine("正常");
+                    Console.WriteLine(userState.GetRemark());
+                }
+
             }
             catch (Exception ex)
             {
