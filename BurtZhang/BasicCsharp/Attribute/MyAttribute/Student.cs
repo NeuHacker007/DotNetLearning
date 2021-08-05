@@ -18,7 +18,7 @@ namespace MyAttribute
         {
             Console.WriteLine($"{this.Name} learn");
         }
-        [Custom]
+        [Custom(666, Description = "this is test", Remark = "777")]
         [return: Custom]
         public string Answer([Custom] string name)
         {

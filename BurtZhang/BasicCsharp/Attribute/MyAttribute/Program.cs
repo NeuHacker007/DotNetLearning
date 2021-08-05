@@ -23,8 +23,9 @@ namespace MyAttribute
                     Student stu = new Student();
                     stu.Id = 123;
                     stu.Name = "Ivan";
-                    stu.Study();
-                    stu.Answer("Ivan");
+                    //stu.Study();
+                    //stu.Answer("Ivan");
+                    Manager.Show(stu);
                 }
             }
             catch (Exception ex)
