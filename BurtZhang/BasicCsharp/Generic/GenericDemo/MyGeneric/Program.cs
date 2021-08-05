@@ -41,6 +41,12 @@ namespace MyGeneric
                        GenericMethod.Show(i); // <> 能省略，自动推算
                        GenericMethod.Show<string>(s); //需要指定参数类型
                     }
+
+                    {
+                        Console.WriteLine("*************Monitor**************");
+                        // 性能 common ~ Generic > object
+                        Monitor.Show();
+                    }
                 }
 
              
