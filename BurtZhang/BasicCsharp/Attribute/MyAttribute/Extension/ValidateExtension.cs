@@ -15,28 +15,52 @@ namespace MyAttribute.Extension
 
             foreach (var propertyInfo in type.GetProperties())
             {
-                if (propertyInfo.IsDefined(typeof(LongAttribute), true))
                 {
-                    if (propertyInfo.GetCustomAttribute(typeof(LongAttribute), true) is LongAttribute attribute 
-                        && !attribute.Validate(propertyInfo.GetValue(oObj)))
+                    if (propertyInfo.IsDefined(typeof(AbstractAttribute), true))
                     {
-                        return false;
+                        object[] attributeArray = propertyInfo.GetCustomAttributes(typeof(AbstractAttribute), true);
+
+                        foreach (AbstractAttribute attribute  in attributeArray)
+                        {
+                            if (!attribute.Validate(propertyInfo.GetValue(oObj)))
+                            {
+                                return false;
+                            }
+                        }
+                        // AbstractAttribute attribute = propertyInfo.GetCustomAttributes()
                     }
                 }
-                if (propertyInfo.IsDefined(typeof(LengthAttribute), true))
+
                 {
-                    if (propertyInfo.GetCustomAttribute(typeof(LengthAttribute), true) is LengthAttribute attribute 
-                        && !attribute.Validate(propertyInfo.GetValue(oObj)))
-                    {
-                        return false;
-                    }
+                    //if (propertyInfo.IsDefined(typeof(LongAttribute), true))
+                    //{
+                    //    if (propertyInfo.GetCustomAttribute(typeof(LongAttribute), true) is LongAttribute attribute 
+                    //        && !attribute.Validate(propertyInfo.GetValue(oObj)))
+                    //    {
+                    //        return false;
+                    //    }
+                    //}
+                    //if (propertyInfo.IsDefined(typeof(LengthAttribute), true))
+                    //{
+                    //    if (propertyInfo.GetCustomAttribute(typeof(LengthAttribute), true) is LengthAttribute attribute 
+                    //        && !attribute.Validate(propertyInfo.GetValue(oObj)))
+                    //    {
+                    //        return false;
+                    //    }
+                    //}
                 }
+                
             }
 
             return true;
         }
     }
-    public class LengthAttribute : Attribute
+
+    public abstract class AbstractAttribute : Attribute
+    {
+        public abstract bool Validate(object value);
+    }
+    public class LengthAttribute : AbstractAttribute
     {
         private readonly long _min = 0;
         private readonly long _max = 0;
@@ -47,11 +71,11 @@ namespace MyAttribute.Extension
             _max = max;
         }
 
-        public bool Validate(object value)
+        public override bool Validate(object value)
         {
             if (value != null && !string.IsNullOrWhiteSpace(value.ToString()) && long.TryParse(value.ToString(), out long lResult))
             {
-                var length = value.ToString().Length;
+                var length = value?.ToString()?.Length;
                 if (length > this._min && length < this._max)
                 {
                     return true;
@@ -64,7 +88,7 @@ namespace MyAttribute.Extension
 
         }
     }
-    public class LongAttribute : Attribute
+    public class LongAttribute : AbstractAttribute
     {
         private readonly long _min = 0;
         private readonly long _max = 0;
@@ -75,7 +99,7 @@ namespace MyAttribute.Extension
             _max = max;
         }
 
-        public bool Validate(object value)
+        public override bool Validate(object value)
         {
             if (value != null && !string.IsNullOrWhiteSpace(value.ToString()) && long.TryParse(value.ToString(), out long lResult))
             {
