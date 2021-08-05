@@ -26,6 +26,8 @@ namespace MyGeneric
         /// 2. 通过继承，子类拥有父类一切的属性和行为；
         ///    任何父类出现的地方都可以用子类代替
         /// .NET Framework 1.0 1.1写法
+        ///
+        /// object 应用类型， 假如传个值类型int，会有装箱，拆箱，有性能损失。
         /// </summary>
         /// <param name="oPram"></param>
         public static void ShowObject(object oPram)
