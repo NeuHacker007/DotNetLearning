@@ -6,6 +6,16 @@ using System.Threading.Tasks;
 
 namespace MyGeneric
 {
+
+    public class GenericClass<T, U, W, S>
+        where T : People
+        where U : Chinese
+        where W : Hubei
+        where S : class
+    
+    {
+
+    }
     public class Generic<T>
     {
         public T _T;
@@ -16,15 +26,15 @@ namespace MyGeneric
         T GetT(T t);//泛型类型的返回值
     }
 
-    public class CommonClass 
+    public class CommonClass
         : Generic<int> // 普通类继承泛型类，必须指定其类型
     {
 
     }
 
-    public class GenericClassChild<T> 
+    public class GenericClassChild<T>
         //: Generic<T>  
-        :Generic<int> // 可以合法
+        : Generic<int> // 可以合法
     {
 
     }

@@ -27,6 +27,7 @@ namespace MyGeneric
         public static void Show<T>(T tPram)
         {
             Console.WriteLine($"this is {typeof(CommonMethod).Name}, type={tPram.GetType().Name}, param={tPram.ToString()} ");
+
         }
         public static void ShowObject(object oPram)
         {

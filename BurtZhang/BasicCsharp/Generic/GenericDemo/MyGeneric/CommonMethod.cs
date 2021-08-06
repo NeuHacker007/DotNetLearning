@@ -28,11 +28,17 @@ namespace MyGeneric
         /// .NET Framework 1.0 1.1写法
         ///
         /// object 应用类型， 假如传个值类型int，会有装箱，拆箱，有性能损失。
+        ///
+        /// 类型不安全
         /// </summary>
         /// <param name="oPram"></param>
         public static void ShowObject(object oPram)
         {
             Console.WriteLine($"this is {typeof(CommonMethod).Name}, type={oPram.GetType().Name}, param={oPram} ");
+
+
+            // this will throw exception when Japenese comes in because it doesn't inherit from People
+           // Console.WriteLine($"{ ((People) oPram).Id }_{((People)oPram).Name}");
         }
     }
 }

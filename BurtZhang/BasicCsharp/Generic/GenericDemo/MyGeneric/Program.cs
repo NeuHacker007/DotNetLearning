@@ -47,6 +47,51 @@ namespace MyGeneric
                         // 性能 common ~ Generic > object
                         Monitor.Show();
                     }
+                    {
+                        Console.WriteLine("********************Constraint*************");
+                        {
+                            People people = new People()
+                            {
+                                Id = 123,
+                                Name = "people"
+                            };
+
+                            Chinese chinese = new Chinese()
+                            {
+                                Id = 234,
+                                Name = "Ivan"
+                            };
+
+                            Hubei hubei = new Hubei()
+                            {
+                                Id = 345,
+                                Name = "Hubei"
+                            };
+
+                            Japanese japanese = new Japanese()
+                            {
+                                Id = 567,
+                                Name = "Cang"
+                            };
+
+                            CommonMethod.ShowObject(people);
+                            CommonMethod.ShowObject(chinese);
+                            CommonMethod.ShowObject(hubei);
+                            CommonMethod.ShowObject(japanese);
+
+                            GenericMethod.Show<People>(people);
+                            GenericMethod.Show<Chinese>(chinese);
+                            GenericMethod.Show<Hubei>(hubei);
+                            GenericMethod.Show<Japanese>(japanese);
+                            {
+                                Constraint.Show<People>(people);
+                                Constraint.Show<Chinese>(chinese);
+                                Constraint.Show<Hubei>(hubei);
+                              //  Constraint.Show<Japanese>(japanese); Error because Japanese not a child class of People
+                            }
+
+                        }
+                    }
                 }
 
              
