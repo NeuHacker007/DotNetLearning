@@ -22,5 +22,20 @@ namespace MyGeneric
             Console.WriteLine($"{tPram.Id}_ {tPram.Name}");
             tPram.Hi();
         }
+        // 为啥不直接用基类
+
+        public static T Get<T>(T t)
+            //where T : ISports //接口约束, 一定是实现了该接口的
+            //where T : class // 引用类型约束： 引用类型 （可以被设置为null的）
+            //where T : struct // 值类型约束: 值类型
+              where T : new() //无参数构造函数
+        {
+            /// t.PingPang();
+            //T tNew = null;
+            // T tnew = 0; //不行
+            T tnew = default(T); //会根据T的不同 赋予默认值 不约束也可以直接写
+            T tNew = new T();
+            return t;
+        }
     }
 }
