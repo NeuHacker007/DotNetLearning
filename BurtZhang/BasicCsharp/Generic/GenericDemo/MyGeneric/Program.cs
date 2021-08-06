@@ -1,4 +1,5 @@
 ﻿using System;
+using MyGeneric.Extend;
 
 
 namespace MyGeneric
@@ -46,6 +47,8 @@ namespace MyGeneric
                         Console.WriteLine("*************Monitor**************");
                         // 性能 common ~ Generic > object
                         Monitor.Show();
+
+                        GenericCacheTest.Show();
                     }
                     {
                         Console.WriteLine("********************Constraint*************");
@@ -90,6 +93,10 @@ namespace MyGeneric
                               //  Constraint.Show<Japanese>(japanese); Error because Japanese not a child class of People
                             }
 
+                        }
+
+                        {
+                            
                         }
                     }
                 }

@@ -70,7 +70,7 @@ namespace MyGeneric.Extend
                 IMyList<Sparrow, Bird> myList1 = new MyList<Sparrow, Bird>();
                 IMyList<Sparrow, Bird> myList2 = new MyList<Sparrow, Sparrow>(); //协变
                 IMyList<Sparrow, Bird> myList3 = new MyList<Bird, Bird>(); // 逆变
-                IMyList<Sparrow, Bird> myList4 = new MyList<Bird, Sparrow>(); // 协变 + 逆变
+                IMyList<Sparrow, Bird> myList4 = new MyList<Bird, Sparrow>(); // 逆变 + 协变
 
 
             }
