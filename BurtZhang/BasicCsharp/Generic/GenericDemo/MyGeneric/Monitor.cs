@@ -26,7 +26,7 @@ namespace MyGeneric
 
                     for (int i = 0; i < 100000000; i++)
                     {
-                        ShowInt(i);
+                        ShowInt(iVal);
                     }
                     watStopwatch.Stop();
 
@@ -40,7 +40,7 @@ namespace MyGeneric
 
                     for (int i = 0; i < 100000000; i++)
                     {
-                        ShowObj(i);
+                        ShowObj(iVal);
                     }
                     watStopwatch.Stop();
 
@@ -54,7 +54,7 @@ namespace MyGeneric
 
                     for (int i = 0; i < 100000000; i++)
                     {
-                        ShowGeneric<int>(i);
+                        ShowGeneric<int>(iVal);
                     }
                     watStopwatch.Stop();
 
