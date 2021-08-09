@@ -1,4 +1,5 @@
 ﻿using System;
+using MyDelegateEvent.DelegateExtend;
 
 namespace MyDelegateEvent
 {
@@ -11,9 +12,15 @@ namespace MyDelegateEvent
 
                 Console.WriteLine("********************Delegate + Event***********************");
 
-                MyDelegate myDelegate = new MyDelegate();
+                {
+                    MyDelegate myDelegate = new MyDelegate();
 
-                myDelegate.Show();
+                    myDelegate.Show();
+                }
+                {
+                    ListExtend test = new ListExtend();
+                    test.Show();
+                }
 
             }
             catch (Exception e)
