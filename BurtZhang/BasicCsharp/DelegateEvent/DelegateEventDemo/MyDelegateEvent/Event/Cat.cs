@@ -38,6 +38,34 @@ namespace MyDelegateEvent.Event
             Console.WriteLine("{0} MiaoNew", this.GetType().Name);
             miaoDelegateHandler?.Invoke();
         }
+
+        public event MiaoDelegate miaoDelegateEvent;
+
+        //事件: 事件是带event关键字的委托实例, event可以限制变量被外部调用/直接赋值
+        //委托和事件的区别和联系
+        //委托是个类
+        //事件本质上是委托类型的一个实例
+        public void MiaoNewEvent()
+        {
+            Console.WriteLine("{0} MiaoNewEvent", this.GetType().Name);
+            miaoDelegateEvent?.Invoke();
+        }
+    }
+
+    public class ChildClass : Cat
+    {
+        public void Show()
+        {
+            this.miaoDelegateEvent += null;
+            {
+                //子类也不能调用， 只能在声明的类中调用。
+
+                //this.miaoDelegateEvent.Invoke();
+            }
+            
+        } 
+
+
     }
 
     public delegate void MiaoDelegate();
