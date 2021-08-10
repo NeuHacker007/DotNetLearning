@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31410.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyOOP", "MyOOP\MyOOP.csproj", "{7AC9556A-6CE8-49E8-B0C5-E042937BB836}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7AC9556A-6CE8-49E8-B0C5-E042937BB836}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AC9556A-6CE8-49E8-B0C5-E042937BB836}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AC9556A-6CE8-49E8-B0C5-E042937BB836}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AC9556A-6CE8-49E8-B0C5-E042937BB836}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D8E5DEAC-DD00-4F03-93E3-F7FA0BB8A6E9}
+	EndGlobalSection
+EndGlobal
