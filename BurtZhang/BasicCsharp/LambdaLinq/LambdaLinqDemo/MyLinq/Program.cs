@@ -55,12 +55,27 @@ namespace MyLinq
 
 
                 }
+                {
+                    //扩展方法 3.0 想要增加方法但是又不想改变原有的类
+                    Student student = new Student()
+                    {
+                        Id = 2,
+                        Name = "Ivan",
+                        Age = 25,
+                        ClassId = 2
+                    };
+                    student.Study();
+                    student.Sing();
+                }
+
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 //throw;
             }
+
+            Console.ReadKey();
         }
     }
 }
