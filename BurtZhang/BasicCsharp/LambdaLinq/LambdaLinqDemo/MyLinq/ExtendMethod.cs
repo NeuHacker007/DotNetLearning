@@ -8,6 +8,13 @@ namespace MyLinq
 {
     public static class ExtendMethod
     {
+
+        //可以使用泛型写扩展方法，但是最好加上约束
+        //否则等同于为所有类型添加该方法
+        public static void Show<T> (this T t) where T : Student
+        {
+
+        }
         //扩展方法: 静态类里面的静态方法, 第一个参数类型前面加上this
         // 缺点:
         // 1. 如果实例中有相同名字的方法，会优先调用实例方法而非扩展方法(有隐患)
