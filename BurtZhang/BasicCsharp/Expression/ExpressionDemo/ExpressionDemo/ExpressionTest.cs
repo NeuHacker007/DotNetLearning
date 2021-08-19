@@ -94,6 +94,105 @@ namespace ExpressionDemo
 
                Console.WriteLine(result);
             }
+
+            {
+                // 用处1
+                {
+                    string sql = "Select * from user where 1=1";
+                    string name = "ivan";
+
+                    if (string.IsNullOrWhiteSpace(name))
+                    {
+                        sql += $" and name like '%{name}%'";
+                    }
+                }
+
+                {
+                    //现在entity framework查询的时候，都需要一个表达式目录树
+
+                    IQueryable<int> list = null;
+
+                    if (true) //过滤A
+                    {
+                        Expression<Func<People, bool>> exp1 = x => x.Id > 1;
+                    }
+
+                    if (true) //过滤B
+                    {
+                        Expression<Func<People, bool>> exp2 = x => x.Age > 10;
+                    }
+
+                    // 都过滤
+                    Expression<Func<People, bool>> exp3 = x => x.Age > 10 && x.Id > 1;
+
+                    // Copy People 属性
+                    {
+                        {
+                            // 写死了 只能为这两种类型服务, 性能最好因为硬编码
+                            People people = new People()
+                            {
+                                Id = 1,
+                                Name = "Ivan",
+                                Age = 32
+                            };
+
+                            PeopleCopy peopleCopy = new PeopleCopy()
+                            {
+                                Id = people.Id,
+                                Name = people.Name,
+                                Age = people.Age
+                            };
+                        }
+
+                        {
+                            // 利用反射: 不同类型都能实现
+                            People people = new People()
+                            {
+                                Id = 1,
+                                Name = "Ivan",
+                                Age = 32
+                            };
+                            var result = ReflectionMapper.Trans<People, PeopleCopy>(people);
+                        }
+                        {
+                            People people = new People()
+                            {
+                                Id = 1,
+                                Name = "Ivan",
+                                Age = 32
+                            };
+                            //序列化器
+
+                            var result = SerializeMapper.Trans<People, PeopleCopy>(people);
+                        }
+                        {
+                            People people = new People()
+                            {
+                                Id = 1,
+                                Name = "Ivan",
+                                Age = 32
+                            };
+                            //1. 通用 2. 性能要高
+                            // 能不能动态的生成硬编码,缓存起来
+                            Expression<Func<People, PeopleCopy>> lambda = p => new PeopleCopy()
+                            {
+                                Id = p.Id,
+                                Name = p.Name,
+                                Age = p.Age
+                            };
+
+                            ExpressionMapper.Trans<People, PeopleCopy>(people);
+                        }
+                       
+
+                    }
+                }
+
+
+                
+
+
+            }
         }
     }
 }
