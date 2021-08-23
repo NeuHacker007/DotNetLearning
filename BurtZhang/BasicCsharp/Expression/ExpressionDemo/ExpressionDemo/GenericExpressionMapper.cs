@@ -7,6 +7,11 @@ using System.Threading.Tasks;
 
 namespace ExpressionDemo
 {
+    /// <summary>
+    /// 利用泛型缓存，只要 泛型类型一样，就不用再执行解析过程，直接返回。
+    /// </summary>
+    /// <typeparam name="TIn"></typeparam>
+    /// <typeparam name="TOut"></typeparam>
     public class GenericExpressionMapper<TIn, TOut>
     {
         private static Func<TIn, TOut> _func = null;

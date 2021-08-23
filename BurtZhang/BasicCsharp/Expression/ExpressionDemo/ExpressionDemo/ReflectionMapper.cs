@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace ExpressionDemo
 {
+    /// <summary>
+    /// 反射实现mapper 性能比较差
+    /// </summary>
     public class ReflectionMapper
     {
         public static TOut Trans<TIn, TOut>(TIn tIn)
