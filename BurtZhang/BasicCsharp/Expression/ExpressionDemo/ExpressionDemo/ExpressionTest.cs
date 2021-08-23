@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using ExpressionDemo.DBExtend;
 
 namespace ExpressionDemo
 {
@@ -124,7 +126,18 @@ namespace ExpressionDemo
 
                     // 都过滤
                     Expression<Func<People, bool>> exp3 = x => x.Age > 10 && x.Id > 1;
+                    {
+                        // 表达式链接
+                        Expression<Func<People, bool>> lambda1 = x => x.Age > 5;
+                        Expression<Func<People, bool>> lambda2 = x => x.Id > 5;
+                        Expression<Func<People, bool>> lambda3 = lambda1.And(lambda2);
+                        Expression<Func<People, bool>> lambda4 = lambda1.Or(lambda2);
+                        Expression<Func<People, bool>> lambda5 = lambda1.Not();
 
+                        Do1(lambda3);
+
+                        
+                    }
                     // Copy People 属性
                     {
                         {
@@ -193,6 +206,18 @@ namespace ExpressionDemo
 
 
             }
+        }
+
+        private static void Do1(Expression<Func<People, bool>> func)
+        {
+            List<People> peoples = new List<People>()
+            {
+                new People() {Id = 4, Name = "Ivan", Age = 4},
+                new People() {Id = 5, Name = "Ivan", Age = 5},
+                new People() {Id = 6, Name = "Ivan", Age = 6}
+            };
+
+            List<People> peoplesList = peoples.Where(func.Compile()).ToList();
         }
     }
 }

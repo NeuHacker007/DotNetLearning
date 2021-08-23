@@ -54,6 +54,8 @@ namespace ExpressionDemo
                                                                  && x.Name.EndsWith("n")
                                                                  && x.Name.Contains("n");
 
+                    var sql = string.Format("Delete from [{0}] where {1}", nameof(People), " [Age] > 5 AND [ID] > 5");
+
                     ConditionBuilderVisitor visitor = new ConditionBuilderVisitor();
 
                     visitor.Visit(lambda);
