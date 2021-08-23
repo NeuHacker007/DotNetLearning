@@ -32,6 +32,37 @@ namespace ExpressionDemo
                 Expression expNew = visitor.Modify(exp1);
             }
 
+            {
+                //用处
+
+                {
+                    var source = new List<People>().AsQueryable();
+
+                    var result = source?.Where<People>(p => p.Age > 5); // Select * from People Where Age > 5
+
+                    Expression<Func<People, bool>> lambda = x => x.Age > 5;
+
+                    ConditionBuilderVisitor visitor = new ConditionBuilderVisitor();
+                    visitor.Visit(lambda);
+                    Console.WriteLine(visitor.Condition());
+                }
+
+                {
+                    Expression<Func<People, bool>> lambda = x => x.Age > 5
+                                                                 && x.Id > 5
+                                                                 && x.Name.StartsWith("I")
+                                                                 && x.Name.EndsWith("n")
+                                                                 && x.Name.Contains("n");
+
+                    ConditionBuilderVisitor visitor = new ConditionBuilderVisitor();
+
+                    visitor.Visit(lambda);
+                    Console.WriteLine(visitor.Condition());
+
+
+                }
+            }
+
 
         }
     }

@@ -19,6 +19,9 @@ namespace ExpressionDemo
                     // 存在于System.Linq.Expression命名空间
                     ExpressionTest.Show();
                 }
+                {
+                    ExpressionVisitorTest.Show();
+                }
             }
             catch (Exception e)
             {
