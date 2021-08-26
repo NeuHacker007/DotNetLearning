@@ -102,7 +102,7 @@ namespace MyAsyncThread
             Console.WriteLine($"**********************btnAysnc_Click End {Thread.CurrentThread.ManagedThreadId.ToString("00")} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}********************");
         }
 
-        
+
         private void DoSomethingLong(string name)
         {
             Console.WriteLine($"**********************DoSomethingLong {name} Start {Thread.CurrentThread.ManagedThreadId.ToString("00")} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}********************");
@@ -113,6 +113,106 @@ namespace MyAsyncThread
             }
             Thread.Sleep(2000);
             Console.WriteLine($"**********************DoSomethingLong {name} End {Thread.CurrentThread.ManagedThreadId.ToString("00")} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")} {lResult}********************");
+        }
+
+        private void btnAsyncAdvanced_Click(object sender, EventArgs e)
+        {
+
+            Console.WriteLine($"**********************btnAsyncAdvanced_Click Start {Thread.CurrentThread.ManagedThreadId.ToString("00")} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}********************");
+
+            Action<string> action = DoSomethingLong;
+
+            IAsyncResult asyncResult = null;
+            {
+                //回调
+                AsyncCallback callback = x =>
+                {
+                    Console.WriteLine("Is x the same with ayncResult: {0}", object.ReferenceEquals(asyncResult, x));
+                    Console.WriteLine(x.AsyncState);
+
+                    Console.WriteLine(
+                        $"compute finished {Thread.CurrentThread.ManagedThreadId.ToString("00")} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}");
+                };
+
+                asyncResult = action.BeginInvoke("btnAsyncAdvanced_Click", callback, "hao");
+
+                //如果不用call back， 下面的函数会在线程开始前，子线程计算还未结束就打印出来
+                // Console.WriteLine($"compute finished {Thread.CurrentThread.ManagedThreadId.ToString("00")} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}");
+            }
+
+            {
+                // 主线程 需要在子线程结束后，才返回UI 可以用以下方法
+                AsyncCallback callback = x =>
+                {
+                    Console.WriteLine("Is x the same with ayncResult: {0}", object.ReferenceEquals(asyncResult, x));
+                    Console.WriteLine(x.AsyncState);
+
+                    Console.WriteLine(
+                        $"compute finished {Thread.CurrentThread.ManagedThreadId.ToString("00")} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}");
+                };
+                asyncResult = action.BeginInvoke("btnAsyncAdvanced_Click", callback, "hao");
+
+                {
+                    //带sleep延迟版本
+                    int i = 0;
+                    while (!asyncResult.IsCompleted) //1. 卡界面 主线程在忙于等待
+                    {
+                        // 可以等待，边等边做其他操作
+                        // 可能最多200ms的延迟，因为延迟的时候可能线程已经结束计算，但我们还等待200ms
+                        // Thread.Sleep(200);
+                        if (i < 10)
+                        {
+                            Console.WriteLine($"Upload {i++ * 10}%..");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Upload 99.99%..");
+                        }
+                        Thread.Sleep(200);
+                    }
+
+                    Console.WriteLine($"Upload Successfully");
+                }
+
+                {
+                    Thread.Sleep(200);
+                    Console.WriteLine("Do something");
+                    Console.WriteLine("Do something");
+                    Console.WriteLine("Do something");
+                    Console.WriteLine("Do something");
+                    Console.WriteLine("Do something");
+
+                    asyncResult.AsyncWaitHandle.WaitOne();// 利用信号量等待任务完成。 子线程完成后会给主线程发信号，界面同样会卡
+                    asyncResult.AsyncWaitHandle.WaitOne(1000);// 等待； 但是最多等待1000ms
+                }
+
+                {
+                    action.EndInvoke(asyncResult); // 可以等待；获取返回值
+                    {
+                        Func<int> func = () =>
+                        {
+                            Thread.Sleep(2000);
+                            return DateTime.Now.Day;
+                        };
+
+                        Console.WriteLine($"func.Invoke()= {func.Invoke()}");
+
+                       asyncResult = func.BeginInvoke(r =>
+                           {
+                               func.EndInvoke(r); // 在回调函数当中获取异步操作返回值。但是该返回值只能用一次，要么在回调函数内，要么在回调函数外。
+                                Console.WriteLine(r.AsyncState);
+                            }
+                            , "Ivan");
+
+                       //Console.WriteLine($"func.EndInvoke(asyncResult)={func.EndInvoke(asyncResult)}");
+                    }
+                }
+
+            }
+
+            Console.WriteLine($"Actually Finished, return to user {Thread.CurrentThread.ManagedThreadId.ToString("00")}");
+            Console.WriteLine($"**********************btnAsyncAdvanced_Click End {Thread.CurrentThread.ManagedThreadId.ToString("00")} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}********************");
+
         }
     }
 }

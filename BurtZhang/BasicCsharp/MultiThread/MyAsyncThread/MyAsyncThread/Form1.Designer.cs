@@ -31,13 +31,14 @@ namespace MyAsyncThread
         {
             this.btnSync = new System.Windows.Forms.Button();
             this.btnAysnc = new System.Windows.Forms.Button();
+            this.btnAsyncAdvanced = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnSync
             // 
             this.btnSync.Location = new System.Drawing.Point(41, 73);
             this.btnSync.Name = "btnSync";
-            this.btnSync.Size = new System.Drawing.Size(75, 23);
+            this.btnSync.Size = new System.Drawing.Size(130, 40);
             this.btnSync.TabIndex = 0;
             this.btnSync.Text = "Sync";
             this.btnSync.UseVisualStyleBackColor = true;
@@ -47,17 +48,28 @@ namespace MyAsyncThread
             // 
             this.btnAysnc.Location = new System.Drawing.Point(41, 138);
             this.btnAysnc.Name = "btnAysnc";
-            this.btnAysnc.Size = new System.Drawing.Size(75, 23);
+            this.btnAysnc.Size = new System.Drawing.Size(130, 37);
             this.btnAysnc.TabIndex = 1;
             this.btnAysnc.Text = "Async";
             this.btnAysnc.UseVisualStyleBackColor = true;
             this.btnAysnc.Click += new System.EventHandler(this.btnAysnc_Click);
+            // 
+            // btnAsyncAdvanced
+            // 
+            this.btnAsyncAdvanced.Location = new System.Drawing.Point(41, 197);
+            this.btnAsyncAdvanced.Name = "btnAsyncAdvanced";
+            this.btnAsyncAdvanced.Size = new System.Drawing.Size(130, 38);
+            this.btnAsyncAdvanced.TabIndex = 2;
+            this.btnAsyncAdvanced.Text = "Aynsc Advance";
+            this.btnAsyncAdvanced.UseVisualStyleBackColor = true;
+            this.btnAsyncAdvanced.Click += new System.EventHandler(this.btnAsyncAdvanced_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnAsyncAdvanced);
             this.Controls.Add(this.btnAysnc);
             this.Controls.Add(this.btnSync);
             this.Name = "Form1";
@@ -71,6 +83,7 @@ namespace MyAsyncThread
 
         private System.Windows.Forms.Button btnSync;
         private System.Windows.Forms.Button btnAysnc;
+        private System.Windows.Forms.Button btnAsyncAdvanced;
     }
 }
 
