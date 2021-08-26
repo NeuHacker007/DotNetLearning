@@ -7,6 +7,11 @@ using System.Threading.Tasks;
 
 namespace MyStructure
 {
+    /// <summary>
+    ///
+    /// IEnumerable 任何数据集合，都实现该接口， 该接口为不同的数据结构，提供了统一的访问方法
+    ///             这个就是迭代器模式
+    /// </summary>
     public class CollectionDemo
     {
         public static void Show()
