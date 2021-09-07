@@ -32,6 +32,8 @@ namespace MyAsyncThread
             this.btnSync = new System.Windows.Forms.Button();
             this.btnAysnc = new System.Windows.Forms.Button();
             this.btnAsyncAdvanced = new System.Windows.Forms.Button();
+            this.btnThread = new System.Windows.Forms.Button();
+            this.btnThreadPool = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnSync
@@ -64,11 +66,33 @@ namespace MyAsyncThread
             this.btnAsyncAdvanced.UseVisualStyleBackColor = true;
             this.btnAsyncAdvanced.Click += new System.EventHandler(this.btnAsyncAdvanced_Click);
             // 
+            // btnThread
+            // 
+            this.btnThread.Location = new System.Drawing.Point(41, 266);
+            this.btnThread.Name = "btnThread";
+            this.btnThread.Size = new System.Drawing.Size(130, 36);
+            this.btnThread.TabIndex = 3;
+            this.btnThread.Text = "Thread";
+            this.btnThread.UseVisualStyleBackColor = true;
+            this.btnThread.Click += new System.EventHandler(this.btnThread_Click);
+            // 
+            // btnThreadPool
+            // 
+            this.btnThreadPool.Location = new System.Drawing.Point(377, 73);
+            this.btnThreadPool.Name = "btnThreadPool";
+            this.btnThreadPool.Size = new System.Drawing.Size(114, 40);
+            this.btnThreadPool.TabIndex = 4;
+            this.btnThreadPool.Text = "ThreadPool";
+            this.btnThreadPool.UseVisualStyleBackColor = true;
+            this.btnThreadPool.Click += new System.EventHandler(this.btnThreadPool_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnThreadPool);
+            this.Controls.Add(this.btnThread);
             this.Controls.Add(this.btnAsyncAdvanced);
             this.Controls.Add(this.btnAysnc);
             this.Controls.Add(this.btnSync);
@@ -84,6 +108,8 @@ namespace MyAsyncThread
         private System.Windows.Forms.Button btnSync;
         private System.Windows.Forms.Button btnAysnc;
         private System.Windows.Forms.Button btnAsyncAdvanced;
+        private System.Windows.Forms.Button btnThread;
+        private System.Windows.Forms.Button btnThreadPool;
     }
 }
 

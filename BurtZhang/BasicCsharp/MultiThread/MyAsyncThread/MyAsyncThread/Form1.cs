@@ -214,5 +214,129 @@ namespace MyAsyncThread
             Console.WriteLine($"**********************btnAsyncAdvanced_Click End {Thread.CurrentThread.ManagedThreadId.ToString("00")} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}********************");
 
         }
+
+        private void btnThread_Click(object sender, EventArgs e)
+        {
+            Console.WriteLine($"**********************btnThread_Click Start {Thread.CurrentThread.ManagedThreadId.ToString("00")} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}********************");
+
+
+            ThreadStart threadStart = () => this.DoSomethingLong("btnThread_Click");
+
+            Thread thread = new Thread(threadStart);
+
+            thread.Start();
+            // 这两个方法已经不推荐使用了，因为有可能导致死锁
+            //thread.Suspend(); // 线程挂起
+            //thread.Resume(); //  唤醒线程
+
+            try
+            {
+                thread.Abort(); // 销毁， 方式是异常 也不建议
+            }
+            catch (Exception)
+            {
+
+                Thread.ResetAbort();// 取消异常
+            }
+
+            thread.Join(500); // 最多等待500毫秒
+            Console.WriteLine("等待500ms");
+            thread.Join(); //当前线程等待thread完成
+
+            while (thread.ThreadState != ThreadState.Stopped)
+            {
+                Thread.Sleep(100);
+            }
+
+            Console.WriteLine(thread.IsBackground); //默认是前台线程， 启动之后一定要完成任务的，阻止进程退出
+
+            thread.IsBackground = true; // 指定后台线程： 随着进程退出
+
+            thread.Priority = ThreadPriority.Highest; //线程优先级
+            // CPU会优先执行 highest 不代表会最先
+            Console.WriteLine($"**********************btnThread_Click End {Thread.CurrentThread.ManagedThreadId.ToString("00")} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}********************");
+        }
+
+        /// <summary>
+        /// .NET 2.0 出现 线程池 -- 享元模式 -- 数据库连接池
+        /// 1. Thread 提供了太多的API
+        /// 2. 无限使用线程 加以限制
+        /// 3. 重用线程， 避免重复创建和销毁
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnThreadPool_Click(object sender, EventArgs e)
+        {
+            Console.WriteLine($"**********************btnThreadPool_Click Start {Thread.CurrentThread.ManagedThreadId.ToString("00")} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}********************");
+            
+            ThreadPool.QueueUserWorkItem(t => this.DoSomethingLong("btnThreadPool_Click"));
+
+            {
+                ThreadPool.GetMaxThreads(out int wokThreads, out int completionPortThreads);
+                Console.WriteLine($" GetMaxThreads wokThreads={wokThreads}, completionPortThreads= {completionPortThreads} ");
+            }
+
+            {
+                ThreadPool.GetMinThreads(out int wokThreads, out int completionPortThreads);
+                Console.WriteLine($" GetMinThreads wokThreads={wokThreads}, completionPortThreads= {completionPortThreads} ");
+            }
+            Console.WriteLine("*********************************************");
+            ThreadPool.SetMaxThreads(16, 16);
+            ThreadPool.SetMinThreads(8, 8);
+            {
+                ThreadPool.GetMaxThreads(out int wokThreads, out int completionPortThreads);
+                Console.WriteLine($" GetMaxThreads wokThreads={wokThreads}, completionPortThreads= {completionPortThreads} ");
+            }
+
+            {
+                ThreadPool.GetMinThreads(out int wokThreads, out int completionPortThreads);
+                Console.WriteLine($" GetMinThreads wokThreads={wokThreads}, completionPortThreads= {completionPortThreads} ");
+            }
+
+            {
+                //类 包含了一个bool属性
+                // false -- WaitOne 等待--Set --True -- WaitOne直接过去
+                // true -- Waitone 直接过去 -- reset -- false -- waitone 等待
+                ManualResetEvent manualResetEvent = new ManualResetEvent(false);
+
+                
+                ThreadPool.QueueUserWorkItem(t =>
+                {
+                    this.DoSomethingLong("btnThreadPool_Click");
+                    manualResetEvent.Set();
+
+                    //manualResetEvent.Reset();
+                });
+
+                manualResetEvent.WaitOne();
+                // 一般来说不要阻塞线程池线程
+                for (int i = 0; i < 20; i++)
+                {
+                    int k = i;
+                    ThreadPool.QueueUserWorkItem(t =>
+                    {
+                        Console.WriteLine(k);
+                        if (k < 18)
+                        {
+                            manualResetEvent.WaitOne();
+                        }
+                        else
+                        {
+                            manualResetEvent.Set();
+                        }
+                    });
+                   
+                }
+
+                if (manualResetEvent.WaitOne())
+                {
+                    Console.WriteLine("没有死锁");
+                }
+                Console.WriteLine("等待queueUserWorkItem执行完");
+
+            }
+
+            Console.WriteLine($"**********************btnThreadPool_Click End {Thread.CurrentThread.ManagedThreadId.ToString("00")} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}********************");
+        }
     }
 }
