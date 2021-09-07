@@ -218,7 +218,19 @@ namespace MyAsyncThread
         private void btnThread_Click(object sender, EventArgs e)
         {
             Console.WriteLine($"**********************btnThread_Click Start {Thread.CurrentThread.ManagedThreadId.ToString("00")} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}********************");
+            {
+                this.ThreadWithCallBack(()=> Console.WriteLine($"Action {Thread.CurrentThread.ManagedThreadId.ToString("00")} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}"),
+                    ()=>Console.WriteLine($"Callback {Thread.CurrentThread.ManagedThreadId.ToString("00")} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}") );
 
+                Func<int> func = this.ThreadWithReturn<int>(() =>
+                {
+                    Thread.Sleep(2000);
+                    return DateTime.Now.Millisecond;
+                });
+                Console.WriteLine("12345234");
+                int iResult = func.Invoke();
+                Console.WriteLine(iResult);
+            }
 
             ThreadStart threadStart = () => this.DoSomethingLong("btnThread_Click");
 
@@ -257,6 +269,46 @@ namespace MyAsyncThread
             Console.WriteLine($"**********************btnThread_Click End {Thread.CurrentThread.ManagedThreadId.ToString("00")} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}********************");
         }
 
+        // 启动子线程计算 -- 完成委托后， 该线程去执行后回调委托
+        private void ThreadWithCallBack(Action act, Action callBack)
+        {
+            Thread thread = new Thread(() =>
+            {
+                act.Invoke();
+                callBack.Invoke();
+                
+            });
+
+            thread.Start();
+        }
+        // 待返回的异步调用 需要获取返回值
+
+        /// <summary>
+        /// 又要结果，又要不阻塞
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="func"></param>
+        /// <returns></returns>
+        private Func<T> ThreadWithReturn<T>(Func<T> func)
+        {
+            T t = default(T);
+            Thread thread = new Thread(() =>
+            {
+                func.Invoke();
+            });
+
+            return () =>
+            {
+                //while (thread.ThreadState != ThreadState.Stopped)
+                //{
+                //    Thread.Sleep(200);
+                //}
+
+                thread.Join();
+
+                return t;
+            };
+        } 
         /// <summary>
         /// .NET 2.0 出现 线程池 -- 享元模式 -- 数据库连接池
         /// 1. Thread 提供了太多的API
