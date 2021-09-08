@@ -96,7 +96,7 @@ namespace MyAsyncThread
             for (int j = 0; j < 5; j++)
             {
                 string name = string.Format($"btnSync_Click_{j}");
-                action.BeginInvoke(name, null, null);
+                action.BeginInvoke(name, null, null); // 是使用线程池的
             }
 
             Console.WriteLine($"**********************btnAysnc_Click End {Thread.CurrentThread.ManagedThreadId.ToString("00")} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}********************");
@@ -389,6 +389,151 @@ namespace MyAsyncThread
             }
 
             Console.WriteLine($"**********************btnThreadPool_Click End {Thread.CurrentThread.ManagedThreadId.ToString("00")} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}********************");
+        }
+
+        /// <summary>
+        /// .Net 3.0 出现， 基于thread pool 实现
+        /// task 增加了多个API
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnTask_Click(object sender, EventArgs e)
+        {
+            Console.WriteLine($"**********************btnTask_Click Start {Thread.CurrentThread.ManagedThreadId.ToString("00")} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}********************");
+
+            {
+                // 线程 -- task -- 启动方式
+                Task.Run(() => this.DoSomethingLong("btnTask_Click1"));
+                Task.Run(() => this.DoSomethingLong("btnTask_Click2"));
+
+                TaskFactory taskFactory = Task.Factory;
+                taskFactory.StartNew(() => this.DoSomethingLong("btnTask_Click3"));
+                new Task(() => this.DoSomethingLong("btnTask_Click4")).Start();
+            }
+
+            {
+                //如何感知某个任务已经完成
+                TaskFactory factory = new TaskFactory();
+                List<Task> tasks = new List<Task>();
+                
+                tasks.Add(factory.StartNew((o) => this.Coding("Ivan", "Client"), "Ivan"));
+                tasks.Add(factory.StartNew((o) => this.Coding("Eva", "Portal"), "Eva"));
+                tasks.Add(factory.StartNew((o) => this.Coding("Recheal", "Service"),"Recheal"));
+                tasks.Add(factory.StartNew((o) => this.Coding("jack", "Jump"), "jack"));
+                tasks.Add(factory.StartNew((o) => this.Coding("Elena", "Monitor"), "elena"));
+
+                factory.ContinueWhenAny(tasks.ToArray(), t =>
+                {
+                    Console.WriteLine(t.AsyncState);
+                    Console.WriteLine($"integration-test {Thread.CurrentThread.ManagedThreadId.ToString("00")}");
+                });
+
+                factory.ContinueWhenAll(tasks.ToArray(), t =>
+                {
+                    Console.WriteLine(t[0].AsyncState);
+                    Console.WriteLine($"integration-test {Thread.CurrentThread.ManagedThreadId.ToString("00")}");
+                });
+            }
+
+            {
+                List<Task> tasks = new List<Task>();
+                // 什么时候用多线程？ 任务能并发运行；提升速度; 优化体验
+                Console.WriteLine($"Project manager start a project ... {Thread.CurrentThread.ManagedThreadId.ToString("00")}");
+                Console.WriteLine($"pre-job ... {Thread.CurrentThread.ManagedThreadId.ToString("00")}");
+
+                Console.WriteLine($"program.... {Thread.CurrentThread.ManagedThreadId.ToString("00")}");
+
+                tasks.Add(Task.Run(() => this.Coding("Ivan", "Client")));
+                tasks.Add(Task.Run(() => this.Coding("Eva", "Portal")));
+                tasks.Add(Task.Run(() => this.Coding("Recheal", "Service")));
+                tasks.Add(Task.Run(() => this.Coding("jack", "Jump")));
+                tasks.Add(Task.Run(() => this.Coding("Elena", "Monitor")));
+
+
+                tasks.Add( Task.WhenAny(tasks.ToArray()).ContinueWith(t =>
+                {
+                    Console.WriteLine($"haha .... {Thread.CurrentThread.ManagedThreadId.ToString("00")}");
+                }));
+
+                tasks.Add(Task.WhenAll(tasks.ToArray()).ContinueWith(t =>
+                {
+                    //此时的continue with 开启一个新的线程执行，很可能会晚于
+                    // line 525 的控制台输出，如果想要让其早于line 525 输出，需要把该task 加入tasks列表当中
+                    Console.WriteLine($"Integration test .... {Thread.CurrentThread.ManagedThreadId.ToString("00")}");
+                }));
+
+
+                // 一个业务查询操作有多个数据源， 首页--多线程并发--拿到全部数据后才返回 Wait All
+                // 一个商品搜索操作有多个数据源， 商品搜索 -- 多个数据源 -- 多线程并发 -- 只需要一个结果即可 -- Wait Any
+                // 阻塞： 需要完成后再继续。
+             
+
+                // 多线程加快速度， 但是全部任务完成后，才能执行的操作
+                Task.WaitAny(tasks.ToArray()); // 会阻塞当前线程，等着某个任务完成后，才进入下一行 卡界面
+                Console.WriteLine($"complete milestone {Thread.CurrentThread.ManagedThreadId.ToString("00")}");
+                Task.WaitAll(tasks.ToArray(), 1000); // 限时等待
+                Task.WaitAll(tasks.ToArray()); // 会阻塞当前线程，等着全部任务都完成后，才进入下一行
+                {
+                    //又想等待又想不卡界面可以再包一层线程。因为waitAll wait any 卡主的是当前线程。
+
+                    Task.Run(() =>
+                    {
+                        // 此时 wait all/any 紧卡住新开的线程而不会阻塞主线程 （UI线程）
+                        Task.WaitAny(tasks.ToArray()); // 会阻塞当前线程，等着某个任务完成后，才进入下一行 卡界面
+                        Console.WriteLine($"complete milestone {Thread.CurrentThread.ManagedThreadId.ToString("00")}");
+                        Task.WaitAll(tasks.ToArray(), 1000); // 限时等待
+                        Task.WaitAll(tasks.ToArray()); // 会阻塞当前线程，等着全部任务都完成后，才进入下一行
+                        Console.WriteLine($"online {Thread.CurrentThread.ManagedThreadId.ToString("00")}");
+                    });
+                }
+
+
+                {
+                    // 完成10000个任务 但是只有11个线程
+                    List<int> list = new List<int>();
+
+                    for (int i = 0; i < 10000; i++)
+                    {
+                        list.Add(i);
+                    }
+                    Action<int> act = i =>
+                    {
+                        Console.WriteLine(Thread.CurrentThread.ManagedThreadId.ToString("00"));
+                        Thread.Sleep(new Random(i).Next(100, 300));
+                    };
+
+
+                    List<Task> taskList = new List<Task>();
+
+                    foreach (var item in list)
+                    {
+                        int k = item;
+
+                        taskList.Add(Task.Run(() => act.Invoke(k)));
+
+                        if (taskList.Count > 10)
+                        {
+                            Task.WaitAny(taskList.ToArray());
+
+                            taskList = taskList.Where(t => t.Status != TaskStatus.RanToCompletion).ToList();
+                        }
+
+                        Task.WaitAll(taskList.ToArray());
+                    }
+                }
+                
+                Console.WriteLine($"online {Thread.CurrentThread.ManagedThreadId.ToString("00")}");
+            }
+           
+            
+            Console.WriteLine($"**********************btnTask_Click End {Thread.CurrentThread.ManagedThreadId.ToString("00")} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}********************");
+        }
+
+        private void Coding(string name, string task)
+        {
+            Console.WriteLine($"**********************Coding {name}, {task} Start {Thread.CurrentThread.ManagedThreadId.ToString("00")} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}********************");
+            Thread.Sleep(200);
+            Console.WriteLine($"**********************Coding {name}, {task} End {Thread.CurrentThread.ManagedThreadId.ToString("00")} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}********************");
         }
     }
 }
