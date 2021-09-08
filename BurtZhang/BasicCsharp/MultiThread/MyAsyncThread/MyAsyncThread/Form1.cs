@@ -616,18 +616,19 @@ namespace MyAsyncThread
                     if (i == 2)
                     {
                         Console.WriteLine("Thread cancel, end of task");
-                        state.Break();//结束 Parallel//当前这次结束
+                        state.Break();//当前这次结束
                         return;
                     }
 
                     if (i == 20)
                     {
                         Console.WriteLine("Thread cancel, end of Parallel");
-                        state.Stop();
+                        state.Stop();//结束 Parallel
                         return; // 必须带上
                     }
                     this.Coding("Ivan", "Web" + i);
                 });
+                // Break: 实际上结束了当前这个线程； 如果是主线程，等于Parallel 都结束了
             }
             
             Console.WriteLine($"**********************btnParallel_Click End {Thread.CurrentThread.ManagedThreadId.ToString("00")} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}********************");
