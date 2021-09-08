@@ -35,6 +35,7 @@ namespace MyAsyncThread
             this.btnThread = new System.Windows.Forms.Button();
             this.btnThreadPool = new System.Windows.Forms.Button();
             this.btnTask = new System.Windows.Forms.Button();
+            this.btnParallel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnSync
@@ -97,11 +98,22 @@ namespace MyAsyncThread
             this.btnTask.UseVisualStyleBackColor = true;
             this.btnTask.Click += new System.EventHandler(this.btnTask_Click);
             // 
+            // btnParallel
+            // 
+            this.btnParallel.Location = new System.Drawing.Point(377, 197);
+            this.btnParallel.Name = "btnParallel";
+            this.btnParallel.Size = new System.Drawing.Size(114, 38);
+            this.btnParallel.TabIndex = 6;
+            this.btnParallel.Text = "Parallel Task";
+            this.btnParallel.UseVisualStyleBackColor = true;
+            this.btnParallel.Click += new System.EventHandler(this.btnParallel_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnParallel);
             this.Controls.Add(this.btnTask);
             this.Controls.Add(this.btnThreadPool);
             this.Controls.Add(this.btnThread);
@@ -123,6 +135,7 @@ namespace MyAsyncThread
         private System.Windows.Forms.Button btnThread;
         private System.Windows.Forms.Button btnThreadPool;
         private System.Windows.Forms.Button btnTask;
+        private System.Windows.Forms.Button btnParallel;
     }
 }
 

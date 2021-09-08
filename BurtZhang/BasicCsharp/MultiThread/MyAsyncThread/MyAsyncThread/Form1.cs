@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ThreadState = System.Threading.ThreadState;
 
 namespace MyAsyncThread
 {
@@ -400,7 +402,43 @@ namespace MyAsyncThread
         private void btnTask_Click(object sender, EventArgs e)
         {
             Console.WriteLine($"**********************btnTask_Click Start {Thread.CurrentThread.ManagedThreadId.ToString("00")} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}********************");
+            {
+                //Thread.Sleep VS Task.Delay
 
+                {
+                    // Thread.Sleep 会卡线程，然后再执行后续
+                    Stopwatch stopwatch = new Stopwatch();
+                    stopwatch.Start();
+                    Thread.Sleep(2000);
+
+                    stopwatch.Stop();
+                    Console.WriteLine(stopwatch.ElapsedMilliseconds);
+                }
+                {
+                    Stopwatch stopwatch = new Stopwatch();
+                    stopwatch.Start();
+
+                    // Task Delay 不会卡线程， 是延迟启动 continuewith的任务
+                    // 延迟触发
+                    Task.Delay(2000).ContinueWith(t =>
+                    {
+                        stopwatch.Stop();
+                        Console.WriteLine(stopwatch.ElapsedMilliseconds); 
+                    });
+                }
+                {
+                    Stopwatch stopwatch = new Stopwatch();
+                    stopwatch.Start();
+                    //效果与delay相似
+                    Task.Run(() =>
+                    {
+                        Thread.Sleep(2000);
+
+                        stopwatch.Stop();
+                        Console.WriteLine(stopwatch.ElapsedMilliseconds);
+                    });
+                }
+            }
             {
                 // 线程 -- task -- 启动方式
                 Task.Run(() => this.DoSomethingLong("btnTask_Click1"));
@@ -534,6 +572,65 @@ namespace MyAsyncThread
             Console.WriteLine($"**********************Coding {name}, {task} Start {Thread.CurrentThread.ManagedThreadId.ToString("00")} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}********************");
             Thread.Sleep(200);
             Console.WriteLine($"**********************Coding {name}, {task} End {Thread.CurrentThread.ManagedThreadId.ToString("00")} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}********************");
+        }
+
+        /// <summary>
+        /// 并行编程 在Task的基础上做了封装 4.5
+        /// Parallel 卡界面， 主线程参与计算，节约了一个线程
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnParallel_Click(object sender, EventArgs e)
+        {
+            Console.WriteLine($"**********************btnParallel_Click Start {Thread.CurrentThread.ManagedThreadId.ToString("00")} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}********************");
+
+            {
+                Parallel.Invoke(() => this.Coding("Ivan","Web")
+                , ()=> this.Coding("Eva", "backend")
+                , ()=> this.Coding("Elena", "frontend"));
+            }
+
+            {
+                Parallel.For(0, 5, i =>
+                {
+                    this.Coding("Ivan", "Web" + i);
+                });
+            }
+
+            {
+                Parallel.ForEach(new string[] {"0", "1", "2", "3", "4"}, i => this.Coding("Ivan", "Web" + i));
+            }
+            {
+                ParallelOptions options = new ParallelOptions();
+                options.MaxDegreeOfParallelism = 3; // 控制并发数量
+                Parallel.For(0, 10,options, i =>
+                {
+                    this.Coding("Ivan", "Web" + i);
+                });
+            }
+            {
+                ParallelOptions options = new ParallelOptions();
+                options.MaxDegreeOfParallelism = 3; // 控制并发数量
+                Parallel.For(0, 40,options, (i,state) =>
+                {
+                    if (i == 2)
+                    {
+                        Console.WriteLine("Thread cancel, end of task");
+                        state.Break();//结束 Parallel//当前这次结束
+                        return;
+                    }
+
+                    if (i == 20)
+                    {
+                        Console.WriteLine("Thread cancel, end of Parallel");
+                        state.Stop();
+                        return; // 必须带上
+                    }
+                    this.Coding("Ivan", "Web" + i);
+                });
+            }
+            
+            Console.WriteLine($"**********************btnParallel_Click End {Thread.CurrentThread.ManagedThreadId.ToString("00")} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}********************");
         }
     }
 }
