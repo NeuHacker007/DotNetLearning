@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -199,14 +201,14 @@ namespace MyAsyncThread
 
                         Console.WriteLine($"func.Invoke()= {func.Invoke()}");
 
-                       asyncResult = func.BeginInvoke(r =>
-                           {
-                               func.EndInvoke(r); // 在回调函数当中获取异步操作返回值。但是该返回值只能用一次，要么在回调函数内，要么在回调函数外。
+                        asyncResult = func.BeginInvoke(r =>
+                            {
+                                func.EndInvoke(r); // 在回调函数当中获取异步操作返回值。但是该返回值只能用一次，要么在回调函数内，要么在回调函数外。
                                 Console.WriteLine(r.AsyncState);
                             }
-                            , "Ivan");
+                             , "Ivan");
 
-                       //Console.WriteLine($"func.EndInvoke(asyncResult)={func.EndInvoke(asyncResult)}");
+                        //Console.WriteLine($"func.EndInvoke(asyncResult)={func.EndInvoke(asyncResult)}");
                     }
                 }
 
@@ -221,8 +223,8 @@ namespace MyAsyncThread
         {
             Console.WriteLine($"**********************btnThread_Click Start {Thread.CurrentThread.ManagedThreadId.ToString("00")} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}********************");
             {
-                this.ThreadWithCallBack(()=> Console.WriteLine($"Action {Thread.CurrentThread.ManagedThreadId.ToString("00")} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}"),
-                    ()=>Console.WriteLine($"Callback {Thread.CurrentThread.ManagedThreadId.ToString("00")} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}") );
+                this.ThreadWithCallBack(() => Console.WriteLine($"Action {Thread.CurrentThread.ManagedThreadId.ToString("00")} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}"),
+                    () => Console.WriteLine($"Callback {Thread.CurrentThread.ManagedThreadId.ToString("00")} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}"));
 
                 Func<int> func = this.ThreadWithReturn<int>(() =>
                 {
@@ -278,7 +280,7 @@ namespace MyAsyncThread
             {
                 act.Invoke();
                 callBack.Invoke();
-                
+
             });
 
             thread.Start();
@@ -310,7 +312,7 @@ namespace MyAsyncThread
 
                 return t;
             };
-        } 
+        }
         /// <summary>
         /// .NET 2.0 出现 线程池 -- 享元模式 -- 数据库连接池
         /// 1. Thread 提供了太多的API
@@ -322,7 +324,7 @@ namespace MyAsyncThread
         private void btnThreadPool_Click(object sender, EventArgs e)
         {
             Console.WriteLine($"**********************btnThreadPool_Click Start {Thread.CurrentThread.ManagedThreadId.ToString("00")} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}********************");
-            
+
             ThreadPool.QueueUserWorkItem(t => this.DoSomethingLong("btnThreadPool_Click"));
 
             {
@@ -353,7 +355,7 @@ namespace MyAsyncThread
                 // true -- Waitone 直接过去 -- reset -- false -- waitone 等待
                 ManualResetEvent manualResetEvent = new ManualResetEvent(false);
 
-                
+
                 ThreadPool.QueueUserWorkItem(t =>
                 {
                     this.DoSomethingLong("btnThreadPool_Click");
@@ -379,7 +381,7 @@ namespace MyAsyncThread
                             manualResetEvent.Set();
                         }
                     });
-                   
+
                 }
 
                 if (manualResetEvent.WaitOne())
@@ -423,7 +425,7 @@ namespace MyAsyncThread
                     Task.Delay(2000).ContinueWith(t =>
                     {
                         stopwatch.Stop();
-                        Console.WriteLine(stopwatch.ElapsedMilliseconds); 
+                        Console.WriteLine(stopwatch.ElapsedMilliseconds);
                     });
                 }
                 {
@@ -453,10 +455,10 @@ namespace MyAsyncThread
                 //如何感知某个任务已经完成
                 TaskFactory factory = new TaskFactory();
                 List<Task> tasks = new List<Task>();
-                
+
                 tasks.Add(factory.StartNew((o) => this.Coding("Ivan", "Client"), "Ivan"));
                 tasks.Add(factory.StartNew((o) => this.Coding("Eva", "Portal"), "Eva"));
-                tasks.Add(factory.StartNew((o) => this.Coding("Recheal", "Service"),"Recheal"));
+                tasks.Add(factory.StartNew((o) => this.Coding("Recheal", "Service"), "Recheal"));
                 tasks.Add(factory.StartNew((o) => this.Coding("jack", "Jump"), "jack"));
                 tasks.Add(factory.StartNew((o) => this.Coding("Elena", "Monitor"), "elena"));
 
@@ -488,10 +490,10 @@ namespace MyAsyncThread
                 tasks.Add(Task.Run(() => this.Coding("Elena", "Monitor")));
 
 
-                tasks.Add( Task.WhenAny(tasks.ToArray()).ContinueWith(t =>
-                {
-                    Console.WriteLine($"haha .... {Thread.CurrentThread.ManagedThreadId.ToString("00")}");
-                }));
+                tasks.Add(Task.WhenAny(tasks.ToArray()).ContinueWith(t =>
+               {
+                   Console.WriteLine($"haha .... {Thread.CurrentThread.ManagedThreadId.ToString("00")}");
+               }));
 
                 tasks.Add(Task.WhenAll(tasks.ToArray()).ContinueWith(t =>
                 {
@@ -504,7 +506,7 @@ namespace MyAsyncThread
                 // 一个业务查询操作有多个数据源， 首页--多线程并发--拿到全部数据后才返回 Wait All
                 // 一个商品搜索操作有多个数据源， 商品搜索 -- 多个数据源 -- 多线程并发 -- 只需要一个结果即可 -- Wait Any
                 // 阻塞： 需要完成后再继续。
-             
+
 
                 // 多线程加快速度， 但是全部任务完成后，才能执行的操作
                 Task.WaitAny(tasks.ToArray()); // 会阻塞当前线程，等着某个任务完成后，才进入下一行 卡界面
@@ -559,11 +561,11 @@ namespace MyAsyncThread
                         Task.WaitAll(taskList.ToArray());
                     }
                 }
-                
+
                 Console.WriteLine($"online {Thread.CurrentThread.ManagedThreadId.ToString("00")}");
             }
-           
-            
+
+
             Console.WriteLine($"**********************btnTask_Click End {Thread.CurrentThread.ManagedThreadId.ToString("00")} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}********************");
         }
 
@@ -585,9 +587,9 @@ namespace MyAsyncThread
             Console.WriteLine($"**********************btnParallel_Click Start {Thread.CurrentThread.ManagedThreadId.ToString("00")} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}********************");
 
             {
-                Parallel.Invoke(() => this.Coding("Ivan","Web")
-                , ()=> this.Coding("Eva", "backend")
-                , ()=> this.Coding("Elena", "frontend"));
+                Parallel.Invoke(() => this.Coding("Ivan", "Web")
+                , () => this.Coding("Eva", "backend")
+                , () => this.Coding("Elena", "frontend"));
             }
 
             {
@@ -598,40 +600,339 @@ namespace MyAsyncThread
             }
 
             {
-                Parallel.ForEach(new string[] {"0", "1", "2", "3", "4"}, i => this.Coding("Ivan", "Web" + i));
+                Parallel.ForEach(new string[] { "0", "1", "2", "3", "4" }, i => this.Coding("Ivan", "Web" + i));
             }
             {
                 ParallelOptions options = new ParallelOptions();
                 options.MaxDegreeOfParallelism = 3; // 控制并发数量
-                Parallel.For(0, 10,options, i =>
-                {
-                    this.Coding("Ivan", "Web" + i);
-                });
+                Parallel.For(0, 10, options, i =>
+                 {
+                     this.Coding("Ivan", "Web" + i);
+                 });
             }
             {
                 ParallelOptions options = new ParallelOptions();
                 options.MaxDegreeOfParallelism = 3; // 控制并发数量
-                Parallel.For(0, 40,options, (i,state) =>
-                {
-                    if (i == 2)
-                    {
-                        Console.WriteLine("Thread cancel, end of task");
-                        state.Break();//当前这次结束
-                        return;
-                    }
+                Parallel.For(0, 40, options, (i, state) =>
+                 {
+                     if (i == 2)
+                     {
+                         Console.WriteLine("Thread cancel, end of task");
+                         state.Break();//当前这次结束
+                         return;
+                     }
 
-                    if (i == 20)
-                    {
-                        Console.WriteLine("Thread cancel, end of Parallel");
-                        state.Stop();//结束 Parallel
-                        return; // 必须带上
-                    }
-                    this.Coding("Ivan", "Web" + i);
-                });
+                     if (i == 20)
+                     {
+                         Console.WriteLine("Thread cancel, end of Parallel");
+                         state.Stop();//结束 Parallel
+                         return; // 必须带上
+                     }
+                     this.Coding("Ivan", "Web" + i);
+                 });
                 // Break: 实际上结束了当前这个线程； 如果是主线程，等于Parallel 都结束了
             }
-            
+
             Console.WriteLine($"**********************btnParallel_Click End {Thread.CurrentThread.ManagedThreadId.ToString("00")} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}********************");
+        }
+
+        private static readonly object btnThreadCore_Click_lock = new object(); // MSDN 标准写法
+
+        private int TotalCount = 0;
+        private List<int> intList = new List<int>();
+
+        private void btnThreadCore_Click(object sender, EventArgs e)
+        {
+            Console.WriteLine($"**********************btnThreadCore_Click Start {Thread.CurrentThread.ManagedThreadId.ToString("00")} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}********************");
+
+            try
+            {
+                TaskFactory taskFactory = new TaskFactory();
+                List<Task> tasks = new List<Task>();
+
+                #region 异常处理
+                // 线程里面的异常被吞掉了，因为已经脱离最外层的 Try catch 的范围了
+                // line 685 ~ 697 会优先于 11， 12 异常结束，如果想在最外层catch 住
+                // 需要在try 的最后一行加入wait all； wait all 会抓到所有多线程的所有exception
+                // 线程里面不允许出现异常， 自己处理好 -- 最佳实践
+                for (int i = 0; i < 20; i++)
+                {
+                    var name = string.Format($"btnThreadCore_Click_{i}");
+
+                    Action<object> act = t =>
+                    {
+                        try
+                        {
+                            Thread.Sleep(2000);
+                            if (t.ToString().Equals("btnThreadCore_Click_11"))
+                            {
+                                throw new Exception(string.Format($"{t} failed"));
+                            }
+
+                            if (t.ToString().Equals("btnThreadCore_Click_12"))
+                            {
+                                throw new Exception(string.Format($"{t} failed"));
+                            }
+
+                            Console.WriteLine("{0} succeed", t);
+                        }
+                        catch (Exception exception)
+                        {
+                            Console.WriteLine(exception.Message);
+
+                        }
+                    };
+
+                    tasks.Add(taskFactory.StartNew(act, name));
+                }
+
+                Task.WaitAll(tasks.ToArray());
+
+                #endregion
+
+                #region 线程取消
+
+                // 多个线程并发，某个失败后，希望通知别的线程，都停下来
+                // task 是外部无法中止的；因为线程是OS的资源，无法掌控啥时候取消
+                // 线程自己停止自己 -- 公共的访问变量 -- 修改它 -- 线程不断地检测它
+                // CancellationTokenSource 去标志任务是否取消，
+                // cancel 表示取消; IsCancellationRequested 是否已经取消
+                // Token 启动Task的时候传入， 那么如果cancel了， 这个任务会放弃启动，抛出异常
+                CancellationTokenSource cts = new CancellationTokenSource();
+
+                for (int i = 0; i < 40; i++)
+                {
+                    var name = string.Format($"btnThreadCore_Click_{i}");
+
+                    Action<object> act = t =>
+                    {
+                        try
+                        {
+                            Thread.Sleep(2000);
+                            if (t.ToString().Equals("btnThreadCore_Click_11"))
+                            {
+                                throw new Exception(string.Format($"{t} failed"));
+                            }
+
+                            if (t.ToString().Equals("btnThreadCore_Click_12"))
+                            {
+                                throw new Exception(string.Format($"{t} failed"));
+                            }
+
+                            if (cts.IsCancellationRequested)
+                            {
+                                Console.WriteLine("{0} canceled", t);
+                            }
+                            else
+                            {
+                                Console.WriteLine("{0} succeed", t);
+                            }
+                        }
+                        catch (Exception exception)
+                        {
+                            cts.Cancel();
+                            Console.WriteLine(exception.Message);
+
+                        }
+                    };
+
+                    tasks.Add(taskFactory.StartNew(act, name, cts.Token));
+
+                }
+
+                Task.WaitAll(tasks.ToArray());
+
+                #endregion
+
+                #region 多线程临时变量
+
+                for (int i = 0; i < 5; i++)
+                {
+                    Task.Run(() =>
+                    {
+                        Thread.Sleep(100);
+                        // 会打印出5个5
+                        Console.WriteLine(i);
+                    });
+                }
+
+                for (int i = 0; i < 5; i++)
+                {
+                    int k = i;
+                    Task.Run(() =>
+                    {
+                        Thread.Sleep(100);
+                        // 会打印出0-5
+                        Console.WriteLine(k);
+                    });
+                }
+
+                //i 最后是5 全程只有一个i, sleep后 等着打印的时候， i = 5
+                // k        全程有5个k 分别是0 1 2 3 4
+                // k 在外面声明 全程只有一个K 等着打印的时候， k = 4
+                for (int i = 0; i < 5; i++)
+                {
+                    int k = i;
+
+                    new Action(() =>
+                    {
+                        Thread.Sleep(100);
+                        Console.WriteLine($"k={k}; i={i}");
+                    }).BeginInvoke(null, null);
+                }
+
+                #endregion
+
+                #region 线程安全 lock
+                // 共有变量: 所有线程都能访问的局部变量/全局变量/数据库的某个值/硬盘文件
+                // 线程内部不共享的变量是安全的
+                
+                // 1. lock 解决， 因为只有一个线程可以进去，没有并发，所以OK 但是牺牲了性能， 所以要尽可能的缩小lock的范围
+                // 2. 安全队列 ConcurrentQueue<> 还是一个线程去完成操作
+                // 3. 最佳的方案就是 不要冲突--数据拆分,避免冲突
+                {
+                    // Without multi-thread
+                    for (int i = 0; i < 10000; i++)
+                    {
+                        int k = i;
+
+                        this.TotalCount += 1;
+                        this.intList.Add(k);
+
+                    }
+
+                    Console.WriteLine(this.TotalCount); // 10000
+                    Console.WriteLine(intList.Count); // 10000
+
+                    this.TotalCount = 0;
+                    intList.Clear();
+                }
+
+                {
+                    // multi-thread unsafe 
+                    tasks.Clear();
+                    int TotalCountIn = 0; // 由于该变量也可以被各个线程访问，所以也存在不安全
+                    for (int i = 0; i < 10000; i++)
+                    {
+                        int k = i;
+                        int m = 3 + 2; //因为在线程当中所以m不会存在线程不安全的问题。
+                        tasks.Add(taskFactory.StartNew(() =>
+                        {
+                            this.TotalCount += 1;
+                            this.intList.Add(k);
+                        }));
+                    }
+
+                    Task.WaitAll(tasks.ToArray());
+
+                    // 计数不足10000 是因为存在多个线程覆盖了彼此的值
+                    // 线程1 在0 加 1 count = 1
+                    // 线程2 在1 加 1 count = 2 
+                    // 线程3 在0 加 1 count = 1 线程3 覆盖线程2 
+                    Console.WriteLine(this.TotalCount); // < 10000
+                    Console.WriteLine(TotalCountIn);   // < 10000 
+                    Console.WriteLine(intList.Count); //  < 10000
+
+                    this.TotalCount = 0;
+                    intList.Clear();
+                }
+                {
+                    // Multi-thread safe lock
+                    tasks.Clear();
+                    int TotalCountIn = 0; // 由于该变量也可以被各个线程访问，所以也存在不安全
+                    for (int i = 0; i < 10000; i++) // 由于 i 变量也可以被各个线程访问，所以也存在不安全
+                    {
+                        int k = i;
+                        int m = 3 + 2; //因为在线程当中所以m不会存在线程不安全的问题。
+
+
+                        tasks.Add(taskFactory.StartNew(() =>
+                        {
+                            {
+                                string teacher = "Eleven";
+                                string teacherVIP = "Eleven";
+
+                                // 虽然两个变量名称不同，但是对于 string 来说，
+                                // teacher 和 teacherVIP 使用的是同一个引用链接
+                                // 故而 以下两个锁实际上是同一个锁。 
+
+                                lock (teacher)
+                                {
+
+                                }
+
+                                lock (teacherVIP)
+                                {
+
+                                }
+
+                            }
+
+                            
+                            // private static readonly object btnThreadCore_Click_lock = new object();
+                            // private => 防止外面也去lock该对象，
+                            // static => 保证全场唯一， 不管new 多少个form 1， 都只有这一个对象 避免不同实例，锁不同
+                            // readonly => 不要改动
+                            // object => 表示引用
+
+
+                            {
+                                lock (this)
+                                {
+                                    // this -> form1 的实例 每次实例化不同的锁，各搞各的, 同一个实例是相同的锁
+                                    // 但是这个实例别人也能访问到， 别人也能锁定
+                                    // 推荐使用 -> private readonly object btnThreadCore_Click_lock = new object();
+                                }
+                            }
+
+                            lock (btnThreadCore_Click_lock) // lock 后的方法快，任意时刻只有一个线程可以进入
+                            // 值类型无法lock，编译器会报错，
+                            // 只能锁引用类型，占用这个引用链接 不要用string 因为享元模式
+                            {
+                                this.TotalCount += 1;
+                                TotalCountIn += 1;
+                                this.intList.Add(k);
+                            }
+
+                            // lock 语法糖 等同于如下code
+                            {
+                                Monitor.Enter(btnThreadCore_Click_lock);
+                                this.TotalCount += 1;
+                                TotalCountIn += 1;
+                                this.intList.Add(k);
+                                Monitor.Exit(btnThreadCore_Click_lock);
+                            }
+
+                        }));
+                    }
+
+                    Task.WaitAll(tasks.ToArray());
+
+                    Console.WriteLine(this.TotalCount); // < 10000
+                    Console.WriteLine(TotalCountIn);   // < 10000 
+                    Console.WriteLine(intList.Count); //  < 10000
+
+                    this.TotalCount = 0;
+                    intList.Clear();
+                }
+
+
+
+                #endregion
+            }
+            catch (AggregateException aggregateException)
+            {
+                foreach (var aggregateExceptionInnerException in aggregateException.InnerExceptions)
+                {
+                    Console.WriteLine(aggregateExceptionInnerException.Message);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            Console.WriteLine($"**********************btnThreadCore_Click End {Thread.CurrentThread.ManagedThreadId.ToString("00")} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}********************");
         }
     }
 }
