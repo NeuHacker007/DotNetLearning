@@ -45,6 +45,7 @@ namespace LotteryDemo
             ,"11","12","13","14","15","16"
         };
 
+        private static readonly object frmSSQ_Lock = new object();
         private void btnStart_Click(object sender, EventArgs e)
         {
             try
@@ -60,11 +61,11 @@ namespace LotteryDemo
                 lblRed6.Text = "00";
                 Thread.Sleep(1000);
                 TaskFactory taskFactory = new TaskFactory();
-                foreach (var control in gbResult.Controls) 
+                foreach (var control in gbResult.Controls)
                 {
                     if (control is Label)
                     {
-                        Label lbl = (Label) control;
+                        Label lbl = (Label)control;
 
                         if (lbl.Name.Contains("Blue"))
                         {
@@ -72,7 +73,7 @@ namespace LotteryDemo
                             {
                                 while (true)
                                 {
-                                    int idx = RandomHelper.GetRandomNumber(0, BlueNums.Length);
+                                    int idx = RandomHelper.GetRandomNumberLong(0, BlueNums.Length);
                                     string sNum = BlueNums[idx];
 
                                     // winForm 中如果直接用下面的 子线程去更新主线程UI的控件会触发异常
@@ -80,17 +81,83 @@ namespace LotteryDemo
                                     // lbl.Text = sNum;
                                     UpdateLbl(lbl, sNum);
                                 }
-                               
+
                             });
                         }
-                    }   
+                        else
+                        {
+                            taskFactory.StartNew(() =>
+                            {
+                                while (true)
+                                {
+
+                                    // 已经来就已经锁住了，导致实际效果跟单线程执行一样
+                                    //  lock (frmSSQ_Lock)
+                                    //  {
+                                    //      int idx = RandomHelper.GetRandomNumberLong(0, RedNums.Length);
+                                    //      string sNum = RedNums[idx];
+
+                                    //      if (IsExist(sNum))
+                                    //      {
+                                    //          continue; //重复了就放弃更新， 重新获取
+                                    //      }
+                                    //      // winForm 中如果直接用下面的 子线程去更新主线程UI的控件会触发异常
+                                    //      // 导致无法更新该控件的值。
+                                    //      // lbl.Text = sNum;
+                                    //      UpdateLbl(lbl, sNum);
+                                    //  }
+
+                                    {
+                                        int idx = RandomHelper.GetRandomNumberLong(0, RedNums.Length);
+                                        string sNum = RedNums[idx];
+
+                                        lock (frmSSQ_Lock)
+                                        {
+                                            if (IsExist(sNum))
+                                            {
+                                                continue; //重复了就放弃更新， 重新获取
+                                            }
+                                            // winForm 中如果直接用下面的 子线程去更新主线程UI的控件会触发异常
+                                            // 导致无法更新该控件的值。
+                                            // lbl.Text = sNum;
+                                            UpdateLbl(lbl, sNum);
+
+                                        }
+
+                                    }
+
+                                }
+
+                            });
+                        }
+                    }
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"start exception: {ex.Message}");
-                
+
             }
+        }
+
+        private bool IsExist(string sNum)
+        {
+            List<string> list = new List<string>();
+            foreach (var control in gbResult.Controls)
+            {
+                if (control is Label)
+                {
+                    Label lbl = (Label)control;
+
+
+                    if (lbl.Name.Contains("Red") && lbl.Text.Equals(sNum))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
 
         private void UpdateLbl(Label lbl, string text)
