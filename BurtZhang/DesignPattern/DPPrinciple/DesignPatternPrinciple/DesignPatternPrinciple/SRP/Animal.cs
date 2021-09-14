@@ -8,21 +8,76 @@ namespace DesignPatternPrinciple.SRP
 {
     public class Animal
     {
-        private string _Name = null;
+        protected string _Name = null;
 
         public Animal(string name)
         {
             this._Name = name;
         }
 
-        public void Breath()
+        public virtual void Breath()
         {
-            Console.WriteLine($"{_Name} Breath");
+            // If else 很多导致维护困难，每添加一个动物都要修改if else
+            // 需要拆分
+            if (_Name.Equals("Chicken"))
+            {
+                Console.WriteLine($"{_Name} Breath Air");
+            }
+            else if (_Name.Equals("fish"))
+            {
+                Console.WriteLine($"{_Name} Breath water");
+            }
+            //...
+
         }
 
-        public void Action()
+        public virtual void Action()
         {
-            Console.WriteLine($"{_Name} Fly");
+            if (_Name.Equals("Chicken"))
+            {
+                Console.WriteLine($"{_Name} flying");
+            }
+            else if (_Name.Equals("fish"))
+            {
+                Console.WriteLine($"{_Name} swimming");
+            }
+            // ...
+        }
+    }
+
+    public class Chicken : Animal
+    {
+        public Chicken(string name): base(name)
+        {
+            
+        }
+
+        public override void Breath()
+        {
+            Console.WriteLine($"{_Name} Breath Air");
+        }
+
+        public override void Action()
+        {
+            Console.WriteLine($"{_Name} flying");
+        }
+    }
+
+    public class Fish : Animal
+    {
+        public Fish(string name): base(name)
+        {
+            
+        }
+
+        public override void Breath()
+        {
+            Console.WriteLine($"{_Name} Breath water");
+        }
+
+        public override void Action()
+        {
+            Console.WriteLine($"{_Name} swimming");
         }
     }
 }
