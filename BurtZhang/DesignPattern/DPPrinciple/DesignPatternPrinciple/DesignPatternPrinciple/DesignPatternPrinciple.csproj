@@ -9,7 +9,6 @@
     <Folder Include="DIP\" />
     <Folder Include="ISP\" />
     <Folder Include="LOD\" />
-    <Folder Include="LSP\" />
     <Folder Include="OCP\" />
   </ItemGroup>
 
