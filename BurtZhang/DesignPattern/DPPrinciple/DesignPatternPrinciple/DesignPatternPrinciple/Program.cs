@@ -23,7 +23,15 @@ namespace DesignPatternPrinciple
                 {
                     Console.WriteLine("************************Single Responsibility************************");
                 }
-                
+                {
+                    SRP.SRPShow.Show();
+                }
+                {
+                    LSP.LSPShow.Show();
+                }
+                {
+
+                }
             }
             catch (Exception e)
             {
