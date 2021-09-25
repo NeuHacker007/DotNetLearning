@@ -48,6 +48,13 @@ namespace FactoryPattern
                     IRace human = ObjectFactory.CreateRace(config); // 3 没有细节 细节被转移
                     player.PlayWar3(human);
                 }
+
+                {
+                    Console.WriteLine("***********************Simple Factory Reflection*****************");
+                    IRace human = ObjectFactory.CreateRaceConfigReflection(config); 
+                    player.PlayWar3(human);
+
+                }
                 Console.ReadKey();
             }
             catch (Exception e)
