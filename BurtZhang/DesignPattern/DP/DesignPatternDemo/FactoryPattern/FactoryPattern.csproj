@@ -16,4 +16,8 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="FactoryMethod\" />
+  </ItemGroup>
+
 </Project>

@@ -38,20 +38,20 @@ namespace FactoryPattern
                     Console.WriteLine("***********************Simple Factory*****************");
                     // 我们希望去掉右边的细节，咱们就封装一下 转移一下
 
-                    IRace human = ObjectFactory.CreateRace(RaceType.Undead); // 3 没有细节 细节被转移
+                    IRace human = SimpleFactory.CreateRace(RaceType.Undead); // 3 没有细节 细节被转移
                     player.PlayWar3(human);
                 }
                 {
                     Console.WriteLine("***********************Simple Factory by Configuration*****************");
                     // 利用配置文件读取种族
 
-                    IRace human = ObjectFactory.CreateRace(config); // 3 没有细节 细节被转移
+                    IRace human = SimpleFactory.CreateRace(config); // 3 没有细节 细节被转移
                     player.PlayWar3(human);
                 }
 
                 {
                     Console.WriteLine("***********************Simple Factory Reflection*****************");
-                    IRace human = ObjectFactory.CreateRaceConfigReflection(config); 
+                    IRace human = SimpleFactory.CreateRaceConfigReflection(config); 
                     player.PlayWar3(human);
 
                 }

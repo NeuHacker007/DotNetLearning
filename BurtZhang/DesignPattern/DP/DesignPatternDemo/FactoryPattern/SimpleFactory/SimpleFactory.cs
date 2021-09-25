@@ -18,7 +18,7 @@ namespace FactoryPattern
         ORC,
         NE
     }
-    public class ObjectFactory
+    public class SimpleFactory
     {
         /// <summary>
         /// 细节没有消失 只是转移
