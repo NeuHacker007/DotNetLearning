@@ -7,9 +7,13 @@ using Microsoft.Extensions.Configuration;
 namespace FactoryPattern
 {
     /// <summary>
-    ///
+    ///创建型设计模式： 关注对象的创建 new 一个对象的动作
+    /// 
     /// 三大工厂
-    /// 简单工厂： (不属于GOF23种设计模式)
+    /// 简单工厂： (不属于GOF23种设计模式) 一个静态方法完成一组对象的创建
+    /// 工厂方法：每个工厂只负责一个对象的创建
+    /// 抽象工厂： 每个工厂负责一个产品簇的创建 工厂+ 约束
+    /// 建造者模式： 是为了创建一个更复杂的对象 
     /// </summary>
     class Program
     {
