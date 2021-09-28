@@ -1,4 +1,5 @@
 ﻿using System;
+using FactoryPattern.FactoryMethod;
 using FactoryPattern.War3.Interface;
 using FactoryPattern.War3.Service;
 using Microsoft.Extensions.Configuration;
@@ -54,6 +55,17 @@ namespace FactoryPattern
                     IRace human = SimpleFactory.CreateRaceConfigReflection(config); 
                     player.PlayWar3(human);
 
+                }
+
+                {
+                    // 工厂方法就是把每个new 对象的操作单独作为一个工厂
+                    IFactory factory = new HumanFactory();
+                    IRace race = factory.CreateRace();
+                    // 何苦 搞了这么多工厂 还不是创建对象
+                    // 以前依赖的是Human 现在换成了 HumanFactory
+
+                    // 1. 工厂可以增加一些创建逻辑 屏蔽对象实例化的复杂度 比如增加多种参数
+                    // 2. 对象创建的过程中 可能扩展(IOC)
                 }
                 Console.ReadKey();
             }
