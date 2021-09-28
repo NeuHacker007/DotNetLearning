@@ -8,5 +8,6 @@ namespace FactoryPattern.War3.Interface
 {
     public interface IHero
     {
+        void ShowHero();
     }
 }

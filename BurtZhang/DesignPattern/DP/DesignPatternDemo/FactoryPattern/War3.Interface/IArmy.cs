@@ -8,7 +8,7 @@ namespace FactoryPattern.War3.Interface
 {
     public interface IArmy
     {
-        
+        void ShowArmy();
     }
     
 }
