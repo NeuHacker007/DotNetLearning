@@ -25,6 +25,9 @@ namespace DesignPattern
     ///         4. 聚合
     ///
     /// 组合优于继承
+    ///
+    /// 适配器模式: 把一个类适配到原有的接口上，可以组合 可以继承
+    /// 代理模式: 
     /// </summary>
     class Program
     {
