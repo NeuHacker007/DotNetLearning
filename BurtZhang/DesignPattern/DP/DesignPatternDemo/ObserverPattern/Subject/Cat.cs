@@ -71,13 +71,15 @@ namespace ObserverPattern.Subject
         {
             Console.WriteLine($"{typeof(Cat)} Miao ....");
 
-            if (MiaoHandler != null)
-            {
-                foreach (Action item in MiaoHandler.GetInvocationList())
-                {
-                    item.Invoke();
-                }
-            }
+            //  if (MiaoHandler != null)
+            //  {
+            //      foreach (Action item in MiaoHandler.GetInvocationList())
+            //      {
+            //          item.Invoke();
+            //      }
+            //  }
+
+            MiaoHandler?.Invoke();
         }
     }
 }
