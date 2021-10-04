@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31613.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ivan.Crawler", "Ivan.Crawler\Ivan.Crawler.csproj", "{19D9A1FC-C0BA-416A-AF4E-208A3B3BE36C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ivan.Crawler.Framework", "Ivan.Crawler.Framework\Ivan.Crawler.Framework.csproj", "{DA19CADC-BE6B-4F3E-B25D-4CE0D3778F38}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{19D9A1FC-C0BA-416A-AF4E-208A3B3BE36C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19D9A1FC-C0BA-416A-AF4E-208A3B3BE36C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19D9A1FC-C0BA-416A-AF4E-208A3B3BE36C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19D9A1FC-C0BA-416A-AF4E-208A3B3BE36C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA19CADC-BE6B-4F3E-B25D-4CE0D3778F38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA19CADC-BE6B-4F3E-B25D-4CE0D3778F38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA19CADC-BE6B-4F3E-B25D-4CE0D3778F38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA19CADC-BE6B-4F3E-B25D-4CE0D3778F38}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A9B9EE58-A8D6-48C1-9993-C82A8BC6899A}
+	EndGlobalSection
+EndGlobal
