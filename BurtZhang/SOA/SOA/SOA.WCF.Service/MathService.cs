@@ -12,22 +12,32 @@ namespace SOA.WCF.Service
     {
         public int PlusInt(int x, int y)
         {
-            throw new NotImplementedException();
+            return x + y;
         }
 
         public int Minus(int x, int y)
         {
-            throw new NotImplementedException();
+            return x - y;
         }
 
         public WCFUser GetUser(int x, int y)
         {
-            throw new NotImplementedException();
+            return new WCFUser()
+            {
+                Id = 1,
+                Name = "Ivan"
+            };
         }
 
         public List<WCFUser> UserList()
         {
-            throw new NotImplementedException();
+            return new List<WCFUser>()
+            {
+                new WCFUser() {Id =1, Name="Ivan"},
+                new WCFUser() {Id =2, Name="Ivan2"},
+                new WCFUser() {Id =3, Name="Ivan3"},
+                new WCFUser() {Id =4, Name="Ivan4"}
+            };
         }
     }
 }

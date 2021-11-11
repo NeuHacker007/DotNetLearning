@@ -45,8 +45,10 @@ namespace SOA.BackEnd
     /// </summary>
     class Program
     {
+        
         static void Main(string[] args)
         {
+            ServiceInit.Process();
         }
     }
 }
