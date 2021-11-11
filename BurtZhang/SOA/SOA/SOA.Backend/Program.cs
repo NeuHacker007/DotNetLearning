@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace SOA.Backend
+namespace SOA.BackEnd
 {
     /// <summary>
     /// 1 SOA 的思想， 分布式服务
@@ -43,7 +47,6 @@ namespace SOA.Backend
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
         }
     }
 }

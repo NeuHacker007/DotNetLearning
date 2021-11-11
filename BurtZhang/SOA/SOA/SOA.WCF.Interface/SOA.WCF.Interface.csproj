@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{519EE29D-CDC5-405C-9E9F-5ECE7B31E551}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>SOA.BackEnd</RootNamespace>
-    <AssemblyName>SOA.BackEnd</AssemblyName>
+    <ProjectGuid>{BFE51CFB-F3EB-4A2B-9503-66AA30396764}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SOA.WCF.Interface</RootNamespace>
+    <AssemblyName>SOA.WCF.Interface</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -44,25 +42,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="IMathService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServiceInit.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\SOA.WCF.Interface\SOA.WCF.Interface.csproj">
-      <Project>{bfe51cfb-f3eb-4a2b-9503-66aa30396764}</Project>
-      <Name>SOA.WCF.Interface</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SOA.WCF.Model\SOA.WCF.Model.csproj">
       <Project>{21d4eb42-c4ea-4c4a-86cd-d5c95c7c429f}</Project>
       <Name>SOA.WCF.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SOA.WCF.Service\SOA.WCF.Service.csproj">
-      <Project>{fc942579-7cf6-4cbd-b55a-eeae5b07cae9}</Project>
-      <Name>SOA.WCF.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

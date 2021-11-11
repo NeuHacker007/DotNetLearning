@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31829.152
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SOA.Backend", "SOA.Backend\SOA.Backend.csproj", "{47B7195D-35D0-4A00-9BE5-FB5DBCFB8826}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SOA.Web", "SOA.Web\SOA.Web.csproj", "{335397DF-FB6C-4870-9ABD-4600D66755A2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SOA.UnitTest", "SOA.UnitTest\SOA.UnitTest.csproj", "{1597D701-0826-4037-A4D3-62B6B38BAC0D}"
@@ -12,16 +10,20 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SOA.UnitTest", "SOA.UnitTes
 		{335397DF-FB6C-4870-9ABD-4600D66755A2} = {335397DF-FB6C-4870-9ABD-4600D66755A2}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SOA.WCF.Interface", "SOA.WCF.Interface\SOA.WCF.Interface.csproj", "{BFE51CFB-F3EB-4A2B-9503-66AA30396764}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SOA.WCF.Model", "SOA.WCF.Model\SOA.WCF.Model.csproj", "{21D4EB42-C4EA-4C4A-86CD-D5C95C7C429F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SOA.WCF.Service", "SOA.WCF.Service\SOA.WCF.Service.csproj", "{FC942579-7CF6-4CBD-B55A-EEAE5B07CAE9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SOA.BackEnd", "SOA.BackEnd\SOA.BackEnd.csproj", "{519EE29D-CDC5-405C-9E9F-5ECE7B31E551}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{47B7195D-35D0-4A00-9BE5-FB5DBCFB8826}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{47B7195D-35D0-4A00-9BE5-FB5DBCFB8826}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{47B7195D-35D0-4A00-9BE5-FB5DBCFB8826}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{47B7195D-35D0-4A00-9BE5-FB5DBCFB8826}.Release|Any CPU.Build.0 = Release|Any CPU
 		{335397DF-FB6C-4870-9ABD-4600D66755A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{335397DF-FB6C-4870-9ABD-4600D66755A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{335397DF-FB6C-4870-9ABD-4600D66755A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -30,6 +32,22 @@ Global
 		{1597D701-0826-4037-A4D3-62B6B38BAC0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1597D701-0826-4037-A4D3-62B6B38BAC0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1597D701-0826-4037-A4D3-62B6B38BAC0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFE51CFB-F3EB-4A2B-9503-66AA30396764}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFE51CFB-F3EB-4A2B-9503-66AA30396764}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFE51CFB-F3EB-4A2B-9503-66AA30396764}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFE51CFB-F3EB-4A2B-9503-66AA30396764}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21D4EB42-C4EA-4C4A-86CD-D5C95C7C429F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21D4EB42-C4EA-4C4A-86CD-D5C95C7C429F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21D4EB42-C4EA-4C4A-86CD-D5C95C7C429F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21D4EB42-C4EA-4C4A-86CD-D5C95C7C429F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC942579-7CF6-4CBD-B55A-EEAE5B07CAE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC942579-7CF6-4CBD-B55A-EEAE5B07CAE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC942579-7CF6-4CBD-B55A-EEAE5B07CAE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC942579-7CF6-4CBD-B55A-EEAE5B07CAE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{519EE29D-CDC5-405C-9E9F-5ECE7B31E551}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{519EE29D-CDC5-405C-9E9F-5ECE7B31E551}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{519EE29D-CDC5-405C-9E9F-5ECE7B31E551}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{519EE29D-CDC5-405C-9E9F-5ECE7B31E551}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
