@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace SOA.Web.Remoting
+namespace SOA.Web.WebServices
 {
     public class User
     {

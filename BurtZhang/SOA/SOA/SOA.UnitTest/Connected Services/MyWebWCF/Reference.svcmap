@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="701545b5-f267-4089-915b-e8ce69ece31e" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8080/WCF/MyWCF.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="MyWCF.xsd" MetadataType="Schema" ID="cd55ad6f-741e-4015-9638-183f592e308c" SourceId="1" SourceUrl="http://localhost:8080/WCF/MyWCF.svc?xsd=xsd2" />
+    <MetadataFile FileName="MyWCF1.xsd" MetadataType="Schema" ID="15bc90cb-396c-466c-bb9d-1fee61a9b4a8" SourceId="1" SourceUrl="http://localhost:8080/WCF/MyWCF.svc?xsd=xsd0" />
+    <MetadataFile FileName="MyWCF.wsdl" MetadataType="Wsdl" ID="611aacf5-ca89-435e-96d4-0886c3540643" SourceId="1" SourceUrl="http://localhost:8080/WCF/MyWCF.svc?wsdl" />
+    <MetadataFile FileName="MyWCF2.xsd" MetadataType="Schema" ID="30be3b34-a279-46e3-ba4c-b755a00d75fc" SourceId="1" SourceUrl="http://localhost:8080/WCF/MyWCF.svc?xsd=xsd1" />
+    <MetadataFile FileName="MyWCF.disco" MetadataType="Disco" ID="54b49c88-e11c-4730-b3dc-6290819d31be" SourceId="1" SourceUrl="http://localhost:8080/WCF/MyWCF.svc?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
