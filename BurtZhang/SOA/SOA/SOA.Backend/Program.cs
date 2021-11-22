@@ -42,6 +42,14 @@ namespace SOA.BackEnd
     ///     2） Form Windows 身份
     ///     3） 加个参数， token 定时更新+沟通
     ///     4） SoapHeader
+    ///
+    /// Protocol Supported by WCF
+    /// 1) Http
+    /// 2) TCP
+    /// 3) pipe
+    /// 4) msmq
+    /// 5) p2p
+    /// 
     /// </summary>
     class Program
     {
