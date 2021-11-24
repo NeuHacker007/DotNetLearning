@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SOA.WCF.Service", "SOA.WCF.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SOA.BackEnd", "SOA.BackEnd\SOA.BackEnd.csproj", "{519EE29D-CDC5-405C-9E9F-5ECE7B31E551}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SOA.WebAPI", "SOA.WebAPI\SOA.WebAPI.csproj", "{5BB76864-DD24-48E3-B573-E1D4691D38B7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +50,10 @@ Global
 		{519EE29D-CDC5-405C-9E9F-5ECE7B31E551}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{519EE29D-CDC5-405C-9E9F-5ECE7B31E551}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{519EE29D-CDC5-405C-9E9F-5ECE7B31E551}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BB76864-DD24-48E3-B573-E1D4691D38B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BB76864-DD24-48E3-B573-E1D4691D38B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BB76864-DD24-48E3-B573-E1D4691D38B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BB76864-DD24-48E3-B573-E1D4691D38B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
