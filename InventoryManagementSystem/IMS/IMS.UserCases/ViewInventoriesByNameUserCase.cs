@@ -3,15 +3,15 @@ using IMS.UserCases.PluginInterfaces;
 
 namespace IMS.UserCases
 {
-    public class ViewInventoriesByName
+    public class ViewInventoriesByNameUserCase : IViewInventoriesByNameUserCase
     {
         private readonly IInventoryRepository inventoryRepository;
 
-        public ViewInventoriesByName(IInventoryRepository inventoryRepository)
+        public ViewInventoriesByNameUserCase(IInventoryRepository inventoryRepository)
         {
             this.inventoryRepository = inventoryRepository;
         }
-        
+
         public async Task<IEnumerable<Inventory>> ExecuteAsync(string name)
         {
             return await this.inventoryRepository.GetInventoriesByName(name);

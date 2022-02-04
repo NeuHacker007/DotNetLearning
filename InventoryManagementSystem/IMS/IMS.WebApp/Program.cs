@@ -1,6 +1,9 @@
 using IMS.Plugins.EFCore;
+using IMS.UserCases;
+using IMS.UserCases.PluginInterfaces;
 using IMS.WebApp.Areas.Identity;
 using IMS.WebApp.Data;
+using IMS.WebApp.Extentions;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
@@ -26,6 +29,8 @@ builder.Services.AddDbContext<IMSContext>(options =>
 {
     options.UseInMemoryDatabase("IMS");
 });
+
+builder.Services.AddCustomServices();
 
 var app = builder.Build();
 
