@@ -12,7 +12,7 @@ namespace IMS.UserCases
             this.inventoryRepository = inventoryRepository;
         }
 
-        public async Task<IEnumerable<Inventory>> ExecuteAsync(string name)
+        public async Task<IEnumerable<Inventory>> ExecuteAsync(string name = "")
         {
             return await this.inventoryRepository.GetInventoriesByName(name);
         }
