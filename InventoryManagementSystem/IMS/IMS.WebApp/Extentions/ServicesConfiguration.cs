@@ -10,6 +10,7 @@ namespace IMS.WebApp.Extentions
         {
             services.AddTransient<IViewInventoriesByNameUserCase, ViewInventoriesByNameUserCase>();
             services.AddTransient<IInventoryRepository, InventoryRepository>();
+            services.AddTransient<IAddInventoryUseCase, AddInventoryUseCase>();
         }
     }
 }
