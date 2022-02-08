@@ -1,0 +1,39 @@
+﻿
+@page "/inventories"
+<h3>InventoryList</h3>
+<br />
+<ViewInventoriesComponent OnSearchInventories="OnSearchInventories"></ViewInventoriesComponent>
+
+@if(inventoriesList != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var inventory in this.inventoriesList)
+            {
+               <tr>
+                    <td>@inventory.Name</td>
+                    <td>@inventory.Quantity</td>
+                    <td>@inventory.Price.ToString("c")</td>
+                    <td>
+                        <button type="button" class="btn btn-light">Edit</button>
+                    </td>
+               </tr>
+            }
+        </tbody>
+    </table>
+}
+@code {
+    private IList<Inventory>? inventoriesList;
+    private void OnSearchInventories(IList<Inventory> inventories)
+    {
+        inventoriesList = inventories;
+    }
+}
