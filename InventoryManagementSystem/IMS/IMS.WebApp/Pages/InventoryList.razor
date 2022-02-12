@@ -1,5 +1,6 @@
 ﻿
 @page "/inventories"
+@inject NavigationManager naviationManager
 <h3>InventoryList</h3>
 <br />
 <ViewInventoriesComponent OnSearchInventories="OnSearchInventories"></ViewInventoriesComponent>
@@ -29,11 +30,18 @@
             }
         </tbody>
     </table>
+    <br/>
+    <button type="button" class="btn btn-primary" @onclick="AddInventory">Add Inventory</button>
 }
 @code {
     private IList<Inventory>? inventoriesList;
     private void OnSearchInventories(IList<Inventory> inventories)
     {
         inventoriesList = inventories;
+    }
+
+    private void AddInventory()
+    {
+        naviationManager.NavigateTo("/addinventory");
     }
 }
