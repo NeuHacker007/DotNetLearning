@@ -1,5 +1,5 @@
 using NUnit.Framework;
-
+using System;
 
 namespace LinqDemo.Tests
 {
@@ -12,9 +12,9 @@ namespace LinqDemo.Tests
         }
 
         [Test]
-        public void Demo1_()
+        public void Demo1_Print_Employees()
         {
-            Assert.Pass();
+           Assert.Pass();
         }
     }
 }
