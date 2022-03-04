@@ -6,7 +6,7 @@ namespace LinqDemo
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            SelectManyDemo.Demo5();
         }
     }
 }
