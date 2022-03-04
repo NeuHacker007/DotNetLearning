@@ -2,11 +2,11 @@
 
 namespace LinqDemo
 {
-    internal class Program
+    public class Program
     {
         static void Main(string[] args)
         {
-            DistinctDemo.Demo3();
+            AggregateDemo.Demo6();
         }
     }
 }
