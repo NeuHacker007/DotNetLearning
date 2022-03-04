@@ -6,7 +6,7 @@ namespace LinqDemo
     {
         static void Main(string[] args)
         {
-            OfTypeDemo.Demo1();
+            DistinctDemo.Demo3();
         }
     }
 }
