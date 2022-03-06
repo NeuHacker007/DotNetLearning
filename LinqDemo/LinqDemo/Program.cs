@@ -6,7 +6,7 @@ namespace LinqDemo
     {
         static void Main(string[] args)
         {
-            AggregateDemo.Demo6();
+           GroupByDemo.Demo2();
         }
     }
 }
