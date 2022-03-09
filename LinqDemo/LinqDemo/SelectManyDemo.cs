@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LinqDemo
 {
@@ -42,8 +40,8 @@ namespace LinqDemo
                                       .ToList();
 
             var queryFormat = (from st in Student.GetStudents()
-                              from program in st.Programming
-                              select program).Distinct().ToList();
+                               from program in st.Programming
+                               select program).Distinct().ToList();
 
             foreach (var program in methodFormat)
             {
@@ -54,19 +52,19 @@ namespace LinqDemo
         public static void Demo4()
         {
             var methodFormat = Student.GetStudents()
-                .SelectMany(st => st.Programming,(st, p) => new
+                .SelectMany(st => st.Programming, (st, p) => new
                 {
                     StudentName = st.Name,
                     Programming = p
                 });
 
             var queryFormat = (from st in Student.GetStudents()
-                              from program in st.Programming
-                              select new
-                              {
-                                  StudentName = st.Name,
-                                  Programming = program
-                              }).ToList();
+                               from program in st.Programming
+                               select new
+                               {
+                                   StudentName = st.Name,
+                                   Programming = program
+                               }).ToList();
 
             foreach (var item in methodFormat)
             {
@@ -78,17 +76,17 @@ namespace LinqDemo
         public static void Demo5()
         {
             var methodFormat = Student.GetStudents()
-                                      .SelectMany(st => new string[]{st.Name, st.Email})
+                                      .SelectMany(st => new string[] { st.Name, st.Email })
                                       .Distinct()
                                       .OrderByDescending(x => x)
                                       .ToList();
             var queryFormat = (from st in Student.GetStudents()
-                               from p in new string[] {st.Name, st.Email }
+                               from p in new string[] { st.Name, st.Email }
                                select p
                                )
                                .Distinct()
                                .ToList();
-            foreach(var st in queryFormat)
+            foreach (var st in queryFormat)
             {
                 Console.WriteLine(st);
             }

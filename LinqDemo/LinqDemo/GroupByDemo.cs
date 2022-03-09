@@ -1,9 +1,6 @@
 ﻿using LinqDemo.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LinqDemo
 {
@@ -48,15 +45,15 @@ namespace LinqDemo
                               };
             foreach (var group in methodFormat)
             {
-                Console.WriteLine(group.Key +" : " + group.Students.Count());
+                Console.WriteLine(group.Key + " : " + group.Students.Count());
                 //Iterate through each student of a group
-                foreach(var student in group.Students)
+                foreach (var student in group.Students)
                 {
                     Console.WriteLine("  Name :" + student.Name + ", Age: " + student.Age + ", Branch :" + student.Barnch);
                 }
             }
 
-           
+
         }
     }
 }

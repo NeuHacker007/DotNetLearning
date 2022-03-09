@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LinqDemo
 {
@@ -17,8 +15,8 @@ namespace LinqDemo
 
             var intsMethodFormat = dataSource.OfType<int>().ToList();
             var intsQueryFormat = (from item in dataSource
-                                  where item is int
-                                  select item).ToList();
+                                   where item is int
+                                   select item).ToList();
             var strs = dataSource.OfType<string>().ToList();
             var strsQueryFormat = (from item in dataSource
                                    where item is string

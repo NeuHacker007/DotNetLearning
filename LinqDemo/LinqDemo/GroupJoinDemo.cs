@@ -1,9 +1,6 @@
 ﻿using LinqDemo.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LinqDemo
 {
@@ -36,7 +33,7 @@ namespace LinqDemo
                  GroupDataSource.Department.GetAllDepartments(),
                  emp => emp.DepartmentId,
                  dep => dep.ID,
-                 (emp, dep) => new {emp, dep});
+                 (emp, dep) => new { emp, dep });
 
 
             foreach (var item in methodFormat)
@@ -56,11 +53,11 @@ namespace LinqDemo
                               join emp in GroupDataSource.Employee.GetAllEmployees()
                               on dep.ID equals emp.DepartmentId into empGroups
                               select new { dep, empGroups };
-            foreach(var item in queryFormat)
+            foreach (var item in queryFormat)
             {
                 Console.WriteLine("Department :" + item.dep.Name);
                 //Inner Foreach loop for each employee of a department
-                foreach(var employee in item.empGroups)
+                foreach (var employee in item.empGroups)
                 {
                     Console.WriteLine("  EmployeeID : " + employee.ID + " , Name : " + employee.Name);
                 }

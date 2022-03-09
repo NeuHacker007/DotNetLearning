@@ -1,9 +1,6 @@
 ﻿using LinqDemo.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LinqDemo
 {
@@ -15,7 +12,7 @@ namespace LinqDemo
             var methodFormat = GroupByStudent.GetStudents().ToLookup(s => s.Barnch);
 
             var queryFormat = (from std in GroupByStudent.GetStudents()
-                              select std).ToLookup(s => s.Barnch);
+                               select std).ToLookup(s => s.Barnch);
             foreach (var group in methodFormat)
             {
                 Console.WriteLine(group.Key + " : " + group.Count());
@@ -29,7 +26,7 @@ namespace LinqDemo
 
         public static void Demo2()
         {
-            
+
         }
     }
 }

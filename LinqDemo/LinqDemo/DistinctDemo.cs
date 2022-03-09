@@ -3,8 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LinqDemo
 {
@@ -33,8 +31,8 @@ namespace LinqDemo
         public static void Demo3()
         {
             var methodFormat = DupStudent.GetStudents().Select(std => new { std.ID, std.Name }).Distinct().ToList();
-            var methodFormat2 = DupStudent.GetStudents().SelectMany(std => new string[]{ std.ID.ToString(), std.Name }).Distinct().ToList();
-            var methodFormat3 = DupStudent.GetStudents().SelectMany(std => new List<Tuple<int, string>>(){ Tuple.Create(std.ID, std.Name) }).Distinct().ToList();
+            var methodFormat2 = DupStudent.GetStudents().SelectMany(std => new string[] { std.ID.ToString(), std.Name }).Distinct().ToList();
+            var methodFormat3 = DupStudent.GetStudents().SelectMany(std => new List<Tuple<int, string>>() { Tuple.Create(std.ID, std.Name) }).Distinct().ToList();
 
             foreach (var item in methodFormat)
             {

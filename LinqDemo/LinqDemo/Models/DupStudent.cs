@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace LinqDemo.Models
 {
@@ -27,7 +23,7 @@ namespace LinqDemo.Models
 
         public override bool Equals(object obj)
         {
-            return this.ID == ((DupStudent) obj).ID && this.Name == ((DupStudent) obj).Name;
+            return this.ID == ((DupStudent)obj).ID && this.Name == ((DupStudent)obj).Name;
         }
 
         public override int GetHashCode()

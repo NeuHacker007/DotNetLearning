@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LinqDemo
 {
@@ -69,7 +67,7 @@ namespace LinqDemo
         public static void Demo6()
         {
             string stdsNames = DupStudent.GetStudents()
-                .SelectMany(std => new List<Tuple<int, string>>(){ Tuple.Create(std.ID, std.Name) })
+                .SelectMany(std => new List<Tuple<int, string>>() { Tuple.Create(std.ID, std.Name) })
                 .Distinct()
                 .Aggregate("Student ID and Names: \n",
                            (stdNames, IdNamePair) => stdNames += IdNamePair.Item1 + " => " + IdNamePair.Item2 + "\n"
