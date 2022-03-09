@@ -6,11 +6,13 @@ namespace LinqDemo
     {
         static void Main(string[] args)
         {
-            GroupJoinDemo.Demo1();
+            //GroupJoinDemo.Demo1();
+            LeftJoinDemo.Demo2();
             Console.WriteLine("*************************");
-            GroupJoinDemo.Demo2();
+            RightjoinDemo.Demo2();
+            //GroupJoinDemo.Demo2();
             Console.WriteLine("********************************");
-            GroupJoinDemo.Demo3();
+            //GroupJoinDemo.Demo3();
             //MultipleJoinSourceDemo.Demo1();
             //Console.WriteLine("");
             //Console.WriteLine("*************************");
