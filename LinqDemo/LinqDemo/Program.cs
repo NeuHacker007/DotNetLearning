@@ -6,7 +6,11 @@ namespace LinqDemo
     {
         static void Main(string[] args)
         {
-           GroupByMultipleKey.Demo1();
+            MultipleJoinSourceDemo.Demo1();
+            Console.WriteLine("");
+            Console.WriteLine("*************************");
+            Console.WriteLine("");
+            MultipleJoinSourceDemo.Demo2();
         }
     }
 }
