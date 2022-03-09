@@ -7,7 +7,7 @@ namespace LinqDemo
         static void Main(string[] args)
         {
             //GroupJoinDemo.Demo1();
-            LeftJoinDemo.Demo2();
+            OuterJoinDemo.Demo2();
             Console.WriteLine("*************************");
             RightjoinDemo.Demo2();
             //GroupJoinDemo.Demo2();

@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace LinqDemo
 {
-    public class LeftJoinDemo
+    public class OuterJoinDemo
     {
         public static void Demo1()
         {
@@ -65,19 +65,21 @@ namespace LinqDemo
 
         public static void Demo2()
         {
-            var queryFormat = from address in OuterJoinDataSource.Address.GetAddress()
-                              join emp in OuterJoinDataSource.Employee.GetAllEmployees()
-                              on address.ID equals emp.AddressId into AddressEmployeeGroup
-                              from emp in AddressEmployeeGroup.DefaultIfEmpty()
-                              select new
-                              {
-                                  emp = emp,
-                                  address = address,
-
-                              };
-            foreach (var item in queryFormat)
+            var methodForamt = OuterJoinDataSource.Address.GetAddress()
+                 .GroupJoin(
+                    OuterJoinDataSource.Employee.GetAllEmployees(),
+                    address => address.ID,
+                    emp => emp.AddressId,
+                    (address, emp) => new { address, emp })
+                 .SelectMany(x => x.emp.DefaultIfEmpty(),
+                  (address, emp) => new
+                  {
+                      emp,
+                      address
+                  });
+            foreach (var item in methodForamt)
             {
-                Console.WriteLine($" Name: {item.emp?.Name} address: {item.address.AddressLine}");
+                Console.WriteLine($" Name: {item.emp?.Name} address: {item.address.address.AddressLine}");
             }
 
 
