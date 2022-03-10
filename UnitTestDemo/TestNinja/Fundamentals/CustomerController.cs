@@ -4,6 +4,7 @@
     {
         public ActionResult GetCustomer(int id)
         {
+            if (id < 0) throw new ArgumentException("Id cannot less than 0");
             if (id == 0)
                 return new NotFound();
             
