@@ -32,6 +32,7 @@ namespace FakeXieCheng.API.Database
             //});
             //if (System.Diagnostics.Debugger.IsAttached == false)
             //{
+            //    //Launches and attaches a debugger to the process
             //    System.Diagnostics.Debugger.Launch();
             //}
             string touristRouteJsonData = File.ReadAllText(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\Database\touristRoutesMockData.json");
