@@ -11,6 +11,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Mvc.Formatters;
+
 namespace FakeXieCheng.API
 {
     public class Startup
@@ -25,7 +27,12 @@ namespace FakeXieCheng.API
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers(setup =>
+            {
+                setup.ReturnHttpNotAcceptable = true;
+                //setup.OutputFormatters.Add(
+                //    new XmlDataContractSerializerOutputFormatter());
+            }).AddXmlDataContractSerializerFormatters();
             services.AddTransient<ITouristRouteRepository, TouristRoutesRepository>();
            
             services.AddDbContext<AppDbContext>(option =>
