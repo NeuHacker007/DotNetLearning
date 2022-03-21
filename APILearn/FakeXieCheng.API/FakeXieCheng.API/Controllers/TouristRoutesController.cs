@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System;
+using FakeXieCheng.API.Dtos;
 
 namespace FakeXieCheng.API.Controllers
 {
@@ -37,7 +38,23 @@ namespace FakeXieCheng.API.Controllers
             {
                 return NotFound($"旅游路线{touristRouteId}找不到");
             }
-            return Ok(touristRouteFromRepo);
+            var touristRouteDto = new TouristRouteDto()
+            {
+                Id= touristRouteFromRepo.Id,
+                Title = touristRouteFromRepo.Title,
+                Description = touristRouteFromRepo.Title,
+                Price = touristRouteFromRepo.OriginalPrice * (decimal) (touristRouteFromRepo.DiscountPresent ?? 1d),
+                CreateTime = touristRouteFromRepo.CreateTime,
+                UpdateTime = touristRouteFromRepo.UpdateTime,
+                Features = touristRouteFromRepo.Features,
+                Fees = touristRouteFromRepo.Fees,
+                Notes = touristRouteFromRepo.Notes,
+                Rating = touristRouteFromRepo.Rating,
+                TravelDays = touristRouteFromRepo.TravelDays.ToString(),
+                TripType = touristRouteFromRepo.TripType.ToString(),
+                DepartureCity = touristRouteFromRepo.DepartureCity.ToString()
+            };
+            return Ok(touristRouteDto);
         }
     }
 }
