@@ -40,6 +40,8 @@ namespace FakeXieCheng.API
                 //option.UseSqlServer(@"Server=IVAN-ZHANG\IVAN_ZHANG;Database=FakeXiechengDb;Integrated Security=True;");
                 option.UseSqlServer(Configuration["DbContext:ConnectionString"]);
             });
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
