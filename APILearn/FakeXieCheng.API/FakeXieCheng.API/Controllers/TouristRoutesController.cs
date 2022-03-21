@@ -5,6 +5,7 @@ using System.Linq;
 using System;
 using FakeXieCheng.API.Dtos;
 using AutoMapper;
+using System.Collections.Generic;
 
 namespace FakeXieCheng.API.Controllers
 {
@@ -30,7 +31,8 @@ namespace FakeXieCheng.API.Controllers
             {
                 return NotFound("没有旅游路线");
             }
-            return Ok(touristRoutesFromRepo);
+            var touristRoutesDto = _mapper.Map<IEnumerable<TouristRouteDto>>(touristRoutesFromRepo);
+            return Ok(touristRoutesDto);
         }
 
         [HttpGet("{touristRouteId:Guid}")]
