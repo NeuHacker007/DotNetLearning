@@ -7,6 +7,7 @@ using FakeXieCheng.API.Dtos;
 using AutoMapper;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using FakeXieCheng.API.ResourceParameters;
 
 namespace FakeXieCheng.API.Controllers
 {
@@ -26,21 +27,12 @@ namespace FakeXieCheng.API.Controllers
         [HttpGet]
         [HttpHead]// only return header info not the body
         public IActionResult GetRouristRoutes(
-            [FromQuery] string keyword,
-            string rating)
+            [FromQuery] TouristRouteResourceParameters parameters
+            //[FromQuery] string keyword,
+            //string rating
+            )
         {
-            Regex regex = new Regex(@"([A-Za-z0-9\-]+)(\d+)");
-            string operatorType = "";
-            int ratingValue = -1;
-            Match match = regex.Match(rating);
-
-            if (match.Success)
-            {
-                operatorType = match.Groups[1].Value;
-                ratingValue = int.Parse( match.Groups[2].Value);
-            }
-
-            var touristRoutesFromRepo = _touristRouteRepository.GetTouristRoutes(keyword, operatorType, ratingValue);
+            var touristRoutesFromRepo = _touristRouteRepository.GetTouristRoutes(parameters.Keyword, parameters.RatingOperator, parameters.RatingValue);
             if (touristRoutesFromRepo == null
                 || touristRoutesFromRepo.Count() <= 0)
             {
