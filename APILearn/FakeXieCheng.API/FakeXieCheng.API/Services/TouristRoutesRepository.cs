@@ -33,7 +33,10 @@ namespace FakeXieCheng.API.Services
             return _context.TouristRoutes.Include(t => t.TouristRoutePictures).FirstOrDefault(tr => tr.Id == touristRouteId);
         }
 
-        public IEnumerable<TouristRoute> GetTouristRoutes(string keyword)
+        public IEnumerable<TouristRoute> GetTouristRoutes(
+            string keyword,
+            string operatorType,
+            int ratingValue)
         {
             IQueryable<TouristRoute> result = _context
                 .TouristRoutes
@@ -42,6 +45,16 @@ namespace FakeXieCheng.API.Services
             {
                 keyword = keyword.Trim();
                 result = result.Where(t => t.Title.Contains(keyword));
+            }
+
+            if (ratingValue >= 0)
+            {
+                result = operatorType switch
+                {
+                    "largerThan" => result.Where(t => t.Rating >= ratingValue),
+                    "lessThan" => result.Where(t => t.Rating < ratingValue),
+                    _ => result.Where(t => t.Rating == ratingValue),
+                };
             }
 
             //include vs join --> eager load

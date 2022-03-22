@@ -6,6 +6,7 @@ using System;
 using FakeXieCheng.API.Dtos;
 using AutoMapper;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace FakeXieCheng.API.Controllers
 {
@@ -16,7 +17,7 @@ namespace FakeXieCheng.API.Controllers
         private readonly ITouristRouteRepository _touristRouteRepository;
         private readonly IMapper _mapper;
 
-        public TouristRoutesController(ITouristRouteRepository touristRouteRepository,  IMapper mapper)
+        public TouristRoutesController(ITouristRouteRepository touristRouteRepository, IMapper mapper)
         {
             _touristRouteRepository = touristRouteRepository;
             this._mapper = mapper;
@@ -24,11 +25,24 @@ namespace FakeXieCheng.API.Controllers
 
         [HttpGet]
         [HttpHead]// only return header info not the body
-        public IActionResult GetRouristRoutes([FromQuery] string keyword)
+        public IActionResult GetRouristRoutes(
+            [FromQuery] string keyword,
+            string rating)
         {
-            var touristRoutesFromRepo = _touristRouteRepository.GetTouristRoutes(keyword);
-            if (touristRoutesFromRepo == null 
-                || touristRoutesFromRepo.Count() <= 0 )
+            Regex regex = new Regex(@"([A-Za-z0-9\-]+)(\d+)");
+            string operatorType = "";
+            int ratingValue = -1;
+            Match match = regex.Match(rating);
+
+            if (match.Success)
+            {
+                operatorType = match.Groups[1].Value;
+                ratingValue = int.Parse( match.Groups[2].Value);
+            }
+
+            var touristRoutesFromRepo = _touristRouteRepository.GetTouristRoutes(keyword, operatorType, ratingValue);
+            if (touristRoutesFromRepo == null
+                || touristRoutesFromRepo.Count() <= 0)
             {
                 return NotFound("没有旅游路线");
             }
