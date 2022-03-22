@@ -9,6 +9,7 @@ namespace FakeXieCheng.API.Profiles
         public TouristRoutePictureProfile()
         {
             CreateMap<TouristRoutePicture, TouristRoutePicturesDto>();
+            CreateMap<TouristRoutePictureForCreationDto, TouristRoutePicture>();
         }
     }
 }

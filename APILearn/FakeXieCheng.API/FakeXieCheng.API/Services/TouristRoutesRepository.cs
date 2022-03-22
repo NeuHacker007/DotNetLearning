@@ -27,6 +27,23 @@ namespace FakeXieCheng.API.Services
             
         }
 
+        public void AddTouristRoutePicture(Guid touristRouteId, TouristRoutePicture touristRoutePicture)
+        {
+            if (touristRouteId == Guid.Empty)
+            {
+                throw new ArgumentNullException(nameof(touristRouteId));
+            }
+            if (touristRoutePicture == null)
+            {
+                throw new ArgumentNullException(nameof(touristRoutePicture));
+            }
+
+            touristRoutePicture.TouristRouteId = touristRouteId;
+
+            _context.TouristRoutePictures.Add(touristRoutePicture);
+
+        }
+
         public TouristRoutePicture GetPicture(int pictureId)
         {
             return _context.TouristRoutePictures.Where(tr => tr.Id == pictureId).FirstOrDefault();

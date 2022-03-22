@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FakeXieCheng.API.Dtos;
+using FakeXieCheng.API.Models;
 using FakeXieCheng.API.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -19,9 +20,9 @@ namespace FakeXieCheng.API.Controllers
             ITouristRouteRepository touristRouteRepository,
             IMapper mapper)
         {
-            this._touristRouteRepository = touristRouteRepository ?? 
-                throw new ArgumentNullException(nameof(touristRouteRepository)); 
-            this._mapper = mapper ?? 
+            this._touristRouteRepository = touristRouteRepository ??
+                throw new ArgumentNullException(nameof(touristRouteRepository));
+            this._mapper = mapper ??
                 throw new ArgumentNullException(nameof(mapper));
         }
 
@@ -44,7 +45,7 @@ namespace FakeXieCheng.API.Controllers
 
         }
 
-        [HttpGet("{pictureId}")]
+        [HttpGet("{pictureId}", Name = "GetPicture")]
         public IActionResult GetPicture(Guid touristRouteId, int pictureId)
         {
             //The reason why we want to put touristRouteId as the parameter 
@@ -63,6 +64,36 @@ namespace FakeXieCheng.API.Controllers
             }
 
             return Ok(_mapper.Map<TouristRoutePicturesDto>(picFromRepo));
+        }
+
+        [HttpPost]
+        public IActionResult CreatePicture(
+            [FromRoute] Guid touristRouteId,
+            [FromBody] TouristRoutePictureForCreationDto touristRoutePictureForCreationDto
+            )
+        {
+            if (!_touristRouteRepository.TouristRouteExists(touristRouteId))
+            {
+                return NotFound($"旅游路线{touristRouteId}不存在");
+            }
+
+            var picModel = _mapper.Map<TouristRoutePicture>(touristRoutePictureForCreationDto);
+
+            _touristRouteRepository.AddTouristRoutePicture(touristRouteId, picModel);
+
+            _touristRouteRepository.Save();
+
+            var pictureToReturn = _mapper.Map<TouristRoutePictureForCreationDto>(picModel);
+
+            return CreatedAtRoute(
+                "GetPicture",
+                new
+                {
+                    TouristRouteId = picModel.TouristRouteId,
+                    PictureId = picModel.Id
+                },
+                pictureToReturn
+                );
         }
     }
 }
