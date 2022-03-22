@@ -23,6 +23,7 @@ namespace FakeXieCheng.API.Controllers
         }
 
         [HttpGet]
+        [HttpHead]// only return header info not the body
         public IActionResult GetRouristRoutes()
         {
             var touristRoutesFromRepo = _touristRouteRepository.GetTouristRoutes();
@@ -36,6 +37,7 @@ namespace FakeXieCheng.API.Controllers
         }
 
         [HttpGet("{touristRouteId:Guid}")]
+        [HttpHead] // only return header info not the body
         public IActionResult GetTouristRoutesById(Guid touristRouteId)
         {
             var touristRouteFromRepo = _touristRouteRepository.GetTouristRoute(touristRouteId);
