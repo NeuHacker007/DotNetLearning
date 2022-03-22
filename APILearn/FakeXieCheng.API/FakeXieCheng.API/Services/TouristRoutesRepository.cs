@@ -16,6 +16,17 @@ namespace FakeXieCheng.API.Services
             this._context = context;
         }
 
+        public void AddTouristRoute(TouristRoute touristRoute)
+        {
+            if (touristRoute == null)
+            {
+                throw new ArgumentNullException(nameof(touristRoute));
+            }
+
+            _context.TouristRoutes.Add(touristRoute);
+            
+        }
+
         public TouristRoutePicture GetPicture(int pictureId)
         {
             return _context.TouristRoutePictures.Where(tr => tr.Id == pictureId).FirstOrDefault();
@@ -59,6 +70,11 @@ namespace FakeXieCheng.API.Services
 
             //include vs join --> eager load
             return result.ToList();
+        }
+
+        public bool Save()
+        {
+            return _context.SaveChanges() >= 0;
         }
 
         public bool TouristRouteExists(Guid touristRouteId)

@@ -32,7 +32,7 @@ namespace FakeXieCheng.API.Models
         public ICollection<TouristRoutePicture> TouristRoutePictures { get; set; }
             = new List<TouristRoutePicture>();
         public double? Rating { get; set; }
-        public TravelDays TravelDays { get; set; }
+        public TravelDays? TravelDays { get; set; }
 
         public TripType? TripType { get; set; }
 

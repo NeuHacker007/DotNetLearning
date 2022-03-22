@@ -8,6 +8,7 @@ using AutoMapper;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using FakeXieCheng.API.ResourceParameters;
+using FakeXieCheng.API.Models;
 
 namespace FakeXieCheng.API.Controllers
 {
@@ -42,7 +43,7 @@ namespace FakeXieCheng.API.Controllers
             return Ok(touristRoutesDto);
         }
 
-        [HttpGet("{touristRouteId:Guid}")]
+        [HttpGet("{touristRouteId:Guid}", Name ="GetTouristRoutesById")]
         [HttpHead] // only return header info not the body
         public IActionResult GetTouristRoutesById(Guid touristRouteId)
         {
@@ -69,6 +70,29 @@ namespace FakeXieCheng.API.Controllers
             //};
             var touristRouteDto = _mapper.Map<TouristRouteDto>(touristRouteFromRepo);
             return Ok(touristRouteDto);
+        }
+
+
+        [HttpPost]
+        public IActionResult CreateTouristRoute(
+            [FromBody] TouristRouteForCreationDto touristRouteForCreationDto
+            )
+        {
+            var touristRouteModel = _mapper.Map<TouristRoute>(touristRouteForCreationDto);
+            _touristRouteRepository.AddTouristRoute(touristRouteModel);
+
+            _touristRouteRepository.Save();
+
+            var touristRouteToReturn = _mapper.Map<TouristRouteDto>(touristRouteModel);
+
+            return CreatedAtRoute(
+                "GetTouristRoutesById",
+                new
+                {
+                    touristRouteId = touristRouteToReturn.Id
+                },
+                touristRouteToReturn
+                );
         }
     }
 }
