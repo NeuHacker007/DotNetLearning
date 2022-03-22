@@ -24,9 +24,9 @@ namespace FakeXieCheng.API.Controllers
 
         [HttpGet]
         [HttpHead]// only return header info not the body
-        public IActionResult GetRouristRoutes()
+        public IActionResult GetRouristRoutes([FromQuery] string keyword)
         {
-            var touristRoutesFromRepo = _touristRouteRepository.GetTouristRoutes();
+            var touristRoutesFromRepo = _touristRouteRepository.GetTouristRoutes(keyword);
             if (touristRoutesFromRepo == null 
                 || touristRoutesFromRepo.Count() <= 0 )
             {
