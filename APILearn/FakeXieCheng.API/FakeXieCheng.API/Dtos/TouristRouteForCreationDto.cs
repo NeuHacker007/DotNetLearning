@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace FakeXieCheng.API.Dtos
 {
-    public class TouristRouteForCreationDto
+    public class TouristRouteForCreationDto : IValidatableObject
     {
+        [Required(ErrorMessage = "Title 不可为空")]
+        [MaxLength(100)]
         public string Title { get; set; }
-
+        [Required(ErrorMessage = "Description 不可为空")]
+        [MaxLength(1500)]
         public string Description { get; set; }
 
         public decimal Price { get; set; }
@@ -32,5 +36,17 @@ namespace FakeXieCheng.API.Dtos
 
         public ICollection<TouristRoutePictureForCreationDto> TouristRoutePictures { get; set; }
                             = new List<TouristRoutePictureForCreationDto>();
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (Title == Description)
+            {
+                yield return new ValidationResult (
+                    "路线名称必须与路线描述不同",
+                    new[] { "TouristRoutePictureForCreationDto"}
+                    
+                    );
+            }
+        }
     }
 }
