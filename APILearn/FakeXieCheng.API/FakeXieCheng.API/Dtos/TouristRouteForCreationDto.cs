@@ -1,10 +1,12 @@
-﻿using System;
+﻿using FakeXieCheng.API.ValidationAttributes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace FakeXieCheng.API.Dtos
 {
-    public class TouristRouteForCreationDto : IValidatableObject
+    [TouristRouteTitleMustBeDifferentFromDescription]
+    public class TouristRouteForCreationDto //: IValidatableObject
     {
         [Required(ErrorMessage = "Title 不可为空")]
         [MaxLength(100)]
@@ -37,16 +39,16 @@ namespace FakeXieCheng.API.Dtos
         public ICollection<TouristRoutePictureForCreationDto> TouristRoutePictures { get; set; }
                             = new List<TouristRoutePictureForCreationDto>();
 
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            if (Title == Description)
-            {
-                yield return new ValidationResult (
-                    "路线名称必须与路线描述不同",
-                    new[] { "TouristRoutePictureForCreationDto"}
+        //public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        //{
+        //    if (Title == Description)
+        //    {
+        //        yield return new ValidationResult (
+        //            "路线名称必须与路线描述不同",
+        //            new[] { "TouristRoutePictureForCreationDto"}
                     
-                    );
-            }
-        }
+        //            );
+        //    }
+        //}
     }
 }
