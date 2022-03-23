@@ -9,7 +9,7 @@ namespace FakeXieCheng.API.Dtos
     public class TouristRouteForUpdateDto : TouristRouteForManipulationDto
     {
         
-        [Required(ErrorMessage = "Description 不可为空")]
+        [Required(ErrorMessage = "更新必备")]
         [MaxLength(1500)]
         /*
          调用使用new来处理的方法，子类的引用调用执行子类的方法，基类的引用调用执行基类的方法。
