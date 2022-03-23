@@ -54,6 +54,11 @@ namespace FakeXieCheng.API.Services
             _context.TouristRoutePictures.Remove(touristRoutePicture);
         }
 
+        public void DeleteTouristRoutes(IEnumerable<TouristRoute> touristRoutes)
+        {
+            _context.TouristRoutes.RemoveRange(touristRoutes);
+        }
+
         public TouristRoutePicture GetPicture(int pictureId)
         {
             return _context.TouristRoutePictures.Where(tr => tr.Id == pictureId).FirstOrDefault();
@@ -69,6 +74,11 @@ namespace FakeXieCheng.API.Services
         public TouristRoute GetTouristRoute(Guid touristRouteId)
         {
             return _context.TouristRoutes.Include(t => t.TouristRoutePictures).FirstOrDefault(tr => tr.Id == touristRouteId);
+        }
+
+        public IEnumerable<TouristRoute> GetTouristRouteByIdList(IEnumerable<Guid> ids)
+        {
+            return _context.TouristRoutes.Where(t => ids.Contains(t.Id)).ToList();
         }
 
         public IEnumerable<TouristRoute> GetTouristRoutes(

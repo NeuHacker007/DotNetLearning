@@ -10,6 +10,7 @@ namespace FakeXieCheng.API.Services
         TouristRoute GetTouristRoute(Guid touristRouteId);
 
         bool TouristRouteExists(Guid touristRouteId);
+        IEnumerable<TouristRoute> GetTouristRouteByIdList(IEnumerable<Guid> ids);
 
         IEnumerable<TouristRoutePicture> GetPicturesByRouteId(Guid touristRouteId);
 
@@ -22,6 +23,7 @@ namespace FakeXieCheng.API.Services
         void AddTouristRoutePicture(Guid touristRouteId, TouristRoutePicture touristRoutePicture);
         void DeleteTouristRoute(TouristRoute touristRoute);
         void DeleteTouristRoutePicture(TouristRoutePicture touristRoutePicture);
+        void DeleteTouristRoutes(IEnumerable<TouristRoute> touristRoutes);
         
     }
 }

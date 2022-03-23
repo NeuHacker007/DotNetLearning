@@ -10,6 +10,7 @@ using System.Text.RegularExpressions;
 using FakeXieCheng.API.ResourceParameters;
 using FakeXieCheng.API.Models;
 using Microsoft.AspNetCore.JsonPatch;
+using FakeXieCheng.API.ModelBinder;
 
 namespace FakeXieCheng.API.Controllers
 {
@@ -110,10 +111,10 @@ namespace FakeXieCheng.API.Controllers
             _mapper.Map(touristRouteForUpdateDto, touristRouteFromRepo);
 
             _touristRouteRepository.Save();
-            
+
             var touristRouteToReturn = _mapper.Map<TouristRouteDto>(touristRouteFromRepo);
 
-          
+
             return Ok(touristRouteToReturn);
         }
 
@@ -128,7 +129,7 @@ namespace FakeXieCheng.API.Controllers
                 return NotFound($"旅游路线{touristRouteId}不存在");
             }
 
-           var touristRouteFromRepo = _touristRouteRepository.GetTouristRoute(touristRouteId);
+            var touristRouteFromRepo = _touristRouteRepository.GetTouristRoute(touristRouteId);
 
             var touristRouteToPatch = _mapper.Map<TouristRouteForUpdateDto>(touristRouteFromRepo);
 
@@ -136,11 +137,11 @@ namespace FakeXieCheng.API.Controllers
 
             if (!TryValidateModel(touristRouteToPatch))
             {
-                 return ValidationProblem(ModelState);
+                return ValidationProblem(ModelState);
             }
-            
+
             _mapper.Map(touristRouteToPatch, touristRouteFromRepo);
-            
+
             _touristRouteRepository.Save();
 
             return NoContent();
@@ -164,6 +165,24 @@ namespace FakeXieCheng.API.Controllers
 
             return NoContent();
 
+        }
+        [HttpDelete("({touristRouteIds})")]
+        public IActionResult DeleteTouristRoutes(
+           [ModelBinder(BinderType = typeof(ArrayModelBinder))]
+           [FromRoute] IEnumerable<Guid> touristRouteIds)
+        {
+            if (touristRouteIds == null)
+            {
+                return BadRequest();
+            }
+
+            var touristRoutesFromRepo = _touristRouteRepository.GetTouristRouteByIdList(touristRouteIds);
+
+            _touristRouteRepository.DeleteTouristRoutes(touristRoutesFromRepo);
+
+            _touristRouteRepository.Save();
+
+            return NoContent();
         }
     }
 }
