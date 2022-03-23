@@ -43,7 +43,7 @@ namespace FakeXieCheng.API.Controllers
             return Ok(touristRoutesDto);
         }
 
-        [HttpGet("{touristRouteId:Guid}", Name ="GetTouristRoutesById")]
+        [HttpGet("{touristRouteId:Guid}", Name = "GetTouristRoutesById")]
         [HttpHead] // only return header info not the body
         public IActionResult GetTouristRoutesById(Guid touristRouteId)
         {
@@ -93,6 +93,27 @@ namespace FakeXieCheng.API.Controllers
                 },
                 touristRouteToReturn
                 );
+        }
+
+        [HttpPut("{touristRouteId}")]
+        public IActionResult UpdateTouristRoute(
+            [FromRoute] Guid touristRouteId,
+            [FromBody] TouristRouteForUpdateDto touristRouteForUpdateDto
+            )
+        {
+            if (!_touristRouteRepository.TouristRouteExists(touristRouteId))
+            {
+                return NotFound($"旅游路线{touristRouteId}不存在");
+            }
+            var touristRouteFromRepo = _touristRouteRepository.GetTouristRoute(touristRouteId);
+            _mapper.Map(touristRouteForUpdateDto, touristRouteFromRepo);
+
+            _touristRouteRepository.Save();
+            
+            var touristRouteToReturn = _mapper.Map<TouristRouteDto>(touristRouteFromRepo);
+
+          
+            return Ok(touristRouteToReturn);
         }
     }
 }
