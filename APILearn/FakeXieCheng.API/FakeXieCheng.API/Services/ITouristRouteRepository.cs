@@ -20,6 +20,7 @@ namespace FakeXieCheng.API.Services
         bool Save();
 
         void AddTouristRoutePicture(Guid touristRouteId, TouristRoutePicture touristRoutePicture);
+        void DeleteTouristRoute(TouristRoute touristRoute);
         
     }
 }

@@ -145,5 +145,25 @@ namespace FakeXieCheng.API.Controllers
 
             return NoContent();
         }
+
+        [HttpDelete("{touristRouteId}")]
+        public IActionResult DeleteTouristRoute(
+            [FromRoute] Guid touristRouteId
+            )
+        {
+            if (!_touristRouteRepository.TouristRouteExists(touristRouteId))
+            {
+                return NotFound($"旅游路线{touristRouteId}不存在");
+            }
+
+            var touristRouteFromRepo = _touristRouteRepository.GetTouristRoute(touristRouteId);
+
+            _touristRouteRepository.DeleteTouristRoute(touristRouteFromRepo);
+
+            _touristRouteRepository.Save();
+
+            return NoContent();
+
+        }
     }
 }
