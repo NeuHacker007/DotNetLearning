@@ -15,11 +15,11 @@ namespace FakeXieCheng.API.Dtos
         [MaxLength(1500)]
         public virtual string Description { get; set; }
 
-        public decimal Price { get; set; }
+        //  public decimal Price { get; set; }
 
-        //public decimal OriginalPrice { get; set; }
+        public decimal OriginalPrice { get; set; }
 
-        //public double? DiscountPresent { get; set; }
+        public double? DiscountPresent { get; set; }
         public DateTime CreateTime { get; set; }
         public DateTime? UpdateTime { get; set; }
 

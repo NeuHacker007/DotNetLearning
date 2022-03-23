@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Serialization;
 
 namespace FakeXieCheng.API
 {
@@ -34,6 +35,11 @@ namespace FakeXieCheng.API
                 //setup.OutputFormatters.Add(
                 //    new XmlDataContractSerializerOutputFormatter());
             })
+            .AddNewtonsoftJson(setup =>
+            {
+                setup.SerializerSettings.ContractResolver =
+                                new CamelCasePropertyNamesContractResolver();
+            })
             .AddXmlDataContractSerializerFormatters()
             .ConfigureApiBehaviorOptions(setup =>
             {
@@ -41,8 +47,8 @@ namespace FakeXieCheng.API
                 {
                     var problemDetail = new ValidationProblemDetails(context.ModelState)
                     {
-                        Type="数据验证失败",
-                        Title= "数据验证失败",
+                        Type = "数据验证失败",
+                        Title = "数据验证失败",
                         Status = StatusCodes.Status422UnprocessableEntity,
                         Detail = "请看详细说明",
                         Instance = context.HttpContext.Request.Path
@@ -52,12 +58,12 @@ namespace FakeXieCheng.API
 
                     return new UnprocessableEntityObjectResult(problemDetail)
                     {
-                        ContentTypes = {"application/problem+json"}
+                        ContentTypes = { "application/problem+json" }
                     };
                 };
             });
             services.AddTransient<ITouristRouteRepository, TouristRoutesRepository>();
-           
+
             services.AddDbContext<AppDbContext>(option =>
             {
                 //option.UseSqlServer(@"Server=IVAN-ZHANG\IVAN_ZHANG;Database=FakeXiechengDb;Integrated Security=True;");

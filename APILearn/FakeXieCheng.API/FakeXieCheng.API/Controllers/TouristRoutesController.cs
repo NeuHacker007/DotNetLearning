@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using FakeXieCheng.API.ResourceParameters;
 using FakeXieCheng.API.Models;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace FakeXieCheng.API.Controllers
 {
@@ -114,6 +115,30 @@ namespace FakeXieCheng.API.Controllers
 
           
             return Ok(touristRouteToReturn);
+        }
+
+        [HttpPatch("{touristRouteId}")]
+        public IActionResult PartiallyupdateTouristRoute(
+            [FromRoute] Guid touristRouteId,
+            [FromBody] JsonPatchDocument<TouristRouteForUpdateDto> patchDocument
+            )
+        {
+            if (!_touristRouteRepository.TouristRouteExists(touristRouteId))
+            {
+                return NotFound($"旅游路线{touristRouteId}不存在");
+            }
+
+           var touristRouteFromRepo = _touristRouteRepository.GetTouristRoute(touristRouteId);
+
+            var touristRouteToPatch = _mapper.Map<TouristRouteForUpdateDto>(touristRouteFromRepo);
+
+            patchDocument.ApplyTo(touristRouteToPatch);
+            
+            _mapper.Map(touristRouteToPatch, touristRouteFromRepo);
+            
+            _touristRouteRepository.Save();
+
+            return NoContent();
         }
     }
 }
