@@ -1,25 +1,25 @@
 ﻿using FakeXieCheng.API.Models;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace FakeXieCheng.API.Services
 {
     public interface ITouristRouteRepository
     {
-        IEnumerable<TouristRoute> GetTouristRoutes(string keyword, string operatorType, int? ratingValue);
-        TouristRoute GetTouristRoute(Guid touristRouteId);
+        Task<IEnumerable<TouristRoute>> GetTouristRoutesAsync(string keyword, string operatorType, int? ratingValue);
+        Task<TouristRoute> GetTouristRouteAsync(Guid touristRouteId);
 
-        bool TouristRouteExists(Guid touristRouteId);
-        IEnumerable<TouristRoute> GetTouristRouteByIdList(IEnumerable<Guid> ids);
+        Task<bool> TouristRouteExistsAsync(Guid touristRouteId);
+        Task<IEnumerable<TouristRoute>> GetTouristRouteByIdListAsync(IEnumerable<Guid> ids);
 
-        IEnumerable<TouristRoutePicture> GetPicturesByRouteId(Guid touristRouteId);
+        Task<IEnumerable<TouristRoutePicture>> GetPicturesByRouteIdAsync(Guid touristRouteId);
 
-        TouristRoutePicture GetPicture(int pictureId);
+        Task<TouristRoutePicture> GetPictureAsync(int pictureId);
 
+        Task<bool> SaveAsync();
+        
         void AddTouristRoute(TouristRoute touristRoute);
-
-        bool Save();
-
         void AddTouristRoutePicture(Guid touristRouteId, TouristRoutePicture touristRoutePicture);
         void DeleteTouristRoute(TouristRoute touristRoute);
         void DeleteTouristRoutePicture(TouristRoutePicture touristRoutePicture);
