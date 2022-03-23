@@ -49,6 +49,11 @@ namespace FakeXieCheng.API.Services
             _context.TouristRoutes.Remove(touristRoute);
         }
 
+        public void DeleteTouristRoutePicture(TouristRoutePicture touristRoutePicture)
+        {
+            _context.TouristRoutePictures.Remove(touristRoutePicture);
+        }
+
         public TouristRoutePicture GetPicture(int pictureId)
         {
             return _context.TouristRoutePictures.Where(tr => tr.Id == pictureId).FirstOrDefault();
