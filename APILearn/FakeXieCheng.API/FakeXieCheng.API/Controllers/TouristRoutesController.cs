@@ -132,7 +132,12 @@ namespace FakeXieCheng.API.Controllers
 
             var touristRouteToPatch = _mapper.Map<TouristRouteForUpdateDto>(touristRouteFromRepo);
 
-            patchDocument.ApplyTo(touristRouteToPatch);
+            patchDocument.ApplyTo(touristRouteToPatch, ModelState);
+
+            if (!TryValidateModel(touristRouteToPatch))
+            {
+                 return ValidationProblem(ModelState);
+            }
             
             _mapper.Map(touristRouteToPatch, touristRouteFromRepo);
             
