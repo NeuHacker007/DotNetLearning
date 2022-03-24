@@ -9,6 +9,7 @@ using System.Text;
 using System;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace FakeXieCheng.API.Controllers
 {
@@ -18,30 +19,52 @@ namespace FakeXieCheng.API.Controllers
     {
         private readonly IConfiguration _configuration;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signinManager;
 
         public AuthenticateController(
             IConfiguration configuration,
-            UserManager<IdentityUser> userManager 
+            UserManager<IdentityUser> userManager,
+            SignInManager<IdentityUser> signinManager
             )
         {
             this._configuration = configuration;
             this._userManager = userManager;
+            this._signinManager = signinManager;
         }
-        
+
         [AllowAnonymous]
         [HttpPost("login")]
-        public IActionResult Login([FromBody] LoginDto loginDto)
+        public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
         {
             //1. verify the user name and password
+            var loginResult = await _signinManager.PasswordSignInAsync(
+                loginDto.Email,
+                loginDto.Password,
+                isPersistent: false,
+                lockoutOnFailure: false
+                );
+            if (!loginResult.Succeeded)
+            {
+                return BadRequest();
+            }
 
+            var user = await _userManager.FindByNameAsync(loginDto.Email);
+            var roleNames = await _userManager.GetRolesAsync(user);
             //2. create Jwt
 
             var signingAlgorithm = SecurityAlgorithms.HmacSha256;
-            var claims = new []
+            var claims = new List<Claim>()
             {
-                new Claim(JwtRegisteredClaimNames.Sub, "fake_user_id"),
-                new Claim(ClaimTypes.Role, "Admin")
+                new Claim(JwtRegisteredClaimNames.Sub, user.Id),
+                //new Claim(ClaimTypes.Role, )
             };
+
+            foreach (var roleName in roleNames)
+            {
+                var roleClaim = new Claim(ClaimTypes.Role, roleName);
+                claims.Add(roleClaim);
+            }
+
             var secretBytes = Encoding.UTF8.GetBytes(_configuration["Authentication:SecretKey"]);
 
             var signingKey = new SymmetricSecurityKey(secretBytes);

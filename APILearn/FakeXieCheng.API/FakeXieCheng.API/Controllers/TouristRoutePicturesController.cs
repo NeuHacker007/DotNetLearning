@@ -69,7 +69,7 @@ namespace FakeXieCheng.API.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin", AuthenticationSchemes ="Bearer")] // if we don't specify the authentication schemes to bearer then it will not work because by default, the authorization is not using jwt for verify
         public async Task<IActionResult> CreatePicture(
             [FromRoute] Guid touristRouteId,
             [FromBody] TouristRoutePictureForCreationDto touristRoutePictureForCreationDto
@@ -100,7 +100,7 @@ namespace FakeXieCheng.API.Controllers
         }
 
         [HttpDelete("{pictureId}")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin", AuthenticationSchemes ="Bearer")]
         public async Task<IActionResult> DeletePicture(
             [FromRoute] Guid touristRouteId,
             [FromRoute] int pictureId
