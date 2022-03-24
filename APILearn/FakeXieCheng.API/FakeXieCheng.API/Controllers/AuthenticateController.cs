@@ -10,6 +10,7 @@ using System;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using FakeXieCheng.API.Models;
 
 namespace FakeXieCheng.API.Controllers
 {
@@ -18,13 +19,13 @@ namespace FakeXieCheng.API.Controllers
     public class AuthenticateController : ControllerBase
     {
         private readonly IConfiguration _configuration;
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signinManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signinManager;
 
         public AuthenticateController(
             IConfiguration configuration,
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signinManager
+            UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signinManager
             )
         {
             this._configuration = configuration;
@@ -89,7 +90,7 @@ namespace FakeXieCheng.API.Controllers
             [FromBody] RegisterDto registerDto
             )
         {
-            var user = new IdentityUser()
+            var user = new ApplicationUser()
             {
                 UserName = registerDto.Email,
                 Email = registerDto.Email
