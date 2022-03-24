@@ -2,6 +2,7 @@
 using FakeXieCheng.API.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,7 +31,8 @@ namespace FakeXieCheng.API
                 //option.UseSqlServer(@"Server=IVAN-ZHANG\IVAN_ZHANG;Database=FakeXiechengDb;Integrated Security=True;");
                 option.UseSqlServer(Configuration["DbContext:ConnectionString"]);
             });
-
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppDbContext>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddJwtAuthenticationToWeb(Configuration);
             services.AddCustomerServices();
