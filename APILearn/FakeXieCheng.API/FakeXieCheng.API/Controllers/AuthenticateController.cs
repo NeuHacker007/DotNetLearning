@@ -7,6 +7,8 @@ using System.IdentityModel.Tokens.Jwt;
 using Microsoft.Extensions.Configuration;
 using System.Text;
 using System;
+using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
 
 namespace FakeXieCheng.API.Controllers
 {
@@ -15,13 +17,19 @@ namespace FakeXieCheng.API.Controllers
     public class AuthenticateController : ControllerBase
     {
         private readonly IConfiguration _configuration;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public AuthenticateController(IConfiguration configuration)
+        public AuthenticateController(
+            IConfiguration configuration,
+            UserManager<IdentityUser> userManager 
+            )
         {
             this._configuration = configuration;
+            this._userManager = userManager;
         }
-        [HttpPost("login")]
+        
         [AllowAnonymous]
+        [HttpPost("login")]
         public IActionResult Login([FromBody] LoginDto loginDto)
         {
             //1. verify the user name and password
@@ -50,6 +58,32 @@ namespace FakeXieCheng.API.Controllers
             //3.return 200 ok + jwt
 
             return Ok(new { JwtToken = tokenString });
+        }
+
+        [AllowAnonymous]
+        [Route("register")]
+        public async Task<IActionResult> Register(
+            [FromBody] RegisterDto registerDto
+            )
+        {
+            var user = new IdentityUser()
+            {
+                UserName = registerDto.Email,
+                Email = registerDto.Email
+            };
+
+            var result = await _userManager.CreateAsync(
+                                            user,
+                                            registerDto.Password
+                                            );
+
+            if (!result.Succeeded)
+            {
+                return BadRequest(result.Errors);
+            }
+
+            return Ok();
+
         }
     }
 }
