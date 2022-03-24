@@ -1,22 +1,12 @@
 ﻿using FakeXieCheng.API.Database;
-using FakeXieCheng.API.Services;
+using FakeXieCheng.API.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.AspNetCore.Mvc.Formatters;
-using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Serialization;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
 
 namespace FakeXieCheng.API
 {
@@ -32,40 +22,8 @@ namespace FakeXieCheng.API
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers(setup =>
-            {
-                setup.ReturnHttpNotAcceptable = true;
-                //setup.OutputFormatters.Add(
-                //    new XmlDataContractSerializerOutputFormatter());
-            })
-            .AddNewtonsoftJson(setup =>
-            {
-                setup.SerializerSettings.ContractResolver =
-                                new CamelCasePropertyNamesContractResolver();
-            })
-            .AddXmlDataContractSerializerFormatters()
-            .ConfigureApiBehaviorOptions(setup =>
-            {
-                setup.InvalidModelStateResponseFactory = context =>
-                {
-                    var problemDetail = new ValidationProblemDetails(context.ModelState)
-                    {
-                        Type = "数据验证失败",
-                        Title = "数据验证失败",
-                        Status = StatusCodes.Status422UnprocessableEntity,
-                        Detail = "请看详细说明",
-                        Instance = context.HttpContext.Request.Path
-                    };
+            services.AddMvcControllerSettingsServices();
 
-                    problemDetail.Extensions.Add("traceId", context.HttpContext.TraceIdentifier);
-
-                    return new UnprocessableEntityObjectResult(problemDetail)
-                    {
-                        ContentTypes = { "application/problem+json" }
-                    };
-                };
-            });
-            services.AddTransient<ITouristRouteRepository, TouristRoutesRepository>();
 
             services.AddDbContext<AppDbContext>(option =>
             {
@@ -74,20 +32,8 @@ namespace FakeXieCheng.API
             });
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options =>
-                {
-                    var secretBytes = Encoding.UTF8.GetBytes(Configuration["Authentication:SecretKey"]);
-                    options.TokenValidationParameters = new TokenValidationParameters()
-                    {
-                        ValidateIssuer = true,
-                        ValidIssuer = Configuration["Authentication:Issuer"],
-                        ValidateAudience = true,
-                        ValidAudience = Configuration["Authentication:Audience"],
-                        ValidateLifetime = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(secretBytes)
-                    };
-                });
+            services.AddJwtAuthenticationToWeb(Configuration);
+            services.AddCustomerServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -97,7 +43,7 @@ namespace FakeXieCheng.API
             {
                 app.UseDeveloperExceptionPage();
             }
-            
+
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
