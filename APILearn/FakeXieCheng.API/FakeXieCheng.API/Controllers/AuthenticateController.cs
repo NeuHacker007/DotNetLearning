@@ -48,7 +48,7 @@ namespace FakeXieCheng.API.Controllers
             var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
             //3.return 200 ok + jwt
 
-            return Ok(tokenString);
+            return Ok(new { JwtToken = tokenString });
         }
     }
 }

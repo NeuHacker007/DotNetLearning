@@ -12,6 +12,7 @@ using FakeXieCheng.API.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using FakeXieCheng.API.ModelBinder;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FakeXieCheng.API.Controllers
 {
@@ -78,6 +79,7 @@ namespace FakeXieCheng.API.Controllers
 
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> CreateTouristRoute(
             [FromBody] TouristRouteForCreationDto touristRouteForCreationDto
             )
@@ -100,6 +102,7 @@ namespace FakeXieCheng.API.Controllers
         }
 
         [HttpPut("{touristRouteId}")]
+        [Authorize]
         public async Task<IActionResult> UpdateTouristRoute(
             [FromRoute] Guid touristRouteId,
             [FromBody] TouristRouteForUpdateDto touristRouteForUpdateDto
