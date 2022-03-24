@@ -85,7 +85,7 @@ namespace FakeXieCheng.API.Controllers
             )
         {
             var touristRouteModel = _mapper.Map<TouristRoute>(touristRouteForCreationDto);
-            _touristRouteRepository.AddTouristRoute(touristRouteModel);
+            await _touristRouteRepository.AddTouristRouteAsync(touristRouteModel);
 
             await _touristRouteRepository.SaveAsync();
 

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FakeXieCheng.API.Dtos;
+using FakeXieCheng.API.Models;
 using FakeXieCheng.API.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -29,7 +30,7 @@ namespace FakeXieCheng.API.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize(AuthenticationSchemes = "Bearer")]
         public async Task<IActionResult> GetShoppingCart()
         {
             //1. Get user
@@ -42,5 +43,43 @@ namespace FakeXieCheng.API.Controllers
             return Ok(_mapper.Map<ShoppingCartDto>(shoppingCart));
 
         } 
+
+        [HttpPost("items")]
+        [Authorize(AuthenticationSchemes = "Bearer")]
+        public async Task<IActionResult> AddShoppingCartItem(
+            [FromBody] AddShoppingCartItemDto addShoppingCartItemDto)
+        {
+            var currentUserId = _httpContextAccessor
+                .HttpContext
+                .User
+                .FindFirst(ClaimTypes.NameIdentifier)
+                .Value;
+
+            var shoppingCart = await _touristRouteRepository
+                .GetShoppingCartByUserIdAsync(currentUserId);
+
+            var touristRoute = await _touristRouteRepository
+                .GetTouristRouteAsync(addShoppingCartItemDto.TouristRouteId);
+
+            if (touristRoute == null)
+            {
+                return NotFound($"旅游路线{addShoppingCartItemDto.TouristRouteId}不存在");
+            }
+
+            var lineItem = new LineItem()
+            {
+                TouristRouteId = addShoppingCartItemDto.TouristRouteId,
+                ShoppingCartId = shoppingCart.Id,
+                OriginalPrice = touristRoute.OriginalPrice,
+                DiscountPresent = touristRoute.DiscountPresent
+            };
+
+            await _touristRouteRepository.AddShoppingCartItemAsync(lineItem);
+            await _touristRouteRepository.SaveAsync();
+
+
+            return Ok(_mapper.Map<ShoppingCartDto>(shoppingCart));
+
+        }
     }
 }

@@ -9,6 +9,6 @@ namespace FakeXieCheng.API.Dtos
         public Guid Id { get; set; }
 
         public string UserId { get; set; }
-        public ICollection<LineItem> ShoppingCartItems { get; set; }
+        public ICollection<LineItemDto> ShoppingCartItems { get; set; }
     }
 }

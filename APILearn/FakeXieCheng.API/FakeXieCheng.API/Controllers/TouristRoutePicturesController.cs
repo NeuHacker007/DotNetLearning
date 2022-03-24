@@ -31,7 +31,7 @@ namespace FakeXieCheng.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetPictureListForTouristRoute(Guid touristRouteId)
         {
-            if (! await _touristRouteRepository.TouristRouteExistsAsync(touristRouteId))
+            if (!await _touristRouteRepository.TouristRouteExistsAsync(touristRouteId))
             {
                 return NotFound($"旅游路线{touristRouteId}不存在");
             }
@@ -53,7 +53,7 @@ namespace FakeXieCheng.API.Controllers
             //The reason why we want to put touristRouteId as the parameter 
             //the picture depends on the tourist route. We shouldn't direct
             //expose the sub resources to the client directly
-            if (! await _touristRouteRepository.TouristRouteExistsAsync(touristRouteId))
+            if (!await _touristRouteRepository.TouristRouteExistsAsync(touristRouteId))
             {
                 return NotFound($"旅游路线{touristRouteId}不存在");
             }
@@ -69,7 +69,7 @@ namespace FakeXieCheng.API.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin", AuthenticationSchemes ="Bearer")] // if we don't specify the authentication schemes to bearer then it will not work because by default, the authorization is not using jwt for verify
+        [Authorize(Roles = "Admin", AuthenticationSchemes = "Bearer")] // if we don't specify the authentication schemes to bearer then it will not work because by default, the authorization is not using jwt for verify
         public async Task<IActionResult> CreatePicture(
             [FromRoute] Guid touristRouteId,
             [FromBody] TouristRoutePictureForCreationDto touristRoutePictureForCreationDto
@@ -82,9 +82,9 @@ namespace FakeXieCheng.API.Controllers
 
             var picModel = _mapper.Map<TouristRoutePicture>(touristRoutePictureForCreationDto);
 
-            _touristRouteRepository.AddTouristRoutePicture(touristRouteId, picModel);
+            await _touristRouteRepository.AddTouristRoutePictureAsync(touristRouteId, picModel);
 
-           await _touristRouteRepository.SaveAsync();
+            await _touristRouteRepository.SaveAsync();
 
             var pictureToReturn = _mapper.Map<TouristRoutePictureForCreationDto>(picModel);
 
@@ -100,7 +100,7 @@ namespace FakeXieCheng.API.Controllers
         }
 
         [HttpDelete("{pictureId}")]
-        [Authorize(Roles = "Admin", AuthenticationSchemes ="Bearer")]
+        [Authorize(Roles = "Admin", AuthenticationSchemes = "Bearer")]
         public async Task<IActionResult> DeletePicture(
             [FromRoute] Guid touristRouteId,
             [FromRoute] int pictureId

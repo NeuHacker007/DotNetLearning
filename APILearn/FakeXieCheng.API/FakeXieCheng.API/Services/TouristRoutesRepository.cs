@@ -39,7 +39,12 @@ namespace FakeXieCheng.API.Services
             this._context = context;
         }
 
-        public async void AddTouristRoute(TouristRoute touristRoute)
+        public async Task AddShoppingCartItemAsync(LineItem lineItem)
+        {
+            await _context.LineItems.AddAsync(lineItem);
+        }
+
+        public async Task AddTouristRouteAsync(TouristRoute touristRoute)
         {
             if (touristRoute == null)
             {
@@ -50,7 +55,7 @@ namespace FakeXieCheng.API.Services
             
         }
 
-        public async void AddTouristRoutePicture(Guid touristRouteId, TouristRoutePicture touristRoutePicture)
+        public async Task AddTouristRoutePictureAsync(Guid touristRouteId, TouristRoutePicture touristRoutePicture)
         {
             if (touristRouteId == Guid.Empty)
             {

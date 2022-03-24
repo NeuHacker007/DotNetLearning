@@ -19,14 +19,14 @@ namespace FakeXieCheng.API.Services
 
         Task<bool> SaveAsync();
         
-        void AddTouristRoute(TouristRoute touristRoute);
-        void AddTouristRoutePicture(Guid touristRouteId, TouristRoutePicture touristRoutePicture);
+        Task AddTouristRouteAsync(TouristRoute touristRoute);
+        Task AddTouristRoutePictureAsync(Guid touristRouteId, TouristRoutePicture touristRoutePicture);
         void DeleteTouristRoute(TouristRoute touristRoute);
         void DeleteTouristRoutePicture(TouristRoutePicture touristRoutePicture);
         void DeleteTouristRoutes(IEnumerable<TouristRoute> touristRoutes);
 
         Task<ShoppingCart> GetShoppingCartByUserIdAsync(string userId);
         Task CreateShoppingCartAsync(ShoppingCart shoppingCart);
-        
+        Task AddShoppingCartItemAsync(LineItem lineItem);
     }
 }
