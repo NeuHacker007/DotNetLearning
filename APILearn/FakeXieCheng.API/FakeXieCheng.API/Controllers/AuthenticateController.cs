@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using FakeXieCheng.API.Models;
+using FakeXieCheng.API.Services;
 
 namespace FakeXieCheng.API.Controllers
 {
@@ -21,16 +22,19 @@ namespace FakeXieCheng.API.Controllers
         private readonly IConfiguration _configuration;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signinManager;
+        private readonly ITouristRouteRepository _touristRouteRepository;
 
         public AuthenticateController(
             IConfiguration configuration,
             UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signinManager
+            SignInManager<ApplicationUser> signinManager,
+            ITouristRouteRepository touristRouteRepository
             )
         {
             this._configuration = configuration;
             this._userManager = userManager;
             this._signinManager = signinManager;
+            this._touristRouteRepository = touristRouteRepository;
         }
 
         [AllowAnonymous]
@@ -105,6 +109,18 @@ namespace FakeXieCheng.API.Controllers
             {
                 return BadRequest(result.Errors);
             }
+
+            var shoppingCart = new ShoppingCart()
+            {
+                Id = Guid.NewGuid(),
+                UserId = user.Id
+            };
+
+            await _touristRouteRepository
+                .CreateShoppingCartAsync(shoppingCart);
+            await _touristRouteRepository.SaveAsync();
+
+
 
             return Ok();
 
