@@ -2,6 +2,7 @@
 using FakeXieCheng.API.Dtos;
 using FakeXieCheng.API.Models;
 using FakeXieCheng.API.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -68,6 +69,7 @@ namespace FakeXieCheng.API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreatePicture(
             [FromRoute] Guid touristRouteId,
             [FromBody] TouristRoutePictureForCreationDto touristRoutePictureForCreationDto
@@ -98,6 +100,7 @@ namespace FakeXieCheng.API.Controllers
         }
 
         [HttpDelete("{pictureId}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeletePicture(
             [FromRoute] Guid touristRouteId,
             [FromRoute] int pictureId
