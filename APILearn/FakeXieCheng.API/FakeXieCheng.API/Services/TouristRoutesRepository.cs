@@ -41,7 +41,7 @@ namespace FakeXieCheng.API.Services
 
         public async Task AddOrderAsync(Order order)
         {
-           await _context.Orders.AddAsync(order);
+            await _context.Orders.AddAsync(order);
         }
 
         public async Task AddShoppingCartItemAsync(LineItem lineItem)
@@ -57,7 +57,7 @@ namespace FakeXieCheng.API.Services
             }
 
             await _context.TouristRoutes.AddAsync(touristRoute);
-            
+
         }
 
         public async Task AddTouristRoutePictureAsync(Guid touristRouteId, TouristRoutePicture touristRoutePicture)
@@ -107,6 +107,20 @@ namespace FakeXieCheng.API.Services
             _context.TouristRoutes.RemoveRange(touristRoutes);
         }
 
+        public async Task<Order> GetOrderByIdAsync(Guid orderId)
+        {
+            return await _context.Orders
+                .Include(o => o.OrderItems)
+                .ThenInclude(oi => oi.TouristRoute)
+                .Where(o => o.Id == orderId)
+                .FirstOrDefaultAsync();
+        }
+
+        public async Task<IEnumerable<Order>> GetOrdersByUserIdAsync(string userId)
+        {
+            return await _context.Orders.Where(o => o.UserId == userId).ToListAsync();
+        }
+
         public async Task<TouristRoutePicture> GetPictureAsync(int pictureId)
         {
             return await _context.TouristRoutePictures.Where(tr => tr.Id == pictureId).FirstOrDefaultAsync();
@@ -121,12 +135,12 @@ namespace FakeXieCheng.API.Services
 
         public async Task<ShoppingCart> GetShoppingCartByUserIdAsync(string userId)
         {
-           return await _context.ShoppingCarts
-                .Include(s => s.User)
-                .Include(s => s.ShoppingCartItems)
-                .ThenInclude(li => li.TouristRoute)
-                .Where(s => s.UserId == userId)
-                .FirstOrDefaultAsync();
+            return await _context.ShoppingCarts
+                 .Include(s => s.User)
+                 .Include(s => s.ShoppingCartItems)
+                 .ThenInclude(li => li.TouristRoute)
+                 .Where(s => s.UserId == userId)
+                 .FirstOrDefaultAsync();
         }
 
         public async Task<LineItem> GetShoppingCartItemByItemIdAsync(int lineItemId)
@@ -137,7 +151,7 @@ namespace FakeXieCheng.API.Services
 
         public async Task<IEnumerable<LineItem>> GetShoppingCartsByIdListAsync(IEnumerable<int> ids)
         {
-           return await _context.LineItems.Where(li => ids.Contains(li.Id)).ToListAsync();
+            return await _context.LineItems.Where(li => ids.Contains(li.Id)).ToListAsync();
         }
 
         public async Task<TouristRoute> GetTouristRouteAsync(Guid touristRouteId)
