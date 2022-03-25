@@ -69,7 +69,7 @@ namespace FakeXieCheng.API.Controllers
                 return NotFound($"User {currentUserId} 不存在");
             }
 
-            var orderFromRepo = _touristRouteRepository.GetOrderByIdAsync(orderId);
+            var orderFromRepo = await _touristRouteRepository.GetOrderByIdAsync(orderId);
 
             if (orderFromRepo == null)
             {
