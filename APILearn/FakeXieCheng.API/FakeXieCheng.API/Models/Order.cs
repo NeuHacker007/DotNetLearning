@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Stateless;
 
 namespace FakeXieCheng.API.Models
 {
-    public enum OrdersState
+    public enum OrderState
     {
         Pending,
         Processing,
@@ -13,8 +14,21 @@ namespace FakeXieCheng.API.Models
         Cancelled,
         Refund
     }
+
+    public enum OrderStateTrigger
+    {
+        PlaceOrder,
+        Approve,
+        Reject,
+        Cancel,
+        Return
+    }
     public class Order
     {
+        public Order()
+        {
+            StateMachineInit();
+        }
         [Key]
         public Guid Id {get;set; }
 
@@ -24,10 +38,32 @@ namespace FakeXieCheng.API.Models
 
         public ICollection<LineItem> OrderItems { get; set; }
 
-        public OrdersState State { get; set; }
+        public OrderState State { get; set; }
 
         public DateTime CreateDateUtc { get; set; }
 
         public string TransactionMetaData { get; set; }
+
+        private StateMachine<OrderState, OrderStateTrigger> _matchine;
+
+        private void StateMachineInit()
+        {
+            _matchine = new StateMachine<OrderState, OrderStateTrigger>(OrderState.Pending);
+            _matchine.Configure(OrderState.Pending)
+                .Permit(OrderStateTrigger.PlaceOrder, OrderState.Processing)
+                .Permit(OrderStateTrigger.Cancel, OrderState.Cancelled);
+
+            _matchine.Configure(OrderState.Processing)
+                .Permit(OrderStateTrigger.Approve, OrderState.Completed)
+                .Permit(OrderStateTrigger.Reject, OrderState.Declined);
+
+            _matchine.Configure(OrderState.Declined)
+                .Permit(OrderStateTrigger.PlaceOrder, OrderState.Processing);
+
+            _matchine.Configure(OrderState.Completed)
+                .Permit(OrderStateTrigger.Return, OrderState.Refund);
+                
+
+        }
     }
 }
