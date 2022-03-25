@@ -39,6 +39,11 @@ namespace FakeXieCheng.API.Services
             this._context = context;
         }
 
+        public async Task AddOrderAsync(Order order)
+        {
+           await _context.Orders.AddAsync(order);
+        }
+
         public async Task AddShoppingCartItemAsync(LineItem lineItem)
         {
             await _context.LineItems.AddAsync(lineItem);
