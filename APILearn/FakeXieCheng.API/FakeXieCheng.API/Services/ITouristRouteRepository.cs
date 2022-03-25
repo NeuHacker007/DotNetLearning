@@ -28,5 +28,10 @@ namespace FakeXieCheng.API.Services
         Task<ShoppingCart> GetShoppingCartByUserIdAsync(string userId);
         Task CreateShoppingCartAsync(ShoppingCart shoppingCart);
         Task AddShoppingCartItemAsync(LineItem lineItem);
+
+        Task<LineItem> GetShoppingCartItemByItemIdAsync(int lineItemId);
+        void DeleteShoppingCartItem(LineItem lineItem);
+        Task<IEnumerable<LineItem>> GetShoppingCartsByIdListAsync(IEnumerable<int> ids);
+        void DeleteShoppingCartItems(IEnumerable<LineItem> lineItems);
     }
 }

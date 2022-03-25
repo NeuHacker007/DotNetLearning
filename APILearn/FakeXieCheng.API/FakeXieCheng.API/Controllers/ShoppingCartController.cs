@@ -1,10 +1,15 @@
 ﻿using AutoMapper;
 using FakeXieCheng.API.Dtos;
+using FakeXieCheng.API.ModelBinder;
 using FakeXieCheng.API.Models;
 using FakeXieCheng.API.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -42,7 +47,7 @@ namespace FakeXieCheng.API.Controllers
 
             return Ok(_mapper.Map<ShoppingCartDto>(shoppingCart));
 
-        } 
+        }
 
         [HttpPost("items")]
         [Authorize(AuthenticationSchemes = "Bearer")]
@@ -80,6 +85,49 @@ namespace FakeXieCheng.API.Controllers
 
             return Ok(_mapper.Map<ShoppingCartDto>(shoppingCart));
 
+        }
+
+
+        [HttpDelete("items/{itemId}")]
+        [Authorize(AuthenticationSchemes = "Bearer")]
+        public async Task<IActionResult> DeleteShoppingCartItemAsync(
+            [FromRoute] int itemId
+            )
+        {
+            var lineItem = await _touristRouteRepository
+                .GetShoppingCartItemByItemIdAsync(itemId);
+
+            if (lineItem == null)
+            {
+                return NotFound("购物车商品找不到");
+            }
+
+            _touristRouteRepository.DeleteShoppingCartItem(lineItem);
+
+            await _touristRouteRepository.SaveAsync();
+
+            return NoContent();
+        }
+
+
+        [HttpDelete("items/({itemId})")]
+        [Authorize(AuthenticationSchemes = "Bearer")]
+
+        public async Task<IActionResult> RemoveShoppingCartItems(
+            [ModelBinder(BinderType = typeof(ArrayModelBinder))]
+            [FromRoute] IEnumerable<int> itemIds)
+        {
+            var lineItems = await _touristRouteRepository.GetShoppingCartsByIdListAsync(itemIds);
+
+            if (lineItems == null || lineItems.Count() <=0)
+            {
+                return BadRequest("购物车商品找不到");
+            }
+
+            _touristRouteRepository.DeleteShoppingCartItems(lineItems);
+            await _touristRouteRepository.SaveAsync();
+
+            return NoContent();
         }
     }
 }

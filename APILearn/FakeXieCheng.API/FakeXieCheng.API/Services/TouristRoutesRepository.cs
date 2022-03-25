@@ -77,6 +77,16 @@ namespace FakeXieCheng.API.Services
             await _context.ShoppingCarts.AddAsync(shoppingCart);
         }
 
+        public void DeleteShoppingCartItem(LineItem lineItem)
+        {
+            _context.LineItems.Remove(lineItem);
+        }
+
+        public void DeleteShoppingCartItems(IEnumerable<LineItem> lineItems)
+        {
+            _context.RemoveRange(lineItems);
+        }
+
         public void DeleteTouristRoute(TouristRoute touristRoute)
         {
             _context.TouristRoutes.Remove(touristRoute);
@@ -112,6 +122,17 @@ namespace FakeXieCheng.API.Services
                 .ThenInclude(li => li.TouristRoute)
                 .Where(s => s.UserId == userId)
                 .FirstOrDefaultAsync();
+        }
+
+        public async Task<LineItem> GetShoppingCartItemByItemIdAsync(int lineItemId)
+        {
+            return await _context.LineItems.Where(li => li.Id == lineItemId)
+                .FirstOrDefaultAsync();
+        }
+
+        public async Task<IEnumerable<LineItem>> GetShoppingCartsByIdListAsync(IEnumerable<int> ids)
+        {
+           return await _context.LineItems.Where(li => ids.Contains(li.Id)).ToListAsync();
         }
 
         public async Task<TouristRoute> GetTouristRouteAsync(Guid touristRouteId)
