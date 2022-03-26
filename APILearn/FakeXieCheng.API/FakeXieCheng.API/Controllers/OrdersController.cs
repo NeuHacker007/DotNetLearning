@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -25,13 +26,15 @@ namespace FakeXieCheng.API.Controllers
         private readonly ITouristRouteRepository _touristRouteRepository;
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly IConfiguration _config;
+        private readonly ILogger _logger;
 
         public OrdersController(
             IHttpContextAccessor httpContextAccessor,
             IMapper mapper,
             ITouristRouteRepository touristRouteRepository,
             IHttpClientFactory httpClientFactory,
-            IConfiguration config
+            IConfiguration config,
+            ILogger logger
             )
         {
             this._httpContextAccessor = httpContextAccessor;
@@ -39,6 +42,7 @@ namespace FakeXieCheng.API.Controllers
             this._touristRouteRepository = touristRouteRepository;
             this._httpClientFactory = httpClientFactory;
             this._config = config;
+            this._logger = logger;
         }
         [HttpGet]
         [Authorize(AuthenticationSchemes = "Bearer")]
@@ -109,8 +113,21 @@ namespace FakeXieCheng.API.Controllers
             }
 
             var order = await _touristRouteRepository.GetOrderByIdAsync(orderId);
-            order.PaymentProcessing();
-            await _touristRouteRepository.SaveAsync();
+            try
+            {
+                order.PaymentProcessing();
+            }
+            catch (Exception e)
+            {
+                order.PaymentRollBackToPending();
+                _logger.LogError(e.Message);
+                throw;
+            }
+            finally
+            {
+                await _touristRouteRepository.SaveAsync();
+            }
+
 
             var httpClient = _httpClientFactory.CreateClient();
             string url = _config["ThirdPartyPayment:PaymentUrl"];
@@ -123,10 +140,10 @@ namespace FakeXieCheng.API.Controllers
             bool isApproved = false;
             string transactionMetaData = "";
 
-            if(response.IsSuccessStatusCode == true)
+            if (response.IsSuccessStatusCode == true)
             {
                 transactionMetaData = await response.Content.ReadAsStringAsync();
-                var jsonObject = (JObject) JsonConvert.DeserializeObject(transactionMetaData);
+                var jsonObject = (JObject)JsonConvert.DeserializeObject(transactionMetaData);
                 isApproved = jsonObject["approved"].Value<bool>();
             }
 
@@ -134,7 +151,8 @@ namespace FakeXieCheng.API.Controllers
             if (isApproved)
             {
                 order.PaymentApprove();
-            } else
+            }
+            else
             {
                 order.PaymentReject();
             }

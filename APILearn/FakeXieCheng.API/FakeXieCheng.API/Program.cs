@@ -21,6 +21,6 @@ namespace FakeXieCheng.API
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                });
+                }).ConfigureLogging(logging => logging.AddConsole());
     }
 }

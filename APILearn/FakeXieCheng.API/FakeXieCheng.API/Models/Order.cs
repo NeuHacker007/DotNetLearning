@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.Extensions.Logging;
 using Stateless;
 
 namespace FakeXieCheng.API.Models
@@ -21,16 +22,18 @@ namespace FakeXieCheng.API.Models
         Approve,
         Reject,
         Cancel,
-        Return
+        Return,
+        ReturnToPending
     }
     public class Order
     {
+
         public Order()
         {
             StateMachineInit();
         }
         [Key]
-        public Guid Id {get;set; }
+        public Guid Id { get; set; }
 
         public string UserId { get; set; }
 
@@ -48,7 +51,9 @@ namespace FakeXieCheng.API.Models
 
         public void PaymentProcessing()
         {
+
             _matchine.Fire(OrderStateTrigger.PlaceOrder);
+
         }
 
         public void PaymentApprove()
@@ -59,6 +64,16 @@ namespace FakeXieCheng.API.Models
         public void PaymentReject()
         {
             _matchine.Fire(OrderStateTrigger.Reject);
+        }
+
+        public void PaymentReturn()
+        {
+            _matchine.Fire(OrderStateTrigger.Return);
+        }
+
+        public void PaymentRollBackToPending()
+        {
+            _matchine.Fire(OrderStateTrigger.ReturnToPending);
         }
         private void StateMachineInit()
         {
@@ -71,14 +86,15 @@ namespace FakeXieCheng.API.Models
 
             _matchine.Configure(OrderState.Processing)
                 .Permit(OrderStateTrigger.Approve, OrderState.Completed)
-                .Permit(OrderStateTrigger.Reject, OrderState.Declined);
+                .Permit(OrderStateTrigger.Reject, OrderState.Declined)
+                .Permit(OrderStateTrigger.ReturnToPending, OrderState.Pending);
 
             _matchine.Configure(OrderState.Declined)
                 .Permit(OrderStateTrigger.PlaceOrder, OrderState.Processing);
 
             _matchine.Configure(OrderState.Completed)
                 .Permit(OrderStateTrigger.Return, OrderState.Refund);
-                
+
 
         }
     }
