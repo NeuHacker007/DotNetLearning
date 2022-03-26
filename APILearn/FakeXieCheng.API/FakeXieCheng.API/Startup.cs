@@ -37,6 +37,7 @@ namespace FakeXieCheng.API
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddJwtAuthenticationToWeb(Configuration);
             services.AddCustomerServices();
+            services.AddHttpClient();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

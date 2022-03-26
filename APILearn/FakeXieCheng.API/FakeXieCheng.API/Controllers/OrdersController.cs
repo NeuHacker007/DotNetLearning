@@ -4,9 +4,13 @@ using FakeXieCheng.API.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -19,16 +23,22 @@ namespace FakeXieCheng.API.Controllers
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IMapper _mapper;
         private readonly ITouristRouteRepository _touristRouteRepository;
+        private readonly IHttpClientFactory _httpClientFactory;
+        private readonly IConfiguration _config;
 
         public OrdersController(
             IHttpContextAccessor httpContextAccessor,
             IMapper mapper,
-            ITouristRouteRepository touristRouteRepository
+            ITouristRouteRepository touristRouteRepository,
+            IHttpClientFactory httpClientFactory,
+            IConfiguration config
             )
         {
             this._httpContextAccessor = httpContextAccessor;
             this._mapper = mapper;
             this._touristRouteRepository = touristRouteRepository;
+            this._httpClientFactory = httpClientFactory;
+            this._config = config;
         }
         [HttpGet]
         [Authorize(AuthenticationSchemes = "Bearer")]
@@ -79,6 +89,60 @@ namespace FakeXieCheng.API.Controllers
             return Ok(_mapper.Map<OrderDto>(orderFromRepo));
         }
 
+        [HttpPost("{orderId}/placeOrder")]
+        [Authorize(AuthenticationSchemes = "Bearer")]
 
+        public async Task<IActionResult> PlaceOrder(
+            [FromRoute] Guid orderId
+
+            )
+        {
+            var currentUserId = _httpContextAccessor
+                .HttpContext
+                .User
+                .FindFirst(ClaimTypes.NameIdentifier)
+                .Value;
+
+            if (string.IsNullOrWhiteSpace(currentUserId))
+            {
+                return NotFound($"User {currentUserId} 不存在");
+            }
+
+            var order = await _touristRouteRepository.GetOrderByIdAsync(orderId);
+            order.PaymentProcessing();
+            await _touristRouteRepository.SaveAsync();
+
+            var httpClient = _httpClientFactory.CreateClient();
+            string url = _config["ThirdPartyPayment:PaymentUrl"];
+
+            var response = await httpClient.PostAsync(
+                 string.Format(url, _config["ThirdPartyPayment:SecretCode"], order.Id, false),
+                 null
+                 );
+
+            bool isApproved = false;
+            string transactionMetaData = "";
+
+            if(response.IsSuccessStatusCode == true)
+            {
+                transactionMetaData = await response.Content.ReadAsStringAsync();
+                var jsonObject = (JObject) JsonConvert.DeserializeObject(transactionMetaData);
+                isApproved = jsonObject["approved"].Value<bool>();
+            }
+
+
+            if (isApproved)
+            {
+                order.PaymentApprove();
+            } else
+            {
+                order.PaymentReject();
+            }
+
+            order.TransactionMetaData = transactionMetaData;
+            await _touristRouteRepository.SaveAsync();
+
+            return Ok(_mapper.Map<OrderDto>(order));
+        }
     }
 }

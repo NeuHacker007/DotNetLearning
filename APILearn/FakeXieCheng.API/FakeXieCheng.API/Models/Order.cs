@@ -46,9 +46,25 @@ namespace FakeXieCheng.API.Models
 
         private StateMachine<OrderState, OrderStateTrigger> _matchine;
 
+        public void PaymentProcessing()
+        {
+            _matchine.Fire(OrderStateTrigger.PlaceOrder);
+        }
+
+        public void PaymentApprove()
+        {
+            _matchine.Fire(OrderStateTrigger.Approve);
+        }
+
+        public void PaymentReject()
+        {
+            _matchine.Fire(OrderStateTrigger.Reject);
+        }
         private void StateMachineInit()
         {
-            _matchine = new StateMachine<OrderState, OrderStateTrigger>(OrderState.Pending);
+            _matchine = new StateMachine<OrderState, OrderStateTrigger>(
+                () => State,
+                s => State = s);
             _matchine.Configure(OrderState.Pending)
                 .Permit(OrderStateTrigger.PlaceOrder, OrderState.Processing)
                 .Permit(OrderStateTrigger.Cancel, OrderState.Cancelled);
