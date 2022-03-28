@@ -1,4 +1,5 @@
 ﻿using FakeXieCheng.API.Database;
+using FakeXieCheng.API.Helper;
 using FakeXieCheng.API.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -164,7 +165,7 @@ namespace FakeXieCheng.API.Services
             return await _context.TouristRoutes.Where(t => ids.Contains(t.Id)).ToListAsync();
         }
 
-        public async Task<IEnumerable<TouristRoute>> GetTouristRoutesAsync(
+        public async Task<PaginationList<TouristRoute>> GetTouristRoutesAsync(
             string keyword,
             string operatorType,
             int? ratingValue,
@@ -189,12 +190,16 @@ namespace FakeXieCheng.API.Services
                     _ => result.Where(t => t.Rating == ratingValue),
                 };
             }
-            var skip = (pageNumber -1) * pageSize;
-            result = result.Skip(skip);
+            //var skip = (pageNumber -1) * pageSize;
+            //result = result.Skip(skip);
 
-            result = result.Take(pageSize);
+            //result = result.Take(pageSize);
             //include vs join --> eager load
-            return await result.ToListAsync();
+
+            return await PaginationList<TouristRoute>.CreateAsync(
+                pageNumber,
+                pageSize,
+                result);
         }
 
         public async Task<bool> SaveAsync()
