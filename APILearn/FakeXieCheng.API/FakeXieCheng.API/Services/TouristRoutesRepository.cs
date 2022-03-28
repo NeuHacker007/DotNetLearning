@@ -167,7 +167,9 @@ namespace FakeXieCheng.API.Services
         public async Task<IEnumerable<TouristRoute>> GetTouristRoutesAsync(
             string keyword,
             string operatorType,
-            int? ratingValue)
+            int? ratingValue,
+            int pageSize,
+            int pageNumber)
         {
             IQueryable<TouristRoute> result = _context
                 .TouristRoutes
@@ -187,7 +189,10 @@ namespace FakeXieCheng.API.Services
                     _ => result.Where(t => t.Rating == ratingValue),
                 };
             }
+            var skip = (pageNumber -1) * pageSize;
+            result = result.Skip(skip);
 
+            result = result.Take(pageSize);
             //include vs join --> eager load
             return await result.ToListAsync();
         }
