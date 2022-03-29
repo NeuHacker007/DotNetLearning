@@ -32,7 +32,8 @@ namespace FakeXieCheng.API.Controllers
         [HttpGet]
         [HttpHead]// only return header info not the body
         public async Task<IActionResult> GetRouristRoutes(
-            [FromQuery] TouristRouteResourceParameters parameters
+            [FromQuery] TouristRouteResourceParameters parameters,
+            [FromQuery] PaginationResourceParameters paginationResourceParameters
             //[FromQuery] string keyword,
             //string rating
             )
@@ -42,8 +43,8 @@ namespace FakeXieCheng.API.Controllers
                 parameters.Keyword, 
                 parameters.RatingOperator, 
                 parameters.RatingValue,
-                parameters.PageSize,
-                parameters.PageNumber);
+                paginationResourceParameters.PageSize,
+                paginationResourceParameters.PageNumber);
             if (touristRoutesFromRepo == null
                 || touristRoutesFromRepo.Count() <= 0)
             {

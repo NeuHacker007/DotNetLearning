@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FakeXieCheng.API.Dtos;
+using FakeXieCheng.API.ResourceParameters;
 using FakeXieCheng.API.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -46,7 +47,9 @@ namespace FakeXieCheng.API.Controllers
         }
         [HttpGet]
         [Authorize(AuthenticationSchemes = "Bearer")]
-        public async Task<IActionResult> GetOrders()
+        public async Task<IActionResult> GetOrders(
+            [FromQuery] PaginationResourceParameters paginationResourceParameters
+            )
         {
             var currentUserId = _httpContextAccessor
                 .HttpContext
@@ -57,7 +60,10 @@ namespace FakeXieCheng.API.Controllers
             {
                 return NotFound($"User {currentUserId} 不存在");
             }
-            var ordersFromRepo = await _touristRouteRepository.GetOrdersByUserIdAsync(currentUserId);
+            var ordersFromRepo = await _touristRouteRepository.GetOrdersByUserIdAsync(
+                currentUserId,
+                paginationResourceParameters.PageSize,
+                paginationResourceParameters.PageNumber);
             if (ordersFromRepo == null || ordersFromRepo.Count() <= 0)
             {
                 return NotFound($"订单不存在");

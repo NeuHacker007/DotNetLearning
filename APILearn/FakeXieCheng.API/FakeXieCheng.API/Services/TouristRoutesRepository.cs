@@ -117,9 +117,20 @@ namespace FakeXieCheng.API.Services
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<Order>> GetOrdersByUserIdAsync(string userId)
+        public async Task<PaginationList<Order>> GetOrdersByUserIdAsync(
+            string userId,
+            int pageSize,
+            int pageNumber
+            )
         {
-            return await _context.Orders.Where(o => o.UserId == userId).ToListAsync();
+
+            IQueryable<Order> result = _context
+                .Orders.Where(o => o.UserId == userId);
+            return await PaginationList<Order>.CreateAsync(pageNumber,pageSize,result);
+            //return await _context
+            //    .Orders
+            //    .Where(o => o.UserId == userId)
+            //    .ToListAsync();
         }
 
         public async Task<TouristRoutePicture> GetPictureAsync(int pictureId)
