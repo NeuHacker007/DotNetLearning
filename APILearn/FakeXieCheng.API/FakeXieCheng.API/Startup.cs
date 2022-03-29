@@ -26,7 +26,7 @@ namespace FakeXieCheng.API
         {
             services.AddMvcControllerSettingsServices();
 
-
+            
             services.AddDbContext<AppDbContext>(option =>
             {
                 //option.UseSqlServer(@"Server=IVAN-ZHANG\IVAN_ZHANG;Database=FakeXiechengDb;Integrated Security=True;");

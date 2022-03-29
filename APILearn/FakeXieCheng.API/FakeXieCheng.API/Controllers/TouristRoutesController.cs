@@ -13,6 +13,10 @@ using Microsoft.AspNetCore.JsonPatch;
 using FakeXieCheng.API.ModelBinder;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using FakeXieCheng.API.Helper;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Mvc.Routing;
+using Newtonsoft.Json;
 
 namespace FakeXieCheng.API.Controllers
 {
@@ -22,14 +26,21 @@ namespace FakeXieCheng.API.Controllers
     {
         private readonly ITouristRouteRepository _touristRouteRepository;
         private readonly IMapper _mapper;
+        private readonly IUrlHelper _urlHelper;
 
-        public TouristRoutesController(ITouristRouteRepository touristRouteRepository, IMapper mapper)
+        public TouristRoutesController(
+            ITouristRouteRepository touristRouteRepository,
+            IMapper mapper,
+            IUrlHelperFactory urlHelperFactory,
+            IActionContextAccessor actionContextAccessor)
         {
             _touristRouteRepository = touristRouteRepository;
             this._mapper = mapper;
+
+            _urlHelper = urlHelperFactory.GetUrlHelper(actionContextAccessor.ActionContext);
         }
 
-        [HttpGet]
+        [HttpGet(Name = "GetRouristRoutes")]
         [HttpHead]// only return header info not the body
         public async Task<IActionResult> GetRouristRoutes(
             [FromQuery] TouristRouteResourceParameters parameters,
@@ -40,8 +51,8 @@ namespace FakeXieCheng.API.Controllers
         {
             var touristRoutesFromRepo = await _touristRouteRepository
                 .GetTouristRoutesAsync(
-                parameters.Keyword, 
-                parameters.RatingOperator, 
+                parameters.Keyword,
+                parameters.RatingOperator,
                 parameters.RatingValue,
                 paginationResourceParameters.PageSize,
                 paginationResourceParameters.PageNumber);
@@ -51,6 +62,32 @@ namespace FakeXieCheng.API.Controllers
                 return NotFound("没有旅游路线");
             }
             var touristRoutesDto = _mapper.Map<IEnumerable<TouristRouteDto>>(touristRoutesFromRepo);
+            var previousPageLink = touristRoutesFromRepo.HasPrevious ?
+                GenerateTouristRouteResourceUrl(
+                    parameters,
+                    paginationResourceParameters,
+                    ResourceUriType.PreviousPage
+                    ) : null;
+
+            var nextPageLink = touristRoutesFromRepo.HasNext ?
+                GenerateTouristRouteResourceUrl(
+                    parameters,
+                    paginationResourceParameters,
+                    ResourceUriType.NextPage
+                    ) : null;
+
+
+            var paginationMetadata = new
+            {
+                previousPageLink,
+                nextPageLink,
+                totalCount = touristRoutesFromRepo.TotalCount,
+                pageSize = touristRoutesFromRepo.PageSize,
+                currentPage = touristRoutesFromRepo.CurrentPage,
+                totalPages = touristRoutesFromRepo.TotalPages
+            };
+
+            Response.Headers.Add("x-pagination", JsonConvert.SerializeObject(paginationMetadata));
             return Ok(touristRoutesDto);
         }
 
@@ -85,7 +122,7 @@ namespace FakeXieCheng.API.Controllers
 
 
         [HttpPost]
-        [Authorize(Roles = "Admin", AuthenticationSchemes ="Bearer")]
+        [Authorize(Roles = "Admin", AuthenticationSchemes = "Bearer")]
         public async Task<IActionResult> CreateTouristRoute(
             [FromBody] TouristRouteForCreationDto touristRouteForCreationDto
             )
@@ -108,7 +145,7 @@ namespace FakeXieCheng.API.Controllers
         }
 
         [HttpPut("{touristRouteId}")]
-        [Authorize(Roles = "Admin", AuthenticationSchemes ="Bearer")]
+        [Authorize(Roles = "Admin", AuthenticationSchemes = "Bearer")]
         public async Task<IActionResult> UpdateTouristRoute(
             [FromRoute] Guid touristRouteId,
             [FromBody] TouristRouteForUpdateDto touristRouteForUpdateDto
@@ -130,7 +167,7 @@ namespace FakeXieCheng.API.Controllers
         }
 
         [HttpPatch("{touristRouteId}")]
-        [Authorize(Roles = "Admin", AuthenticationSchemes ="Bearer")]
+        [Authorize(Roles = "Admin", AuthenticationSchemes = "Bearer")]
         public async Task<IActionResult> PartiallyupdateTouristRoute(
             [FromRoute] Guid touristRouteId,
             [FromBody] JsonPatchDocument<TouristRouteForUpdateDto> patchDocument
@@ -160,7 +197,7 @@ namespace FakeXieCheng.API.Controllers
         }
 
         [HttpDelete("{touristRouteId}")]
-        [Authorize(Roles = "Admin", AuthenticationSchemes ="Bearer")]
+        [Authorize(Roles = "Admin", AuthenticationSchemes = "Bearer")]
         public async Task<IActionResult> DeleteTouristRoute(
             [FromRoute] Guid touristRouteId
             )
@@ -180,7 +217,7 @@ namespace FakeXieCheng.API.Controllers
 
         }
         [HttpDelete("({touristRouteIds})")]
-        [Authorize(Roles = "Admin", AuthenticationSchemes ="Bearer")]
+        [Authorize(Roles = "Admin", AuthenticationSchemes = "Bearer")]
         public async Task<IActionResult> DeleteTouristRoutes(
            [ModelBinder(BinderType = typeof(ArrayModelBinder))]
            [FromRoute] IEnumerable<Guid> touristRouteIds)
@@ -197,6 +234,44 @@ namespace FakeXieCheng.API.Controllers
             await _touristRouteRepository.SaveAsync();
 
             return NoContent();
+        }
+
+        private string GenerateTouristRouteResourceUrl(
+            TouristRouteResourceParameters touristRouteResourceParameters,
+            PaginationResourceParameters paginationResourceParameters,
+            ResourceUriType type
+            )
+        {
+            return type switch
+            {
+                ResourceUriType.PreviousPage => _urlHelper.Link(
+                "GetRouristRoutes",
+                new
+                {
+                    keyword = touristRouteResourceParameters.Keyword,
+                    rating = touristRouteResourceParameters.Rating,
+                    pageNumber = paginationResourceParameters.PageNumber - 1,
+                    pageSize = paginationResourceParameters.PageSize
+                }),
+                ResourceUriType.NextPage => _urlHelper.Link(
+                "GetRouristRoutes",
+                new
+                {
+                    keyword = touristRouteResourceParameters.Keyword,
+                    rating = touristRouteResourceParameters.Rating,
+                    pageNumber = paginationResourceParameters.PageNumber + 1,
+                    pageSize = paginationResourceParameters.PageSize
+                }),
+                _ => _urlHelper.Link(
+                "GetRouristRoutes",
+                new
+                {
+                    keyword = touristRouteResourceParameters.Keyword,
+                    rating = touristRouteResourceParameters.Rating,
+                    pageNumber = paginationResourceParameters.PageNumber,
+                    pageSize = paginationResourceParameters.PageSize
+                }),
+            };
         }
     }
 }

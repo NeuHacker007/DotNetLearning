@@ -1,5 +1,6 @@
 ﻿using FakeXieCheng.API.Services;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace FakeXieCheng.API.Extensions
@@ -10,6 +11,7 @@ namespace FakeXieCheng.API.Extensions
         {
             services.AddTransient<ITouristRouteRepository, TouristRoutesRepository>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
         }
     }
 }
