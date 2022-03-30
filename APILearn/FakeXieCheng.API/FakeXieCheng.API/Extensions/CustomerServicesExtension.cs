@@ -10,8 +10,9 @@ namespace FakeXieCheng.API.Extensions
         public static void AddCustomerServices(this IServiceCollection services)
         {
             services.AddTransient<ITouristRouteRepository, TouristRoutesRepository>();
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
+            services.AddTransient<IPropertyMappingService, PropertyMappingService>();
         }
     }
 }
