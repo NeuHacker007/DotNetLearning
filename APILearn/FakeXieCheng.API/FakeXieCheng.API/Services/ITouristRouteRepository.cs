@@ -13,7 +13,8 @@ namespace FakeXieCheng.API.Services
             string operatorType, 
             int? ratingValue,
             int pageSize,
-            int pageNumber);
+            int pageNumber, 
+            string orderBy);
         Task<TouristRoute> GetTouristRouteAsync(Guid touristRouteId);
 
         Task<bool> TouristRouteExistsAsync(Guid touristRouteId);

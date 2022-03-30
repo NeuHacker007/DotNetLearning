@@ -181,7 +181,8 @@ namespace FakeXieCheng.API.Services
             string operatorType,
             int? ratingValue,
             int pageSize,
-            int pageNumber)
+            int pageNumber, 
+            string orderBy)
         {
             IQueryable<TouristRoute> result = _context
                 .TouristRoutes
@@ -206,6 +207,14 @@ namespace FakeXieCheng.API.Services
 
             //result = result.Take(pageSize);
             //include vs join --> eager load
+
+            if (!string.IsNullOrWhiteSpace(orderBy))
+            {
+                if (orderBy.ToLowerInvariant() == "OriginalPrice".ToLowerInvariant())
+                {
+                    result = result.OrderBy(t => t.OriginalPrice);
+                }
+            }
 
             return await PaginationList<TouristRoute>.CreateAsync(
                 pageNumber,
