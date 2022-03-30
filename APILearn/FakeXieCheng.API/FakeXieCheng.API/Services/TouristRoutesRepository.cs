@@ -1,4 +1,5 @@
 ﻿using FakeXieCheng.API.Database;
+using FakeXieCheng.API.Dtos;
 using FakeXieCheng.API.Helper;
 using FakeXieCheng.API.Models;
 using Microsoft.EntityFrameworkCore;
@@ -6,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FakeXieCheng.API.Extensions;
 
 namespace FakeXieCheng.API.Services
 {
@@ -34,10 +36,14 @@ namespace FakeXieCheng.API.Services
     public class TouristRoutesRepository : ITouristRouteRepository
     {
         private readonly AppDbContext _context;
+        private readonly IPropertyMappingService _propertyMappingService;
 
-        public TouristRoutesRepository(AppDbContext context)
+        public TouristRoutesRepository(
+            AppDbContext context,
+            IPropertyMappingService propertyMappingService)
         {
             this._context = context;
+            this._propertyMappingService = propertyMappingService;
         }
 
         public async Task AddOrderAsync(Order order)
@@ -210,10 +216,14 @@ namespace FakeXieCheng.API.Services
 
             if (!string.IsNullOrWhiteSpace(orderBy))
             {
-                if (orderBy.ToLowerInvariant() == "OriginalPrice".ToLowerInvariant())
-                {
-                    result = result.OrderBy(t => t.OriginalPrice);
-                }
+                //if (orderBy.ToLowerInvariant() == "OriginalPrice".ToLowerInvariant())
+                //{
+                //    result = result.OrderBy(t => t.OriginalPrice);
+                //}
+
+                var touristRouteMappingDictionary = _propertyMappingService
+                    .GetPropertyMapping<TouristRouteDto, TouristRoute>();
+                result = result.ApplySort(orderBy, touristRouteMappingDictionary);
             }
 
             return await PaginationList<TouristRoute>.CreateAsync(
