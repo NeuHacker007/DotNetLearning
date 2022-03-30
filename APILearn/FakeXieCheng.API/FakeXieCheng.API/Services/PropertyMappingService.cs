@@ -19,7 +19,7 @@ namespace FakeXieCheng.API.Services
             };
 
         private IList<IPropertyMapping> _propertyMappings = new List<IPropertyMapping>();
-        public PropertyMappingService()
+        public PropertyMappingService() 
         {
 
             _propertyMappings.Add(
