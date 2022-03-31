@@ -249,6 +249,7 @@ namespace FakeXieCheng.API.Controllers
                 "GetRouristRoutes",
                 new
                 {
+                    orderBy = touristRouteResourceParameters.OrderBy,
                     keyword = touristRouteResourceParameters.Keyword,
                     rating = touristRouteResourceParameters.Rating,
                     pageNumber = paginationResourceParameters.PageNumber - 1,
@@ -258,6 +259,7 @@ namespace FakeXieCheng.API.Controllers
                 "GetRouristRoutes",
                 new
                 {
+                    orderBy = touristRouteResourceParameters.OrderBy,
                     keyword = touristRouteResourceParameters.Keyword,
                     rating = touristRouteResourceParameters.Rating,
                     pageNumber = paginationResourceParameters.PageNumber + 1,
