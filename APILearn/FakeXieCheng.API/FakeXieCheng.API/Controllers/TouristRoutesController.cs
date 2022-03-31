@@ -17,6 +17,7 @@ using FakeXieCheng.API.Helper;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Newtonsoft.Json;
+using FakeXieCheng.API.Extensions;
 
 namespace FakeXieCheng.API.Controllers
 {
@@ -98,7 +99,7 @@ namespace FakeXieCheng.API.Controllers
             };
 
             Response.Headers.Add("x-pagination", JsonConvert.SerializeObject(paginationMetadata));
-            return Ok(touristRoutesDto);
+            return Ok(touristRoutesDto.ShapeData(parameters.Fields));
         }
 
         [HttpGet("{touristRouteId:Guid}", Name = "GetTouristRoutesById")]
@@ -258,6 +259,7 @@ namespace FakeXieCheng.API.Controllers
                 "GetRouristRoutes",
                 new
                 {
+                    filds = touristRouteResourceParameters.Fields,
                     orderBy = touristRouteResourceParameters.OrderBy,
                     keyword = touristRouteResourceParameters.Keyword,
                     rating = touristRouteResourceParameters.Rating,
@@ -268,6 +270,7 @@ namespace FakeXieCheng.API.Controllers
                 "GetRouristRoutes",
                 new
                 {
+                    filds = touristRouteResourceParameters.Fields,
                     orderBy = touristRouteResourceParameters.OrderBy,
                     keyword = touristRouteResourceParameters.Keyword,
                     rating = touristRouteResourceParameters.Rating,
@@ -278,6 +281,8 @@ namespace FakeXieCheng.API.Controllers
                 "GetRouristRoutes",
                 new
                 {
+                    filds = touristRouteResourceParameters.Fields,
+                    orderBy = touristRouteResourceParameters.OrderBy,
                     keyword = touristRouteResourceParameters.Keyword,
                     rating = touristRouteResourceParameters.Rating,
                     pageNumber = paginationResourceParameters.PageNumber,

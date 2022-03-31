@@ -33,6 +33,8 @@ namespace FakeXieCheng.API.ResourceParameters
 
         public string OrderBy { get; set; }
 
+        public string Fields { get; set; }
+
 
     }
 }
