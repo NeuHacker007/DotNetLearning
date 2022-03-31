@@ -52,11 +52,16 @@ namespace FakeXieCheng.API.Controllers
             //string rating
             )
         {
-            if (! _propertyMappingService
-                .IsMappingExists<TouristRouteDto, TouristRoute> 
+            if (!_propertyMappingService
+                .IsMappingExists<TouristRouteDto, TouristRoute>
                 (parameters.OrderBy))
             {
                 return BadRequest($"请输入正确的排序参数");
+            }
+
+            if (!_propertyMappingService.IsPropertyExists<TouristRouteDto>(parameters.Fields))
+            {
+                return BadRequest($"请输入正确的塑形参数");
             }
 
             var touristRoutesFromRepo = await _touristRouteRepository
@@ -108,11 +113,16 @@ namespace FakeXieCheng.API.Controllers
             Guid touristRouteId,
             string fields)
         {
+            if (!_propertyMappingService.IsPropertyExists<TouristRouteDto>(fields))
+            {
+                return BadRequest($"请输入正确的塑形参数");
+            }
             var touristRouteFromRepo = await _touristRouteRepository.GetTouristRouteAsync(touristRouteId);
             if (touristRouteFromRepo == null)
             {
                 return NotFound($"旅游路线{touristRouteId}找不到");
             }
+
             //var touristRouteDto = new TouristRouteDto()
             //{
             //    Id= touristRouteFromRepo.Id,
