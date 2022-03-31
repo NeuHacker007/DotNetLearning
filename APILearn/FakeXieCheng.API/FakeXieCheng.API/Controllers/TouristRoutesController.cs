@@ -104,7 +104,9 @@ namespace FakeXieCheng.API.Controllers
 
         [HttpGet("{touristRouteId:Guid}", Name = "GetTouristRoutesById")]
         [HttpHead] // only return header info not the body
-        public async Task<IActionResult> GetTouristRoutesById(Guid touristRouteId)
+        public async Task<IActionResult> GetTouristRoutesById(
+            Guid touristRouteId,
+            string fields)
         {
             var touristRouteFromRepo = await _touristRouteRepository.GetTouristRouteAsync(touristRouteId);
             if (touristRouteFromRepo == null)
@@ -128,7 +130,7 @@ namespace FakeXieCheng.API.Controllers
             //    DepartureCity = touristRouteFromRepo.DepartureCity.ToString()
             //};
             var touristRouteDto = _mapper.Map<TouristRouteDto>(touristRouteFromRepo);
-            return Ok(touristRouteDto);
+            return Ok(touristRouteDto.ShapeData(fields));
         }
 
 
