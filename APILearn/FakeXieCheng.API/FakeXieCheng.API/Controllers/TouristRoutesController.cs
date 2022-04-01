@@ -6,7 +6,6 @@ using System;
 using FakeXieCheng.API.Dtos;
 using AutoMapper;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using FakeXieCheng.API.ResourceParameters;
 using FakeXieCheng.API.Models;
 using Microsoft.AspNetCore.JsonPatch;
@@ -19,6 +18,7 @@ using Microsoft.AspNetCore.Mvc.Routing;
 using Newtonsoft.Json;
 using FakeXieCheng.API.Extensions;
 using Microsoft.Net.Http.Headers;
+using System.Dynamic;
 
 namespace FakeXieCheng.API.Controllers
 {
@@ -44,6 +44,12 @@ namespace FakeXieCheng.API.Controllers
             _urlHelper = urlHelperFactory.GetUrlHelper(actionContextAccessor.ActionContext);
         }
 
+        [Produces(
+            "application/json",
+            "application/vnd.ivan.hateoas+json",
+            "application/vnd.ivan.touristRoute.simplify+json",
+            "application/vnd.ivan.touristRoute.simplify.hateoas+json"
+            )]
         [HttpGet(Name = "GetRouristRoutes")]
         [HttpHead]// only return header info not the body
         public async Task<IActionResult> GetRouristRoutes(
@@ -58,8 +64,6 @@ namespace FakeXieCheng.API.Controllers
             {
                 return BadRequest($"http header: accept 不正确");
             }
-
-
 
             if (!_propertyMappingService
                 .IsMappingExists<TouristRouteDto, TouristRoute>
@@ -86,7 +90,7 @@ namespace FakeXieCheng.API.Controllers
             {
                 return NotFound("没有旅游路线");
             }
-            var touristRoutesDto = _mapper.Map<IEnumerable<TouristRouteDto>>(touristRoutesFromRepo);
+           
             var previousPageLink = touristRoutesFromRepo.HasPrevious ?
                 GenerateTouristRouteResourceUrl(
                     parameters,
@@ -114,9 +118,29 @@ namespace FakeXieCheng.API.Controllers
 
             Response.Headers.Add("x-pagination", JsonConvert.SerializeObject(paginationMetadata));
 
-            var shapedDtoList = touristRoutesDto.ShapeData(parameters.Fields);
+            bool isHateoas = parsedMediaType.SubTypeWithoutSuffix.EndsWith("hateoas", StringComparison.InvariantCultureIgnoreCase);
 
-            if (parsedMediaType.MediaType == "application/vnd.ivan.hateoas+json")
+            var primaryMediaType = isHateoas 
+                ? parsedMediaType.SubTypeWithoutSuffix.Substring(0, parsedMediaType.SubTypeWithoutSuffix.Length - 8)
+                : parsedMediaType.SubTypeWithoutSuffix;
+            //var touristRoutesDto = _mapper.Map<IEnumerable<TouristRouteDto>>(touristRoutesFromRepo);
+            //var shapedDtoList = touristRoutesDto.ShapeData(parameters.Fields);
+
+            IEnumerable<object> touristRoutesDto;
+            IEnumerable<ExpandoObject> shapedDtoList;
+
+            if (primaryMediaType == "vnd.ivan.touristRoute.simplify")
+            {
+                touristRoutesDto = _mapper.Map<IEnumerable<TouristRouteSimplifyDto>>(touristRoutesFromRepo);
+
+                shapedDtoList = ((IEnumerable<TouristRouteSimplifyDto>) touristRoutesDto).ShapeData(parameters.Fields);
+            } else
+            {
+                touristRoutesDto = _mapper.Map<IEnumerable<TouristRouteDto>>(touristRoutesFromRepo);
+                shapedDtoList = ((IEnumerable<TouristRouteDto>) touristRoutesDto).ShapeData(parameters.Fields);
+            }
+
+            if (isHateoas)
             {
                 var linkDto = CreateLinksForTouristRouteList(parameters, paginationResourceParameters);
 
