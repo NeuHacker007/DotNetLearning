@@ -151,13 +151,20 @@ namespace FakeXieCheng.API.Controllers
 
             var touristRouteToReturn = _mapper.Map<TouristRouteDto>(touristRouteModel);
 
+            var links = CreateLinkForTouristRoute(
+                touristRouteModel.Id,null);
+
+            var result = touristRouteToReturn.ShapeData(null) as IDictionary<string, object>;
+
+            result.Add("links", links);
+
             return CreatedAtRoute(
                 "GetTouristRoutesById",
                 new
                 {
-                    touristRouteId = touristRouteToReturn.Id
+                    touristRouteId = result["id"]
                 },
-                touristRouteToReturn
+                result
                 );
         }
 
