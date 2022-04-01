@@ -104,7 +104,28 @@ namespace FakeXieCheng.API.Controllers
             };
 
             Response.Headers.Add("x-pagination", JsonConvert.SerializeObject(paginationMetadata));
-            return Ok(touristRoutesDto.ShapeData(parameters.Fields));
+
+            var shapedDtoList = touristRoutesDto.ShapeData(parameters.Fields);
+
+            var linkDto = CreateLinksForTouristRouteList(parameters,paginationResourceParameters);
+
+            var shapedDtoWithLinkedList = shapedDtoList.Select(t =>
+            {
+                var touristDictionary = t as IDictionary<string, object>;
+
+                var links = CreateLinkForTouristRoute(
+                    (Guid)touristDictionary["Id"], 
+                    null);
+                touristDictionary.Add("links",links);
+                return touristDictionary;
+            });
+
+            var result = new
+            {
+                value = shapedDtoWithLinkedList,
+                links = linkDto
+            };
+            return Ok(result);
         }
 
         [HttpGet("{touristRouteId:Guid}", Name = "GetTouristRoutesById")]
@@ -138,7 +159,7 @@ namespace FakeXieCheng.API.Controllers
         }
 
 
-        [HttpPost]
+        [HttpPost(Name = "CreateTouristRoute")]
         [Authorize(Roles = "Admin", AuthenticationSchemes = "Bearer")]
         public async Task<IActionResult> CreateTouristRoute(
             [FromBody] TouristRouteForCreationDto touristRouteForCreationDto
@@ -152,7 +173,7 @@ namespace FakeXieCheng.API.Controllers
             var touristRouteToReturn = _mapper.Map<TouristRouteDto>(touristRouteModel);
 
             var links = CreateLinkForTouristRoute(
-                touristRouteModel.Id,null);
+                touristRouteModel.Id, null);
 
             var result = touristRouteToReturn.ShapeData(null) as IDictionary<string, object>;
 
@@ -258,6 +279,34 @@ namespace FakeXieCheng.API.Controllers
             await _touristRouteRepository.SaveAsync();
 
             return NoContent();
+        }
+
+        private IEnumerable<LinkDto> CreateLinksForTouristRouteList(
+             TouristRouteResourceParameters touristRouteResourceParameters,
+             PaginationResourceParameters paginationResourceParameters)
+        {
+            var links = new List<LinkDto>();
+
+            links.Add(
+                new LinkDto(
+                    GenerateTouristRouteResourceUrl(
+                        touristRouteResourceParameters,
+                        paginationResourceParameters,
+                        ResourceUriType.CurrentPage),
+                    "self",
+                    "GET"
+                    )
+                );
+
+            links.Add(new LinkDto(
+                
+                Url.Link("CreateTouristRoute", null),
+                "create_tourist_route",
+                "POST"
+                ));
+
+
+            return links;
         }
         private IEnumerable<LinkDto> CreateLinkForTouristRoute(
             Guid touristRouteId,
