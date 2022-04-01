@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Serialization;
+using System.Linq;
 
 namespace FakeXieCheng.API.Extensions
 {
@@ -41,6 +43,17 @@ namespace FakeXieCheng.API.Extensions
                         ContentTypes = { "application/problem+json" }
                     };
                 };
+            });
+
+
+            services.Configure<MvcOptions>(config =>
+            {
+                var outputFormatter = config.OutputFormatters.OfType<NewtonsoftJsonOutputFormatter>()?.FirstOrDefault();
+
+                if (outputFormatter != null)
+                {
+                    outputFormatter.SupportedMediaTypes.Add("application/vnd.ivan.hateoas+json");
+                }
             });
         }
     }

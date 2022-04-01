@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Newtonsoft.Json;
 using FakeXieCheng.API.Extensions;
+using Microsoft.Net.Http.Headers;
 
 namespace FakeXieCheng.API.Controllers
 {
@@ -47,11 +48,19 @@ namespace FakeXieCheng.API.Controllers
         [HttpHead]// only return header info not the body
         public async Task<IActionResult> GetRouristRoutes(
             [FromQuery] TouristRouteResourceParameters parameters,
-            [FromQuery] PaginationResourceParameters paginationResourceParameters
+            [FromQuery] PaginationResourceParameters paginationResourceParameters,
+            [FromHeader(Name = "Accept")] string mediaType
             //[FromQuery] string keyword,
             //string rating
             )
         {
+            if (!MediaTypeHeaderValue.TryParse(mediaType, out MediaTypeHeaderValue parsedMediaType))
+            {
+                return BadRequest($"http header: accept 不正确");
+            }
+
+
+
             if (!_propertyMappingService
                 .IsMappingExists<TouristRouteDto, TouristRoute>
                 (parameters.OrderBy))
@@ -107,25 +116,32 @@ namespace FakeXieCheng.API.Controllers
 
             var shapedDtoList = touristRoutesDto.ShapeData(parameters.Fields);
 
-            var linkDto = CreateLinksForTouristRouteList(parameters,paginationResourceParameters);
-
-            var shapedDtoWithLinkedList = shapedDtoList.Select(t =>
+            if (parsedMediaType.MediaType == "application/vnd.ivan.hateoas+json")
             {
-                var touristDictionary = t as IDictionary<string, object>;
+                var linkDto = CreateLinksForTouristRouteList(parameters, paginationResourceParameters);
 
-                var links = CreateLinkForTouristRoute(
-                    (Guid)touristDictionary["Id"], 
-                    null);
-                touristDictionary.Add("links",links);
-                return touristDictionary;
-            });
+                var shapedDtoWithLinkedList = shapedDtoList.Select(t =>
+                {
+                    var touristDictionary = t as IDictionary<string, object>;
 
-            var result = new
-            {
-                value = shapedDtoWithLinkedList,
-                links = linkDto
-            };
-            return Ok(result);
+                    var links = CreateLinkForTouristRoute(
+                        (Guid)touristDictionary["Id"],
+                        null);
+                    touristDictionary.Add("links", links);
+                    return touristDictionary;
+                });
+
+                var result = new
+                {
+                    value = shapedDtoWithLinkedList,
+                    links = linkDto
+                };
+                return Ok(result);
+            }
+
+            return Ok(shapedDtoList);
+
+
         }
 
         [HttpGet("{touristRouteId:Guid}", Name = "GetTouristRoutesById")]
@@ -299,7 +315,7 @@ namespace FakeXieCheng.API.Controllers
                 );
 
             links.Add(new LinkDto(
-                
+
                 Url.Link("CreateTouristRoute", null),
                 "create_tourist_route",
                 "POST"
