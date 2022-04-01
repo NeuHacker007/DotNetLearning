@@ -45,7 +45,7 @@ namespace FakeXieCheng.API.Controllers
             this._config = config;
             this._logger = logger;
         }
-        [HttpGet]
+        [HttpGet(Name = "GetOrders")]
         [Authorize(AuthenticationSchemes = "Bearer")]
         public async Task<IActionResult> GetOrders(
             [FromQuery] PaginationResourceParameters paginationResourceParameters

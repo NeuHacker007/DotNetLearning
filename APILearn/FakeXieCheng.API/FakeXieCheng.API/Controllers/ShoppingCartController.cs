@@ -34,7 +34,7 @@ namespace FakeXieCheng.API.Controllers
             this._mapper = mapper;
         }
 
-        [HttpGet]
+        [HttpGet("GetShoppingCart")]
         [Authorize(AuthenticationSchemes = "Bearer")]
         public async Task<IActionResult> GetShoppingCart()
         {
