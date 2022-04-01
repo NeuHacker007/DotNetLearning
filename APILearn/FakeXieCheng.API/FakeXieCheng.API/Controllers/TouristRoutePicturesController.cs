@@ -28,7 +28,7 @@ namespace FakeXieCheng.API.Controllers
                 throw new ArgumentNullException(nameof(mapper));
         }
 
-        [HttpGet]
+        [HttpGet(Name ="GetPictureListForTouristRoute")]
         public async Task<IActionResult> GetPictureListForTouristRoute(Guid touristRouteId)
         {
             if (!await _touristRouteRepository.TouristRouteExistsAsync(touristRouteId))
@@ -68,7 +68,7 @@ namespace FakeXieCheng.API.Controllers
             return Ok(_mapper.Map<TouristRoutePicturesDto>(picFromRepo));
         }
 
-        [HttpPost]
+        [HttpPost(Name = "CreatePicture")]
         [Authorize(Roles = "Admin", AuthenticationSchemes = "Bearer")] // if we don't specify the authentication schemes to bearer then it will not work because by default, the authorization is not using jwt for verify
         public async Task<IActionResult> CreatePicture(
             [FromRoute] Guid touristRouteId,

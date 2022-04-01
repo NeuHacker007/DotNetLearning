@@ -123,24 +123,18 @@ namespace FakeXieCheng.API.Controllers
                 return NotFound($"旅游路线{touristRouteId}找不到");
             }
 
-            //var touristRouteDto = new TouristRouteDto()
-            //{
-            //    Id= touristRouteFromRepo.Id,
-            //    Title = touristRouteFromRepo.Title,
-            //    Description = touristRouteFromRepo.Title,
-            //    Price = touristRouteFromRepo.OriginalPrice * (decimal) (touristRouteFromRepo.DiscountPresent ?? 1d),
-            //    CreateTime = touristRouteFromRepo.CreateTime,
-            //    UpdateTime = touristRouteFromRepo.UpdateTime,
-            //    Features = touristRouteFromRepo.Features,
-            //    Fees = touristRouteFromRepo.Fees,
-            //    Notes = touristRouteFromRepo.Notes,
-            //    Rating = touristRouteFromRepo.Rating,
-            //    TravelDays = touristRouteFromRepo.TravelDays.ToString(),
-            //    TripType = touristRouteFromRepo.TripType.ToString(),
-            //    DepartureCity = touristRouteFromRepo.DepartureCity.ToString()
-            //};
+
             var touristRouteDto = _mapper.Map<TouristRouteDto>(touristRouteFromRepo);
-            return Ok(touristRouteDto.ShapeData(fields));
+            //return Ok(touristRouteDto.ShapeData(fields));
+
+            var linkDtos = CreateLinkForTouristRoute(touristRouteId, fields);
+
+            var result = touristRouteDto.ShapeData(fields) as IDictionary<string, object>;
+
+            result.Add("links", linkDtos);
+
+
+            return Ok(result);
         }
 
 
@@ -167,7 +161,7 @@ namespace FakeXieCheng.API.Controllers
                 );
         }
 
-        [HttpPut("{touristRouteId}")]
+        [HttpPut("{touristRouteId}", Name = "UpdateTouristRoute")]
         [Authorize(Roles = "Admin", AuthenticationSchemes = "Bearer")]
         public async Task<IActionResult> UpdateTouristRoute(
             [FromRoute] Guid touristRouteId,
@@ -189,7 +183,7 @@ namespace FakeXieCheng.API.Controllers
             return Ok(touristRouteToReturn);
         }
 
-        [HttpPatch("{touristRouteId}")]
+        [HttpPatch("{touristRouteId}", Name = "PartiallyupdateTouristRoute")]
         [Authorize(Roles = "Admin", AuthenticationSchemes = "Bearer")]
         public async Task<IActionResult> PartiallyupdateTouristRoute(
             [FromRoute] Guid touristRouteId,
@@ -219,7 +213,7 @@ namespace FakeXieCheng.API.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{touristRouteId}")]
+        [HttpDelete("{touristRouteId}", Name = "DeleteTouristRoute")]
         [Authorize(Roles = "Admin", AuthenticationSchemes = "Bearer")]
         public async Task<IActionResult> DeleteTouristRoute(
             [FromRoute] Guid touristRouteId
@@ -258,7 +252,56 @@ namespace FakeXieCheng.API.Controllers
 
             return NoContent();
         }
+        private IEnumerable<LinkDto> CreateLinkForTouristRoute(
+            Guid touristRouteId,
+            string fields)
+        {
+            var links = new List<LinkDto>();
 
+            links.Add(new LinkDto(
+
+                Url.Link("GetTouristRoutesById", new { touristRouteId, fields }),
+                "self",
+                "GET"
+                ));
+
+            links.Add(new LinkDto(
+
+                Url.Link("UpdateTouristRoute", new { touristRouteId }),
+                "update",
+                "PUT"
+                ));
+
+
+            links.Add(new LinkDto(
+
+             Url.Link("PartiallyupdateTouristRoute", new { touristRouteId }),
+             "partially_update",
+             "PATCH"
+             ));
+
+            links.Add(new LinkDto(
+
+             Url.Link("DeleteTouristRoute", new { touristRouteId }),
+             "delete",
+             "DELETE"
+             ));
+
+            links.Add(new LinkDto(
+
+              Url.Link("GetPictureListForTouristRoute", new { touristRouteId }),
+              "get_picture",
+              "GET"
+              ));
+
+            links.Add(new LinkDto(
+
+                Url.Link("CreatePicture", new { touristRouteId }),
+                "create_picture",
+                "POST"
+                ));
+            return links;
+        }
         private string GenerateTouristRouteResourceUrl(
             TouristRouteResourceParameters touristRouteResourceParameters,
             PaginationResourceParameters paginationResourceParameters,
