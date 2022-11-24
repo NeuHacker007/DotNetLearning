@@ -6,6 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models;
 
 namespace StartUpDemo
 {
@@ -33,7 +36,38 @@ namespace StartUpDemo
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     Console.WriteLine("ConfigureWebHostDefaults");
-                    webBuilder.UseStartup<Startup>();
+                    //webBuilder.UseStartup<Startup>();
+                    webBuilder.ConfigureServices(services =>
+                    {
+                        Console.WriteLine("Startup -- ConfigureServices");
+                        services.AddControllers();
+                        services.AddSwaggerGen(c =>
+                        {
+                            c.SwaggerDoc("v1", new OpenApiInfo { Title = "StartUpDemo", Version = "v1" });
+                        });
+                    });
+
+                    webBuilder.Configure(app =>
+                    {
+                        Console.WriteLine("Startup -- Configure");
+                        //if (env.IsDevelopment())
+                        //{
+                        //    app.UseDeveloperExceptionPage();
+                        //    app.UseSwagger();
+                        //    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "StartUpDemo v1"));
+                        //}
+
+                        app.UseHttpsRedirection();
+
+                        app.UseRouting();
+
+                        app.UseAuthorization();
+
+                        app.UseEndpoints(endpoints =>
+                        {
+                            endpoints.MapControllers();
+                        });
+                    });
                 });
     }
 }
