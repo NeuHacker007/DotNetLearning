@@ -247,7 +247,6 @@ bin
 /Dotnet Core/MoshDonetCore/ClientApp/node_modules
 /Dotnet Core/MoshDonetCore/obj
 /Dotnet Core/MoshDonetCore/ClientApp/*.gitignore
-/NetCoreLearning/Projects/GeekTime
 NetCoreLearning/Projects/MohamadLawandCourse/gRPCDemo/.vscode/launch.json
 NetCoreLearning/Projects/MohamadLawandCourse/gRPCDemo/.vscode/tasks.json
 /NetCoreLearning/Projects/MohamadLawandCourse/Authentication/.vscode
