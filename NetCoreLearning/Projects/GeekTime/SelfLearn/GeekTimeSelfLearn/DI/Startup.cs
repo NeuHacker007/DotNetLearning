@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DI.Services;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace DI
 {
@@ -37,14 +38,36 @@ namespace DI
 
             #region Register 
 
-            services.AddSingleton<IOrderService>(new OrderService());
-            services.AddSingleton<IOrderService>(serviceProvider =>
-            new OrderServiceEx()
-            );
+            services.AddSingleton<IOrderService>(new OrderService()); // 直接注入实例
+            //services.AddSingleton<IOrderService>(serviceProvider => // 工厂
+            //            new OrderServiceEx()
+            //);
 
 
             #endregion
 
+            #region Try Register
+            //如果该服务已经被注册则不再注册
+            //services.TryAddSingleton<IOrderService, OrderService>();
+
+            //如果实现类相同就不注册，实现类不同才注册
+           // services.TryAddEnumerable(ServiceDescriptor.Singleton<IOrderService, OrderService>());
+
+           
+            #endregion
+
+            #region RemoveReplace
+
+            //services.RemoveAll<IOrderService>();
+           // services.Replace(ServiceDescriptor.Singleton<IOrderService, OrderServiceEx>()); // 替换服务
+
+            #endregion
+
+            #region Register Generic Template
+
+            services.AddSingleton(typeof(IGenericService<>), typeof(GenericService<>));
+
+            #endregion
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

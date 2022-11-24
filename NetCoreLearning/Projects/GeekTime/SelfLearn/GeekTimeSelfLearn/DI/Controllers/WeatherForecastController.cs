@@ -18,11 +18,17 @@ namespace DI.Controllers
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
+        private readonly IOrderService _orderService;
+        private readonly IGenericService<IOrderService> _genericService;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(
+            ILogger<WeatherForecastController> logger,
+            IOrderService orderService,
+            IGenericService<IOrderService> genericService)
         {
             _logger = logger;
-           
+            _orderService = orderService;
+            _genericService = genericService;
         }
 
         [HttpGet]
