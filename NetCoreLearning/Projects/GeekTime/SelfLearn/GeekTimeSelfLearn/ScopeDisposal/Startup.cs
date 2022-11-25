@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
@@ -30,7 +30,17 @@ namespace ScopeDisposal
             //services.AddTransient<IOrderService, DisposableOrderService>();
             //services.AddTransient<IOrderService>(o => new DisposableOrderService());
             //services.AddScoped<IOrderService>(o => new DisposableOrderService());
-            services.AddSingleton<IOrderService>(o => new DisposableOrderService());
+            //services.AddSingleton<IOrderService>(o => new DisposableOrderService());
+
+            #region 容器不会释放对象
+
+            // 以下方式注册对象，然后放入容器无法使得容器管理对象的声明周期
+            //var service = new DisposableOrderService();
+
+            //services.AddSingleton<IOrderService>(service);
+            #endregion
+
+            services.AddSingleton<IOrderService, DisposableOrderService>();
             
             services.AddControllers();
             services.AddSwaggerGen(c =>
