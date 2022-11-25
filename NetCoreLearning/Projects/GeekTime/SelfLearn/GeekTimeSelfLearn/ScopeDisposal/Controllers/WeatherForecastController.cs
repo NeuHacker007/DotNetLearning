@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 using ScopeDisposal.Services;
 
 namespace ScopeDisposal.Controllers
@@ -27,6 +28,16 @@ namespace ScopeDisposal.Controllers
         [HttpGet]
         public int Get([FromServices] IOrderService orderService, [FromServices] IOrderService orderService2)
         {
+            Console.WriteLine("==============1===============");
+            // HttpContext.RequestServices 当前请求的根容器, 每个请求都会有一个当前请求的根容器
+            using (IServiceScope scope = HttpContext.RequestServices.CreateScope())
+            {
+                //子作用域， 子作用域内多个请求为单例
+                var service = scope.ServiceProvider.GetService<IOrderService>();
+                var service2 = scope.ServiceProvider.GetService<IOrderService>();
+                
+            }
+            Console.WriteLine("==============2===============");
             Console.WriteLine("Interface request end");
             return 1;
         }
