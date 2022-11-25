@@ -13,4 +13,9 @@ namespace ScopeDisposal.Services
             Console.WriteLine($"DisposableOrderService disposed: {this.GetHashCode()}");
         }
     }
+
+    public class OrderService : IOrderService
+    {
+        
+    }
 }

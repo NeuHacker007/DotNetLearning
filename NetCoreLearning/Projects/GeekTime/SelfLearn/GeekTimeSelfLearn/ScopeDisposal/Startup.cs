@@ -40,8 +40,8 @@ namespace ScopeDisposal
             //services.AddSingleton<IOrderService>(service);
             #endregion
 
-            //services.AddSingleton<IOrderService, DisposableOrderService>();
-            services.AddTransient<IOrderService, DisposableOrderService>();
+            services.AddSingleton<IOrderService, DisposableOrderService>();
+            //services.AddTransient<IOrderService, OrderService>();
             
             services.AddControllers();
             services.AddSwaggerGen(c =>
