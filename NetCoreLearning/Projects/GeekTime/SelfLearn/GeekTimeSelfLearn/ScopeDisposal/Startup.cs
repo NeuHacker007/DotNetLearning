@@ -40,7 +40,8 @@ namespace ScopeDisposal
             //services.AddSingleton<IOrderService>(service);
             #endregion
 
-            services.AddSingleton<IOrderService, DisposableOrderService>();
+            //services.AddSingleton<IOrderService, DisposableOrderService>();
+            services.AddTransient<IOrderService, DisposableOrderService>();
             
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -52,6 +53,10 @@ namespace ScopeDisposal
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            // 如果在根容器范围内声明实现了IDisposal瞬时服务
+            // 然后再在根容器内获取该对象，对象会积累到应用程序关闭时才能得到释放
+            var service1 = app.ApplicationServices.GetService<IOrderService>();
+            var service2 = app.ApplicationServices.GetService<IOrderService>();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
