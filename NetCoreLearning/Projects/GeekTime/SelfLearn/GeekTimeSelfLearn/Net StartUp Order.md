@@ -15,3 +15,7 @@ IServiceCollection   -> 负责注册服务
 ServiceDescriptor  -> 注册服务时的信息
 IServiceProvider -> 具体的容器， 由 ServiceCollection build 而成
 IServiceScope -> 一个容器的子容器的生命周期
+
+
+避免在根容器获取实现了IDisposable 接口的瞬时对象
+避免手动创建实现了IDisposable对象, 应该使用容器来管理奇生命周期
