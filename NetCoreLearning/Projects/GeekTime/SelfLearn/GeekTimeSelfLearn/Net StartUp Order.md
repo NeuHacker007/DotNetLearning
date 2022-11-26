@@ -19,3 +19,7 @@ IServiceScope -> 一个容器的子容器的生命周期
 
 避免在根容器获取实现了IDisposable 接口的瞬时对象
 避免手动创建实现了IDisposable对象, 应该使用容器来管理奇生命周期
+
+.NET Core 第三方DI 服务 核心扩展点
+public interface IserviceProviderFactory<TContainerBuilder>
+

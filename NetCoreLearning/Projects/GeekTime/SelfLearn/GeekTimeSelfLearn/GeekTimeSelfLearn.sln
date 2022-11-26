@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DI", "DI\DI.csproj", "{DA20
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScopeDisposal", "ScopeDisposal\ScopeDisposal.csproj", "{8395E23D-75A8-49F4-904D-03646C33EE2C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutofacPractice", "Autofac\AutofacPractice.csproj", "{F5FF805B-83B6-4649-880B-092B0F461060}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{8395E23D-75A8-49F4-904D-03646C33EE2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8395E23D-75A8-49F4-904D-03646C33EE2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8395E23D-75A8-49F4-904D-03646C33EE2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5FF805B-83B6-4649-880B-092B0F461060}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5FF805B-83B6-4649-880B-092B0F461060}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5FF805B-83B6-4649-880B-092B0F461060}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5FF805B-83B6-4649-880B-092B0F461060}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
