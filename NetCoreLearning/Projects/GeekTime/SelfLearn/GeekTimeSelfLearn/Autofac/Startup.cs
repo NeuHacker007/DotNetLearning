@@ -41,8 +41,8 @@ namespace Autofac
         {
             this.AutofacContainer = app.ApplicationServices.GetAutofacRoot();
 
-            var serviceNamed = this.AutofacContainer.ResolveNamed<IMyService>("Service2");
-            serviceNamed.ShowCode();
+            //var serviceNamed = this.AutofacContainer.ResolveNamed<IMyService>("Service2");
+            //serviceNamed.ShowCode();
 
             var service = this.AutofacContainer.Resolve<IMyService>();
             service.ShowCode();
@@ -68,11 +68,19 @@ namespace Autofac
 
         public void ConfigureContainer(ContainerBuilder builder)
         {
-            builder.RegisterType<Myservice>().As<IMyService>();
+            //builder.RegisterType<Myservice>().As<IMyService>();
 
             #region 命名zhuce
 
-            builder.RegisterType<MyServiceV2>().Named<IMyService>("Service2");
+            //builder.RegisterType<MyServiceV2>().Named<IMyService>("Service2");
+
+            #endregion
+
+            #region 属性注册
+
+            builder.RegisterType<MyNameService>();
+
+            builder.RegisterType<MyServiceV2>().As<IMyService>().PropertiesAutowired();
 
             #endregion
         }
