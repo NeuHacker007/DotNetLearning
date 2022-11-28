@@ -23,3 +23,10 @@ IServiceScope -> 一个容器的子容器的生命周期
 .NET Core 第三方DI 服务 核心扩展点
 public interface IserviceProviderFactory<TContainerBuilder>
 
+
+命令行配置
+
+* 无前缀模式 key=value
+* 双中横线模式 --key=value  ||  --key value
+* 正斜杠模式    /key=value 或 /key value
+

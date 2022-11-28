@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutofacPractice", "Autofac\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configuration", "Configuration\Configuration.csproj", "{690957D8-3B00-492B-B455-ED0709333FDB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommindLineConfigDemo", "CommindLineConfigDemo\CommindLineConfigDemo.csproj", "{AF0CD1E7-EB04-491E-B36E-C8DD175A322E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{690957D8-3B00-492B-B455-ED0709333FDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{690957D8-3B00-492B-B455-ED0709333FDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{690957D8-3B00-492B-B455-ED0709333FDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF0CD1E7-EB04-491E-B36E-C8DD175A322E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF0CD1E7-EB04-491E-B36E-C8DD175A322E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF0CD1E7-EB04-491E-B36E-C8DD175A322E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF0CD1E7-EB04-491E-B36E-C8DD175A322E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
