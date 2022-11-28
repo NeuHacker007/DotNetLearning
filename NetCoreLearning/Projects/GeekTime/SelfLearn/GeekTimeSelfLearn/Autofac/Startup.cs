@@ -12,7 +12,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Autofac.Extensions.DependencyInjection;
+using Autofac.Extras.DynamicProxy;
 using Autofac.Services;
+using AutofacPractice.Services;
 
 namespace Autofac
 {
@@ -46,7 +48,7 @@ namespace Autofac
 
             var service = this.AutofacContainer.Resolve<IMyService>();
             service.ShowCode();
-            
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -78,9 +80,19 @@ namespace Autofac
 
             #region 属性注册
 
-            builder.RegisterType<MyNameService>();
+            //builder.RegisterType<MyNameService>();
 
-            builder.RegisterType<MyServiceV2>().As<IMyService>().PropertiesAutowired();
+            //builder.RegisterType<MyServiceV2>().As<IMyService>().PropertiesAutowired();
+
+            #endregion
+
+            #region AOP
+
+            builder.RegisterType<Interceptor>();
+            //builder.RegisterType<MyNameService>();
+            builder.RegisterType<MyServiceV2>().As<IMyService>().PropertiesAutowired()
+                .InterceptedBy(typeof(Interceptor))
+                .EnableInterfaceInterceptors();
 
             #endregion
         }
