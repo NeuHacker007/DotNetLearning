@@ -46,8 +46,22 @@ namespace Autofac
             //var serviceNamed = this.AutofacContainer.ResolveNamed<IMyService>("Service2");
             //serviceNamed.ShowCode();
 
-            var service = this.AutofacContainer.Resolve<IMyService>();
-            service.ShowCode();
+            //var service = this.AutofacContainer.Resolve<IMyService>();
+            //service.ShowCode();
+
+            using (var myScope = AutofacContainer.BeginLifetimeScope("MyScope"))
+            {
+                var service0 = myScope.Resolve<MyNameService>();
+
+                using (var scope = myScope.BeginLifetimeScope())
+                {
+                    var service1 = scope.Resolve<MyNameService>();
+                    var service2 = scope.Resolve<MyNameService>();
+
+                    Console.WriteLine($"service1=service2: {service1 == service2}");
+                    Console.WriteLine($"service1=service0: {service1 == service0}");
+                }
+            }
 
             if (env.IsDevelopment())
             {
@@ -88,11 +102,17 @@ namespace Autofac
 
             #region AOP
 
-            builder.RegisterType<Interceptor>();
-            //builder.RegisterType<MyNameService>();
-            builder.RegisterType<MyServiceV2>().As<IMyService>().PropertiesAutowired()
-                .InterceptedBy(typeof(Interceptor))
-                .EnableInterfaceInterceptors();
+            //builder.RegisterType<Interceptor>();
+            ////builder.RegisterType<MyNameService>();
+            //builder.RegisterType<MyServiceV2>().As<IMyService>().PropertiesAutowired()
+            //    .InterceptedBy(typeof(Interceptor))
+            //    .EnableInterfaceInterceptors();
+
+            #endregion
+
+            #region Child Container
+
+            builder.RegisterType<MyNameService>().InstancePerMatchingLifetimeScope("MyScope");
 
             #endregion
         }
