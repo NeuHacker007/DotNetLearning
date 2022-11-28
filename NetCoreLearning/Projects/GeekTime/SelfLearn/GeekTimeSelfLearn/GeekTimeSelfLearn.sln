@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScopeDisposal", "ScopeDispo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutofacPractice", "Autofac\AutofacPractice.csproj", "{F5FF805B-83B6-4649-880B-092B0F461060}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configuration", "Configuration\Configuration.csproj", "{690957D8-3B00-492B-B455-ED0709333FDB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{F5FF805B-83B6-4649-880B-092B0F461060}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5FF805B-83B6-4649-880B-092B0F461060}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5FF805B-83B6-4649-880B-092B0F461060}.Release|Any CPU.Build.0 = Release|Any CPU
+		{690957D8-3B00-492B-B455-ED0709333FDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{690957D8-3B00-492B-B455-ED0709333FDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{690957D8-3B00-492B-B455-ED0709333FDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{690957D8-3B00-492B-B455-ED0709333FDB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
