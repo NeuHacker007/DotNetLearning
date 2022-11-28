@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configuration", "Configurat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommindLineConfigDemo", "CommindLineConfigDemo\CommindLineConfigDemo.csproj", "{AF0CD1E7-EB04-491E-B36E-C8DD175A322E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnvVariableConfig", "EnvVariableConfig\EnvVariableConfig.csproj", "{D802648A-B5C6-428C-BD5D-0300574FB69F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{AF0CD1E7-EB04-491E-B36E-C8DD175A322E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF0CD1E7-EB04-491E-B36E-C8DD175A322E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF0CD1E7-EB04-491E-B36E-C8DD175A322E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D802648A-B5C6-428C-BD5D-0300574FB69F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D802648A-B5C6-428C-BD5D-0300574FB69F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D802648A-B5C6-428C-BD5D-0300574FB69F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D802648A-B5C6-428C-BD5D-0300574FB69F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

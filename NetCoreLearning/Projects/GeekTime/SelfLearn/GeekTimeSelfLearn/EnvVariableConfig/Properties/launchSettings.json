@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "EnvVariableConfig": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "Ivan_Key1": "Ivan_V1",
+        "Section1__Key3": "v3",
+        "Section1__Section2__Key4": "v4",
+        "Key1": "v1",
+        "key2": "v2"
+      }
+    }
+  }
+}
