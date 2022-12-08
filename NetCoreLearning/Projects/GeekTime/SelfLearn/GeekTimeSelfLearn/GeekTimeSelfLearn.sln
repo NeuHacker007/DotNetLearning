@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommindLineConfigDemo", "Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnvVariableConfig", "EnvVariableConfig\EnvVariableConfig.csproj", "{D802648A-B5C6-428C-BD5D-0300574FB69F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigFile", "ConfigFile\ConfigFile.csproj", "{A954CBD6-F458-4681-BFB7-72DC7E4C9943}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{D802648A-B5C6-428C-BD5D-0300574FB69F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D802648A-B5C6-428C-BD5D-0300574FB69F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D802648A-B5C6-428C-BD5D-0300574FB69F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A954CBD6-F458-4681-BFB7-72DC7E4C9943}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A954CBD6-F458-4681-BFB7-72DC7E4C9943}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A954CBD6-F458-4681-BFB7-72DC7E4C9943}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A954CBD6-F458-4681-BFB7-72DC7E4C9943}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

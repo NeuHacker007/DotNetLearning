@@ -30,3 +30,7 @@ public interface IserviceProviderFactory<TContainerBuilder>
 * 双中横线模式 --key=value  ||  --key value
 * 正斜杠模式    /key=value 或 /key value
 
+
+监听配置变化
+
+IChangeToken  ---> can only use once 
