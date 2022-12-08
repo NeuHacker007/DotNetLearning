@@ -3,21 +3,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StartUpDemo", "StartUpDemo\StartUpDemo.csproj", "{27A93FB8-7352-4236-AA95-A7FD449CD4DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StartUpDemo", "StartUpDemo\StartUpDemo.csproj", "{27A93FB8-7352-4236-AA95-A7FD449CD4DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DI", "DI\DI.csproj", "{DA204A17-E6ED-4C6C-8429-59CC886FC6AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DI", "DI\DI.csproj", "{DA204A17-E6ED-4C6C-8429-59CC886FC6AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScopeDisposal", "ScopeDisposal\ScopeDisposal.csproj", "{8395E23D-75A8-49F4-904D-03646C33EE2C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScopeDisposal", "ScopeDisposal\ScopeDisposal.csproj", "{8395E23D-75A8-49F4-904D-03646C33EE2C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutofacPractice", "Autofac\AutofacPractice.csproj", "{F5FF805B-83B6-4649-880B-092B0F461060}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutofacPractice", "Autofac\AutofacPractice.csproj", "{F5FF805B-83B6-4649-880B-092B0F461060}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configuration", "Configuration\Configuration.csproj", "{690957D8-3B00-492B-B455-ED0709333FDB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Configuration", "Configuration\Configuration.csproj", "{690957D8-3B00-492B-B455-ED0709333FDB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommindLineConfigDemo", "CommindLineConfigDemo\CommindLineConfigDemo.csproj", "{AF0CD1E7-EB04-491E-B36E-C8DD175A322E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommindLineConfigDemo", "CommindLineConfigDemo\CommindLineConfigDemo.csproj", "{AF0CD1E7-EB04-491E-B36E-C8DD175A322E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnvVariableConfig", "EnvVariableConfig\EnvVariableConfig.csproj", "{D802648A-B5C6-428C-BD5D-0300574FB69F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnvVariableConfig", "EnvVariableConfig\EnvVariableConfig.csproj", "{D802648A-B5C6-428C-BD5D-0300574FB69F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigFile", "ConfigFile\ConfigFile.csproj", "{A954CBD6-F458-4681-BFB7-72DC7E4C9943}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConfigFile", "ConfigFile\ConfigFile.csproj", "{A954CBD6-F458-4681-BFB7-72DC7E4C9943}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomConfiguration", "CustomConfiguration\CustomConfiguration.csproj", "{988DDBC1-8C2B-4F61-9548-2F71C9C42D4A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{A954CBD6-F458-4681-BFB7-72DC7E4C9943}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A954CBD6-F458-4681-BFB7-72DC7E4C9943}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A954CBD6-F458-4681-BFB7-72DC7E4C9943}.Release|Any CPU.Build.0 = Release|Any CPU
+		{988DDBC1-8C2B-4F61-9548-2F71C9C42D4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{988DDBC1-8C2B-4F61-9548-2F71C9C42D4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{988DDBC1-8C2B-4F61-9548-2F71C9C42D4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{988DDBC1-8C2B-4F61-9548-2F71C9C42D4A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
