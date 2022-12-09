@@ -9,8 +9,8 @@ namespace OptionsDemo.Services
 
     public class OrderService : IOrderService
     {
-        private IOptions<OrderServiceOptions> _options;
-        public OrderService(IOptions<OrderServiceOptions> options)
+        private IOptionsSnapshot<OrderServiceOptions> _options;
+        public OrderService(IOptionsSnapshot<OrderServiceOptions> options)
         {
             _options = options;
         }

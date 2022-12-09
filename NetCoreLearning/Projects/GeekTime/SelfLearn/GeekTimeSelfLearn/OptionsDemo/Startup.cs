@@ -37,7 +37,7 @@ namespace OptionsDemo
             //services.AddSingleton<OrderServiceOptions>();
 
             services.Configure<OrderServiceOptions>(Configuration.GetSection("OrderServices"));
-            services.AddSingleton<IOrderService, OrderService>();
+            services.AddScoped<IOrderService, OrderService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

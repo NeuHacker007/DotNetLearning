@@ -34,3 +34,7 @@ public interface IserviceProviderFactory<TContainerBuilder>
 监听配置变化
 
 IChangeToken  ---> can only use once 
+
+
+IOptionsMonitor<out TOptions> ----> 用于单例
+IOptionsSnapshot<out TOptions> ---> 用于范围
