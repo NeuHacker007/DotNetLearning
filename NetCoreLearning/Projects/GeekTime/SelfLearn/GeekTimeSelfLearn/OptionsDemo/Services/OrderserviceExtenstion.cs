@@ -7,11 +7,19 @@ namespace OptionsDemo.Services
     {
         public static IServiceCollection AddOrderServices(this IServiceCollection services, IConfiguration config)
         {
-            services.Configure<OrderServiceOptions>(config);
-            services.PostConfigure<OrderServiceOptions>((options) =>
+            //services.Configure<OrderServiceOptions>(config);
+            services.AddOptions<OrderServiceOptions>().Configure(options =>
             {
-                options.MaxOrderCount += 100; 
-            });
+                config.Bind(options);
+            }).ValidateDataAnnotations();
+            //.Validate(options =>
+            //{
+            //    return options.MaxOrderCount <= 100;
+            //}, "MaxOrderCount cannot greater than 100");
+            //services.PostConfigure<OrderServiceOptions>((options) =>
+            //{
+            //    options.MaxOrderCount += 100;
+            //});
             services.AddSingleton<IOrderService, OrderService>();
 
             return services;

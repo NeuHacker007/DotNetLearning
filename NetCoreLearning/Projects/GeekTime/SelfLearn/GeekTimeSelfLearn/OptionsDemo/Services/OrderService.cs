@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace OptionsDemo.Services
 {
@@ -28,6 +29,7 @@ namespace OptionsDemo.Services
 
     public class OrderServiceOptions
     {
+        [Range(1, 20)]
         public int MaxOrderCount { get; set; } = 100;
     }
 }
