@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Options;
+using System;
 
 namespace OptionsDemo.Services
 {
@@ -9,15 +10,19 @@ namespace OptionsDemo.Services
 
     public class OrderService : IOrderService
     {
-        private IOptionsSnapshot<OrderServiceOptions> _options;
-        public OrderService(IOptionsSnapshot<OrderServiceOptions> options)
+        private IOptionsMonitor<OrderServiceOptions> _options;
+        public OrderService(IOptionsMonitor<OrderServiceOptions> options)
         {
             _options = options;
+            _options.OnChange((options) =>
+            {
+                Console.WriteLine($"new value = {options.MaxOrderCount}");
+            });
         }
 
         public int ShowMaxOrderCount()
         {
-            return _options.Value.MaxOrderCount;
+            return _options.CurrentValue.MaxOrderCount;
         }
     }
 
