@@ -32,4 +32,18 @@ namespace OptionsDemo.Services
         [Range(1, 20)]
         public int MaxOrderCount { get; set; } = 100;
     }
+
+    public class OrderServiceValidateOptions : IValidateOptions<OrderServiceOptions>
+    {
+        ValidateOptionsResult IValidateOptions<OrderServiceOptions>.Validate(string name, OrderServiceOptions options)
+        {
+            if (options.MaxOrderCount > 100)
+            {
+                return ValidateOptionsResult.Fail("MaxOrderCount Cannot Great 100");
+            } else
+            {
+                return ValidateOptionsResult.Success; 
+            }
+        }
+    }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 
 namespace OptionsDemo.Services
 {
@@ -11,7 +12,7 @@ namespace OptionsDemo.Services
             services.AddOptions<OrderServiceOptions>().Configure(options =>
             {
                 config.Bind(options);
-            }).ValidateDataAnnotations();
+            }).Services.AddSingleton<IValidateOptions<OrderServiceOptions>, OrderServiceValidateOptions>();
             //.Validate(options =>
             //{
             //    return options.MaxOrderCount <= 100;
