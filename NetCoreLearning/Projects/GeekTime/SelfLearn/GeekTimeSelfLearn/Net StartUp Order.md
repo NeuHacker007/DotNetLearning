@@ -38,3 +38,9 @@ IChangeToken  ---> can only use once
 
 IOptionsMonitor<out TOptions> ----> 用于单例
 IOptionsSnapshot<out TOptions> ---> 用于范围
+
+日志作用域
+
+1. 一个事务包含多条操作
+2. 复杂流程的日志关联
+3. 调用链追踪与请求处理过程对应时

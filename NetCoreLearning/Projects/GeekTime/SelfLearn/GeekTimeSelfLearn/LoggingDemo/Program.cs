@@ -24,12 +24,20 @@ namespace LoggingDemo
                 builder.AddConfiguration(config.GetSection("Logging"));
                 builder.AddConsole();
             });
-
+            serviceCollection.AddTransient<OrderService>();
             IServiceProvider service = serviceCollection.BuildServiceProvider();
+           
 
-            ILoggerFactory loggerFactory = service.GetService<ILoggerFactory>();
+            var orderService = service.GetService<OrderService>();
 
-            var alogger = loggerFactory.CreateLogger("alogger");
+            orderService.Show();
+
+            //
+
+            //ILoggerFactory loggerFactory = service.GetService<ILoggerFactory>();
+
+            //ILogger alogger = loggerFactory.CreateLogger("alogger");
+            //alogger.LogDebug(2001,"aiya");
         }
     }
 }
